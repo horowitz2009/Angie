@@ -1,0 +1,6 @@
+{
+    "proxy":"http://proxy.obs.bg:8080",
+    "https-proxy":"http://proxy.obs.bg:8080",
+
+    "directory": "app/bower_components"
+}

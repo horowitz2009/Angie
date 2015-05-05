@@ -1,0 +1,114 @@
+
+<div class="w100 clearfix category-top">
+    <h2> {{category.name}} </h2>
+    <div class="categoryImage"> <img ng-src="{{category.cover}}" class="img-responsive" alt="img"> </div>
+</div>
+<!--/.category-top-->
+
+<!-- productFilter includes counter, sorting dropdown -->
+<div class="w100 productFilter clearfix">
+    <p class="pull-left"> <ng-pluralize count="results.length"
+                            when="{'0': 'Няма намерени продукти.',
+                                 'one': 'Намерен ',
+                               'other': 'Намерени '}"></ng-pluralize>
+							   
+							   <strong><ng-pluralize count="results.length"
+                            when="{'0': '',
+                                 'one': '1',
+                               'other': '{}'}"></ng-pluralize></strong>
+							   
+							   <ng-pluralize count="results.length"
+                            when="{'0': '',
+                                 'one': ' продукт.',
+                               'other': ' продукта.'}"></ng-pluralize>
+							   
+							   </p>
+
+    <div class="pull-right ">
+        <div class="change-order pull-right">
+            <select class="form-control" name="orderby" style="display: none;">
+                <option selected="selected">Default sorting</option>
+                <option value="popularity">Sort by popularity</option>
+                <option value="rating">Sort by average rating</option>
+                <option value="date">Sort by newness</option>
+                <option value="price">Sort by price: low to high</option>
+                <option value="price-desc">Sort by price: high to low</option>
+            </select>
+
+        </div>
+        <div class="change-view pull-right">
+		  <a id="gridView" title="Grid" ng-class="gridView" ng-click="gridview()"><i class="fa fa-th-large"></i></a> 
+		  <a id="listView" title="List" ng-class="listView" ng-click="listview()"><i class="fa fa-th-list"></i></a>
+		</div>
+    </div>
+</div>
+<!--/.productFilter-->
+
+
+<div class="row categoryProduct xsResponse clearfix">
+
+    <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6 repeat-animation" ng-class="productView" ng-repeat="product in category.products | filter:search as results">
+        <div class="product">
+            <div class="image">
+                <!--
+                <div class="quickview">
+                    <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal"> Quick View </a>
+                </div>
+                -->
+
+                <a ui-sref="shop.one.product({productId:product.id})">
+                    <img ng-src="{{product.image}}" alt="{{product.name}}" class="img-responsive"></a>
+
+                <!--<div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+				
+				
+            </div>
+            <div class="description">
+                <h4><a ui-sref="shop.one.product({productId:product.id})">{{product.name}}</a></h4>
+                <div class="grid-description">
+                    <p>{{product.description}}</p>
+                </div>
+                <div class="list-description">
+                    <p>{{product.longdesc}}</p>
+                </div>
+            <div class="price"> <span>{{product.price | number:2}}</span><span class="currency">лв</span> </div>
+                <span class="size" style="font-size: 0.75em"> {{product.quantity}} {{product.unit}} </span> </div>
+            <div class="action-control">
+              <!--<button id="btn-{{product.fullId}}" class="btn btn-7 btn-7a icon-cart" ng-click="addToCart(product, 1)">Добави</button>-->
+
+              <button id="btn-{{product.fullId}}" class="btn2 btn2-7a glyphicon-shopping-cart" ng-click="addToCart(product, 1)"> 
+                Добави
+              </button>
+              <!--
+              <a class="btn btn-primary" ng-click="addToCart(product, 1)"> 
+                <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Добави </span> 
+              </a>
+              -->
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--/.categoryProduct || product content end-->
+
+<!--
+
+<div class="w100 categoryFooter">
+    <div class="pagination pull-left no-margin-top">
+        <ul class="pagination no-margin-top">
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">«</a></li>
+            <li class="active"><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">1</a></li>
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">2</a></li>
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">3</a></li>
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">4</a></li>
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">5</a></li>
+            <li> <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html#">»</a></li>
+        </ul>
+    </div>
+    <div class="pull-right pull-right col-sm-4 col-xs-12 no-padding text-right text-left-xs">
+        <p>Showing 1–450 of 12 results</p>
+    </div>
+</div>
+
+-->
+<!--/.categoryFooter-->

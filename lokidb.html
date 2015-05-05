@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Loki JS Tester page</title>
+<meta name="description" content="Loki JS tester page">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body>
+
+	<script src="app/bower_components/jquery/dist/jquery.js"></script>
+	<script src="app/bower_components/angular/angular.js"></script>
+
+	<script src="js/lokijs.js"></script>
+	<script src="js/jquerySyncToMySqlAdapter.js"></script>
+
+	<script>
+    function sep() {
+      trace('//---------------------------------------------//');
+    }
+
+    function trace(message) {
+      if (typeof console !== 'undefined' && console.log) {
+        console.log(message);
+      }
+    }
+
+    var jqAdapter = new jquerySyncAdapter({
+      ajaxLib : $
+    });
+
+    var db = new loki('general.json', {
+      autoload : true,
+      autoloadCallback : loadHandler,
+      autosave : false,
+      autosaveInterval : 10000,
+      persistenceMethod : 'adapter',
+      adapter : jqAdapter
+    });
+
+    function initData(db) {
+      var needSave = false;
+      var testCollection = db.getCollection('test');
+
+      if (!testCollection) {
+        console.log("test collection not found. Adding...")
+        needSave = true;
+        testCollection = db.addCollection('test', {
+          'disableChangesApi' : false
+        });
+      }
+
+      testCollection.setChangesApi(true);//TODO check it
+
+      console.log(testCollection.data.length);
+
+      var n = 1
+      while (n < 5) {
+        var res = testCollection.insert({
+          'name' : 'jeff' + n,
+          'email' : 'jeff' + n + '@lokijs.org',
+          'age' : 30 + n
+        });
+        trace(res);
+        n++;
+      }
+
+      if (needSave) {
+        //console.log("saving db...");
+        //db.save();
+      }
+    }
+
+    function makeChanges2(db) {
+      console.log("deleting bunch of docs...");
+      var test = db.getCollection('test');
+      var toDelete = test.find({
+        'name' : {
+          '$contains' : 'GONZO'
+        }
+      });
+
+      test.remove(toDelete);
+      toDelete = test.find({
+        'name' : {
+          '$contains' : 'jeff'
+        }
+      });
+
+      test.remove(toDelete);
+
+      var changes = db.serializeChanges([ 'test' ]);
+      console.log(changes);
+
+      $.ajax({
+        type : "POST",
+        dataType : 'json',
+
+        url : 'assets/save_loki.php',
+        data : {
+          changes : changes,
+          dbname: "general.json"
+        },
+        complete : function() {
+          console.log("DONEDONEDONE!");
+          db.clearChanges();
+        },
+        failure : function() {
+          alert("Error!");
+        }
+      });
+
+    }
+
+    function makeChanges1(db) {
+      console.log("making several changes...");
+      var test = db.getCollection('test');
+      test.setChangesApi(true);
+
+      //INSERT
+      test.insert({
+        'name' : 'GONZO' + 11,
+        'email' : 'jeff' + 11 + '@lokijs.org',
+        'age' : 30 + 11
+      });
+
+      console.log(test.getChanges());
+
+      var changes = db.serializeChanges([ 'test' ]);
+      console.log(changes);
+
+      //UPDATE
+      var jeff1 = test.findOne({
+        name : 'jeff1'
+      });
+      console.log(jeff1);
+      if (jeff1) {
+
+        jeff1.name = "MANGO JERRY1";
+        test.update(jeff1);
+        console.log(jeff1);
+
+        changes = db.serializeChanges([ 'test' ]);
+        console.log(changes);
+      }
+
+      //REMOVE
+      var jeff2 = test.findOne({
+        name : 'jeff4'
+      });
+      console.log(jeff2);
+      if (jeff2) {
+        jeff2.name = "JERRY GROOM2";
+        test.update(jeff2);
+        test.remove(jeff2);
+        //console.log(jeff2);
+      }
+      changes = db.serializeChanges([ 'test' ]);
+      console.log(changes);
+
+      $.ajax({
+        type : "POST",
+        dataType : 'json',
+
+        url : 'assets/save_loki.php',
+        data : {
+          dbname: "general.json",
+          changes: changes
+        },
+        complete : function() {
+          console.log("DONE!");
+          db.clearChanges();
+          //console.log(data);
+          makeChanges2(db);
+        },
+        failure : function() {
+          alert("Error!");
+        }
+      });
+
+    }
+
+    function loadHandler() {
+      //db.clearChanges();
+      //db.save();
+      trace("I'M READY!");
+
+      trace('collections: ');
+      trace(db.listCollections());
+
+      initData(db);
+      makeChanges1(db);
+
+    }
+
+    //trace('collections: ' + db.listCollections());
+
+    //db.loadDatabase();
+  </script>
+
+</body>
+</html>

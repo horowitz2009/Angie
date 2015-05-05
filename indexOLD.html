@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html lang="en" ng-app="felt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- using twitter bootstrap, but of course -->
+    <!--<link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css">-->
+    <link rel="stylesheet" type="text/css" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- styles for ng-animate are located here -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+    <!-- Include angular.js, angular-animate.js and angular-ui-router.js-->
+    <script src="app/bower_components/jquery/dist/jquery.js"></script>
+    <script src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="app/bower_components/bootstrap/js/collapse.js"></script>
+
+
+    <script src="app/bower_components/angular/angular.js"></script>
+    <script src="app/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- app.js declares the uiRouterSample module and adds items to $rootScope, and defines
+         the "home" and "about" states
+    -->
+    <script src="app/app.js"></script>
+
+    <!-- contacts.js declares the uiRouterSample.contacts module, and adds a number of contact
+         related states 
+    -->
+    <script src="app/contacts/contacts.js"></script>
+    <script src="app/shop/shop.js"></script>
+
+    <!-- contacts-service.js, and utils-service.js define services for use by the 
+         uiRouterSample.contacts module.
+    -->
+    <script src="app/contacts/contacts-service.js"></script>
+    <script src="app/shop/categories-service.js"></script>
+    <script src="common/utils/utils-service.js"></script>
+
+    <!-- could easily use a custom property of the state here instead of 'name' -->
+    <title ng-bind="$state.current.name + ' - ui-router'">ui-router</title>
+  </head>
+  <body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="home">
+                    Фелт
+                    <!--<img src="app/images/brand_small.png" alt="Фелт"/>-->
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{active: $state.includes('contacts')}"><a ui-sref="contacts.list">Контакти</a>
+                        </li>
+                        <li ng-class="{active: $state.includes('shop')}"><a ui-sref="shop.list">Продукти</a></li>
+                        <li ui-sref-active="active"><a ui-sref="about">За нас</a></li>
+                    </ul>
+                </div>
+                <p ui-view="hint" class="navbar-text navbar-right"></p>
+
+        </div>
+    </nav>
+
+
+    <div class="container">
+      <div class="row">
+        <p>breadcrumb next:</p>
+        <div ui-view="breadcrumb"></div>
+      </div>
+    </div>
+
+    <!-- Here is the main ui-view (unnamed) and will be populated by its immediate children's templates
+         unless otherwise explicitly named views are targeted. It's also employing ng-animate. -->
+    <div ui-view class="container slide" style="padding-top: 80px;"></div>
+
+
+
+    <!-- FOOTER -->
+    <hr>
+    <pre>
+      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+      $state = {{$state.current.name}}
+      $stateParams = {{$stateParams}}
+      $state full url = {{ $state.$current.url.source }}
+      <!-- $state.$current is not a public api, we are using it to
+           display the full url for learning purposes-->
+    </pre>
+  </body>
+</html>

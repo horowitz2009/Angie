@@ -1,0 +1,60 @@
+<html lang="en" ng-app="colorApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap core CSS -->
+    <link href="app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- add theme styles for this template -->
+    <link id="pagestyle" href="css/skin-2.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+  <title>Color name finder</title>
+    
+</head>
+
+<body ng-controller="MainCtrl">
+
+
+
+
+<div class="container main-container w100">
+  <div class="row">
+    <!--left column-->
+    <div class="col-lg-3 col-md-3 col-sm-12" ui-view="left">
+    </div>
+
+    <!--right column-->
+    <div class="col-lg-9 col-md-9 col-sm-12" ui-view="right">
+    </div>
+    <!--/right column end-->
+  </div>  
+  <!-- /.row  -->
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12" ui-view="content2">
+    </div>
+  </div>  
+  <!-- /.row  -->
+</div>
+<!-- /.container -->
+
+
+<script src="app/bower_components/jquery/dist/jquery.js"></script>
+<script src="app/bower_components/angular/angular.js"></script>
+<script src="app/bower_components/angular-animate/angular-animate.js"></script>
+<script src="app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+
+<!-- APP -->
+<script src="app/colorApp.js"></script>
+<script src="common/utils/utils-service.js"></script>
+<script src="js/ntc.js"></script>
+
+</body>
+
+</html>

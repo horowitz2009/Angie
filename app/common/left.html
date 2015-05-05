@@ -1,0 +1,10 @@
+<div ng-repeat="path in paths" style="min-width: 300px" id="par">
+  <img ng-src="{{path.imagePath}}" style="max-height:200px; max-width:200px;" id="{{path.id}}" ng-load="checkColor(path)"></img>
+  <input type="text" value="{{path.hex}}"></input>
+  <button ng-click="checkColor(path, this)">Check</button>
+  <a href={{path.urlRight}} target="myframe">link1</a><br>
+  <a href={{path.link2}} target="myframe">link2</a><br>
+  <div>closest match: {{this.n_rgb}}</div>
+  <div>Name: {{this.n_name}}</div>
+  <div>Exact color match: {{this.n_exactmatch}}</div>
+</div>

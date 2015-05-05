@@ -1,0 +1,11 @@
+<html>
+  <body>
+    
+    //Note the value attribute rather than ng-model
+    <spin value="someScopeValue" min="1" max="{{someOtherScopeValue}}" step="2" />
+    
+      $scope.someScopeValue = 2;
+      $scope.someOtherScopeValue = 20;
+    
+  </body>
+</html>

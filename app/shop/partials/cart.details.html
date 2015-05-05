@@ -1,0 +1,251 @@
+<style>
+
+.cartItem {
+    /*display: block;*/
+    height: auto;
+    transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    /*margin-bottom: 15px;*/
+    padding: 15px 7px;
+}
+
+.cartItem h4 a {
+    /*color: #2c3e50;*/
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    line-height: 20px;
+} 
+
+.cartItem .price {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.cartItem span {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.editCart {
+    float: left;
+    width: 100%;
+}
+
+.editCart a.dropdown-toggle {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 20px;
+    display: block;
+}
+
+.editCart .dropdown-menu {
+    padding-bottom: 0;
+    border-radius: 0;
+    margin-top: 0;
+}
+
+.miniCartTable {
+    max-height: 300px;
+    width: 100%;
+    display: block;
+}
+
+.miniCartProductThumb {
+    text-align: center;
+}
+
+.editCart img {
+    /*width: 50px;*/
+}
+
+.editCart h4 {
+    padding-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.miniCartDescription .size {
+    color: #888888;
+    font-size: 11px;
+}
+
+.miniCartDescription .price {
+    color: #444444;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.old-price {
+    color: #666666;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: line-through;
+}
+
+.editCart table {
+    width: 100%;
+    height: auto;
+}
+
+.editCart table tr {
+    border-bottom: solid 1px #ddd;
+}
+
+.editCart table tr td {
+    padding: 7px 7px;
+}
+
+.editCart table tr th {
+  vertical-align: bottom; 
+  font-weight: normal; 
+  font-size: 12px;
+}
+
+.miniCartFooter {
+    background: #ECF0F1;
+    padding: 10px 10px 10px;
+}
+
+.miniCartFooter .subtotal {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    margin-bottom: 0;
+    /*text-transform: uppercase;*/
+}
+
+.editCart .incaps {
+    display: block;
+    float: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.editCart .incaps i {
+    font-size: 12px;
+}
+
+.editCart .color-in {
+    color: #4CC94A;
+}
+
+.editCart .product-code {
+    font-family: oswald, Helvetica Neue, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.fix-align-char td.char-align { width: 72px; }
+.fix-align-char span.left { float: left; text-align: right; width: 44px; }
+.fix-align-char span.currency { text-align: left; float: left; }
+.fix-align-char span.right { float: right; text-align: left; width: 28px; }
+
+</style>
+
+<!-- cart.details.html -->
+<div class="editCart" style="width: 100%">
+  <table>
+    <thead>
+      <tr class="cartItem">
+        <th style="width:45%;" colspan="2"> <h2 style="padding:10px 0">Вашата количка</h2> </td>
+        
+        <th style="width:15%" style="font-size: 11px"> Ед. цена </td>
+        <th style="width:20%" style="font-size: 11px"> Количество </td>
+        <th style="width:15%" style="font-size: 11px"> Общо </td>
+        <th style="width:5%" style="font-size: 11px"> </td>
+      </tr>
+    </thead>  
+    <tbody>
+      <tr ng-repeat="item in cart.items" class="cartItem repeat-animation hide-fade" cart-repeat-directive>
+        <!-- IMAGE -->
+        <td style="width:20%">
+          <a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
+            <img ng-src="{{item.product.image}}" class="img-responsive" alt="{{item.product.name}}">
+          </a>
+        </td>
+        
+        <!-- NAME -->
+        <td style="width:25%">
+          <h4><a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})"> {{item.product.name}} </a></h4>
+          <h3 class="product-code">{{item.product.categoryId | shortCategory }}-{{item.product.origin | shortOrigin }}-{{item.product.color}}</h3>
+          <h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i> В наличност</h3>
+          <!--<div style="clear: both"><a ng-click="removeFromCart(item.id)">
+            <span>премахни от количката</span>
+          </a></div>-->
+        </td>
+        
+        <!-- PRICE -->
+        <td style="width:15%;">
+          <span> {{item.product.price | number:2}} лв</span>
+        </td>
+        
+        <!-- QUANTITY -->
+        <td style="width:20%;" >
+          
+          <div class="input-group input-group-sm" style="width: 120px; min-width: 80px;">
+            <span class="input-group-btn"></span>
+            <input class="qtyInput form-control" 
+                   ng-model="item.quantity" type="text" data-bts-min="1" data-bts-max="999" 
+                   style="text-align: center;">
+            <span class="input-group-btn"></span>       
+			    </div>
+          <!--<script>
+            //$('.qtyInput').TouchSpin();
+          </script>-->
+        </td>
+        
+        <!-- SUM -->
+        <td style="width:15%;"><span> {{item.sum | number:2}} лв</span></td>
+        
+        <!-- REMOVE button -->
+        <td style="width:10%;">
+          <a ng-click="removeFromCart(item.id)">
+            <span class="glyphicon glyphicon-remove-circle" style="color: red"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="cartItem">
+        <td colspan="2"> </td>
+        <td colspan="2" style="text-align: right;"><span style="font-size: 18px; font-weight: 600; padding-right: 15px;"> Общо: </span></td>
+        <td colspan="2" style="text-align: left; "><span style="font-size: 18px; font-weight: 600"> {{ cart.subTotal | number:2 }} лв </span></td>
+      </tr>
+      <tr class="cartItem">
+        <td colspan="2"> </td>
+        <td colspan="2" style="text-align: right;"><span style="font-size: 18px; font-weight: 600; padding-right: 15px;"> Доставка: </span></td>
+        <td colspan="2" style="text-align: left; "><span style="font-size: 18px; font-weight: 600"> {{ cart.shippingCosts | number:2 }} лв </span></td>
+      </tr>
+      <tr class="cartItem">
+        <td colspan="2"> </td>
+        <td colspan="2" style="text-align: right;"><span style="font-size: 18px; font-weight: 600; padding-right: 15px;"> Всичко: </span></td>
+        <td colspan="2" style="text-align: left; "><span style="font-size: 18px; font-weight: 600"> {{ cart.total | number:2 }} лв </span></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+
+<!--/ cart.details.html -->

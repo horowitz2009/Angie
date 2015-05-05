@@ -1,0 +1,277 @@
+<style>
+#myUp .noborder-round {
+	border-radius: 0; 
+	margin-right: 1px; 
+}
+
+.availability {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.cart-actions2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  width: 100%;
+  /*display: inline-block;*/
+  border-bottom: 1px solid #DDDDDD;
+  padding-bottom: 22px;
+  clear: both;
+  }
+</style>
+
+
+<div class="row transitionfx">
+
+    <!-- left column -->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <!-- product Image and Zoom -->
+        <div class="main-image sp-wrap col-lg-12 no-padding" style="display: inline-block;">
+            <div class="sp-large" style="overflow: hidden; height: auto; left: 0px; top: 0px;">
+                <a href="../images/zoom1hi.jpg" class="">
+                    <img ng-src="{{product.image}}" class="img-responsive" alt="{{product.name}}">
+                </a>
+            </div>
+			
+            <div class="sp-thumbs sp-tb-active" style="display:none">
+                <a href="../images/zoom1hi.jpg" class="sp-current">
+                    <img src="../images/zoom1.jpg" class="img-responsive" alt="img">
+                </a>
+                <a href="../images/zoom2hi.jpg" class="">
+                    <img src="../images/zoom2.jpg" class="img-responsive" alt="img">
+                </a>
+                <a href="../images/zoom3hi.jpg" class="">
+                    <img src="../images/zoom3.jpg" class="img-responsive" alt="img">
+                </a>
+            </div>
+        </div>
+    </div><!--/ left column end -->
+
+
+    <!-- right column -->
+    <div class="col-lg-6 col-md-6 col-sm-5" style="padding-left: 30px">
+
+        <h1 class="product-title"> {{product.name}} </h1>
+        <h3 class="product-code">Product Code : DEN1098</h3>
+        <div class="product-price">
+            <span class="price-sales">{{product.price | number:2}} <span style="font-size: 80%">лв</span></span>
+            <!--<span class="price-standard"></span>-->
+        </div>
+
+        <div class="details-description">
+            <p>{{product.description}}</p>
+        </div>
+<!--
+        <div class="color-details">
+            <span class="selected-color"><strong>COLOR</strong></span>
+            <ul class="swatches Color">
+                <li class="selected"> <a style="background-color:#f1f40e"> </a> </li>
+                <li> <a style="background-color:#adadad"> </a> </li>
+                <li> <a style="background-color:#4EC67F"> </a> </li>
+            </ul>
+        </div>
+-->		
+        <!--/.color-details-->
+		
+        
+		<div class="availability" >
+			<h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i> В наличност</h3>
+		</div>
+		
+		<!-- SO FAR THIS IS THE BEST LOOKING CONTROL -->
+		<div class="cart-actions2" >
+			<div class="input-group input-group-lg" style="width:320px; min-width:295px;">
+			  <span class="input-group-btn"></span>
+			  <input id="mine1" class="form-control" type="text" ng-model="quantity" ng-init="quantity = 1;" data-bts-min="1" data-bts-max="100" style="text-align: center;">
+			  <span id="myUp" class="input-group-btn"></span>
+			  <span class="input-group-btn">
+				<button id="btn-{{product.fullId}}" class="btn btn-primary btn2 btn2-7a glyphicon-shopping-cart" 
+          style="padding-left: 55px; padding-right: 18px; outline: 0px none;" 
+          type="button" ng-click="addToCart(product, quantity)">
+        ДОБАВИ</button>
+			  </span>
+			</div>
+		</div>
+<!--		
+        <div class="productFilter productFilterLook2">
+            <div class="filterBox">
+                <select style="display: none;">
+                    <option value="strawberries" selected="">Quantity</option>
+                    <option value="mango">1</option>
+                    <option value="bananas">2</option>
+                    <option value="watermelon">3</option>
+                    <option value="grapes">4</option>
+                    <option value="oranges">5</option>
+                    <option value="pineapple">6</option>
+                    <option value="peaches">7</option>
+                    <option value="cherries">8</option>
+                </select>
+				<div class="minict_wrapper">
+				  <input type="text" value="Quantity" placeholder="Quantity">
+				  <ul>
+				    <li data-value="strawberries" class="selected">Quantity</li>
+					<li data-value="mango" class="">1</li>
+					<li data-value="bananas" class="">2</li>
+					<li data-value="watermelon" class="">3</li>
+					<li data-value="grapes" class="">4</li>
+					<li data-value="oranges" class="">5</li>
+					<li data-value="pineapple" class="">6</li>
+					<li data-value="peaches" class="">7</li>
+					<li data-value="cherries" class="">8</li>
+					<li class="minict_empty">No results match your keyword.</li>
+				  </ul>
+				</div>
+            </div>
+            <div class="filterBox">
+                <select style="display: none;">
+                    <option value="strawberries" selected="">Size</option>
+                    <option value="mango">XL</option>
+                    <option value="bananas">XXL</option>
+                    <option value="watermelon">M</option>
+                    <option value="apples">L</option>
+                    <option value="apples">S</option>
+                </select>
+				<div class="minict_wrapper">
+				  <input type="text" value="Size" placeholder="Size">
+				  <ul>
+				  <li data-value="strawberries" class="selected">Size</li>
+				  <li data-value="mango" class="">XL</li>
+				  <li data-value="bananas" class="">XXL</li>
+				  <li data-value="watermelon" class="">M</li>
+				  <li data-value="apples" class="">L</li>
+				  <li data-value="apples" class="">S</li>
+				  <li class="minict_empty">No results match your keyword.</li>
+			      </ul>
+			    </div>
+            </div>
+        </div>
+-->		
+        <!-- productFilter -->
+
+        <div class="cart-actions" style="display:none">
+            <div class="addto">
+                <button class="button btn-cart cart first" title="Добави в количката" type="button">Добави</button>
+                <a class="link-wishlist wishlist">Add to Wishlist</a>
+			</div>
+
+            <div style="clear:both"></div>
+
+            <h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i> В наличност</h3>
+            <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Out of stock</h3>
+			
+            <h3 class="incaps"> <i class="glyphicon glyphicon-lock"></i> Secure online ordering</h3>
+        </div>
+        <!--/.cart-actions-->
+
+        <div class="clear"></div>
+
+        <div class="product-tab w100 clearfix" style="margin-top:20px">
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#details" data-toggle="tab">Допълнителна информация</a></li>
+                <li> <a data-target="#size" data-toggle="tab">Размери</a></li>
+                <li> <a data-target="#shipping" data-toggle="tab">Доставка</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="details">
+				{{product.longdesc}}
+				</div>
+                <div class="tab-pane" id="size"> 
+				    Тегло: {{product.quantity}} {{product.unit}}<br>
+                    Ширина: 10-15см<br>
+                    Височина: 5-10см<br>
+					Дълбочина: 5-10см<br>
+                    
+                    <br>
+					Опаковка: найлонов плик
+                    <br>
+                    Размери на опаковката: 20 x 30см<br>
+                </div>
+
+                <div class="tab-pane" id="shipping">
+                    <table>
+                        <colgroup>
+                            <col style="width:33%">
+                            <col style="width:33%">
+                            <col style="width:33%">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>Стандартна</td>
+                            <td>2-5 работни дни</td>
+                            <td>4.40лв</td>
+                        </tr>
+                        <tr>
+                            <td>Експресна</td>
+                            <td>1-2 работни дни</td>
+                            <td>7.00лв</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="3">* Безплатна доставка при поръчка над 40лв</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div> <!-- /.tab content -->
+
+        </div><!--/.product-tab-->
+
+        <div style="clear:both"></div>
+
+        <div class="product-share clearfix">
+            <p> SHARE </p>
+            <div class="socialIcon">
+                <a href="#"> <i class="fa fa-facebook"></i></a>
+                <a href="#"> <i class="fa fa-twitter"></i></a>
+                <a href="#"> <i class="fa fa-google-plus"></i></a>
+                <a href="#"> <i class="fa fa-pinterest"></i></a> </div>
+        </div>
+        <!--/.product-share-->
+
+    </div><!--/ right column end -->
+
+</div>
+
+
+<script>
+
+
+$('#colorfulmine1').TouchSpin({
+                min: 1,
+				
+                stepinterval: 1,
+                maxboostedstep: 3,
+				replacementval: 1,
+                buttondown_class: 'btn btn-default',
+				buttonup_class: 'noborder-round btn btn-default',
+				buttondown_txt: '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>',
+				buttonup_txt: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
+
+				
+				});
+$('#mine1').TouchSpin({
+                min: 1,
+				        max: 100,
+                stepinterval: 1,
+                maxboostedstep: 3,
+				        replacementval: 1,
+                buttondown_class: 'btn btn-default',
+				        buttonup_class: 'noborder-round btn btn-default',
+				        buttondown_txt: '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>',
+				        buttonup_txt: '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
+
+				});
+
+/*
+$('#colorfulmine').bootstrapNumber({
+	upClass: 'success',
+	downClass: 'danger'
+});
+*/
+</script>

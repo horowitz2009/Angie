@@ -1,0 +1,68 @@
+<!-- Modal Login start -->
+<div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+        
+        <iframe src="sink.html" name="sink" style="display:none"></iframe>
+        
+        <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="LoginController"
+              ng-submit="login(credentials)" novalidate form-autofill-fix>
+        
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
+                <h3 class="modal-title-site text-center"> Login to FELT </h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group login-username">
+                    <div>
+                        <input name="email" id="email" ng-model="credentials.email" 
+                               class="form-control input" size="20"
+                               placeholder="Enter E-mail" type="text" autocomplete="off"
+                               style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;">
+                    </div>
+                </div>
+                <div class="form-group login-password">
+                    <div>
+                        <input name="password" id="password" ng-model="credentials.password"
+                               class="form-control input" size="20"
+                               placeholder="Password" type="password" autocomplete="off"
+                               style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                            <label style="display: none;">
+                                <input name="rememberme" value="forever" checked="checked" type="checkbox"
+                                       style="display: none;"> Remember Me </label>
+                                
+                                <!-- <span class="icr enabled checked" id="icr-1"><span
+                                class="icr__checkbox"></span><span class="icr__text">Remember Me</span></span>
+                                -->
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input name="submit" class="btn  btn-block btn-lg btn-primary" value="LOGIN" type="submit">
+                        
+                    </div>
+                </div>
+                <!--userForm-->
+
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"> Not here before? 
+                  <a data-toggle="modal" data-dismiss="modal" href="#ModalSignup"> Sign Up. </a> <br>
+                  <a href="forgot-password.html"> Lost your password? </a>
+                </p>
+            </div>
+          </form>  
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
+<!-- /.Modal Login -->

@@ -1,0 +1,20 @@
+    <div class="w100 clearfix category-top">
+        <h2> КАТЕГОРИИ </h2>
+
+        <div class="categoryImage"><img src="images/cover2.png" class="img-responsive" alt="img"></div>
+    </div>
+    <!--/.category-top-->
+    <div class="row subCategoryList clearfix">
+        <div class="item2 col-sm-4 col-lg-4 col-md-4 col-xs-6" ng-repeat="category in categories">
+            <a ui-sref="shop.one({categoryId:category.id})">
+            <div class="product2">
+                <div class="image2" style="padding: 3px 3px 0px 3px">
+                    <img ng-src="{{category.thumbnail}}" alt="img" class="img-responsive img-rounded">
+                </div>
+                <div class="description2">
+                    <h4>{{category.name}}</h4>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>

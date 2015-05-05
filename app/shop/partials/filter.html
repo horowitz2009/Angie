@@ -1,0 +1,193 @@
+        <div class="panel-group" id="accordionNo">
+
+            <!-- CATEGORY -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseCategory" class="collapseWill"> <span class="pull-left"> <i class="fa fa-caret-right"></i></span> Категории </a> </h4>
+                </div>
+                <div id="collapseCategory" class="panel-collapse collapse in">
+                    <div class="panel-body">
+
+                        <ul class="nav nav-pills nav-stacked tree">
+                            <li ng-repeat="menuitem in catMenuItems" ui-sref-active="active">
+                              <a ui-sref="shop.one({categoryId:menuitem.id})">
+                                <span class="badge pull-right">{{menuitem.cnt}}</span>{{menuitem.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/Category menu end-->
+            
+            <!-- ORIGIN -->
+			      <div ng-if="filter.origins.length>0" style="display:none">{{filter.origins}}</div>
+            <div class="panel panel-default" ng-if="filter.origins.length > 0">
+                <div class="panel-heading">
+                    <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Произход <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a> </h4>
+                </div>
+                <div id="collapseBrand" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div ng-repeat="origin in filter.origins">
+                            <label> <input type="checkbox" ng-model="origin.value" name="selectedOrigins[]"> 
+                            {{origin.name}} <span>({{origin.cnt}})</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/origin panel end-->
+			
+            <!-- COLOR -->
+			      <div ng-if="filter.colors.length > 0" ng-show="isDebug">{{filter.colors}}</div>
+            <div  ng-if="filter.colors.length > 0" class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseColors" class="collapseWill"> Цвят <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a> </h4>
+                </div>
+                <div id="collapseColors" class="panel-collapse collapse in">
+                    <div class="panel-body maxheight300 color-filter mCustomScrollbar">
+                        <div ng-repeat="color in filter.colors">
+                            <label>
+                                <input type="checkbox" name="selectedColors[]" ng-model="color.value">
+								<small style="background-color: {{color.code}}"></small>
+                                {{color.name}} <span>({{color.cnt}})</span>
+							</label>
+                        </div>
+<!--						
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="1">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (111) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="2">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="3">
+                                <small style="background-color:#6fcc14"></small>
+                                Green (253) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="4">
+                                <small style="background-color:#333333"></small>
+                                Black <span>(123)</span> </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="5">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (434) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="6">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="7">
+                                <small style="background-color:#333333"></small>
+                                Black <span>(123)</span> </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="8">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (434) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="9">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="10">
+                                <small style="background-color:#6fcc14"></small>
+                                Green (253) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="11">
+                                <small style="background-color:#333333"></small>
+                                Black <span>(123)</span> </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="12">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (434) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="13">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="14">
+                                <small style="background-color:#6fcc14"></small>
+                                Green (253) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="15">
+                                <small style="background-color:#333333"></small>
+                                Black <span>(123)</span> </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="16">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (434) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="17">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="18">
+                                <small style="background-color:#6fcc14"></small>
+                                Green (253) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="19">
+                                <small style="background-color:#333333"></small>
+                                Black <span>(123)</span> </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="20">
+                                <small style="background-color:#1664c4"></small>
+                                Blue (434) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="21">
+                                <small style="background-color:#c00707"></small>
+                                Red (338) </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="color" value="22">
+                                <small style="background-color:#6fcc14"></small>
+                                Green (253) </label>
+                        </div>
+						-->
+                    </div>
+                </div>
+            </div>
+            <!--/color panel end-->
+
+        </div>
