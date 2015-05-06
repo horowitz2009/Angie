@@ -3,6 +3,7 @@ angular.module('felt.shop.service', [
 ])
 
   .factory('ShopService', ['$http', 'utils', '$q', function ($http, utils, $q) {
+    console.log("[  6 shop-service.factory ShopService]");
     var pathCategories = 'assets/categories.json';
     var pathAllColors = 'assets/allColors.json';
     var categoriesPromise = null;

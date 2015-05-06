@@ -14,7 +14,6 @@ function exception_error_handler($severity, $message, $file, $line) {
 set_error_handler ( "exception_error_handler" );
 
 $useremail = false;
-$jscallback = '';
 
 // First, we initialize the session, to see if we are already logged in
 session_start();

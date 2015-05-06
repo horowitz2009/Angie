@@ -12,6 +12,7 @@ angular
     })
 
     .config([ '$stateProvider', '$filterProvider', function($stateProvider, $filterProvider) {
+      console.log("[ 15 cart.config]");
       // register a filter factory which uses the
       // greet service to demonstrate DI.
       $filterProvider.register('shortCategory', function() {
@@ -102,6 +103,8 @@ angular
 
     .directive('cartRepeatDirective',
         [ '$timeout', '$animate', '$rootScope', 'CART_EVENTS', function($timeout, $animate, $rootScope, CART_EVENTS) {
+          console.log("[106 cart.directive cartRepeatDirective]");
+
           return {
             link : function(scope, element, attrs) {
 
@@ -151,10 +154,10 @@ angular
 
     .value(
         "cart",
-        /*
-         * { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00 }
-         */
-
+        
+          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00 }
+         
+/*
         {
           "items" : [
               {
@@ -231,13 +234,13 @@ angular
             "billingAddress" : {}
           },
           "total" : 10.80
-        }
+        }*/
 
     )
 
     .factory('CartService',
         [ 'cart', 'utils', '$rootScope', 'CART_EVENTS', function(cart, utils, $rootScope, CART_EVENTS) {
-
+          console.log("[243 cart.factory CartService]");
           var service = {};
 
           // cart object
@@ -294,6 +297,8 @@ angular
             this.cart.subTotal = newTotal;
             // TODO recalcShippingCosts
             this.cart.shippingCosts = 6.00;
+            if (this.cart.subTotal == 0)
+              this.cart.shippingCosts = 0.00;
             if (this.cart.subTotal >= 20)
               this.cart.shippingCosts = 3.00;
             if (this.cart.subTotal >= 40)
@@ -316,6 +321,7 @@ angular
 
     .factory('CartPersistenceService',
         [ 'CartService', 'utils', '$rootScope', 'CART_EVENTS', function(CartService, utils, $rootScope, CART_EVENTS) {
+          console.log("[322 cart.factory CartPersistenceService]");
           var service = {};
 
           service.cart = CartService.cart;
@@ -339,21 +345,27 @@ angular
               encoding:"UTF-8",
               url : 'php/load_cart.php',
               data : {'username' : username},
-              success : function(res) {
-                service.cart = res.cart;//TODO check if this is working
-                successCallback(res);
+              success : function(newCart) {
+                //service.cart = newCart;//TODO check if this is working
+                if (newCart.items)
+                  angular.copy(newCart, service.cart);
+                
+                CartService.recalcTotals();
+                if (successCallback)
+                  successCallback(newCart);
               },
               error : errorCallback
             });
             
           }
 
-          service.loadCart = function() {
-            // TODO
-          }
-
           return service;
         } ])
+
+.run(function () { console.log("[363 cart.run]"); })
+.config([ '$stateProvider', '$filterProvider', function($stateProvider, $filterProvider) {
+      console.log("[365 cart.config2]");
+}])
 
 ;
 

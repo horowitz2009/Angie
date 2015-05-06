@@ -16,52 +16,10 @@ angular.module('felt', [
 ])
 
 
-.run(['$rootScope', '$state', '$stateParams',
-  function ($rootScope, $state, $stateParams) {
-	  console.log("[MAIN RUN] start");
-
-        // It's very handy to add references to $state and $stateParams to the $rootScope
-        // so that you can access them from any scope within your applications.For example,
-        // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
-        // to active whenever 'contacts.list' or one of its decendents is active.
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-		
-        
-    
-
-        $rootScope.$on('$stateChangeSuccess',
-            function (event, toState, toParams, fromState, fromParams) {
-                console.log('state changed from ' + fromState.name + ' to ' + toState.name);
-
-                $("html, body").animate({ scrollTop: 0 }, 200);
-                
-                /*
-                console.log("fromState:");
-                console.log(fromState);
-                console.log("toState:");
-                console.log(toState);
-                console.log("fromParams:");
-                console.log(fromParams);
-                console.log("toParams:");
-                console.log(toParams);
-                console.log("EVENT:");
-                console.log(event);
-                */
-                
-                if (toState.name === 'home') {
-
-
-                }
-
-            });
-
-
-  }
-])
 
 .config(['$stateProvider', '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
+    console.log("[ 59 app.config]");
 
             /////////////////////////////
             // Redirects and Otherwise //
@@ -92,6 +50,35 @@ angular.module('felt', [
 
                         '': {
 
+                        }
+
+                    },
+                    
+                    onExit: function () {
+                        $('.slider-v1').cycle('destroy');
+                    }
+
+                })
+
+                
+                //////////
+                // My Account //
+                //////////
+                .state("myaccount", {
+
+                    url: "/myaccount",
+
+                    data: {
+                      displayName: 'Моят акаунт'
+                    },
+
+                    views: {
+                        'banner': {
+                            
+                        },
+
+                        '': {
+                          templateUrl: 'app/home/partials/myaccount.html'
                         }
 
                     },
@@ -133,43 +120,146 @@ angular.module('felt', [
   }
 ])
 
+.run(['$rootScope', '$state', '$stateParams',
+  function ($rootScope, $state, $stateParams) {
+    console.log("[333 21 app.run]");
+
+    // It's very handy to add references to $state and $stateParams to the $rootScope
+    // so that you can access them from any scope within your applications.For example,
+    // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
+    // to active whenever 'contacts.list' or one of its decendents is active.
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
+    
+
+
+    $rootScope.$on('$stateChangeSuccess',
+        function (event, toState, toParams, fromState, fromParams) {
+            console.log('state changed from ' + fromState.name + ' to ' + toState.name);
+
+            $("html, body").animate({ scrollTop: 0 }, 200);
+            
+            /*
+            console.log("fromState:");
+            console.log(fromState);
+            console.log("toState:");
+            console.log(toState);
+            console.log("fromParams:");
+            console.log(fromParams);
+            console.log("toParams:");
+            console.log(toParams);
+            console.log("EVENT:");
+            console.log(event);
+            */
+        });
+
+
+  }
+])
 
 .controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService','AUTH_EVENTS',
                          'ShopService', 'maxVisibleElements',
-                         'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS', '$animate', '$timeout',
+                         'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
+                         '$animate', '$timeout', '$interval',
                     function($scope, $rootScope, USER_ROLES, AuthService, AUTH_EVENTS, ShopService, maxVisibleElements, 
-            		         cart, CartService, CartPersistenceService, CART_EVENTS, $animate, $timeout) {
-  console.log("[MAINCTRL] start");
+            		         cart, CartService, CartPersistenceService, CART_EVENTS, 
+            		         $animate, $timeout, $interval) {
+  
+  console.log("[168 app.MainCtrl] start");
   $scope.currentUser = null;
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
   
-  $scope.setCurrentUser = function (user) {
+  $scope.getUsername = function() {
+    return $scope.currentUser != null ? $scope.currentUser.email : "guest";
+  }
+  
+  $scope.setCurrentUser = function(user) {
+    var oldUsername = $scope.getUsername();
+    console.log("SET CURRENT USER: ");
     $scope.currentUser = user;
-    console.log("USER1: " + $scope.currentUser);
-    $timeout(function() {
-      $scope.$apply();
-	  console.log("USER2: " + $scope.currentUser);
-	}, 10);
+    var newUsername = $scope.getUsername();
+    console.log(newUsername);
+    //TODO broadcast
+    $rootScope.$broadcast("user-changed", oldUsername, newUsername);
   };
   
   $scope.logout = function (logoutAll) {
 	  console.log("LOGOUT CLICKED");
-	  AuthService.logout(logoutAll).then(function (user) {
+	  AuthService.logout(logoutAll).always(function (user) {
 		  $scope.setCurrentUser(null);
 		  $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-	  }, function () {
-		  //$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 	  });
   };
 
   $scope.isLoginPage = false;
   
-  //AuthService.loginFromRememberMe();
+  $scope.wireCartEvents = function() {
+    console.log("wiring cart events...");
+    //wire cart persistence
+    $scope.$on(CART_EVENTS.cartChanged, function(event, args) {
+      
+      var username = $scope.currentUser != null ? $scope.currentUser.email : "guest";
+      
+      if (saveCartPromise) {
+        $timeout.cancel(saveCartPromise);  
+      }
+      
+      saveCartPromise = $timeout(function() {
+        console.log("SAVING CART...")
+        CartPersistenceService.saveCart(username);
+      }, 1000);
+      
+    });
+    
+  }
   
-  console.log("CART");
-  console.log(cart);
-  console.log(CartService);
+  $scope.loadCart = function() {
+    CartPersistenceService.loadCart($scope.getUsername()).then($scope.wireCartEvents);
+  }
+
+  // TRY LOGIN FROM REMEMBER ME
+  console.log("LOGIN FROM REMEMBER ME...");
+  AuthService.loginFromRememberMe().then(function(user) {
+    if (user) {
+      $scope.setCurrentUser(user);
+    } else {
+      $scope.setCurrentUser(null);
+    }
+    
+  }, function() {
+    $scope.setCurrentUser(null);
+  })
+  
+  .always(function() {
+    $('#userMenu').removeClass('hide');
+    $scope.$apply();
+  })
+  
+  
+//  //TODO make it with events  
+//  
+//  .always(function(user) {
+//    console.log("LOADING CART IF ANY FOR USER " + $scope.getUsername());
+//    $scope.loadCart();
+//  })
+  
+  ;
+  
+  
+
+  $scope.$on("user-changed", function(event, arg1, arg2) {
+    console.log("user changed caught:");
+    console.log("LOADING CART IF ANY FOR USER " + $scope.getUsername());
+    $scope.loadCart();
+  });
+  
+  
+  $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
+    console.log("login success caught");
+    $scope.setCurrentUser(args);
+  });
 
   var subTotalPromise = null;
   var addToCartPromise = null;
@@ -178,10 +268,12 @@ angular.module('felt', [
   $scope.cart = cart;
 
   ShopService.getCategories().then(function(data) {
+    console.log("[207 app.MainCtrl] getCategories");
     var categories = data;
     //console.log("Categories:");
     //console.log(categories);
     $scope.catMenuItems = ShopService.extractCatMenuItems(categories);
+    console.log("[212 app.MainCtrl] extractCatMenuItems");
 
   });
 
@@ -199,22 +291,8 @@ angular.module('felt', [
 
   $scope.gridview();
 
-  $scope.addToCart = function(product, quantity) {
-    this.flashIt(product);
-    CartService.addItem(product, quantity);
-  }
-
-  $scope.removeFromCart = function(id) {
-    CartService.removeItem(id);
-  }
-
-  $scope.recalcCart = function() {
-    CartService.recalcTotals();
-    //console.log("cart recalculated");
-  }
-
   $scope.flashIt = function(product) {
-	  if ($scope.cartPromise) {
+    if ($scope.cartPromise) {
         $animate.cancel($scope.cartPromise);
       }
 
@@ -227,7 +305,20 @@ angular.module('felt', [
       }, 1);
 
   }
+  
+  $scope.addToCart = function(product, quantity) {
+    $scope.flashIt(product);
+    CartService.addItem(product, quantity);
+  }
 
+  $scope.removeFromCart = function(id) {
+    CartService.removeItem(id);
+  }
+
+  $scope.recalcCart = function() {
+    CartService.recalcTotals();
+    //console.log("cart recalculated");
+  }
 
   $scope.$watch('cart.subTotal', function(newValue, oldValue) {
     if (newValue !== oldValue) {
@@ -246,31 +337,22 @@ angular.module('felt', [
 
     }
   });
-  $scope.cnt = 0;
-  //wire cart persistence
-  $scope.$on(CART_EVENTS.cartChanged, function(event, args) {
-    
-    var username = $scope.currentUser != null ? $scope.currentUser.email : "guest";
-    console.log("SAVING CART..." + ++$scope.cnt);
-    
-    if (saveCartPromise) {
-      console.log("ignoring a request...");
-      $timeout.cancel(saveCartPromise);  
-    }
-    
-    saveCartPromise = $timeout(function() {
-      console.log("SAVING CART  (REALLY)")
-      CartPersistenceService.saveCart(username);
-    }, 1000);
-    
-    
-    
-  });
+  
+
+  
+  
+  $scope.hasFocus = false;
+  
+  
+  $interval(function() {
+    $scope.hasFocus = document.hasFocus();
+  }, 333);
 
 }])
     
     
 .factory('Title', ['$rootScope', '$interpolate', function ($rootScope,   $interpolate) {
+  console.log("[319 app.factory Title]");
 
         var factory = {};
 
@@ -299,6 +381,7 @@ angular.module('felt', [
 	 
 .directive('updateTitle', ['$rootScope', '$timeout', 'Title',
   function($rootScope, $timeout, Title) {
+    console.log("[348 app.directive updateTitle]");
     return {
       link: function(scope, element, attrs) {
         var listener = function(event, toState) {
@@ -315,6 +398,11 @@ angular.module('felt', [
     };
   }
 ])
+
+
+
+
+
 
 ; //the end
 

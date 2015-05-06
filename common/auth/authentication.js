@@ -5,6 +5,7 @@ angular.module('common.authentication', [
 .constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',
+  loginFromRememberMeFailed: 'auth-login-from-rememberme-failed',
   registrationFailed: 'auth-register-failed',
   logoutSuccess: 'auth-logout-success',
   sessionTimeout: 'auth-session-timeout',
@@ -20,6 +21,7 @@ angular.module('common.authentication', [
 })
 
 .service('Session', function () {
+  console.log("[ 23 auth.service Session]");
   this.create = function (sessionId, userId, userRoles) {
     this.id = sessionId;//TODO session id. I don't need it
     this.userId = userId;
@@ -35,79 +37,89 @@ angular.module('common.authentication', [
 })
 
 .factory('AuthService', ["$http", "Session", function ($http, Session) {
+  console.log("[ 39 auth.factory AuthService]");
   var authService = {};
  
-  authService.login = function (credentials) {
+  //LOGIN
+  authService.login = function(credentials) {
     return $.ajax({
-    	type : "POST",
-		url : 'php/login.php',
-		data: credentials,
-		success: function (res) {
-	               Session.create(res.id, res.email, res.roles);
-                   return res;
-                 },
-        error: function (res) {
-        	     console.log("DAMN");//TODO error. do what?
-        	     console.log(res);
-               }
+      type : "POST",
+      url : 'php/login.php',
+      data : credentials,
+      success : function(res) {
+        if (res && res.email)
+          Session.create(res.id, res.email, res.roles);
+        return res;
+      },
+      error : function(res) {
+        console.log("Login failed");// TODO error. do what?
+        console.log(res);
+      }
     });
-    		
+
   }
   
-  authService.register = function (newUser) {
-	  return $.ajax({
-		  type : "POST",
-		  url : 'php/register.php',
-		  data: newUser,
-		  success: function (res) {
-			  //Session.create(res.id, res.email, res.roles);
-			  //return res;
-			  authService.login(newUser);
-		  },
-		  error: function (res) {
-			  console.log("DAMN");//TODO error. do what?
-			  console.log(res);
-		  }
-	  });
-	  
-  }
-  
-  authService.logout = function (logoutAll) {
+  //REGISTER
+  authService.register = function(newUser) {
     return $.ajax({
-    	type : "POST",
-		url : 'php/login.php',
-		data: { 'logout': logoutAll },
-		success: function (res) {
-	               Session.destroy();
-                   return res;
-                 },
-        error: function (res) {
-        	     Session.destroy();
-               }
+      type : "POST",
+      url : 'php/register.php',
+      data : newUser,
+      success : function(res) {
+        // Session.create(res.id, res.email, res.roles);
+        // return res;
+        authService.login(newUser);
+      },
+      error : function(res) {
+        console.log("Register failed");// TODO error. do what?
+        console.log(res);
+      }
     });
-    		
+
   }
   
-  authService.loginFromRememberMe = function () {
-	  return $.ajax({
-		  type : "POST",
-		  data : { 'loginWithRememberMe': true },
-		  url : 'php/login.php',//TODO make login.php with no credentials trying cookie way
-		  success: function (res) {
-              Session.create(res.id, res.email, res.roles);
-			  return res;
-		  },
-		  error: function (res) {
-			  //console.log("DAMN");//TODO error. do what? uh?
-			  //console.log(res);
-			  //DO NOTHING FOR NOW
-		  }
-	  });
-	  
+  //LOGOUT
+  authService.logout = function(logoutAll) {
+    return $.ajax({
+      type : "POST",
+      url : 'php/login.php',
+      data : {
+        'logout' : logoutAll
+      },
+      success : function(res) {
+        Session.destroy();
+        return res;
+      },
+      error : function(res) {
+        Session.destroy();
+      }
+    });
+
+  }
+  
+  //LOGIN FROM REMEMBER ME
+  authService.loginFromRememberMe = function() {
+    return $.ajax({
+      type : "POST",
+      data : {
+        'loginWithRememberMe' : true
+      },
+      url : 'php/login.php',// TODO make login.php with no credentials trying
+                            // cookie way
+      success : function(res) {
+        if (res && res.email)
+          Session.create(res.id, res.email, res.roles);
+        return res;
+      },
+      error : function(res) {
+        console.log("login from remember me failed");// TODO error. do what? uh?
+      }
+    });
+
   }
   
   authService.isAuthenticated = function () {
-	console.log("[CHECK SESSION.userID: " + Session.userId);
+	  console.log("[CHECK SESSION.userID: " + Session.userId);
     return Session.userId != null && Session.userId.length > 0;
   };
   
@@ -123,6 +135,7 @@ angular.module('common.authentication', [
 }])
 
 .config(['$httpProvider', function ($httpProvider) {
+  console.log("[128 auth.config]");
   $httpProvider.interceptors.push([
     '$injector',
     function ($injector) {
@@ -133,6 +146,7 @@ angular.module('common.authentication', [
 
 .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', 
                              function ($rootScope, $q, AUTH_EVENTS) {
+  console.log("[139 auth.factory AuthInterceptor]");
   return {
     responseError: function (response) { 
       $rootScope.$broadcast({
@@ -150,8 +164,7 @@ angular.module('common.authentication', [
 .controller('LoginController', ["$scope", "$rootScope", "AUTH_EVENTS", "AuthService", '$timeout',
                                 function ($scope, $rootScope, AUTH_EVENTS, AuthService, $timeout) {
   
-  console.log("[LOGINCTRL] start");
-  
+  console.log("[158 auth.controller LoginController]");
   $scope.result = ' ';
   
   $scope.credentials = {
@@ -162,23 +175,23 @@ angular.module('common.authentication', [
   
   $scope.login = function (credentials) {
     AuthService.login(credentials).then(function (user) {
-      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-      $scope.setCurrentUser(user);
+      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
+      //$scope.setCurrentUser(user);
     }, function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      $rootScope.$broadcast(AUTH_EVENTS.loginFailed, null);
     });
   };
 
-  //TODO do you need this in scope?
+  //TODO THIS IS NOT USED?! CHECK!!!
   $scope.loginFromRememberMe = function () {
     AuthService.loginFromRememberMe().then(function (user) {
   	  if (user) {
-  		$scope.setCurrentUser(user);
-        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+  		  //$scope.setCurrentUser(user);
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
   	  }
     }, function () {
          $scope.setCurrentUser(null);
-         //$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+         $rootScope.$broadcast(AUTH_EVENTS.loginFromRememberMeFailed);
        });
   };
   
@@ -201,6 +214,7 @@ angular.module('common.authentication', [
        //TODO what now?
        $scope.setResult('Incorrect username or password!');
 	});
+  
   $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
 	  console.log("LOGIN SUCCESS");
       $scope.setResult(' ');
@@ -218,16 +232,14 @@ angular.module('common.authentication', [
 	  $scope.reset();
   });
 
-  
-  console.log(">>>login from remember me...");
-  $scope.loginFromRememberMe();
+  //console.log("[224 auth.controller LoginController] login from remember me ...");
+  //$scope.loginFromRememberMe();
   
 }])
 
 .controller('RegisterController', ["$scope", "$rootScope", "AUTH_EVENTS", "AuthService", '$timeout',
                                 function ($scope, $rootScope, AUTH_EVENTS, AuthService, $timeout) {
-	
-	console.log("[REGISTERCTRL] start");
+  console.log("[231 auth.controller RegisterController]");
 	
 	$scope.result = ' ';
 	
@@ -320,4 +332,6 @@ angular.module('common.authentication', [
   };
 }])
 
+
+.run(function () { console.log("[325 auth.run]"); })
 ;

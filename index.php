@@ -72,6 +72,7 @@
 </head>
 
 <body ng-controller="MainCtrl">
+<script> console.log("75 BODY");</script>
 <!-- Modal Login start -->
 <div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
     <div class="modal-dialog ">
@@ -81,7 +82,7 @@
         
         <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="LoginController"
               ng-submit="login(credentials)" novalidate form-autofill-fix>
-        
+        <script> console.log("85 BODY");</script>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
                 <h3 class="modal-title-site text-center"> Въведете имейл и парола </h3>
@@ -153,7 +154,7 @@
         
         <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="RegisterController"
               ng-submit="register(newUser)" novalidate form-autofill-fix>
-        
+        <script> console.log("157 BODY");</script>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
                 <h3 class="modal-title-site text-center"> Регистрация </h3>
@@ -221,6 +222,7 @@
 <!-- NAVBAR -->
 <!-- ===================================================================== -->
 <header  class="navbar navbar-tshop navbar-fixed-top megamenu" style="margin-bottom: 0px">
+<script> console.log("225 header");</script>
     <div class="navbar-top">
         <div class="container">
             <div class="row">
@@ -245,23 +247,37 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
                     <div class="pull-right">
-                        <ul class="userMenu">
+                        <ul id="userMenu" class="userMenu hide">
                             <!-- logged -->
-                            <li ng-if="currentUser"><a href="#">
-                              <span class="hidden-xs" style="text-transform: none;font-size: 14px;line-height: 28px;" ng-bind="currentUser.email">
+                            <li ng-if="currentUser">
+                              <a href="#">
+                              <span class="hidden-xs" style="text-transform: none;font-size: 14px;line-height: 28px;" 
+                                    ng-bind="currentUser.email">
                                 ...
                               </span></a>
                             </li>
-                            <li ng-if="currentUser" ng-cloak><a href="#"><span
-                                    class="hidden-xs"> Моят акаунт</span> <i
-                                    class="glyphicon glyphicon-user hide visible-xs "></i></a></li>
-                            <li ng-if="currentUser" ng-cloak><a ng-click="logout(false)"> <span class="hidden-xs">Изход</span>
-                                <i class="glyphicon glyphicon-log-out hide visible-xs "></i> </a></li>
+                            
+                            <li ng-if="currentUser" ng-cloak>
+                              <a ui-sref="myaccount"><span class="hidden-xs"> Моят акаунт</span> 
+                                <i class="glyphicon glyphicon-user hide visible-xs "></i>
+                              </a>
+                            </li>
+                            
+                            <li ng-if="currentUser" ng-cloak>
+                              <a ng-click="logout(false)">
+                                <span class="hidden-xs">Изход</span>
+                                <i class="glyphicon glyphicon-log-out hide visible-xs "></i> 
+                              </a>
+                            </li>
                             
                             <!-- not logged -->    
-                            <li ng-if="currentUser == null" ng-cloak><a href="#"
-                                   data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Вход</span>
-                                <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a></li>
+                            <li ng-if="currentUser == null" ng-cloak>
+                              <a data-toggle="modal" data-target="#ModalLogin"> 
+                                <span class="hidden-xs">Вход</span>
+                                <i class="glyphicon glyphicon-log-in hide visible-xs "></i> 
+                              </a>
+                            </li>
+                            
                             <li ng-if="currentUser == null" ng-cloak class="hidden-xs"><a
                                     href="#"
                                     data-toggle="modal" data-target="#ModalSignup"> Регистрирайте акаунт </a></li>
@@ -817,6 +833,8 @@
       session_cache_expire = <?php echo session_cache_expire(); ?>
       
       logged user = {{currentUser.email}}
+      
+      has focus = {{hasFocus}}
     </pre>
 
 
@@ -972,8 +990,8 @@
 <script type="text/javascript" >
     // this script required for subscribe modal
     $(window).load(function () {
-        console.log("START " + "<?php echo $useremail; ?>");
-        <?php echo $jscallback; ?>
+        console.log("993 START " + "<?php echo $useremail; ?>");
+        
         
         // full load
         //$('#modalAds').modal('show');
@@ -1010,7 +1028,7 @@
 <!-- jQuery minimalect // custom select   -->
 <script type="text/javascript" src="js/jquery.minimalect.min.js"></script>
 
-
+<script>console.log("1031 Index");</script>
 <!-- ANGULAR -->
 <script type="text/javascript" src="app/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="app/bower_components/angular-animate/angular-animate.js"></script>
@@ -1024,6 +1042,7 @@
 
 
 <!-- APP -->
+<script>console.log("1045 Index");</script>
 <script type="text/javascript" src="app/app.js"></script>
 <script type="text/javascript" src="app/shop/shop.js"></script>
 <script type="text/javascript" src="app/shop/cart.js"></script>
@@ -1042,6 +1061,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 
 <div login-dialog ng-if="!isLoginPage"></div>
-
+<script>console.log("1064 Index");</script>
 </body>
 </html>
+<script>console.log("1067 Index");</script>

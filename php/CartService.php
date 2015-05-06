@@ -155,4 +155,12 @@ class CartService {
       $token
     )), $exp);
   }
+
+  public function loadCart($username) {
+    $cart = null;
+    $token = $this->findCartToken();
+    if ($token != null)
+      $cart = $this->storage->loadCart($username, $token . $this->tokenGenerator->getSalt());
+    return $cart;
+  }
 }

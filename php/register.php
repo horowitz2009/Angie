@@ -19,7 +19,6 @@ function register() {
     $result = $conn->exec($sql);
     if ($result == 1) {
       set_result('200', 'OK');
-      echo '{}';
     } else {
       set_result('401', 'Something went wrong');
     }

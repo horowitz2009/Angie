@@ -7,7 +7,7 @@ angular.module('felt.shop', [
   .config(
   ['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
-    
+      console.log("[ 10 shop.config]");
       /////////////////////////////
       // Redirects and Otherwise //
       /////////////////////////////
@@ -271,4 +271,9 @@ angular.module('felt.shop', [
 
     }
   ]
-);
+)
+
+.run(function () { console.log("[277 shop.run]"); })
+
+
+;

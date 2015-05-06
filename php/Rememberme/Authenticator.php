@@ -107,7 +107,7 @@ class Authenticator
     {
         $cookieValues = $this->getCookieValues();
 
-        if (!$cookieValues || count($cookieValues < 3)) {
+        if (!$cookieValues || count($cookieValues) < 3) {
             return false;
         }
 

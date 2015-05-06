@@ -19,7 +19,7 @@ $options = array(
   "tableName" => "carts2"
 );
 
-if (! empty($_POST) && isset($_POST['username']) && isset($_POST['cart'])) {
+if (! empty($_POST) && isset($_POST['username'])) {
   
   $storage = new Rememberme\Storage\PDOCart($options);
   
@@ -35,12 +35,15 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['cart'])) {
   session_start();
   
   $username = $_POST['username'];
-  $cart = $_POST['cart'];
   $cartService->setCookieName('CART_' . $username);
   
-  $cartService->saveCart($username, $cart);
+  $cart = $cartService->loadCart($username);
+  if ($cart != null) {
+    set_result('200', 'OK', $cart);
+  } else {
+    set_result('200', 'EMPTY');
+  }
   
-  set_result('200', 'OK');
 } else {
   set_result("500", "Missing arguments");
 }
