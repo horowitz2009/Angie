@@ -66,9 +66,9 @@ angular.module('common.authentication', [
       url : 'php/register.php',
       data : newUser,
       success : function(res) {
-        // Session.create(res.id, res.email, res.roles);
+        //Session.create(res.id, res.email, res.roles);
         // return res;
-        authService.login(newUser);
+        //authService.login(newUser);
       },
       error : function(res) {
         console.log("Register failed");// TODO error. do what?
@@ -252,9 +252,20 @@ angular.module('common.authentication', [
 	
 	$scope.register = function (newUser) {
 		AuthService.register(newUser).then(function (user) {
-			$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-			console.log(">>>register good. set user...");
-			$scope.setCurrentUser(user);
+		  console.log(">>>register good. set user...");
+		  
+		  
+	    AuthService.login(newUser).then(function (user) {
+	      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
+	      //$scope.setCurrentUser(user);
+	    }, function () {
+	      $rootScope.$broadcast(AUTH_EVENTS.loginFailed, null);
+	    });
+
+		  
+		  
+			//$rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
+			//$scope.setCurrentUser(user);
 		}, function () {
 			$rootScope.$broadcast(AUTH_EVENTS.registrationFailed);
 		});

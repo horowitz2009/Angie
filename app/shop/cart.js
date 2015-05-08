@@ -156,85 +156,6 @@ angular
         "cart",
         
           { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "initial": true }
-         
-/*
-        {
-          "items" : [
-              {
-                "id" : "wool-yellow",
-                "product" : {
-                  "id" : "yellow",
-                  "color" : "жълт",
-                  "image" : "images/wool_jylta.jpg",
-                  "name" : "Жълта вълна",
-                  "origin" : "България",
-                  "description" : "Прана, дарачена, багрена и пак дарачена. Изключително подходяща за основа поради бързото и лесно степване.",
-                  "longdesc" : "Тъй като вълната е много лека и обемна, ще ви дадем ориентировъчно какво количество е необходимо за някои от нещата, които можете да си изработите. За едно цвете са ви необходими около 3-8г според големината му. Малките фигури за фиба, направени с иглонабиване, са по-леки от грам. Гривните са около 2-7г според вида им. Шапките - около 60-80г. Чантите - около 50-100г пак според големината им.",
-                  "price" : 0.8,
-                  "quantity" : 10,
-                  "unit" : "грама",
-                  "categoryId" : "wool",
-                  "fullId" : "wool-yellow"
-                },
-
-                "quantity" : 1,
-                "sum" : 0.8
-              },
-              {
-                "id" : "wool-grapefruit",
-                "product" : {
-                  "id" : "grapefruit",
-                  "color" : "светло розов",
-                  "image" : "images/wool_grapefruit.jpg",
-                  "name" : "Грейпфрут",
-                  "origin" : "България",
-                  "description" : "Прана, дарачена, багрена и пак дарачена. Изключително подходяща за основа поради бързото и лесно степване.",
-                  "longdesc" : "Тъй като вълната е много лека и обемна, ще ви дадем ориентировъчно какво количество е необходимо за някои от нещата, които можете да си изработите. За едно цвете са ви необходими около 3-8г според големината му. Малките фигури за фиба, направени с иглонабиване, са по-леки от грам. Гривните са около 2-7г според вида им. Шапките - около 60-80г. Чантите - около 50-100г пак според големината им.",
-                  "price" : 0.8,
-                  "quantity" : 10,
-                  "unit" : "грама",
-                  "categoryId" : "wool",
-                  "fullId" : "wool-grapefruit"
-                },
-                "quantity" : 2,
-                "sum" : 1.6
-              },
-              {
-                "id" : "wool-darkgrapefruit",
-                "product" : {
-                  "id" : "darkgrapefruit",
-                  "color" : "тъмно розов",
-                  "image" : "images/wool_grapefruit2.jpg",
-                  "name" : "ТЪМЕН ГРЕЙПФРУТ",
-                  "origin" : "България",
-                  "description" : "Прана, дарачена, багрена и пак дарачена. Изключително подходяща за основа поради бързото и лесно степване.",
-                  "longdesc" : "Тъй като вълната е много лека и обемна, ще ви дадем ориентировъчно какво количество е необходимо за някои от нещата, които можете да си изработите. За едно цвете са ви необходими около 3-8г според големината му. Малките фигури за фиба, направени с иглонабиване, са по-леки от грам. Гривните са около 2-7г според вида им. Шапките - около 60-80г. Чантите - около 50-100г пак според големината им.",
-                  "price" : 0.8,
-                  "quantity" : 10,
-                  "unit" : "грама",
-                  "categoryId" : "wool",
-                  "fullId" : "wool-darkgrapefruit"
-                },
-                "quantity" : 3,
-                "sum" : 2.4000000000000004
-              } ],
-
-          "subTotal" : 4.80,
-          "shippingCosts" : 6.00,
-          "shipping" : {
-            "method" : '',
-            "shippingAddress" : {
-              "country" : "България",
-              "zipCode" : '',
-              "cityData" : '',
-              "province" : '',
-              "" : ''
-            },
-            "isBillingAddressSame" : true,
-            "billingAddress" : {}
-          },
-          "total" : 10.80
-        }*/
 
     )
 
@@ -287,6 +208,20 @@ angular
             }
           }
 
+          // mergeCarts
+          service.mergeCarts = function(cart1, cart2) {
+            //TODO fix this shit
+//            var items = [];
+//            if (cart1 && cart1.items) {
+//              items = items.concat(cart1.items);
+//            }
+//            if (cart2 && cart2.items) {
+//              items = items.concat(cart2.items);
+//            }
+//            angular.copy(items, this.cart.items);
+            this.recalcTotals();
+          }
+          
           // recalcTotals
           service.recalcTotals = function() {
             var oldCart = angular.copy(this.cart);

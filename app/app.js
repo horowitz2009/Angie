@@ -270,32 +270,34 @@ angular.module('felt', [
       promise = promise.then($scope.wireCartEvents);
     }
     
-    promise.then(function(newCart) {
+    promise.then(function() {
       //newCart is a copy!!!
       console.log("THIS IS IT. 000000000000000000000000000000000000000000000000000");
       console.log("OLD cart");
       console.log(oldCart);
       console.log("NEW cart");
+      newCart = angular.copy($scope.cart);
       console.log(newCart);
-      if (newCart == null || !newCart.items)
-        console.log('newCart is NULL');
-      console.log("NEW cart2");
-      console.log($scope.cart);
+      
+
       
       
-      //A. if(isEmpty(oldCart)) {
-      //     //no problem for all situations
-      //   } else {
-      //     if(isEmpty(newCart) {
-      //       //copy oldCart to newCart. remove oldCart from DB
-      //     } else {
-      //       if (!angular.equals(oldCart, newCart) {
-      //         //USER MUST CHOOSE
-      //       } else {
-      //         //remove oldCart from DB (probably guest)
-      //       }
-      //     }
-      //   }
+       if(isEmpty(oldCart)) {
+         //no problem for all situations
+       } else {
+         if(isEmpty(newCart)) {
+           //copy oldCart to newCart. remove oldCart from DB
+           CartService.mergeCarts(oldCart, newCart);
+         } else {
+           if (!angular.equals(oldCart, newCart)) {
+             //TODO USER MUST CHOOSE
+             CartService.mergeCarts(oldCart, newCart);
+           } else {
+             //remove oldCart from DB (probably guest)
+             CartService.mergeCarts(oldCart, newCart);
+           }
+         }
+       }
       
       //1. if different and both are not empty
       //have to choose
@@ -311,7 +313,9 @@ angular.module('felt', [
       //5. if different, old is full guest, new empty user
       // -> copy old cart to new cart and remove guest cart
       
-      
+      console.log("oldCart isEmpty: " + isEmpty(oldCart));
+      console.log("newCart isEmpty: " + isEmpty(newCart));
+      console.log("===============================================================");
       
       
     });
@@ -471,3 +475,7 @@ angular.module('felt', [
 
 ; //the end
 
+
+function isEmpty(cart) {
+  return  cart == null || (cart.items && cart.items.length == 0);  
+}
