@@ -155,7 +155,7 @@ angular
     .value(
         "cart",
         
-          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00 }
+          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "initial": true }
          
 /*
         {
@@ -289,12 +289,14 @@ angular
 
           // recalcTotals
           service.recalcTotals = function() {
+            var oldCart = angular.copy(this.cart);
             var newTotal = 0.00;
             this.cart.items.forEach(function(item) {
               item.sum = item.product.price * item.quantity;
               newTotal += item.sum;
             });
             this.cart.subTotal = newTotal;
+            
             // TODO recalcShippingCosts
             this.cart.shippingCosts = 6.00;
             if (this.cart.subTotal == 0)
@@ -304,7 +306,11 @@ angular
             if (this.cart.subTotal >= 40)
               this.cart.shippingCosts = 0.00;
             this.cart.total = this.cart.subTotal + this.cart.shippingCosts;
-            $rootScope.$broadcast(CART_EVENTS.cartChanged, this.cart);
+            
+            if(!angular.equals(oldCart, this.cart)) {
+              console.log("broadcast change cart...");
+              $rootScope.$broadcast(CART_EVENTS.cartChanged, this.cart);
+            }
           }
 
           // findItem
@@ -328,6 +334,11 @@ angular
           
           // try not use these callbacks, instead use the promise functionality
           service.saveCart = function(username, successCallback, errorCallback) {
+            console.log("Saving cart of user " + username);
+//            if (service.cart.initial) {
+//              console.log("Saving cart skipped...");
+//              return null;
+//            }
             return $.ajax({
               type : "POST",
               encoding:"UTF-8",
@@ -339,7 +350,7 @@ angular
 
           }
           
-          service.loadCart = function(username, successCallback, errorCallback) {
+          service.loadCart = function(username) {
             return $.ajax({
               type : "POST",
               encoding:"UTF-8",
@@ -349,12 +360,8 @@ angular
                 //service.cart = newCart;//TODO check if this is working
                 if (newCart.items)
                   angular.copy(newCart, service.cart);
-                
                 CartService.recalcTotals();
-                if (successCallback)
-                  successCallback(newCart);
-              },
-              error : errorCallback
+              }
             });
             
           }

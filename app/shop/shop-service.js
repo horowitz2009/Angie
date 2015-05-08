@@ -163,7 +163,6 @@ angular.module('felt.shop.service', [
         });
       }
     }
-
 	
     function saveToLoki(categories) {
       new loki('catalog', {
@@ -214,7 +213,7 @@ angular.module('felt.shop.service', [
         autosave : false,
         autosaveInterval : 10000,
         persistenceMethod : 'adapter',
-        adapter : jqAdapter
+        adapter : new jquerySyncAdapter({ ajaxLib : $ })
       });
 
 

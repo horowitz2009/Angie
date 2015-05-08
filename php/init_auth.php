@@ -2,6 +2,7 @@
 require_once __DIR__ . '/RememberMe/TokenGenerator.php';
 require_once __DIR__ . '/RememberMe/Authenticator.php';
 require_once __DIR__ . '/RememberMe/Storage/PDO.php';
+require_once __DIR__ . '/DBService.php';
 
 use Birke\Rememberme;
 
@@ -34,12 +35,8 @@ $options = array(
 );
 
 $storage = new Rememberme\Storage\PDO($options);
-
-$servername = "localhost"; // TODO think about constants or ini file
-$usernameDB = "zhristov";
-$passwordDB = "totaasha";
-$dbname = "felt";
-$conn = new \PDO("mysql:host=$servername;dbname=$dbname", $usernameDB, $passwordDB);
+$db = new DBService();
+$conn = $db->createPDOConnection();
 $storage->setConnection($conn);
 
 $authenticator = new Rememberme\Authenticator($storage, new Rememberme\TokenGenerator("jeff_" . $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']));

@@ -72,7 +72,6 @@
 </head>
 
 <body ng-controller="MainCtrl">
-<script> console.log("75 BODY");</script>
 <!-- Modal Login start -->
 <div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
     <div class="modal-dialog ">
@@ -82,7 +81,6 @@
         
         <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="LoginController"
               ng-submit="login(credentials)" novalidate form-autofill-fix>
-        <script> console.log("85 BODY");</script>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
                 <h3 class="modal-title-site text-center"> Въведете имейл и парола </h3>
@@ -154,7 +152,6 @@
         
         <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="RegisterController"
               ng-submit="register(newUser)" novalidate form-autofill-fix>
-        <script> console.log("157 BODY");</script>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> ×</button>
                 <h3 class="modal-title-site text-center"> Регистрация </h3>
@@ -222,7 +219,6 @@
 <!-- NAVBAR -->
 <!-- ===================================================================== -->
 <header  class="navbar navbar-tshop navbar-fixed-top megamenu" style="margin-bottom: 0px">
-<script> console.log("225 header");</script>
     <div class="navbar-top">
         <div class="container">
             <div class="row">
@@ -1028,7 +1024,6 @@
 <!-- jQuery minimalect // custom select   -->
 <script type="text/javascript" src="js/jquery.minimalect.min.js"></script>
 
-<script>console.log("1031 Index");</script>
 <!-- ANGULAR -->
 <script type="text/javascript" src="app/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="app/bower_components/angular-animate/angular-animate.js"></script>
@@ -1042,7 +1037,6 @@
 
 
 <!-- APP -->
-<script>console.log("1045 Index");</script>
 <script type="text/javascript" src="app/app.js"></script>
 <script type="text/javascript" src="app/shop/shop.js"></script>
 <script type="text/javascript" src="app/shop/cart.js"></script>
@@ -1061,7 +1055,5 @@
 <script type="text/javascript" src="js/script.js"></script>
 
 <div login-dialog ng-if="!isLoginPage"></div>
-<script>console.log("1064 Index");</script>
 </body>
 </html>
-<script>console.log("1067 Index");</script>

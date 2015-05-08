@@ -158,6 +158,54 @@ angular.module('felt', [
   }
 ])
 
+.factory('Title', ['$rootScope', '$interpolate', function ($rootScope,   $interpolate) {
+  console.log("[319 app.factory Title]");
+
+        var factory = {};
+
+        factory.getTitle = function () {
+          var title = '';
+          var currentState = $rootScope.$state.$current;
+          var data = null;
+          if (currentState.data) {
+            if (currentState.data.title)
+              data = currentState.data.title;
+            else
+              data = currentState.data.displayName;
+            if (data) {
+              var interpolationContext =  (typeof currentState.locals !== 'undefined') ? currentState.locals.globals : currentState;
+              title = $interpolate(data)(interpolationContext);
+            }
+          }
+          return title;
+        };
+        
+
+        return factory;
+
+  }
+])
+   
+.directive('updateTitle', ['$rootScope', '$timeout', 'Title',
+  function($rootScope, $timeout, Title) {
+    console.log("[348 app.directive updateTitle]");
+    return {
+      link: function(scope, element, attrs) {
+        var listener = function(event, toState) {
+
+          var title = attrs.prefix + ' ' + Title.getTitle();
+            
+          $timeout(function() {
+            element.text(title);
+          }, 0, false);
+        };
+
+        $rootScope.$on('$stateChangeSuccess', listener);
+      }
+    };
+  }
+])
+
 .controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService','AUTH_EVENTS',
                          'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
@@ -166,7 +214,7 @@ angular.module('felt', [
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval) {
   
-  console.log("[168 app.MainCtrl] start");
+  console.log("[217 app.controller] MainCtrl");
   $scope.currentUser = null;
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
@@ -177,11 +225,9 @@ angular.module('felt', [
   
   $scope.setCurrentUser = function(user) {
     var oldUsername = $scope.getUsername();
-    console.log("SET CURRENT USER: ");
     $scope.currentUser = user;
     var newUsername = $scope.getUsername();
-    console.log(newUsername);
-    //TODO broadcast
+    console.log("SET CURRENT USER: " + newUsername);
     $rootScope.$broadcast("user-changed", oldUsername, newUsername);
   };
   
@@ -194,11 +240,12 @@ angular.module('felt', [
   };
 
   $scope.isLoginPage = false;
+  $scope.cartEvents = null;
   
   $scope.wireCartEvents = function() {
     console.log("wiring cart events...");
     //wire cart persistence
-    $scope.$on(CART_EVENTS.cartChanged, function(event, args) {
+    $scope.cartEvents = $scope.$on(CART_EVENTS.cartChanged, function(event, args) {
       
       var username = $scope.currentUser != null ? $scope.currentUser.email : "guest";
       
@@ -215,8 +262,64 @@ angular.module('felt', [
     
   }
   
-  $scope.loadCart = function() {
-    CartPersistenceService.loadCart($scope.getUsername()).then($scope.wireCartEvents);
+  $scope.loadCart = function(oldUsername, newUsername) {
+    console.log("LOADING CART " + oldUsername + " -> " + newUsername + "   - " + $scope.getUsername());
+    var oldCart = angular.copy($scope.cart);
+    var promise = CartPersistenceService.loadCart($scope.getUsername());
+    if($scope.cartEvents == null) {
+      promise = promise.then($scope.wireCartEvents);
+    }
+    
+    promise.then(function(newCart) {
+      //newCart is a copy!!!
+      console.log("THIS IS IT. 000000000000000000000000000000000000000000000000000");
+      console.log("OLD cart");
+      console.log(oldCart);
+      console.log("NEW cart");
+      console.log(newCart);
+      if (newCart == null || !newCart.items)
+        console.log('newCart is NULL');
+      console.log("NEW cart2");
+      console.log($scope.cart);
+      
+      
+      //A. if(isEmpty(oldCart)) {
+      //     //no problem for all situations
+      //   } else {
+      //     if(isEmpty(newCart) {
+      //       //copy oldCart to newCart. remove oldCart from DB
+      //     } else {
+      //       if (!angular.equals(oldCart, newCart) {
+      //         //USER MUST CHOOSE
+      //       } else {
+      //         //remove oldCart from DB (probably guest)
+      //       }
+      //     }
+      //   }
+      
+      //1. if different and both are not empty
+      //have to choose
+      
+      //2. if different and old is empty guest, new is user and not empty
+      //no problem - load new and do nothing
+      
+      //3. if different and old is empty user, new is guest and not empty - should be not possible
+      
+      //4. if different and old is full user, new is guest
+      // -> remove the cart
+      
+      //5. if different, old is full guest, new empty user
+      // -> copy old cart to new cart and remove guest cart
+      
+      
+      
+      
+    });
+
+    
+    
+    
+    return promise;
   }
 
   // TRY LOGIN FROM REMEMBER ME
@@ -235,25 +338,33 @@ angular.module('felt', [
   .always(function() {
     $('#userMenu').removeClass('hide');
     $scope.$apply();
-  })
-  
-  
-//  //TODO make it with events  
-//  
-//  .always(function(user) {
-//    console.log("LOADING CART IF ANY FOR USER " + $scope.getUsername());
-//    $scope.loadCart();
-//  })
-  
-  ;
-  
-  
-
-  $scope.$on("user-changed", function(event, arg1, arg2) {
-    console.log("user changed caught:");
-    console.log("LOADING CART IF ANY FOR USER " + $scope.getUsername());
-    $scope.loadCart();
   });
+
+  $scope.$on("user-changed", function(event, oldUsername, newUsername) {
+    console.log("user changed:");
+    console.log("old username: " + oldUsername);
+    console.log("new username: " + newUsername);
+    
+    var oldCart2 = angular.copy($scope.cart);
+    
+    var savePromise = null;
+    if (cart.initial) {
+      cart.initial = false;
+      //skip first save
+    } else {
+      var savePromise = CartPersistenceService.saveCart(oldUsername);
+    }
+    
+    if (savePromise)
+      savePromise.always(function() {
+        $scope.loadCart(oldUsername, newUsername);//load the cart after saving the previous is done
+        
+      });
+    else 
+      $scope.loadCart(oldUsername, newUsername);//load cart. no cart is being saved
+    
+  });
+  
   
   
   $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
@@ -351,53 +462,7 @@ angular.module('felt', [
 }])
     
     
-.factory('Title', ['$rootScope', '$interpolate', function ($rootScope,   $interpolate) {
-  console.log("[319 app.factory Title]");
 
-        var factory = {};
-
-        factory.getTitle = function () {
-          var title = '';
-          var currentState = $rootScope.$state.$current;
-          var data = null;
-          if (currentState.data) {
-            if (currentState.data.title)
-              data = currentState.data.title;
-            else
-              data = currentState.data.displayName;
-            if (data) {
-              var interpolationContext =  (typeof currentState.locals !== 'undefined') ? currentState.locals.globals : currentState;
-              title = $interpolate(data)(interpolationContext);
-            }
-          }
-          return title;
-        };
-        
-
-        return factory;
-
-  }
-])
-	 
-.directive('updateTitle', ['$rootScope', '$timeout', 'Title',
-  function($rootScope, $timeout, Title) {
-    console.log("[348 app.directive updateTitle]");
-    return {
-      link: function(scope, element, attrs) {
-        var listener = function(event, toState) {
-
-          var title = attrs.prefix + ' ' + Title.getTitle();
-            
-          $timeout(function() {
-            element.text(title);
-          }, 0, false);
-        };
-
-        $rootScope.$on('$stateChangeSuccess', listener);
-      }
-    };
-  }
-])
 
 
 

@@ -28,7 +28,7 @@ class CartService {
 
   /**
    *
-   * @var PDOCart2
+   * @var PDOCart
    */
   protected $storage;
 
@@ -162,5 +162,14 @@ class CartService {
     if ($token != null)
       $cart = $this->storage->loadCart($username, $token . $this->tokenGenerator->getSalt());
     return $cart;
+  }
+  
+  public function deleteCart($username) {
+    $token = $this->findCartToken();
+  
+    if ($token != null) {  
+      $this->storage->deleteCart($username, $token . $this->tokenGenerator->getSalt());
+      $this->setCookie("", time() - 60*60*24);
+    }
   }
 }

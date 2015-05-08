@@ -75,4 +75,11 @@ class PDOCart extends PDO {
     
     return $result;
   }
+
+  public function deleteCart($credential, $token) {
+    $sql = "DELETE FROM {$this->tableName} WHERE {$this->tokenColumn} = SHA1(?) AND {$this->credentialColumn} = ?";
+    
+    $query = $this->connection->prepare($sql);
+    $query->execute(array($token,$credential));
+  }
 }

@@ -1,32 +1,17 @@
 <?php
-//header ( 'Content-Type: application/json' );
+require_once '../php/LokiService.php';
 
-$dbname = $_GET ["dbname"];
-$servername = "localhost";
-$username = "zhristov";
-$password = "totaasha";
+$dbname = $_GET["dbname"];
 
-// Create connection
-$conn = new mysqli ( $servername, $username, $password, "felt" );
+$lokiService = new LokiService($dbname);
 
-// Check connection
-if ($conn->connect_error) {
-	die ( "Connection failed: " . $conn->connect_error );
-}
-
-$stmt = $conn->prepare ( "SELECT data FROM lokidbs where name = '$dbname'" );
-$stmt->execute ();
-$stmt->store_result ();
-$stmt->bind_result ( $value );
-$res = $stmt->fetch ();
-if ($res) {
-	echo $value;
+$stringData = $lokiService->loadLoki();
+if ($stringData != null) {
+  echo $stringData;
 } else {
-	echo "";
+  echo "";
 }
 
-$stmt->close ();
-$conn->close ();
 ?>
 
 
