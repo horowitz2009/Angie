@@ -208,18 +208,24 @@ angular
             }
           }
 
+          // reset cart
+          service.resetCart = function() {
+            this.cart.items.splice(0, this.cart.items.length);
+            this.recalcTotals();
+          }
+          
           // mergeCarts
           service.mergeCarts = function(cart1, cart2) {
-            //TODO fix this shit
-//            var items = [];
-//            if (cart1 && cart1.items) {
-//              items = items.concat(cart1.items);
-//            }
-//            if (cart2 && cart2.items) {
-//              items = items.concat(cart2.items);
-//            }
-//            angular.copy(items, this.cart.items);
-            this.recalcTotals();
+            //TODO someday I could rethink this strategy. For now I stick to 'use newest'
+            // var items = [];
+            // if (cart1 && cart1.items) {
+            // items = items.concat(cart1.items);
+            // }
+            // if (cart2 && cart2.items) {
+            // items = items.concat(cart2.items);
+            // }
+            // angular.copy(items, this.cart.items);
+            // this.recalcTotals();
           }
           
           // recalcTotals
@@ -300,7 +306,18 @@ angular
             });
             
           }
-
+          
+          service.transferCart = function(oldUsername, newUsername) {
+            console.log("Transferring cart from " + oldUsername + " to " + newUsername);
+            return $.ajax({
+              type : "POST",
+              encoding:"UTF-8",
+              url : 'php/transfer_cart.php',
+              data : { 'cart': JSON.stringify(service.cart), 'oldusername': oldUsername, 'newusername': newUsername }
+            });
+              
+          }
+          
           return service;
         } ])
 

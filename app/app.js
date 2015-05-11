@@ -280,8 +280,6 @@ angular.module('felt', [
       console.log(newCart);
       
 
-      
-      
        if(isEmpty(oldCart)) {
          //no problem for all situations
        } else {
@@ -290,12 +288,16 @@ angular.module('felt', [
            CartService.mergeCarts(oldCart, newCart);
          } else {
            if (!angular.equals(oldCart, newCart)) {
-             //TODO USER MUST CHOOSE
-             CartService.mergeCarts(oldCart, newCart);
-           } else {
-             //remove oldCart from DB (probably guest)
-             CartService.mergeCarts(oldCart, newCart);
+             //STRATEGY 'USE NEWEST'
+             //means although user has a cart as logged, the current and newest cart as guest will be used
+             angular.copy(oldCart, $scope.cart);             
            }
+           if (oldUsername == "guest" && newUsername != "guest") {
+             //transfer the cart from guest to logged
+             CartPersistenceService.transferCart(oldUsername, newUsername);
+           } else {
+             CartService.resetCart();
+           } 
          }
        }
       
