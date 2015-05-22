@@ -17,6 +17,9 @@ angular.module('felt.shop', [
           
           .when('/shop/cart', ['$state', function ($state) {
             $state.go('shop.cart.edit');
+          }])
+          .when('/shop/cart/checkout', ['$state', function ($state) {
+            $state.go('shop.cart.checkout');
           }]);
           
             

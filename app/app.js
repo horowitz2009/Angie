@@ -11,6 +11,7 @@ angular.module('felt', [
 	  
     'ui.bootstrap',
     'ui.router',
+    'angucomplete-alt',
     
     'ngAnimate'
 ])
@@ -278,7 +279,7 @@ angular.module('felt', [
       console.log("NEW cart");
       newCart = angular.copy($scope.cart);
       console.log(newCart);
-      
+      $rootScope.$broadcast("cart-loaded", oldCart, newCart);
 
        if(isEmpty(oldCart)) {
          //no problem for all situations

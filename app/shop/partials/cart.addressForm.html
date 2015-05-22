@@ -1,0 +1,358 @@
+<!-- <iframe src="sink.html" name="sink" style="display: none"></iframe>-->
+<style>
+.radio .office {
+	margin-top: 25px;
+}
+</style>
+
+<!-- ДАННИ ЗА КОНТАКТ -->
+<div class="panel panel-success" id="contactData">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseContactData" class="collapseWill"> <span class="pull-left">
+          <i class="fa fa-chevron-right"></i>
+      </span> Данни за контакт
+      </a>
+    </h4>
+  </div>
+  <div id="collapseContactData" class="panel-collapse collapse in">
+    <div ng-if="editContactData == true" class="panel-body">
+      <!-- Panel content -->
+      <form name="contactForm" class="form-horizontal" ng-submit="saveContactData(cart)" novalidate>
+
+        <div class="form-group" style="">
+          <!-- firstName -->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+            ng-class="{ 'has-error' : contactForm.firstName.$invalid && !contactForm.firstName.$pristine }">
+            <label class="control-label " for="firstName">Име</label> <input type="text" class="form-control"
+              id="firstName" name="firstName" ng-model="cart.address.firstName"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="contactForm.firstName.$invalid && !contactForm.firstName.$pristine" class="help-block">Въведете
+              име.</p>
+          </div>
+          <!-- lastName -->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+            ng-class="{ 'has-error' : contactForm.lastName.$invalid && !contactForm.lastName.$pristine }">
+            <label class="control-label " for="lastName">Фамилия</label> <input type="text" class="form-control"
+              id="lastName" name="lastName" ng-model="cart.address.lastName"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="contactForm.lastName.$invalid && !contactForm.lastName.$pristine" class="help-block">Въведете
+              фамилно име.</p>
+          </div>
+        </div>
+
+        <!-- phone -->
+        <div class="form-group"
+          ng-class="{ 'has-error' : contactForm.phone.$error.required && !contactForm.phone.$pristine }">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="phone">Телефон</label> <input type="text" class="form-control" id="phone"
+              name="phone" ng-model="cart.address.phone"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="contactForm.phone.$error.required && !contactForm.phone.$pristine" class="help-block">Въведете
+              телефонен номер.</p>
+          </div>
+        </div>
+
+        <!-- email -->
+        <div class="form-group" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="email">Имейл</label> <input type="email" class="form-control" id="email"
+              name="email" ng-model="cart.address.email">
+            <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Въведете
+              валиден имейл адрес.</p>
+          </div>
+        </div>
+
+
+        <div class="form-group" style="margin-bottom: 0px">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input name="submit" class="btn btn-primary" value="Продължи" type="submit"
+              ng-disabled="contactForm.$invalid">
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <!-- panel-body -->
+
+    <div ng-if="editContactData == false" class="panel-body" style="padding: 15px 0px;">
+
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+        <h5 style="padding-bottom: 0px">
+          <span style="white-space: nowrap; padding-right: 15px"> {{cart.address.firstName}}
+            {{cart.address.lastName}} </span> <span style="white-space: nowrap; padding-right: 15px"> <i
+            class="fa fa-phone"></i> {{cart.address.phone}}
+          </span> <span style="white-space: nowrap;" ng-show="cart.address.email"> <i class="fa fa-envelope-o"></i>
+            {{cart.address.email}}
+          </span>
+        </h5>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+        <input name="button" class="btn btn-default btn-sm" style="float: right" value="Промени" type="button"
+          ng-click="setEditContactData(true)">
+      </div>
+
+
+    </div>
+    <!-- panel-body -->
+
+  </div>
+  <!-- collapseContacts -->
+</div>
+<!--/ДАННИ ЗА КОНТАКТ-->
+
+<!-- ======================================================================= -->
+
+<!-- ДАННИ ЗА ДОСТАВКА -->
+<div class="panel panel-success" id="addressData">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseAddressData" class="collapseWill"> <span class="pull-left">
+          <i class="fa fa-chevron-right"></i>
+      </span> Данни за доставка
+      </a>
+    </h4>
+  </div>
+  <div id="collapseAddressData" class="panel-collapse collapse in">
+    <div ng-if="editAddressData == true" class="panel-body">
+      <!-- Panel content -->
+      <form name="addressForm" class="form-horizontal" ng-submit="saveAddress(cart)" novalidate>
+
+        <!-- country -->
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="country">Държава</label> <select class="form-control" id="country"
+              name="country" ng-model="cart.address.country">
+                <option>България</option>
+                <option>Македония</option>
+                <option>Гърция</option>
+                <option>Румъния</option>
+            </select>
+          </div>
+        </div>
+        <!-- options -->
+        <div id="options" ng-show="cart.address.showOptions == true">
+          <div class="form-group" style="">
+            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
+                id="optionsRadios1" value="ekont"> До офис на ЕКОНТ
+              </label>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <input type="text" class="form-control" id="ekontOffice" name="ekontOffice"
+                ng-model="cart.address.ekontOffice" ng-disabled="cart.address.addressOption != 'ekont'"
+                ng-required="cart.address.addressOption == 'ekont'">
+            </div>
+          </div>
+          <!-- speedy -->
+          <div class="form-group" style="">
+            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
+                id="optionsRadios2" value="speedy"> До офис на СПИДИ
+              </label>
+
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <input type="text" class="form-control" id="speedyOffice" name="speedyOffice"
+                ng-model="cart.address.speedyOffice" ng-disabled="cart.address.addressOption != 'speedy'"
+                ng-required="cart.address.addressOption == 'speedy'">
+            </div>
+          </div>
+
+          <!-- address -->
+          <div class="form-group" style="">
+            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
+                id="optionsRadios2" value="address"> До адрес
+              </label>
+            </div>
+          </div>
+          <!-- form-group -->
+        </div>
+
+        <div id="address" ng-show="cart.address.addressOption == 'address'">
+          <!-- zipCode -->
+          <div class="form-group" style="">
+            <!-- zipCode -->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+              ng-class="{ 'has-error' : addressForm.zipCode.$invalid && !addressForm.zipCode.$pristine }">
+              <label class="control-label " for="zipCode">Пощенски код</label> <input type="text" class="form-control"
+                id="zipCode" name="zipCode" ng-model="cart.address.zipCode"
+                ng-required="cart.address.addressOption == 'address'">
+              <p ng-show="addressForm.zipCode.$error.required && !addressForm.zipCode.$pristine" class="help-block">Въведете
+                пощенски код.</p>
+            </div>
+
+            <!-- city -->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+              ng-class="{ 'has-error' : addressForm.city.$invalid && !addressForm.city.$pristine }">
+              <label class="control-label " for="city">Населено място</label> <input type="text" class="form-control"
+                id="city" name="city" ng-model="cart.address.city" ng-required="cart.address.addressOption == 'address'">
+              <p ng-show="addressForm.city.$error.required && !addressForm.city.$pristine" class="help-block">Въведете
+                населено място.</p>
+            </div>
+          </div>
+
+
+          <!-- streetAddress1 -->
+          <div class="form-group"
+            ng-class="{ 'has-error' : addressForm.streetAddress1.$invalid && !addressForm.streetAddress1.$pristine }">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <label class="control-label " for="streetAddress1">Адрес</label> <input type="text" class="form-control"
+                id="streetAddress1" name="streetAddress1" ng-model="cart.address.streetAddress1"
+                ng-required="cart.address.addressOption == 'address'">
+              <p ng-show="addressForm.streetAddress1.$error.required && !addressForm.streetAddress1.$pristine"
+                class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
+            </div>
+          </div>
+
+          <!-- streetAddress2 -->
+          <div class="form-group">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <label class="control-label " for="streetAddress2">Допълнителни указания</label> <input type="text"
+                class="form-control" id="streetAddress2" ng-model="cart.address.streetAddress2">
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="phone">Желаете ли фактура?</label>
+            <div class="btn-group btn-toggle" style="margin-left: 7px">
+              <input type="button" class="btn btn-sm" ng-click="setWantInvoice(true)"
+                ng-class="{ 'btn-default': !cart.address.wantInvoice, 'btn-success active': cart.address.wantInvoice }"
+                value="Да"> <input type="button" class="btn btn-sm" ng-click="setWantInvoice(false)"
+                ng-class="{ 'btn-default': cart.address.wantInvoice, 'btn-success active': !cart.address.wantInvoice }"
+                value="Не">
+            </div>
+          </div>
+        </div>
+
+        <!-- textarea -->
+        <div class="form-group" ng-if="cart.address.wantInvoice"
+          ng-class="{ 'has-error' : addressForm.invoiceData.$error.required && !addressForm.invoiceData.$pristine }">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="invoiceData">Данни за фактурата</label>
+            <textarea rows="5" cols="50" class="form-control" id="invoiceData" name="invoiceData"
+              ng-model="cart.address.invoiceData" required></textarea>
+            <p ng-show="addressForm.invoiceData.$error.required && !addressForm.invoiceData.$pristine"
+              class="help-block">Въведете дан. номер или ЕГН, име на фирма, М.О.Л. и т.н.</p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0px">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input name="submit" class="btn btn-primary" value="Продължи" type="submit"
+              ng-disabled="addressForm.$invalid">
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <!-- panel-body -->
+
+    <!-- NO EDIT -->
+    <div ng-if="editAddressData == false" class="panel-body" style="padding: 15px 0px;">
+
+      <!-- Panel content -->
+      <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
+        <h5 style="padding-bottom: 0px">
+          {{cart.address.country}}, <span ng-show="cart.address.addressOption == 'ekont'"> До офис на Еконт:<br>
+            {{cart.address.ekontOffice}}
+          </span> <span ng-show="cart.address.addressOption == 'speedy'"> До офис на Спиди:<br>
+            {{cart.address.speedyOffice}}
+          </span> <span ng-show="cart.address.addressOption == 'address'"> {{cart.address.city}}
+            {{cart.address.zipCode}} <br> {{cart.address.streetAddress1}} <br> <small><span
+              ng-show="cart.address.streetAddress2"> ({{cart.address.streetAddress2}}) </span></small>
+          </span>
+        </h5>
+        <div style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0px;" ng-show="cart.address.wantInvoice">
+          За фактурата:
+          <pre style="margin: 0 0 0 0; padding: 5px 0 0 15px; border: none;">{{cart.address.invoiceData}}</pre>
+        </div>
+
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+        <input name="button" class="btn btn-default btn-sm" style="float: right" value="Промени" type="button"
+          ng-click="setEditAddressData(true)">
+
+      </div>
+    </div>
+    <!-- panel-body -->
+  </div>
+</div>
+<!--/ДАННИ ЗА ДОСТАВКА-->
+
+
+<!-- ======================================================================= -->
+
+<!-- НАЧИН НА ПЛАЩАНЕ -->
+<div class="panel panel-success" id="paymentData">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapsePaymentData" class="collapseWill"> <span class="pull-left">
+          <i class="fa fa-chevron-right"></i>
+      </span> Начин на плащане
+      </a>
+    </h4>
+  </div>
+  <div id="collapsePaymentData" class="panel-collapse collapse in">
+    <div ng-if="editPaymentData == true" class="panel-body">
+      <!-- Panel content -->
+      <!-- TODO Payment options go here -->
+    </div>
+    <!-- panel-body -->
+
+
+    <div ng-if="editPaymentData == false" class="panel-body">
+      <!-- Panel content -->
+      <!--<div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">-->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h5 style="padding-bottom: 0px">Към момента приемаме единствено плащане при доставка на куриер (наложен
+          платеж).</h5>
+      </div>
+
+      <!-- 
+      <div
+        style="margin-left: -15px; margin-right: -15px; margin-bottom: 0px">
+        <input name="button" class="btn btn-default btn-sm"
+          value="Промени" type="button"
+          ng-click="setEditPaymentData(true)">
+      </div>
+       -->
+    </div>
+    <!-- panel-body -->
+
+  </div>
+  <!-- collapseInvoice -->
+</div>
+<!--/ФАКТУРА-->
+
+
+
+
+
+
+
+<a ui-sref="shop.cart.edit" class="btn btn-primary">Обратно към количката</a>
+
+<input type="button" class="btn btn-lg btn-danger" value="Поръчай" bg-click="submitOrder()"
+  style="float: right; padding-left: 36px; padding-right: 36px;"
+  ng-disabled="!isContactDataOK() || !isAddressDataOK() || !isPaymentDataOK()">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--/ addressForm.html -->

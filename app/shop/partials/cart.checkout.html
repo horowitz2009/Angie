@@ -1,0 +1,86 @@
+<!-- cart.checkout.html -->
+
+<div class="checkoutCart" style="width: 100%" ng-if="cart.count > 0">
+
+  <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12" ng-include="'app/shop/partials/cart.addressForm.html'"></div>
+  <div class="col-lg-3 col-md-4 col-sm-4 hidden-xs">
+
+
+
+    <div class="sidebox panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Вашата поръчка</h4>
+      </div>
+      <div class="panel-body sidebox-body">
+
+        <table>
+          <tbody>
+            <tr>
+              <td class="summary-item">{{cart.count}} <ng-pluralize count="cart.count"
+                  when="{'0': '', 'one': ' продукт', 'other': ' продукта'}"> продукт(а)</ng-pluralize>
+              </td>
+              <td class="summary-item right"><span><span>{{cart.subTotal | number:2}}</span>лв</span></td>
+            </tr>
+            <tr>
+              <td class="summary-item">Доставка</td>
+              <td class="summary-item right"><span><span>{{cart.shippingCosts | number:2}}</span>лв</span></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th class="summary-total" colspan="2">
+                <div>
+                  Всичко <span class="summary-total-sum"><span>{{cart.total | number:2}}</span>лв</span>
+                </div>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="sidebox panel panel-default" ng-show="isContactDataOK() && isAddressDataOK() && !editContactData && !editAddressData">
+      <div class="panel-heading">
+        <h4 class="panel-title">Информация за поръчката</h4>
+      </div>
+      <div class="panel-body sidebox-body">
+
+        <table>
+          <tbody>
+            <tr>
+              <td class="summary-item" colspan="2">
+                <div>
+                  <span style="font-weight: bold">Адрес:</span><br>
+                  {{cart.address.firstName}} {{cart.address.lastName}}<br>
+                  
+                  <span ng-show="cart.address.addressOption == 'ekont'"> До офис на Еконт:<br>
+                    {{cart.address.ekontOffice}} </span> 
+                  
+                  <span ng-show="cart.address.addressOption == 'speedy'"> До офис на Спиди:<br>
+                    {{cart.address.speedyOffice}} </span> 
+
+                  <span ng-show="cart.address.addressOption == 'address'">
+                    {{cart.address.country}}, {{cart.address.city}} {{cart.address.zipCode}}<br>
+                    {{cart.address.streetAddress1}} <br> 
+                    <small>
+                      <span ng-show="cart.address.streetAddress2"> ({{cart.address.streetAddress2}}) </span>
+                    </small>
+                  </span>
+                  <br>
+                  <span style="font-weight: bold">Куриер:</span> Спиди<br>
+                  <span style="font-weight: bold">Услуга:</span> Градски куриер<br>
+
+                  <span style="font-weight: bold">Начин на плащане:</span> Наложен платеж<br>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--/ cart.checkout.html -->

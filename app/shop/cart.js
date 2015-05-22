@@ -2,17 +2,20 @@ angular
     .module('felt.shop.cart', [ 'ui.router', 'angularUtils.directives.uiBreadcrumbs', 'common.utils.service'
 
     ])
+    
+    //Router stuff is in cart.router.js
 
     .constant('CART_EVENTS', {
       cartChanged : 'cart-changed',
       itemAdded : 'item-added',
       itemRemoved : 'item-removed',
       itemQuantityChanged : 'item-quantity-changed',
-      cartCleared : 'cart-cleared'
+      cartCleared : 'cart-cleared',
+      addressChanged : 'address-changed'
     })
 
-    .config([ '$stateProvider', '$filterProvider', function($stateProvider, $filterProvider) {
-      console.log("[ 15 cart.config]");
+    .config(['$filterProvider', function($filterProvider) {
+      console.log("[ 17 cart.config1]");
       // register a filter factory which uses the
       // greet service to demonstrate DI.
       $filterProvider.register('shortCategory', function() {
@@ -37,70 +40,21 @@ angular
         return function(text) {
           console.log("numberAligned");
           console.log(text);
-
+    
           var floatNumber = parseFloat(text);
           var integerPart = Math.floor(floatNumber);
           floatNumber = floatNumber - integerPart;
-
+    
           var frac = Math.round(floatNumber * 100);
           console.log(integerPart);
           console.log(floatNumber);
           console.log(frac);
-
+    
           return '<span class="left">' + integerPart + '</span><span class="right">' + frac + '</span>';
         };
       });
-
-      $stateProvider
-
-      // /////////////////
-      // SHOP > CART //
-      // /////////////////
-      .state('shop.cart', {
-
-        abstract : true,
-
-        url : '/cart',
-
-        views : {
-          'filter' : {
-            templateUrl : 'app/shop/partials/filter.html'
-          },
-
-          'content' : {
-            template : '<div ui-view="cartContent"></div>'
-          }
-        },
-
-        data : {
-          breadcrumbProxy : 'shop.cart.edit'
-        }
-
-      })
-
-      .state('shop.cart.edit', {
-
-        url : '',
-
-        data : {
-          displayName : 'Количка'
-        },
-
-        views : {
-          'cartContent' : {
-            templateUrl : 'app/shop/partials/cart.details.html',
-            controller : [ '$scope', 'cart', 'CartService', function($scope, cart, CartService) {
-              if (!$scope.cart) {
-                console.log('adding cart to this scope');
-                $scope.cart = cart;
-              }
-            } ]
-          }
-        }
-
-      });
-    } ])
-
+    }])
+    
     .directive('cartRepeatDirective',
         [ '$timeout', '$animate', '$rootScope', 'CART_EVENTS', function($timeout, $animate, $rootScope, CART_EVENTS) {
           console.log("[106 cart.directive cartRepeatDirective]");
@@ -155,7 +109,10 @@ angular
     .value(
         "cart",
         
-          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "initial": true }
+          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "count": 0.00,
+            "address": { country: "България"},
+            
+            "initial": true }
 
     )
 
@@ -228,24 +185,44 @@ angular
             // this.recalcTotals();
           }
           
+          service.canShippingBeCalculated = function() {
+            var a = this.cart.address;
+            if (!a || !a.country)
+              return false;
+
+            if (a.country == 'България') {
+              if (!a.zipCode || !a.city)
+                return false;
+            }
+            
+            return true;
+          }
+          
           // recalcTotals
           service.recalcTotals = function() {
             var oldCart = angular.copy(this.cart);
             var newTotal = 0.00;
+            var cnt = 0.00;
             this.cart.items.forEach(function(item) {
               item.sum = item.product.price * item.quantity;
               newTotal += item.sum;
+              cnt += parseInt(item.quantity);
             });
             this.cart.subTotal = newTotal;
+            console.log("count: " + cnt);
+            this.cart.count = cnt;
             
             // TODO recalcShippingCosts
-            this.cart.shippingCosts = 6.00;
-            if (this.cart.subTotal == 0)
-              this.cart.shippingCosts = 0.00;
-            if (this.cart.subTotal >= 20)
-              this.cart.shippingCosts = 3.00;
-            if (this.cart.subTotal >= 40)
-              this.cart.shippingCosts = 0.00;
+            this.cart.shippingCosts = 0.00;
+            if (this.canShippingBeCalculated()) {
+              this.cart.shippingCosts = 6.00;
+              if (this.cart.subTotal == 0)
+                this.cart.shippingCosts = 0.00;
+              if (this.cart.subTotal >= 40)
+                this.cart.shippingCosts = 3.00;
+              if (this.cart.subTotal >= 60)
+                this.cart.shippingCosts = 0.00;
+            }
             this.cart.total = this.cart.subTotal + this.cart.shippingCosts;
             
             if(!angular.equals(oldCart, this.cart)) {
@@ -258,6 +235,37 @@ angular
           service.findItem = function(id) {
             return utils.findById(this.cart.items, id);
           }
+          
+          service.isAddressDataOK = function() {
+            var a = this.cart.address;
+            if (!a || !a.country)
+              return false;
+
+            var addressRequired = true;
+            if (a.country == 'България') {
+              if (a.addressOption == "ekont") {
+                addressRequired = false;
+                if (!a.ekontOffice)
+                  return false;
+              } else if (a.addressOption == "speedy") {
+                addressRequired = false;
+                if (!a.speedyOffice)
+                  return false;
+              }
+            }
+            if (addressRequired) {
+              // either is Bulgaria and not office option, or
+              // not Bulgaria
+              if (!a.zipCode || !a.city || !a.streetAddress1)
+                return false;
+            }
+            if (a.wantInvoice && !a.invoiceData)
+              return false;
+            return true;
+          }
+
+          
+          
 
           return service;
         } ])
