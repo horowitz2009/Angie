@@ -5,6 +5,7 @@ angular.module('felt', [
     'felt.shop.cart',
     'felt.shop.service',
     'felt.color.service',
+    'felt.shipping.service',
     
     'common.utils.service',
     'common.authentication',
@@ -277,13 +278,13 @@ angular.module('felt', [
       console.log("OLD cart");
       console.log(oldCart);
       console.log("NEW cart");
-      newCart = angular.copy($scope.cart);
+      newCart = $scope.cart;
       console.log(newCart);
-      $rootScope.$broadcast("cart-loaded", oldCart, newCart);
+      $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
 
-       if(isEmpty(oldCart)) {
+      if (isEmpty(oldCart)) {
          //no problem for all situations
-       } else {
+      } else {
          if(isEmpty(newCart)) {
            //copy oldCart to newCart. remove oldCart from DB
            CartService.mergeCarts(oldCart, newCart);

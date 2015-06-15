@@ -401,18 +401,19 @@
 
             <tbody>
               <tr>
-                <td style="" class="text-right">Междинна сума:</td>
+                <td style="" class="text-right">Междинна сума: {{cart.weight}}</td>
                 <td style="" class="text-right"><span class="text-nowrap bigPrice"> {{ cart.subTotal |
                     number:2 }} лв</span></td>
               </tr>
               <tr>
-                <td style="" class="text-right">Доставка:</td>
+                <td style="" class="text-right">Доставка:<br>
+                <small ng-show="cart.shippingData.selectedOption">{{cart.shippingData.getOption().getNameAndService()}}</small></td>
                 <td style="" class="text-right">
-                
-                  <a ng-show="!canShippingBeCalculated()" data-toggle="modal" data-target="#ModalZip"
-                      class="btn btn-xs btn-info">изчисли!</a>
-                  <span ng-show="canShippingBeCalculated()" class="text-nowrap bigPrice">
-                      {{cart.shippingCosts | number:2}} лв</span>
+                  <!-- ng-show="!canShippingBeCalculated()"  -->
+                  <a data-toggle="modal" data-target="#ModalZip"
+                      class="btn btn-xs btn-info"><span ng-show="!cart.shippingData.selectedOption">изчисли!</span><span ng-show="cart.shippingData.selectedOption">промени!</span></a>
+                  <span ng-show="cart.shippingData.selectedOption" class="text-nowrap bigPrice">
+                      {{cart.shippingData.getOption().amount | number:2}} лв</span>
                   
                   </td>
                   
@@ -423,7 +424,7 @@
               <tr>
                 <td style="" class="text-right">Всичко:</td>
                 <td style="" class="text-right"><strong><span class="text-nowrap bigPrice">{{
-                      cart.total | number:2 }} лв</span></strong></td>
+                      cart.subTotal + cart.shippingData.getOption().amount | number:2 }} лв</span></strong></td>
               </tr>
             </tfoot>
           </table>
@@ -441,6 +442,7 @@
     style="float: right" ng-show="cart.count > 0"> Поръчай </a>
 </div>
 
+
 <!-- =================================================================================== -->
 <!-- =========================== MODAL ZIP ============================================= -->
 <!-- =================================================================================== -->
@@ -449,9 +451,11 @@
 
 .form-group.options {
   padding-left: 15px;
+  padding-right: 15px;
 }
 
 .form-group.options label {
+  display: block;
   font-weight: normal;
   font-size: 14px;
 }
@@ -470,7 +474,7 @@
 <div class="modal fade" id="ModalZip" tabindex="-1" role="dialog">
   <div class="modal-dialog ">
     <div class="modal-content">
-      <form name="zipForm" method="post" ng-submit="setZip(cart)" novalidate>
+      <form name="zipForm" method="post" ng-submit="shippingCtrl.submitSettlement(cart)" novalidate>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title-site text-center">Въведете пощенски код или населено място</h3>
@@ -485,7 +489,7 @@
           <div class="form-group country">
             <div>
               <label class="control-label " for="country">Държава</label> <select class="form-control" id="country"
-                name="country" ng-model="cart.address.country">
+                name="country" ng-model="shippingCtrl.shippingData.settlement.country">
                 <option>България</option>
                 <option>Македония</option>
                 <option>Гърция</option>
@@ -494,38 +498,86 @@
             </div>
           </div>
 
-          <div class="form-group zipCity" ng-show="cart.address.country == 'България'">
+          <div class="form-group zipCity" ng-show="shippingCtrl.shippingData.settlement.country == 'България'">
             <div>
-              <label class="control-label " for="country">Пощенски код или населено място</label> 
-              <input name="zipCity" id="zipCity" ng-model="zipCity" class="form-control input" size="30"
-                placeholder="пощенски код или населено място" type="text">
+              <label class="control-label " for="zipCodeAndCity2">Пощенски код или населено място</label> 
+      <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
+      <script type="text/ng-template" id="/my-custom-template.html">
+        <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+          <input ng-model="searchStr" id="zipCodeAndCity2" name="zipCodeAndCity2"
+            ng-disabled="disableInput"
+            type="text"
+            placeholder="{{placeholder}}"
+            ng-focus="onFocusHandler()"
+            class="{{inputClass}}"
+            ng-focus="resetHideResults()"
+            ng-blur="hideResults($event)"
+            autocapitalize="off"
+            autocorrect="off"
+            autocomplete="off"
+            ng-change="inputChangeHandler(searchStr)"/>
+          <div class="angucomplete-dropdown" ng-show="showDropdown">
+            <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+            <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+
+            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
+                 ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+              <div class="angucomplete-title">
+                <span>{{result.originalObject.type}}</span> <span ng-bind-html="result.title"></span>
                 
-                <!-- 
-                <div angucomplete-alt id="zipCity" placeholder="Search countries" maxlength="50" 
-                     pause="100" selected-object="selectedCountry" local-data="countries" 
-                     search-fields="name" title-field="name" minlength="1" 
-                     input-class="form-control input" match-class="highlight">
-                </div>-->
+                 <span ng-if="result.originalObject.speedyOffices.length > 0" class="pull-right"><img src="images/speedy_logo_17.png"></img></span>
+              </div
+              
+              <div class="angucomplete-description">
+                <small><span ng-if="result.originalObject.municipality.indexOf('район') < 0">общ. </span>{{result.originalObject.municipality}}, обл. {{result.originalObject.district}}</small>
+                <span ng-if="result.originalObject.ekontOffices.length > 0" class="pull-right"><img src="images/econt-logo-12.png" width="54" height="12"></img></span> 
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </script>
+      <div angucomplete-alt 
+          placeholder="пощенски код или населено място"
+          pause="400" selected-object="shippingCtrl.setTempZipCodeAndCity"
+          custom-select="shippingCtrl.customSelectZipAndCity"
+          custom-lookup="shippingCtrl.customLookup"
+          custom-matching="shippingCtrl.customMatching"
+          keep-initial-value-binding="true"
+          
+          initial-value="shippingCtrl.shippingData.getCityAndZipPretty()"
+          local-data="shippingCtrl.zipCodes"
+          search-fields="zipCode*,city"
+          title-field="city,zipCode"
+          description-field="zipCode"
+          minlength="3"
+          maxlength="50"
+          input-class="form-control input"
+          match-class="highlight" 
+          template-url="/my-custom-template.html"
+          ><!-- template-url="/my-custom-template.html" -->
+      </div>
+                
+      <!-- eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
                 
             </div>
           </div>
           <!-- OPTIONS -->
-          <div class="form-group options">
-            <div>
-              <label> <input type="radio" name="options" ng-model="cart.address.addressOption" id="option1" value="address">
-                До адрес - 7.60лв
+          <div class="form-group options" ng-show="shippingCtrl.shippingData.options && shippingCtrl.shippingData.options.length > 0">
+            <div ng-repeat="option in shippingCtrl.shippingData.options">
+              <label> <input type="radio" name="newAddressOption" ng-model="shippingCtrl.shippingData.selectedOption" 
+                               ng-value="option.toString()">
+                {{ option.getNameAndService() }}
+                <span class="pull-right"> {{ option.amount | number:2 }} лв</span>
               </label>
             </div>
+          </div>
+          <div class="form-group options" ng-show="shippingCtrl.shippingData.options && shippingCtrl.shippingData.options.length == 0">
             <div>
-              <label> <input type="radio" name="options" ng-model="cart.address.addressOption" id="option2" value="ekont">
-                До офис на Еконт - 5.90лв
+              <label> За съжаление не можахме да изчислим сумата по Вашата доставка. Това не означава че няма да можем да ви изпълним и доставим поръчката. 
+                За точната сума и избор на най-подходящия куриер ще Ви уведомим по телефон или имейл, които можете да въведете в следващата стъпка. 
               </label>
-            </div>
-            <div>
-              <label> <input type="radio" name="options" ng-model="cart.address.addressOption" id="option3" value="speedy">
-                До офис на Спиди - 6.10лв
-              </label>
-
             </div>
           </div>
 
@@ -533,11 +585,11 @@
         <div class="modal-footer">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-md-4 col-md-offset-4">
+              <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
                 <input name="submit" class="btn btn-block btn-default" value="Затвори" type="submit"
                   data-dismiss="modal">
               </div>
-              <div class="col-md-4 ">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <input name="submit" class="btn btn-block btn-primary" value="Избери" type="submit">
               </div>
             </div>

@@ -1,8 +1,18 @@
 <!-- <iframe src="sink.html" name="sink" style="display: none"></iframe>-->
 <style>
 .radio .office {
-	margin-top: 25px;
+  margin-top: 25px;
 }
+
+/*input[type="radio"]:checked+span { 
+  font-weight: bold;
+  font-size: 16px; 
+}*/
+
+.notSelected { 
+  color: #868788; 
+}
+
 </style>
 
 <!-- ДАННИ ЗА КОНТАКТ -->
@@ -25,7 +35,7 @@
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
             ng-class="{ 'has-error' : contactForm.firstName.$invalid && !contactForm.firstName.$pristine }">
             <label class="control-label " for="firstName">Име</label> <input type="text" class="form-control"
-              id="firstName" name="firstName" ng-model="cart.address.firstName"
+              id="firstName" name="firstName" ng-model="cart.contactData.firstName"
               ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
             <p ng-show="contactForm.firstName.$invalid && !contactForm.firstName.$pristine" class="help-block">Въведете
               име.</p>
@@ -34,7 +44,7 @@
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
             ng-class="{ 'has-error' : contactForm.lastName.$invalid && !contactForm.lastName.$pristine }">
             <label class="control-label " for="lastName">Фамилия</label> <input type="text" class="form-control"
-              id="lastName" name="lastName" ng-model="cart.address.lastName"
+              id="lastName" name="lastName" ng-model="cart.contactData.lastName"
               ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
             <p ng-show="contactForm.lastName.$invalid && !contactForm.lastName.$pristine" class="help-block">Въведете
               фамилно име.</p>
@@ -46,7 +56,7 @@
           ng-class="{ 'has-error' : contactForm.phone.$error.required && !contactForm.phone.$pristine }">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <label class="control-label " for="phone">Телефон</label> <input type="text" class="form-control" id="phone"
-              name="phone" ng-model="cart.address.phone"
+              name="phone" ng-model="cart.contactData.phone"
               ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
             <p ng-show="contactForm.phone.$error.required && !contactForm.phone.$pristine" class="help-block">Въведете
               телефонен номер.</p>
@@ -57,7 +67,7 @@
         <div class="form-group" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <label class="control-label " for="email">Имейл</label> <input type="email" class="form-control" id="email"
-              name="email" ng-model="cart.address.email">
+              name="email" ng-model="cart.contactData.email">
             <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Въведете
               валиден имейл адрес.</p>
           </div>
@@ -79,11 +89,11 @@
 
       <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
         <h5 style="padding-bottom: 0px">
-          <span style="white-space: nowrap; padding-right: 15px"> {{cart.address.firstName}}
-            {{cart.address.lastName}} </span> <span style="white-space: nowrap; padding-right: 15px"> <i
-            class="fa fa-phone"></i> {{cart.address.phone}}
-          </span> <span style="white-space: nowrap;" ng-show="cart.address.email"> <i class="fa fa-envelope-o"></i>
-            {{cart.address.email}}
+          <span style="white-space: nowrap; padding-right: 15px"> {{cart.contactData.firstName}}
+            {{cart.contactData.lastName}} </span> <span style="white-space: nowrap; padding-right: 15px"> <i
+            class="fa fa-phone"></i> {{cart.contactData.phone}}
+          </span> <span style="white-space: nowrap;" ng-show="cart.contactData.email"> <i class="fa fa-envelope-o"></i>
+            {{cart.contactData.email}}
           </span>
         </h5>
       </div>
@@ -122,7 +132,7 @@
         <div class="form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <label class="control-label " for="country">Държава</label> <select class="form-control" id="country"
-              name="country" ng-model="cart.address.country">
+              name="country" ng-model="cart.shippingData.settlement.country">
                 <option>България</option>
                 <option>Македония</option>
                 <option>Гърция</option>
@@ -130,114 +140,286 @@
             </select>
           </div>
         </div>
-        <!-- options -->
-        <div id="options" ng-show="cart.address.showOptions == true">
-          <div class="form-group" style="">
-            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
-                id="optionsRadios1" value="ekont"> До офис на ЕКОНТ
-              </label>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-              <input type="text" class="form-control" id="ekontOffice" name="ekontOffice"
-                ng-model="cart.address.ekontOffice" ng-disabled="cart.address.addressOption != 'ekont'"
-                ng-required="cart.address.addressOption == 'ekont'">
-            </div>
-          </div>
-          <!-- speedy -->
-          <div class="form-group" style="">
-            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
-                id="optionsRadios2" value="speedy"> До офис на СПИДИ
-              </label>
-
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-              <input type="text" class="form-control" id="speedyOffice" name="speedyOffice"
-                ng-model="cart.address.speedyOffice" ng-disabled="cart.address.addressOption != 'speedy'"
-                ng-required="cart.address.addressOption == 'speedy'">
-            </div>
-          </div>
-
-          <!-- address -->
-          <div class="form-group" style="">
-            <div class="radio office col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <label> <input type="radio" name="optionsRadios" ng-model="cart.address.addressOption"
-                id="optionsRadios2" value="address"> До адрес
-              </label>
-            </div>
-          </div>
-          <!-- form-group -->
-        </div>
-
-        <div id="address" ng-show="cart.address.addressOption == 'address'">
+        
+        <!-- zipCode and city -->
+        <div class="form-group" style="">
           <!-- zipCode -->
-          <div class="form-group" style="">
-            <!-- zipCode -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-              ng-class="{ 'has-error' : addressForm.zipCode.$invalid && !addressForm.zipCode.$pristine }">
-              <label class="control-label " for="zipCode">Пощенски код</label> <input type="text" class="form-control"
-                id="zipCode" name="zipCode" ng-model="cart.address.zipCode"
-                ng-required="cart.address.addressOption == 'address'">
-              <p ng-show="addressForm.zipCode.$error.required && !addressForm.zipCode.$pristine" class="help-block">Въведете
-                пощенски код.</p>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"
+            ng-class="{ 'has-error' : addressForm.zipCode2.$invalid && !addressForm.zipCode2.$pristine }">
+          
+            <label class="control-label" for="zipCode2">Пощенски код</label>  
+            
+            
+      <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
+      <script type="text/ng-template" id="/zip-code-template.html">
+        <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+           
+          <input type="text" class="form-control input" id="zipCode2" name="zipCode2"
+            ng-model="searchStr" ng-focus="onFocusHandler()" ng-disabled="disableInput"
+            ng-focus="resetHideResults()" ng-blur="hideResults($event)" ng-change="inputChangeHandler(searchStr)"
+            autocapitalize="off" autocorrect="off" autocomplete="off" required />
+
+          <div class="angucomplete-dropdown" ng-show="showDropdown" style="min-width:400px">
+            <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+            <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+
+            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
+                 ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+              <div class="angucomplete-title">
+                <span>{{result.originalObject.type}}</span> <span ng-bind-html="result.title"></span>
+                
+                 <span ng-if="result.originalObject.speedyOffices.length > 0" class="pull-right"><img src="images/speedy_logo_17.png"></img></span>
+              </div
+              
+              <div class="angucomplete-description">
+                <small><span ng-if="result.originalObject.municipality.indexOf('район') < 0">общ. </span>{{result.originalObject.municipality}}, обл. {{result.originalObject.district}}</small>
+                
+                <span ng-if="result.originalObject.ekontOffices.length > 0" class="pull-right"><img src="images/econt-logo-12.png" width="54" height="12"></img></span> 
+              </div>
+
             </div>
 
-            <!-- city -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-              ng-class="{ 'has-error' : addressForm.city.$invalid && !addressForm.city.$pristine }">
-              <label class="control-label " for="city">Населено място</label> <input type="text" class="form-control"
-                id="city" name="city" ng-model="cart.address.city" ng-required="cart.address.addressOption == 'address'">
-              <p ng-show="addressForm.city.$error.required && !addressForm.city.$pristine" class="help-block">Въведете
-                населено място.</p>
+          </div>
+        </div>
+      </script>
+            <div angucomplete-alt pause="400"
+            
+                selected-object="shippingCtrl.setZipCodeAndCity"
+                custom-lookup="shippingCtrl.customLookup"
+                custom-matching="shippingCtrl.customMatching"
+                custom-select="shippingCtrl.customSelectZipCode"
+                keep-initial-value-binding="true"
+                
+                initial-value="cart.shippingData.settlement.zipCode"
+                field-required="true"
+                
+                local-data="shippingCtrl.zipCodes"
+                search-fields="zipCode*,city"
+                title-field="city,zipCode"
+                description-field="zipCode"
+                minlength="2"
+                maxlength="50"
+                input-class="form-control"
+                match-class="highlight" 
+                template-url="/zip-code-template.html"
+                > <!--  -->
             </div>
+                
+      <!-- eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
+           
+            
+            
           </div>
 
+          <!-- city -->
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"
+            ng-class="{ 'has-error' : addressForm.city2.$invalid && !addressForm.city2.$pristine }">
+            <label class="control-label " for="city2">Населено място</label> 
+            
+            
+      <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
+      <script type="text/ng-template" id="/city-template.html">
+        <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+           
+          <input type="text" class="form-control input" id="city2" name="city2"
+            ng-model="searchStr" ng-focus="onFocusHandler()" ng-disabled="disableInput"
+            ng-focus="resetHideResults()" ng-blur="hideResults($event)" ng-change="inputChangeHandler(searchStr)"
+            autocapitalize="off" autocorrect="off" autocomplete="off" required />
 
-          <!-- streetAddress1 -->
-          <div class="form-group"
-            ng-class="{ 'has-error' : addressForm.streetAddress1.$invalid && !addressForm.streetAddress1.$pristine }">
+          <div class="angucomplete-dropdown" ng-show="showDropdown" style="min-width:400px; float:right">
+            <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+            <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+
+            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
+                 ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+              <div class="angucomplete-title">
+                <span>{{result.originalObject.type}}</span> <span ng-bind-html="result.title"></span>
+                
+                 <span ng-if="result.originalObject.speedyOffices.length > 0" class="pull-right"><img src="images/speedy_logo_17.png"></img></span>
+              </div
+              
+              <div class="angucomplete-description">
+                <small><span ng-if="result.originalObject.municipality.indexOf('район') < 0">общ. </span>{{result.originalObject.municipality}}, обл. {{result.originalObject.district}}</small>
+                
+                <span ng-if="result.originalObject.ekontOffices.length > 0" class="pull-right"><img src="images/econt-logo-12.png" width="54" height="12"></img></span> 
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </script>
+            <div angucomplete-alt pause="400"
+                selected-object="shippingCtrl.setZipCodeAndCity"
+                custom-lookup="shippingCtrl.customLookup"
+                custom-matching="shippingCtrl.customMatching"
+                custom-select="shippingCtrl.customSelectCity"
+                keep-initial-value-binding="true"
+                
+                initial-value="cart.shippingData.getCityPretty()"
+                field-required="true"
+                
+                local-data="shippingCtrl.zipCodes"
+                search-fields="city,zipCode*"
+                title-field="city,zipCode"
+                description-field="zipCode"
+                minlength="3"
+                maxlength="50"
+                input-class="form-control"
+                match-class="highlight" 
+                template-url="/city-template.html"
+                > <!--  -->
+            </div>
+                
+      <!-- eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
+            
+            
+            
+          </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- ============== OPTIONS ===================================== -->
+        <!-- ============================================================ -->
+        <script type="text/ng-template" id="/offices-template.html">
+        <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+           
+          <input type="text" class="form-control input" id="office" name="office"
+            ng-model="searchStr" ng-focus="onFocusHandler()" ng-disabled="disableInput"
+            ng-focus="resetHideResults()" ng-blur="hideResults($event)" ng-change="inputChangeHandler(searchStr)"
+            autocapitalize="off" autocorrect="off" autocomplete="off" required />
+
+          <div class="angucomplete-dropdown" ng-show="showDropdown" style="min-width:400px; float:right">
+            <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+            <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+
+            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
+                 ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+              <div class="angucomplete-title">
+                <span ng-bind-html="result.title"></span>
+              </div
+
+              <div class="angucomplete-description" ng-bind-html="result.description"></div>
+            </div>
+          </div>
+        </div>
+      </script>
+
+        <div id="options" ng-show="cart.shippingData.options && cart.shippingData.options.length > 0">
+          <div class="form-group" style="" ng-repeat="option in cart.shippingData.options" ng-class="{notSelected: option.toString() !== cart.shippingData.selectedOption}">
+            <hr>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <label class="control-label " for="streetAddress1">Адрес</label> <input type="text" class="form-control"
-                id="streetAddress1" name="streetAddress1" ng-model="cart.address.streetAddress1"
-                ng-required="cart.address.addressOption == 'address'">
+              <!-- RADIO -->
+                <label> 
+                  <input type="radio" name="optionsRadios" ng-model="cart.shippingData.selectedOption"
+                         ng-value="option.toString()" ng-click="shippingCtrl.setOption2(option)">
+                  <span>{{ option.getNameAndService() }}
+                    <small style="padding-left: 10px;"> {{ option.amount | number:2 }} лв </small>
+                  </span>  
+                </label>
+            </div>
+            
+            <!-- office -->
+            <div ng-if="option.type == 'office'" class="col-lg-10 col-md-10 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+              <!-- INPUT TEXT Courier Office dropdown-->
+              <label class="control-label"> Офис </label>
+              <!-- <input type="text" class="form-control" name="{{option.type}}"
+                ng-model="cart.shippingData.office[option.courier]"
+                ng-required="cart.shippingData.selectedOption === option.toString()"> -->
+                
+                <!-- 3333333333333333333333333333333333333333333333333333333333333333333333333333333333 -->
+                <div angucomplete-alt pause="400"
+                selected-object="shippingCtrl.setOffice"
+                keep-initial-value-binding="true"
+                custom-lookup="shippingCtrl.lookupOffices"
+                custom-lookup-Only="true"
+                
+                initial-value="cart.shippingData.office[option.courier]"
+                field-required="true"
+                
+                local-data="option.courier"
+                search-fields="name,address"
+                title-field="name"
+                description-field="address"
+                minlength="3"
+                maxlength="50"
+                input-class="form-control"
+                match-class="highlight" 
+                
+                > <!--template-url="/offices-template.html"  -->
+            </div>
+                <!-- 44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444 -->
+                
+            </div>
+            
+            <!-- address -->
+            <div ng-if="option.type == 'address'" class="col-lg-10 col-md-10 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+              <!-- INPUT TEXT Courier Office dropdown-->
+              <label class="control-label">Адрес (ул. номер, бл., ет., ...)</label> 
+              <input type="text" class="form-control" name="{{option.type}}"
+                ng-model="cart.shippingData.office['address']"
+                ng-required="cart.shippingData.selectedOption === option.toString()">
+              <!--   
               <p ng-show="addressForm.streetAddress1.$error.required && !addressForm.streetAddress1.$pristine"
-                class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
+                 class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
+              -->
             </div>
-          </div>
-
-          <!-- streetAddress2 -->
+            
+          </div> <!-- ng-repeat -->
           <div class="form-group">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <label class="control-label " for="streetAddress2">Допълнителни указания</label> <input type="text"
-                class="form-control" id="streetAddress2" ng-model="cart.address.streetAddress2">
-            </div>
+            <hr> <!-- footer line -->
           </div>
-
+               
+        </div><!-- if > 0 -->
+        
+        <!--  TODO MUST NOT HAPPEN!!! -->
+        <div class="form-group options" ng-show="cart.shippingData.options && cart.shippingData.options.length == 0">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!-- INPUT TEXT Courier Office dropdown-->
+            <label class="control-label " for="streetAddress1">Адрес (ул. номер, бл., ет., ...)</label> 
+            <input type="text" class="form-control" name="streetAddress1"
+                   ng-model="cart.shippingData.streetAddress1" required>
+            <!--   
+            <p ng-show="addressForm.streetAddress1.$error.required && !addressForm.streetAddress1.$pristine"
+               class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
+            -->
+          </div>
+        </div>
+        
+        <!-- streetAddress2 -->
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!-- INPUT TEXT streetAddress2 -->
+            <label class="control-label " for="streetAddress2">Допълнителни указания</label> <input type="text"
+              class="form-control" id="streetAddress2" ng-model="cart.shippingData.streetAddress2">
+          </div>
         </div>
 
 
+        <!-- ====================================================== -->
+        <!-- INVOICE -->
+        <!-- ====================================================== -->
 
         <div class="form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <label class="control-label " for="phone">Желаете ли фактура?</label>
             <div class="btn-group btn-toggle" style="margin-left: 7px">
               <input type="button" class="btn btn-sm" ng-click="setWantInvoice(true)"
-                ng-class="{ 'btn-default': !cart.address.wantInvoice, 'btn-success active': cart.address.wantInvoice }"
+                ng-class="{ 'btn-default': !cart.shippingData.wantInvoice, 'btn-success active': cart.shippingData.wantInvoice }"
                 value="Да"> <input type="button" class="btn btn-sm" ng-click="setWantInvoice(false)"
-                ng-class="{ 'btn-default': cart.address.wantInvoice, 'btn-success active': !cart.address.wantInvoice }"
+                ng-class="{ 'btn-default': cart.shippingData.wantInvoice, 'btn-success active': !cart.shippingData.wantInvoice }"
                 value="Не">
             </div>
           </div>
         </div>
 
         <!-- textarea -->
-        <div class="form-group" ng-if="cart.address.wantInvoice"
+        <div class="form-group" ng-if="cart.shippingData.wantInvoice"
           ng-class="{ 'has-error' : addressForm.invoiceData.$error.required && !addressForm.invoiceData.$pristine }">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-10 col-md-10 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
             <label class="control-label " for="invoiceData">Данни за фактурата</label>
             <textarea rows="5" cols="50" class="form-control" id="invoiceData" name="invoiceData"
-              ng-model="cart.address.invoiceData" required></textarea>
+              ng-model="cart.shippingData.invoiceData" required></textarea>
             <p ng-show="addressForm.invoiceData.$error.required && !addressForm.invoiceData.$pristine"
               class="help-block">Въведете дан. номер или ЕГН, име на фирма, М.О.Л. и т.н.</p>
           </div>
@@ -246,7 +428,7 @@
         <div class="form-group" style="margin-bottom: 0px">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input name="submit" class="btn btn-primary" value="Продължи" type="submit"
-              ng-disabled="addressForm.$invalid">
+              ng-disabled="!isAddressDataOK()">
           </div>
         </div>
 
@@ -260,18 +442,18 @@
       <!-- Panel content -->
       <div class="col-lg-10 col-md-10 col-sm-9 col-xs-8">
         <h5 style="padding-bottom: 0px">
-          {{cart.address.country}}, <span ng-show="cart.address.addressOption == 'ekont'"> До офис на Еконт:<br>
-            {{cart.address.ekontOffice}}
-          </span> <span ng-show="cart.address.addressOption == 'speedy'"> До офис на Спиди:<br>
-            {{cart.address.speedyOffice}}
-          </span> <span ng-show="cart.address.addressOption == 'address'"> {{cart.address.city}}
-            {{cart.address.zipCode}} <br> {{cart.address.streetAddress1}} <br> <small><span
-              ng-show="cart.address.streetAddress2"> ({{cart.address.streetAddress2}}) </span></small>
+          {{cart.shippingData.settlement.country}}, {{cart.shippingData.getCityAndZipPretty()}}<br>
+          <span ng-if="cart.shippingData.getOption().type==='atelier'">{{cart.shippingData.getOption().getNameAndService()}}</span>
+          <span ng-if="cart.shippingData.getOption().type==='office'">
+            До офис: {{cart.shippingData.office[cart.shippingData.getOption().courier]}}
+          </span>
+          <span ng-if="cart.shippingData.getOption().type==='address'">
+            {{cart.shippingData.office['address']}}
           </span>
         </h5>
-        <div style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0px;" ng-show="cart.address.wantInvoice">
+        <div style="padding-top: 10px; padding-bottom: 0px; margin-bottom: 0px;" ng-show="cart.shippingData.wantInvoice">
           За фактурата:
-          <pre style="margin: 0 0 0 0; padding: 5px 0 0 15px; border: none;">{{cart.address.invoiceData}}</pre>
+          <pre style="margin: 0 0 0 0; padding: 5px 0 0 15px; border: none;">{{cart.shippingData.invoiceData}}</pre>
         </div>
 
       </div>

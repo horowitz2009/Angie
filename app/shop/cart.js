@@ -1,3 +1,130 @@
+function ShippingOption(name, type, courier) {
+  if (typeof name === 'object') {
+    this.name = name.name;
+    this.type = name.type;
+    this.amount = name.amount;
+    this.service = name.service;
+    this.courier = name.courier;
+  } else {
+    this.name = name;
+    this.type = type;
+    this.amount = -1.00;
+    this.service = "";
+    this.courier = courier;
+  }
+}
+
+ShippingOption.prototype.toString = function() {
+  return this.type + "|" + this.service + "|" + this.amount;    
+};
+
+ShippingOption.prototype.getNameAndService = function() {
+  var s = this.name;
+  if (this.service) {
+    s += (" - (" + this.service + ")");
+  }
+  return s;
+};
+  
+function ShippingData() {
+  this.settlement = { "country": "България" };
+  this.options = [];
+  this.selectedOption = null;
+  this.office = {};
+}
+
+ShippingData.prototype.canShippingBeCalculated = function() {
+  if (!this.settlement.country)
+    return false;
+
+  if (this.settlement.country == 'България') {
+    if (!this.settlement.zipCode || !this.settlement.city)
+      return false;
+  }
+  
+  return true;  
+}
+
+ShippingData.prototype.getCityPretty = function () {
+  var s = this.settlement;
+  var res='';
+  if (s.type) 
+    res += s.type + ' ';
+  if (s.city)  
+    res += s.city;
+  return res;
+}
+
+ShippingData.prototype.getCityAndZipPretty = function () {
+  var res = this.getCityPretty();
+  if (this.settlement.zipCode)
+    res += ' ' + this.settlement.zipCode;
+  return res;  
+}
+
+ShippingData.prototype.getOption = function () {
+  if (this.selectedOptionObj == null)
+    for (var i = 0; this.options && i < this.options.length; i++) {
+      if (this.options[i].toString() === this.selectedOption) {
+        this.selectedOptionObj = this.options[i];
+        break;
+      }
+    }
+  return this.selectedOptionObj;
+}
+
+ShippingData.prototype.setOption = function (optionStrOrObj) {
+  if (typeof optionStrOrObj === 'string')
+    this.selectedOption = optionStrOrObj;
+  else {
+    this.selectedOption = optionStrOrObj ? optionStrOrObj.toString() : null;
+    this.selectedOptionObj = optionStrOrObj;
+  }
+}
+
+ShippingData.prototype.updateOptions = function (newOptions) {
+  { //if (!angular.equals(this.options, newOptions)){
+    this.options = newOptions;
+    if (this.selectedOption) {
+      var ss = this.selectedOption.split("|");
+      var found = false;
+      for (var i = 0; !found && i < this.options.length; i++) {
+        if (this.options[i].type === ss[0] && this.options[i].service === ss[1]) {
+          this.selectedOptionObj = this.options[i];
+          this.selectedOption = this.options[i].toString();
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        this.selectedOptionObj = null;
+        this.selectedOption = null;
+      }
+    } else {
+      this.selectedOptionObj = null;
+    }
+  }
+}
+
+ShippingData.prototype.copyTo = function(obj) {
+  angular.copy(this.settlement, obj.settlement);
+  angular.copy(this.options, obj.options);
+  obj.selectedOptionObj = null;
+  obj.selectedOption = this.selectedOption;
+
+  //angular.copy(this.prototype, obj.prototype);
+}
+
+ShippingData.prototype.propagateSettlement = function(obj) {
+  this.settlement.type = obj.type;
+  this.settlement.city = obj.city;
+  this.settlement.zipCode = obj.zipCode;
+  this.settlement.combo = obj.combo;
+}
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
 angular
     .module('felt.shop.cart', [ 'ui.router', 'angularUtils.directives.uiBreadcrumbs', 'common.utils.service'
 
@@ -87,9 +214,8 @@ angular
 
               scope.$watch('item.quantity', function() {
 
-                $timeout.cancel(timeoutPromise); // does nothing, if timeout
-                // alrdy done
-                timeoutPromise = $timeout(function() { // Set timeout
+                $timeout.cancel(timeoutPromise); // does nothing, if timeout already done
+                timeoutPromise = $timeout(function() {
                   $rootScope.$broadcast(CART_EVENTS.itemQuantityChanged);
                   scope.recalcCart();
                 }, delayInMs);
@@ -105,17 +231,23 @@ angular
     .value("maxV", {
       "value" : 10
     })
-
+    
+    ///////////////////////////////////////////
+    // cart
+    ///////////////////////////////////////////
     .value(
         "cart",
         
-          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "count": 0.00,
-            "address": { country: "България"},
-            
+          { "items": [], "subTotal": 0.00, "shippingCosts": 0.00, "total": 0.00, "count": 0.00, "weight": 0.00,
+            "contactData": {},
+            "shippingData": new ShippingData(),
             "initial": true }
 
     )
 
+    ////////////////////////////////////////////
+    // CartService
+    ////////////////////////////////////////////
     .factory('CartService',
         [ 'cart', 'utils', '$rootScope', 'CART_EVENTS', function(cart, utils, $rootScope, CART_EVENTS) {
           console.log("[243 cart.factory CartService]");
@@ -127,48 +259,48 @@ angular
           // addItem
           service.addItem = function(product, qty) {
             var quantity = parseInt(qty);
-            var item = this.findItem(product.fullId);
+            var item = service.findItem(product.fullId);
             if (item) {
               // console.log("already exists");
               item.quantity = parseInt(item.quantity) + parseInt(quantity);
             } else {
               // console.log("adding new item in cart");
               item = buildItem(product, quantity);
-              this.cart.items.push(item);
+              cart.items.push(item);
             }
             $rootScope.$broadcast(CART_EVENTS.itemAdded, item);
-            this.recalcTotals();
+            service.recalcTotals();
           }
 
           // removeItem
           service.removeItem = function(id) {
-            var index = utils.getIndexOf(this.cart.items, id);
+            var index = utils.getIndexOf(cart.items, id);
             if (index >= 0) {
-              this.cart.items.splice(index, 1);
+              cart.items.splice(index, 1);
               $rootScope.$broadcast(CART_EVENTS.itemRemoved, id);
-              this.recalcTotals();
+              service.recalcTotals();
             }
           }
 
           // addItem
           service.editItem = function(id, newQty) {
             var quantity = parseInt(newQty);
-            var item = this.findItem(id);
+            var item = service.findItem(id);
             if (item) {
               if (quantity == 0) {
-                this.removeItem(id);
+                service.removeItem(id);
               } else {
                 item.quantity = quantity;
                 $rootScope.$broadcast(CART_EVENTS.itemQuantityChanged, item);
-                this.recalcTotals();
+                service.recalcTotals();
               }
             }
           }
 
           // reset cart
           service.resetCart = function() {
-            this.cart.items.splice(0, this.cart.items.length);
-            this.recalcTotals();
+            cart.items.splice(0, cart.items.length);
+            service.recalcTotals();
           }
           
           // mergeCarts
@@ -181,12 +313,12 @@ angular
             // if (cart2 && cart2.items) {
             // items = items.concat(cart2.items);
             // }
-            // angular.copy(items, this.cart.items);
-            // this.recalcTotals();
+            // angular.copy(items, cart.items);
+            // service.recalcTotals();
           }
           
           service.canShippingBeCalculated = function() {
-            var a = this.cart.address;
+            var a = cart.shippingData.settlement;
             if (!a || !a.country)
               return false;
 
@@ -200,72 +332,73 @@ angular
           
           // recalcTotals
           service.recalcTotals = function() {
-            var oldCart = angular.copy(this.cart);
+            var oldCart = angular.copy(cart);
             var newTotal = 0.00;
             var cnt = 0.00;
-            this.cart.items.forEach(function(item) {
+            var weight = 0.00;
+            cart.items.forEach(function(item) {
               item.sum = item.product.price * item.quantity;
               newTotal += item.sum;
               cnt += parseInt(item.quantity);
+              if (!isNaN(parseInt(item.product.weight)))
+                weight += (parseInt(item.product.weight) * item.quantity);
             });
-            this.cart.subTotal = newTotal;
-            console.log("count: " + cnt);
-            this.cart.count = cnt;
-            
-            // TODO recalcShippingCosts
-            this.cart.shippingCosts = 0.00;
-            if (this.canShippingBeCalculated()) {
-              this.cart.shippingCosts = 6.00;
-              if (this.cart.subTotal == 0)
-                this.cart.shippingCosts = 0.00;
-              if (this.cart.subTotal >= 40)
-                this.cart.shippingCosts = 3.00;
-              if (this.cart.subTotal >= 60)
-                this.cart.shippingCosts = 0.00;
+            cart.subTotal = newTotal;
+            cart.count = cnt;
+            cart.weight = weight;
+            //TODO recalc shipping costs
+            cart.shippingCosts = 0.00;
+            if (service.canShippingBeCalculated()) {
+              cart.shippingCosts = 6.00;
+              if (cart.subTotal == 0)
+                  cart.shippingCosts = 0.00;
+              if (cart.subTotal >= 40)
+                cart.shippingCosts = 3.00;
+              if (cart.subTotal >= 60)
+                cart.shippingCosts = 0.00;
             }
-            this.cart.total = this.cart.subTotal + this.cart.shippingCosts;
+            cart.total = cart.subTotal + cart.shippingCosts;
             
-            if(!angular.equals(oldCart, this.cart)) {
+            if(!angular.equals(oldCart, cart)) {
               console.log("broadcast change cart...");
-              $rootScope.$broadcast(CART_EVENTS.cartChanged, this.cart);
+              $rootScope.$broadcast(CART_EVENTS.cartChanged, cart);
             }
           }
 
           // findItem
           service.findItem = function(id) {
-            return utils.findById(this.cart.items, id);
+            return utils.findById(cart.items, id);
           }
           
           service.isAddressDataOK = function() {
-            var a = this.cart.address;
-            if (!a || !a.country)
+            
+            if (!service.canShippingBeCalculated()) 
               return false;
 
-            var addressRequired = true;
-            if (a.country == 'България') {
-              if (a.addressOption == "ekont") {
-                addressRequired = false;
-                if (!a.ekontOffice)
-                  return false;
-              } else if (a.addressOption == "speedy") {
-                addressRequired = false;
-                if (!a.speedyOffice)
-                  return false;
+            var sd = cart.shippingData;
+            var so = sd.selectedOption;
+            
+            
+            var option = sd.getOption();
+            if (!option)
+              return false;
+            
+            if (option.type === "atelier") {
+              //nothing more is required
+              return true;
+            } else if (option.type === "office") {
+              if (!sd.office[option.courier]) {
+                return false;
               }
-            }
-            if (addressRequired) {
-              // either is Bulgaria and not office option, or
-              // not Bulgaria
-              if (!a.zipCode || !a.city || !a.streetAddress1)
+            } else if (option.type === "address") {
+              if (!sd.office[option.type])
                 return false;
             }
-            if (a.wantInvoice && !a.invoiceData)
+          
+            if (sd.wantInvoice && !sd.invoiceData)
               return false;
             return true;
           }
-
-          
-          
 
           return service;
         } ])
@@ -288,11 +421,24 @@ angular
 //              console.log("Saving cart skipped...");
 //              return null;
 //            }
+            var jsonStr = JSON.stringify(service.cart, function(key, value) {
+                if (key === 'options')
+                  return [];
+                else if (key === 'selectedOptionObj')
+                  return null;
+                else if (key === 'ekontOffices')
+                  return [];
+                else if (key === 'speedyOffices')
+                  return [];
+                  
+                return value;  
+              });
+            
             return $.ajax({
               type : "POST",
               encoding:"UTF-8",
               url : 'php/save_cart.php',
-              data : { 'cart': JSON.stringify(service.cart), 'username': username },
+              data : { 'cart': jsonStr, 'username': username },//TODO use replacer to exclude some fields
               success : successCallback,
               error : errorCallback
             });
@@ -306,10 +452,15 @@ angular
               url : 'php/load_cart.php',
               data : {'username' : username},
               success : function(newCart) {
-                //service.cart = newCart;//TODO check if this is working
-                if (newCart.items)
-                  angular.copy(newCart, service.cart);
-                CartService.recalcTotals();
+                
+                if (newCart.items) {
+                  angular.copy(newCart.contactData, service.cart.contactData);
+                  angular.copy(newCart.shippingData, service.cart.shippingData);
+                  angular.copy(newCart.items, service.cart.items);
+                  CartService.recalcTotals();
+                  console.log("CART LOADED................................");
+                }
+                
               }
             });
             

@@ -17,22 +17,21 @@ angular.module('felt.shop.service', [
     var factory = {};
     
 	
-	function initializeDB(db) {
-    if (db != null && typeof (db) === "object") {
-		  var promise = $http.get("assets/categories.json").then(function (resp) {
-          var res = resp.data.categories;
-          
-          saveToLoki(res);
-          
-          enrich(res);
-          return res;
-        });
+  	function initializeDB(db) {
+      if (db != null && typeof (db) === "object") {
+  		  var promise = $http.get("assets/categories.json").then(function (resp) {
+            var res = resp.data.categories;
+            
+            saveToLoki(res);
+            
+            enrich(res);
+            return res;
+          });
+  
+        
+  		}		
+  	}
 
-      
-		}		
-	}
-
-	
 	
     factory.getCategories = function() {
       if (categoriesPromise == null) {
@@ -159,6 +158,9 @@ angular.module('felt.shop.service', [
               p.categoryId = cat.id;
             if (!p.fullId) 
               p.fullId = p.categoryId + '-' + p.id;
+            
+            p.weight = p.quantity;
+            
           }
         });
       }

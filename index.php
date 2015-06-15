@@ -1043,6 +1043,7 @@
   <script type="text/javascript" src="app/shop/cart.js"></script>
   <script type="text/javascript" src="app/shop/cart.router.js"></script>
   <script type="text/javascript" src="app/shop/shop-service.js"></script>
+  <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
   <script type="text/javascript" src="app/common/color-service.js"></script>
   <script type="text/javascript" src="common/utils/utils-service.js"></script>
   <script type="text/javascript" src="common/auth/authentication.js"></script>

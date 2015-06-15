@@ -1,0 +1,2036 @@
+[
+  {
+    "name": "АЙТОС-УЛ. ХРИСТО БОТЕВ (SPS)  [570]",
+    "city": "АЙТОС",
+    "address": "ул. ХРИСТО БОТЕВ 21",
+    "worktime1": "09:30 - 17:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=570"
+  },
+  {
+    "name": "АКСАКОВО (SPS)  [640]",
+    "city": "АКСАКОВО",
+    "address": "ул. ГЕОРГИ ПЕТЛЕШЕВ 58А",
+    "worktime1": "09:00 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=640"
+  },
+  {
+    "name": "АСЕНОВГРАД  [17]",
+    "city": "АСЕНОВГРАД",
+    "address": "ул. ГОЦЕ ДЕЛЧЕВ 91-93",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=17"
+  },
+  {
+    "name": "БАЛЧИК-УЛ. ЧЕРНО МОРЕ (SPS)  [672]",
+    "city": "БАЛЧИК",
+    "address": "ул. ЧЕРНО МОРЕ 29",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=672"
+  },
+  {
+    "name": "БАНСКО  [34]",
+    "city": "БАНСКО",
+    "address": "ул. ВИКТОР ЮГО 7",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=34"
+  },
+  {
+    "name": "БЕЛЕНЕ  [108]",
+    "city": "БЕЛЕНЕ",
+    "address": "пл. БЪЛГАРИЯ 1А ОФИС ЦЕНТЪР КРИСТИНИ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=108"
+  },
+  {
+    "name": "БЕЛИЦА (SPS)  [617]",
+    "city": "БЕЛИЦА",
+    "zipCode": "2780",
+    "address": "ул. АЛЕКСИ САЧКОВ 3",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=617"
+  },
+  {
+    "name": "БЕЛОВО (SPS)  [649]",
+    "city": "БЕЛОВО",
+    "address": "бул. ОСВОБОЖДЕНИЕ 80",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=649"
+  },
+  {
+    "name": "БЕЛОГРАДЧИК (SPS)  [550]",
+    "city": "БЕЛОГРАДЧИК",
+    "address": "ул. КНЯЗ БОРИС I 50",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=550"
+  },
+  {
+    "name": "БЕЛОСЛАВ (SPS)  [589]",
+    "city": "БЕЛОСЛАВ",
+    "address": "ул. ГЕБЕДЖЕ 2",
+    "worktime1": "09:30 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=589"
+  },
+  {
+    "name": "БЕРКОВИЦА (SPS)  [528]",
+    "city": "БЕРКОВИЦА",
+    "address": "ул. ИВАН ВАЗОВ 2",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=528"
+  },
+  {
+    "name": "БЛАГОЕВГРАД-СКЛАД  [13]",
+    "city": "БЛАГОЕВГРАД",
+    "address": "кв. ГРАМАДА СКЛАДОВА БАЗА ПИРИНСНАБ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=13"
+  },
+  {
+    "name": "БЛАГОЕВГРАД-ОФИС  [69]",
+    "city": "БЛАГОЕВГРАД",
+    "address": "бул. ВАСИЛ ЛЕВСКИ 49",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=69"
+  },
+  {
+    "name": "БЛАГОЕВГРАД - УЛ. ГРИГОР ПЪРЛИЧЕВ  [137]",
+    "city": "БЛАГОЕВГРАД",
+    "address": "ул. ГРИГОР ПЪРЛИЧЕВ 2 СРЕЩУ КЛИНИКА РУБИДЕНТ ДО СТАДИОНА",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=137"
+  },
+  {
+    "name": "БЛАГОЕВГРАД-ЦЕНТЪР (SPS)  [591]",
+    "city": "БЛАГОЕВГРАД",
+    "address": "ул. ТОДОР АЛЕКСАНДРОВ 23 НА ГЪРБА НА СТОМАТОЛОГИЯТА",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=591"
+  },
+  {
+    "name": "БЛАГОЕВГРАД-ЖК ЕЛЕНОВО (SPS)  [676]",
+    "city": "БЛАГОЕВГРАД",
+    "address": "жк ЕЛЕНОВО ул. ГЕОРГИ АНДРЕЙЧИН 8 М-Н 'ОТ ИГЛА ДО КОНЕЦ'",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=676"
+  },
+  {
+    "name": "БОТЕВГРАД  [61]",
+    "city": "БОТЕВГРАД",
+    "address": "бул. 3-ТИ МАРТ 85",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=61"
+  },
+  {
+    "name": "БУРГАС-СКЛАД  [3]",
+    "city": "БУРГАС",
+    "address": "БАЗА СОМАТ",
+    "worktime1": "08:30 - 19:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=3"
+  },
+  {
+    "name": "БУРГАС-ИВАН БОГОРОВ  [115]",
+    "city": "БУРГАС",
+    "address": "ул. ИВАН БОГОРОВ 20",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=115"
+  },
+  {
+    "name": "БУРГАС-КАУФЛАНД  [119]",
+    "city": "БУРГАС",
+    "address": "бул. ЯНКО КОМИТОВ 8 КАУФЛАНД",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=119"
+  },
+  {
+    "name": "СЛЪНЧЕВ БРЯГ  [121]",
+    "city": "БУРГАС",
+    "address": "к.к. СЛЪНЧЕВ БРЯГ ХОТЕЛ ГОЛДЕН ФОРТ С/У Х-Л ХРИЗАНТЕМА",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=121"
+  },
+  {
+    "name": "БУРГАС-К. ФОТИНОВ (SPS)  [507]",
+    "city": "БУРГАС",
+    "address": "ул. КОНСТАНТИН ФОТИНОВ 25 ДО СЛАДКАРНИЦА РОЗА НА БУЛ. АЛ. БОГОРИДИ",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=507"
+  },
+  {
+    "name": "БУРГАС-МЕДЕН РУДНИК (SPS)  [569]",
+    "city": "БУРГАС",
+    "address": "жк МЕДЕН РУДНИК ДО БИВШ БИТОВ КОМБИНАТ",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=569"
+  },
+  {
+    "name": "БУРГАС-ЖК ИЗГРЕВ (SPS)  [574]",
+    "city": "БУРГАС",
+    "address": "жк ИЗГРЕВ бл. 132 ДО БИЛЛА",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=574"
+  },
+  {
+    "name": "БУРГАС-ПОБЕДА (SPS)  [584]",
+    "city": "БУРГАС",
+    "address": "кв. ПОБЕДА ул. ЧАТАЛДЖА 51",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=584"
+  },
+  {
+    "name": "БУРГАС-ВЪЗРАЖДАНЕ (SPS)  [602]",
+    "city": "БУРГАС",
+    "address": "жк ВЪЗРАЖДАНЕ ул. СЛИВНИЦА 55",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=602"
+  },
+  {
+    "name": "БУРГАС-ЖК СЛАВЕЙКОВ (SPS)  [613]",
+    "city": "БУРГАС",
+    "address": "жк СЛАВЕЙКОВ бл. 79 ДО БИЛЛА",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=613"
+  },
+  {
+    "name": "БУРГАС-ЗОРНИЦА (SPS)  [695]",
+    "city": "БУРГАС",
+    "address": "жк ЗОРНИЦА СПОРТНА ЗАЛА БОЙЧО БРЪНЗОВ",
+    "worktime1": "10:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=695"
+  },
+  {
+    "name": "БУРГАС-БРАТЯ МИЛАДИНОВИ (SPS)  [705]",
+    "city": "БУРГАС",
+    "address": "жк БРАТЯ МИЛАДИНОВИ ул. СТАРА ПЛАНИНА 19",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=705"
+  },
+  {
+    "name": "БУРГАС-ЖК ЛАЗУР (SPS)  [719]",
+    "city": "БУРГАС",
+    "address": "жк ЛАЗУР бл. 127",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=719"
+  },
+  {
+    "name": "БЯЛА (ОБЛ. РС) (SPS)  [525]",
+    "city": "БЯЛА",
+    "address": "ул. ВАСИЛ ЛЕВСКИ 19",
+    "worktime1": "08:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=525"
+  },
+  {
+    "name": "БЯЛА СЛАТИНА  [59]",
+    "city": "БЯЛА СЛАТИНА",
+    "address": "ул. ХАН КРУМ 48",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=59"
+  },
+  {
+    "name": "ВАРНА-СКЛАД  [4]",
+    "city": "ВАРНА",
+    "address": "кв./жк ЗАПАДНА ПРОМИШЛЕНА ЗОНА 2",
+    "worktime1": "09:00 - 19:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=4"
+  },
+  {
+    "name": "ВАРНА-ОФИС  [77]",
+    "city": "ВАРНА",
+    "address": "ул. ГЕН. ПАРЕНСОВ 8",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=77"
+  },
+  {
+    "name": "ВАРНА-ЦАР ОСВОБОДИТЕЛ  [111]",
+    "city": "ВАРНА",
+    "address": "бул. ЦАР ОСВОБОДИТЕЛ 263А ДО ТЕХНОМАРКЕТ",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=111"
+  },
+  {
+    "name": "ВАРНА-ПРИМОРСКИ  [117]",
+    "city": "ВАРНА",
+    "address": "бул. ПРИМОРСКИ 27",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=117"
+  },
+  {
+    "name": "ВАРНА-Г. БЕНКОВСКИ (SPS)  [510]",
+    "city": "ВАРНА",
+    "address": "ул. ГЕОРГИ БЕНКОВСКИ 9",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=510"
+  },
+  {
+    "name": "ВАРНА-БУЛ. ВЛ. ВАРНЕНЧИК (SPS)  [513]",
+    "city": "ВАРНА",
+    "address": "бул. ВЛАДИСЛАВ ВАРНЕНЧИК 126",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=513"
+  },
+  {
+    "name": "С. ТОПОЛИ-Д-Р ЛИПОВ (SPS)  [545]",
+    "city": "ВАРНА",
+    "address": "с. ТОПОЛИ ул./бул. ДОКТОР ЛИПОВ 20",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=545"
+  },
+  {
+    "name": "ВАРНА-ЖК ЧАЙКА (SPS)  [547]",
+    "city": "ВАРНА",
+    "address": "жк ЧАЙКА ЗАД БЛ 56",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=547"
+  },
+  {
+    "name": "ВАРНА-ЖК ВЛ. ВАРНЕНЧИК (SPS)  [580]",
+    "city": "ВАРНА",
+    "address": "жк ВЛАДИСЛАВ ВАРНЕНЧИК ТЪРГ. К-С, НАД БЛ.20, МОДУЛ №24 №1\"",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=580"
+  },
+  {
+    "name": "ВАРНА-УЛ. БАТАК (SPS)  [603]",
+    "city": "ВАРНА",
+    "address": "ул. БАТАК 7",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=603"
+  },
+  {
+    "name": "ВАРНА-УЛ. БРАТЯ БЪКСТОН (SPS)  [604]",
+    "city": "ВАРНА",
+    "address": "ул. БРАТЯ БЪКСТОН 30",
+    "worktime1": "09:00 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=604"
+  },
+  {
+    "name": "ВАРНА-ЖК ВЪЗРАЖДАНЕ (SPS)  [659]",
+    "city": "ВАРНА",
+    "address": "жк ВЪЗРАЖДАНЕ ул. БЛЯН ДО БЛ. 45",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=659"
+  },
+  {
+    "name": "ВАРНА-КВ. ЛЕВСКИ (SPS)  [661]",
+    "city": "ВАРНА",
+    "address": "ул. СТУДЕНТСКА 4",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=661"
+  },
+  {
+    "name": "ВАРНА-ЦЕНТРАЛЕН ПАЗАР (SPS)  [662]",
+    "city": "ВАРНА",
+    "address": "ул. БАБА ТОНКА 11",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=662"
+  },
+  {
+    "name": "ВАРНА-КВ. АСПАРУХОВО (SPS)  [664]",
+    "city": "ВАРНА",
+    "address": "кв. АСПАРУХОВО ул. СТАРА ЗАГОРА 1",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=664"
+  },
+  {
+    "name": "ВАРНА-СПАРТАК (SPS)  [671]",
+    "city": "ВАРНА",
+    "address": "бул. ЦАР ОСВОБОДИТЕЛ 95 С/У АГ БОЛНИЦА",
+    "worktime1": "09:30 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=671"
+  },
+  {
+    "name": "ВАРНА-ЖК БРИЗ (SPS)  [680]",
+    "city": "ВАРНА",
+    "address": "жк БРИЗ ул. Д-Р ВАСИЛАКИ ПАПАДОПОЛУ 50",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=680"
+  },
+  {
+    "name": "ВАРНА-ЖК МЛАДОСТ (SPS)  [701]",
+    "city": "ВАРНА",
+    "address": "жк МЛАДОСТ СРЕЩУ БЛ. 147",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=701"
+  },
+  {
+    "name": "ВАРНА-ЖК ТРОШЕВО (SPS)  [706]",
+    "city": "ВАРНА",
+    "address": "жк ТРОШЕВО ул. ИВАЦ 14",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=706"
+  },
+  {
+    "name": "ВАРНА-УЛ. ФРЕДЕРИК КЮРИ (SPS)  [709]",
+    "city": "ВАРНА",
+    "address": "ул. ФРЕДЕРИК КЮРИ 92",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=709"
+  },
+  {
+    "name": "ВЕЛИКО ТЪРНОВО-СКЛАД  [11]",
+    "city": "ВЕЛИКО ТЪРНОВО",
+    "address": "с. ЛЕДЕНИК ул. ШЕСТА 473",
+    "worktime1": "09:00 - 20:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=11"
+  },
+  {
+    "name": "ВЕЛИКО ТЪРНОВО-ОФИС  [80]",
+    "city": "ВЕЛИКО ТЪРНОВО",
+    "address": "ул. КОЗЛОДУЙ 4",
+    "worktime1": "08:00 - 18:00",
+    "worktime2": "08:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=80"
+  },
+  {
+    "name": "ВЕЛИКО ТЪРНОВО-УЛ. БЕЛЯКОВСКО ШОСЕ (SPS)  [704]",
+    "city": "ВЕЛИКО ТЪРНОВО",
+    "address": "ул. БЕЛЯКОВСКО ШОСЕ 1Д",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=704"
+  },
+  {
+    "name": "ВЕЛИНГРАД  [49]",
+    "city": "ВЕЛИНГРАД",
+    "address": "ул. ЦАР САМУИЛ 7",
+    "worktime1": "09:00 - 16:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=49"
+  },
+  {
+    "name": "ВИДИН-ОФИС  [62]",
+    "city": "ВИДИН",
+    "address": "ул. ЕКЗАРХ ЙОСИФ I 13",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 12:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=62"
+  },
+  {
+    "name": "ВИДИН-СКЛАД  [113]",
+    "city": "ВИДИН",
+    "address": "кв./жк ЮЖНА ПРОМИШЛЕНА ЗОНА БИВШ З-Д БДИН МЕБЕЛ",
+    "worktime1": "08:30 - 17:30",
+    "worktime2": "08:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=113"
+  },
+  {
+    "name": "ВИДИН-ВИДА (SPS)  [618]",
+    "city": "ВИДИН",
+    "address": "бул. ПАНОНИЯ 21",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 12:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=618"
+  },
+  {
+    "name": "ВРАЦА-ОФИС  [19]",
+    "city": "ВРАЦА",
+    "address": "бул. МИТО ОРОЗОВ 6",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "08:30 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=19"
+  },
+  {
+    "name": "ВРАЦА-СКЛАД  [20]",
+    "city": "ВРАЦА",
+    "address": "бул. МИТО ОРОЗОВ 32",
+    "worktime1": "08:00 - 18:30",
+    "worktime2": "08:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=20"
+  },
+  {
+    "name": "ВРАЦА-ЖК. ДЪБНИКА  [129]",
+    "city": "ВРАЦА",
+    "address": "жк ДЪБНИКА С/У БЛОК 10, ОФИС №5\"",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "08:30 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=129"
+  },
+  {
+    "name": "ВРАЦА-ПРОБИВА (SPS)  [548]",
+    "city": "ВРАЦА",
+    "address": "бул. НИКОЛА ВОЙВОДОВ 16",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "10:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=548"
+  },
+  {
+    "name": "ВРАЦА-УЛ. ОКОЛЧИЦА (SPS)  [673]",
+    "city": "ВРАЦА",
+    "address": "ул. ОКОЛЧИЦА 2",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=673"
+  },
+  {
+    "name": "ВЪРШЕЦ (SPS)  [579]",
+    "city": "ВЪРШЕЦ",
+    "address": "ул. РЕПУБЛИКА 71Б",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=579"
+  },
+  {
+    "name": "ГАБРОВО-СКЛАД  [15]",
+    "city": "ГАБРОВО",
+    "zipCode": "5300",
+    "address": "ул. ОРЛОВСКА 154",
+    "worktime1": "08:00 - 18:00",
+    "worktime2": "08:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=15"
+  },
+  {
+    "name": "ГАБРОВО-БУЛ. АПРИЛОВ (SPS)  [668]",
+    "city": "ГАБРОВО",
+    "zipCode": "5300",
+    "address": "бул. АПРИЛОВ 25",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=668"
+  },
+  {
+    "name": "ГОРНА ОРЯХОВИЦА  [46]",
+    "city": "ГОРНА ОРЯХОВИЦА",
+    "address": "ул. ГЕОРГИ ИЗМИРЛИЕВ 2 вх. Б ПАРТЕР",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=46"
+  },
+  {
+    "name": "ГОЦЕ ДЕЛЧЕВ - УЛ. ПАОЛО ЛЕНЦ  [31]",
+    "city": "ГОЦЕ ДЕЛЧЕВ",
+    "address": "ул. ПАОЛО ЛЕНЦ 4",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=31"
+  },
+  {
+    "name": "ГОЦЕ ДЕЛЧЕВ - УЛ. КИРИЛ И МЕТОДИЙ  [140]",
+    "city": "ГОЦЕ ДЕЛЧЕВ",
+    "address": "ул. КИРИЛ И МЕТОДИЙ 15",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=140"
+  },
+  {
+    "name": "ДИМИТРОВГРАД  [42]",
+    "city": "ДИМИТРОВГРАД",
+    "address": "ул. ОТЕЦ ПАИСИЙ 15",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=42"
+  },
+  {
+    "name": "ДИМИТРОВГРАД- БУЛ. Д. БЛАГОЕВ (SPS)  [630]",
+    "city": "ДИМИТРОВГРАД",
+    "address": "бул. ДИМИТЪР БЛАГОЕВ 1",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=630"
+  },
+  {
+    "name": "ДИМИТРОВГРАД-КВ СЛАВЯНСКИ (SPS)  [653]",
+    "city": "ДИМИТРОВГРАД",
+    "address": "ул. ПАТРИАРХ ЕВТИМИЙ М/У БЛОК 8-10",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=653"
+  },
+  {
+    "name": "ДОБРИЧ  [14]",
+    "city": "ДОБРИЧ",
+    "address": "пл. СВОБОДА 8",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=14"
+  },
+  {
+    "name": "ДОБРИЧ-СКЛАД  [128]",
+    "city": "ДОБРИЧ",
+    "address": "жк ДОБРОТИЦА ТЪРГОВСКА КЪЩА ДОБРОТИЦА",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=128"
+  },
+  {
+    "name": "ДОБРИЧ-УЛ. НИКОЛА ПЕТКОВ (SPS)  [699]",
+    "city": "ДОБРИЧ",
+    "address": "жк ДРУЖБА II ул. НИКОЛА ПЕТКОВ 9 ДО БАР ЖЪЛТО",
+    "worktime1": "09:30 - 17:00",
+    "worktime2": "09:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=699"
+  },
+  {
+    "name": "ДРЯНОВО (SPS)  [694]",
+    "city": "ДРЯНОВО",
+    "address": "ул. ШИПКА 56",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=694"
+  },
+  {
+    "name": "ДУЛОВО (SPS)  [593]",
+    "city": "ДУЛОВО",
+    "address": "ул. ВАСИЛ ЛЕВСКИ 8",
+    "worktime1": "07:30 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=593"
+  },
+  {
+    "name": "ДУПНИЦА  [26]",
+    "city": "ДУПНИЦА",
+    "address": "ул. СТРАХИЛ ВОЙВОДА 16",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "08:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=26"
+  },
+  {
+    "name": "ДУПНИЦА-СКЛАД  [118]",
+    "city": "ДУПНИЦА",
+    "address": "ул. ЯХИНСКО ШОСЕ 16",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=118"
+  },
+  {
+    "name": "ЕЛЕНА (SPS)  [693]",
+    "city": "ЕЛЕНА",
+    "address": "ул. СТОЯН МИХАЙЛОВСКИ 36",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=693"
+  },
+  {
+    "name": "ЕЛИН ПЕЛИН (SPS)  [501]",
+    "city": "ЕЛИН ПЕЛИН",
+    "address": "бул. СОФИЯ 11",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=501"
+  },
+  {
+    "name": "ЕЛХОВО  [73]",
+    "city": "ЕЛХОВО",
+    "address": "ул. ТЪРГОВСКА 69 ПАРТЕР",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=73"
+  },
+  {
+    "name": "ЕТРОПОЛЕ (SPS)  [645]",
+    "city": "ЕТРОПОЛЕ",
+    "address": "бул. РУСКИ 101",
+    "worktime1": "09:00 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=645"
+  },
+  {
+    "name": "ИСПЕРИХ (SPS)  [594]",
+    "city": "ИСПЕРИХ",
+    "address": "ул. СТЕФАН КАРАДЖА 1",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=594"
+  },
+  {
+    "name": "КАБЛЕШКОВО (SPS)  [702]",
+    "city": "КАБЛЕШКОВО",
+    "address": "ул. ЧЕРНО МОРЕ 40",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=702"
+  },
+  {
+    "name": "КАВАРНА (SPS)  [552]",
+    "city": "КАВАРНА",
+    "address": "ул. БЪЛГАРИЯ 26",
+    "worktime1": "10:00 - 17:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=552"
+  },
+  {
+    "name": "КАЗАНЛЪК-СКЛАД (ДО OMV)  [21]",
+    "city": "КАЗАНЛЪК",
+    "address": "бул. КНЯЗ АЛЕКСАНДЪР БАТЕНБЕРГ 221 В ДВОРА НА ФЕРОХРОМ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=21"
+  },
+  {
+    "name": "КАЗАНЛЪК-ПАРК РОЗАРИУМ  [135]",
+    "city": "КАЗАНЛЪК",
+    "address": "ул. ГЕН. СТОЛЕТОВ 1",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=135"
+  },
+  {
+    "name": "КАЗАНЛЪК (SPS)  [514]",
+    "city": "КАЗАНЛЪК",
+    "address": "ул. ЦАР ОСВОБОДИТЕЛ 1",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=514"
+  },
+  {
+    "name": "КАРЛОВО  [22]",
+    "city": "КАРЛОВО",
+    "address": "ул. ГЕН. ЗАИМОВ 8",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=22"
+  },
+  {
+    "name": "КАРЛОВО (SPS)  [609]",
+    "city": "КАРЛОВО",
+    "address": "ул. ГЕН. КАРЦОВ 63",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=609"
+  },
+  {
+    "name": "КАРНОБАТ  [28]",
+    "city": "КАРНОБАТ",
+    "address": "ул. ВАСИЛ ЛЕВСКИ 26",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=28"
+  },
+  {
+    "name": "КНЕЖА (SPS)  [542]",
+    "city": "КНЕЖА",
+    "address": "ул. НИКОЛА ПЕТКОВ 111",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=542"
+  },
+  {
+    "name": "КОЗЛОДУЙ-ОФИС  [64]",
+    "city": "КОЗЛОДУЙ",
+    "address": "ул. ХРИСТО БОТЕВ ТК СОНИ",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=64"
+  },
+  {
+    "name": "КОЗЛОДУЙ-ФОТОЦЕНТЪР (SPS)  [549]",
+    "city": "КОЗЛОДУЙ",
+    "address": "ул. ХРИСТО БОТЕВ 1",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "10:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=549"
+  },
+  {
+    "name": "КОСТИНБРОД (SPS)  [585]",
+    "city": "КОСТИНБРОД",
+    "address": "ул. ОХРИД 9",
+    "worktime1": "10:00 - 17:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=585"
+  },
+  {
+    "name": "КУБРАТ (SPS)  [689]",
+    "city": "КУБРАТ",
+    "address": "ул. ЕКЗАРХ ЙОСИФ 5",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=689"
+  },
+  {
+    "name": "КЪРДЖАЛИ  [32]",
+    "city": "КЪРДЖАЛИ",
+    "address": "бул. БЕЛОМОРСКИ 68 В ДВОРА НА ХЛЕБОЗАВОДА",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=32"
+  },
+  {
+    "name": "КЪРДЖАЛИ-УЛ. СТЕФАН СТАМБОЛОВ (SPS)  [678]",
+    "city": "КЪРДЖАЛИ",
+    "address": "ул. СТЕФАН СТАМБОЛОВ 1",
+    "worktime1": "10:00 - 17:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=678"
+  },
+  {
+    "name": "КЮСТЕНДИЛ  [23]",
+    "city": "КЮСТЕНДИЛ",
+    "address": "ул. ХРИСТО БОТЕВ 51",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "08:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=23"
+  },
+  {
+    "name": "ЛЕВСКИ (SPS)  [524]",
+    "city": "ЛЕВСКИ",
+    "address": "ул. АЛЕКСАНДЪР СТАМБОЛИЙСКИ 61",
+    "worktime1": "08:30 - 18:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=524"
+  },
+  {
+    "name": "ЛОВЕЧ  [25]",
+    "city": "ЛОВЕЧ",
+    "address": "ул. СТАРА ПЛАНИНА 29",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=25"
+  },
+  {
+    "name": "ЛОВЕЧ-БУЛ. БЪЛГАРИЯ (SPS)  [667]",
+    "city": "ЛОВЕЧ",
+    "address": "бул. БЪЛГАРИЯ 1",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=667"
+  },
+  {
+    "name": "ЛОМ  [63]",
+    "city": "ЛОМ",
+    "address": "ул. СЛАВЯНСКА 62",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=63"
+  },
+  {
+    "name": "ЛУКОВИТ (SPS)  [529]",
+    "city": "ЛУКОВИТ",
+    "address": "ул. ВЪЗРАЖДАНЕ 55Б",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=529"
+  },
+  {
+    "name": "МЕЗДРА (SPS)  [527]",
+    "city": "МЕЗДРА",
+    "address": "ул. ХРИСТО БОТЕВ 25",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=527"
+  },
+  {
+    "name": "МОМЧИЛГРАД (SPS)  [631]",
+    "city": "МОМЧИЛГРАД",
+    "address": "ул. ГЮМЮРДЖИНСКА 51",
+    "worktime1": "10:00 - 17:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=631"
+  },
+  {
+    "name": "МОНТАНА-СКЛАД  [60]",
+    "city": "МОНТАНА",
+    "address": "МЕСТНОСТ \"\"ПЧЕЛИНА\"\", УЛ. \"\"ВРАЧАНСКО ШОСЕ\"\" БИВШ МЛЕКОЗАВОД \"\"ЛАКТИС\"\"\"",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=60"
+  },
+  {
+    "name": "МОНТАНА-ОФИС  [78]",
+    "city": "МОНТАНА",
+    "address": "бул. 3-ТИ МАРТ 30",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=78"
+  },
+  {
+    "name": "МОНТАНА-ЖК МЛАДОСТ 1 (SPS)  [648]",
+    "city": "МОНТАНА",
+    "address": "жк МЛАДОСТ 1 бул. ГЕН. АРНОЛДИ 11",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:30 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=648"
+  },
+  {
+    "name": "НЕСЕБЪР  [83]",
+    "city": "НЕСЕБЪР",
+    "address": "ул. ЕДЕЛВАЙС 38А",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=83"
+  },
+  {
+    "name": "НОВА ЗАГОРА  [56]",
+    "city": "НОВА ЗАГОРА",
+    "address": "ул. 14-ТИ ЯНУАРИ 77",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=56"
+  },
+  {
+    "name": "НОВИ ПАЗАР (SPS)  [592]",
+    "city": "НОВИ ПАЗАР",
+    "address": "ул. ОБОРИЩЕ 4",
+    "worktime1": "08:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=592"
+  },
+  {
+    "name": "ПАВЛИКЕНИ (SPS)  [625]",
+    "city": "ПАВЛИКЕНИ",
+    "address": "ул. ВАСИЛ ЛЕВСКИ 3",
+    "worktime1": "09:00 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=625"
+  },
+  {
+    "name": "ПАЗАРДЖИК  [18]",
+    "city": "ПАЗАРДЖИК",
+    "address": "ул. ПЛОВДИВСКА 103",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=18"
+  },
+  {
+    "name": "ПАЗАРДЖИК-ЧИНАРИТЕ (SPS)  [650]",
+    "city": "ПАЗАРДЖИК",
+    "address": "бул. ЦАР ОСВОБОДИТЕЛ 88 К-С ЧИНАРИТЕ С/У ЛИДЪЛ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=650"
+  },
+  {
+    "name": "ПАЗАРДЖИК-БЦ ТРАКИЯ (SPS)  [657]",
+    "city": "ПАЗАРДЖИК",
+    "address": "пл. ВЪЗРАЖДАНЕ БЦ ТРАКИЯ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=657"
+  },
+  {
+    "name": "ПАНАГЮРИЩЕ (SPS)  [601]",
+    "city": "ПАНАГЮРИЩЕ",
+    "address": "ул. ГЕОРГИ БЕНКОВСКИ 33",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=601"
+  },
+  {
+    "name": "ПЕРНИК  [35]",
+    "city": "ПЕРНИК",
+    "address": "ул. СВ. СВ. КИРИЛ И МЕТОДИЙ 23 БЦ ЕЛЕНА",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=35"
+  },
+  {
+    "name": "ПЕРНИК-СКЛАД  [127]",
+    "city": "ПЕРНИК",
+    "address": "ул. СОФИЙСКО ШОСЕ 15",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=127"
+  },
+  {
+    "name": "ПЕРНИК-ЦЕНТЪР (SPS)  [677]",
+    "city": "ПЕРНИК",
+    "address": "ул. МИНЬОР 6",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=677"
+  },
+  {
+    "name": "ПЕТРИЧ  [27]",
+    "city": "ПЕТРИЧ",
+    "address": "пл. МАКЕДОНИЯ 10",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=27"
+  },
+  {
+    "name": "ПЕТРИЧ-РОКФЕЛЕР (SPS)  [568]",
+    "city": "ПЕТРИЧ",
+    "address": "ул. РОКФЕЛЕР 25",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=568"
+  },
+  {
+    "name": "ПЕЩЕРА (SPS)  [520]",
+    "city": "ПЕЩЕРА",
+    "address": "ул. ДОЙРАНСКА ЕПОПЕЯ 5",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=520"
+  },
+  {
+    "name": "ПИРДОП-ЦАР ОСВОБОДИТЕЛ (SPS)  [541]",
+    "city": "ПИРДОП",
+    "address": "ул. ЦАР ОСВОБОДИТЕЛ 42",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=541"
+  },
+  {
+    "name": "ПЛЕВЕН-СКЛАД  [12]",
+    "city": "ПЛЕВЕН",
+    "address": "кв./жк ЗАПАДНА ИНДУСТРИАЛНА ЗОНА КАЙЛЪКА-РЕСУРС",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=12"
+  },
+  {
+    "name": "ПЛЕВЕН-ОФИС  [106]",
+    "city": "ПЛЕВЕН",
+    "address": "ул. ВАСИЛ ДРУМЕВ 4",
+    "worktime1": "08:00 - 18:00",
+    "worktime2": "08:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=106"
+  },
+  {
+    "name": "ПЛЕВЕН-УЛ. САН СТЕФАНО (SPS)  [646]",
+    "city": "ПЛЕВЕН",
+    "address": "ул. САН СТЕФАНО 21-5 ПОД ВИК ДО ПЧЕЛАРСКИ МАГАЗИН",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=646"
+  },
+  {
+    "name": "ПЛЕВЕН-БУЛ. ХРИСТО БОТЕВ (SPS)  [685]",
+    "city": "ПЛЕВЕН",
+    "address": "бул. ХРИСТО БОТЕВ 49",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=685"
+  },
+  {
+    "name": "ПЛЕВЕН-ДЕВЕТИ (SPS)  [686]",
+    "city": "ПЛЕВЕН",
+    "address": "ул. ПИРОТ 17 С/У СЛАДКАРНИЦА КОСМОС",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=686"
+  },
+  {
+    "name": "ПЛОВДИВ-СКЛАД  [1]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. КУКЛЕНСКО ШОСЕ 15",
+    "worktime1": "08:30 - 19:30",
+    "worktime2": "08:30 - 14:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=1"
+  },
+  {
+    "name": "ПЛОВДИВ-ОФИС  [79]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. КОНСТАНТИН СТОИЛОВ 19",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=79"
+  },
+  {
+    "name": "ПЛОВДИВ-РОДОПИ  [94]",
+    "city": "ПЛОВДИВ",
+    "address": "бул. НАЙЧО ЦАНОВ НАДЛЕЗ РОДОПИ",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=94"
+  },
+  {
+    "name": "ПЛОВДИВ-ГЕОРГИ ТРИНГОВ  [109]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. ГЕОРГИ ТРИНГОВ",
+    "worktime1": "08:30 - 18:30",
+    "worktime2": "08:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=109"
+  },
+  {
+    "name": "ПЛОВДИВ-ПРОСЛАВ (SPS)  [532]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. ВЕГЕТАРИАНСКА 2",
+    "worktime1": "10:00 - 19:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=532"
+  },
+  {
+    "name": "\"ПЛОВДИВ-ЖК ТРАКИЯ, Т.Ц. АРИМАГ (SPS)  [582]\"",
+    "city": "ПЛОВДИВ",
+    "address": "ул. СЪЕДИНЕНИЕ 19",
+    "worktime1": "09:00 - 18:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=582"
+  },
+  {
+    "name": "ПЛОВДИВ-УЛ. МАКЕДОНИЯ (SPS)  [583]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. БЯЛО МОРЕ 6",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=583"
+  },
+  {
+    "name": "ПЛОВДИВ-ТЕТ ЛЕНИН (SPS)  [606]",
+    "city": "ПЛОВДИВ",
+    "address": "бул. ПЕЩЕРСКО ШОСЕ 28А",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=606"
+  },
+  {
+    "name": "ПЛОВДИВ-ЖК ТРАКИЯ БЛ. 148 (SPS)  [608]",
+    "city": "ПЛОВДИВ",
+    "address": "жк ТРАКИЯ бл. 148",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=608"
+  },
+  {
+    "name": "ПЛОВДИВ-БУЛ. ИЗТОЧЕН (SPS)  [628]",
+    "city": "ПЛОВДИВ",
+    "address": "бул. ИЗТОЧЕН 75",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=628"
+  },
+  {
+    "name": "ПЛОВДИВ-ПЛ. ГРОЗДОВ ПАЗАР (SPS)  [655]",
+    "city": "ПЛОВДИВ",
+    "address": "пл. ГРОЗДОВ ПАЗАР 2",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=655"
+  },
+  {
+    "name": "ПЛОВДИВ-УЛ. БРЕЗОВСКА (SPS)  [656]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. БРЕЗОВСКА 27 ДО ТРЕТО РПУ",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=656"
+  },
+  {
+    "name": "ПЛОВДИВ-МЛАДЕЖКИ ДОМ (SPS)  [666]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. АВКСЕНТИЙ ВЕЛЕШКИ 20 ДО АПТЕКАТА",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=666"
+  },
+  {
+    "name": "ПЛОВДИВ-УЛ. ЯНКО САКЪЗОВ (SPS)  [688]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. ЯНКО САКЪЗОВ 19",
+    "worktime1": "09:00 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=688"
+  },
+  {
+    "name": "ПЛОВДИВ-ХРИСТО ЧЕРНОПЕЕВ (SPS)  [696]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. ХРИСТО ЧЕРНОПЕЕВ 8",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=696"
+  },
+  {
+    "name": "ПЛОВДИВ-БУЛ РУСКИ 99 (SPS)   [700]",
+    "city": "ПЛОВДИВ",
+    "address": "бул. РУСКИ 99",
+    "worktime1": "10:00 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=700"
+  },
+  {
+    "name": "ПЛОВДИВ-ЛАУТА (SPS)  [707]",
+    "city": "ПЛОВДИВ",
+    "address": "бул. САНКТ ПЕТЕРБУРГ 49",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=707"
+  },
+  {
+    "name": "ПЛОВДИВ-УЛ. САМАРА (SPS)  [708]",
+    "city": "ПЛОВДИВ",
+    "address": "ул. САМАРА 18",
+    "worktime1": "09:30 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=708"
+  },
+  {
+    "name": "ПОМОРИЕ (SPS)  [641]",
+    "city": "ПОМОРИЕ",
+    "address": "ул. ЕКЗАРХ ЙОСИФ 7",
+    "worktime1": "10:00 - 17:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=641"
+  },
+  {
+    "name": "ПОПОВО (SPS)  [521]",
+    "city": "ПОПОВО",
+    "address": "ул. БЪЛГАРИЯ 86",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=521"
+  },
+  {
+    "name": "ПРИМОРСКО (SPS)  [551]",
+    "city": "ПРИМОРСКО",
+    "address": "ул. РОПОТАМО 78",
+    "worktime1": "10:00 - 17:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=551"
+  },
+  {
+    "name": "ПРОВАДИЯ (SPS)  [665]",
+    "city": "ПРОВАДИЯ",
+    "address": "ул. СВ. СВ. КИРИЛ И МЕТОДИЙ 24",
+    "worktime1": "09:30 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=665"
+  },
+  {
+    "name": "ПЪРВОМАЙ (SPS)  [562]",
+    "city": "ПЪРВОМАЙ",
+    "address": "ул. ДИМИТЪР БЛАГОЕВ 11",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=562"
+  },
+  {
+    "name": "РАДНЕВО (SPS)  [561]",
+    "city": "РАДНЕВО",
+    "address": "ул. ТАЧО ДАСКАЛОВ 3",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=561"
+  },
+  {
+    "name": "РАДОМИР-БАТЕНБЕРГ (SPS)  [540]",
+    "city": "РАДОМИР",
+    "address": "ул. БАТЕНБЕРГ 31",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=540"
+  },
+  {
+    "name": "РАЗГРАД  [9]",
+    "city": "РАЗГРАД",
+    "address": "ул. ПАНЕГА 16",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=9"
+  },
+  {
+    "name": "РАЗЛОГ  [114]",
+    "city": "РАЗЛОГ",
+    "address": "ул. АЛЕКСАНДЪР СТАМБОЛИЙСКИ 86",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=114"
+  },
+  {
+    "name": "РАКОВСКИ (SPS)  [518]",
+    "city": "РАКОВСКИ",
+    "address": "ул. ГЕОРГИ С. РАКОВСКИ 47",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=518"
+  },
+  {
+    "name": "РУСЕ-БУЛ. БЪЛГАРИЯ (СКЛАД)  [10]",
+    "city": "РУСЕ",
+    "address": "бул. БЪЛГАРИЯ 310",
+    "worktime1": "08:00 - 19:00",
+    "worktime2": "08:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=10"
+  },
+  {
+    "name": "РУСЕ-ОФИС  [91]",
+    "city": "РУСЕ",
+    "address": "ул. МУТКУРОВА 36",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=91"
+  },
+  {
+    "name": "РУСЕ- УЛ. КОНСТАНТИН ИРЕЧЕК (SPS)  [643]",
+    "city": "РУСЕ",
+    "address": "ул. КОНСТАНТИН ИРЕЧЕК 5",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=643"
+  },
+  {
+    "name": "РУСЕ-УЛ. РАЙКО ДАСКАЛОВ (SPS)  [687]",
+    "city": "РУСЕ",
+    "address": "ул. РАЙКО ДАСКАЛОВ 15",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=687"
+  },
+  {
+    "name": "РУСЕ-УЛ. ЯНТРА (УНИВЕРСИТЕТ) (SPS)  [714]",
+    "city": "РУСЕ",
+    "address": "ул. ЯНТРА 9 МАГАЗИН 34",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "10:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=714"
+  },
+  {
+    "name": "РУСЕ-БЛ. АХЕЛОЙ (SPS)  [715]",
+    "city": "РУСЕ",
+    "address": "ул. ПЛИСКА 89 бл. АХЕЛОЙ 1",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=715"
+  },
+  {
+    "name": "САМОКОВ  [71]",
+    "city": "САМОКОВ",
+    "address": "ул. БЪЛГАРИЯ 206",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "08:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=71"
+  },
+  {
+    "name": "САМОКОВ-УЛ. ГЕН. ВЕЛИАМИНОВ (SPS)  [712]",
+    "city": "САМОКОВ",
+    "address": "ул. ГЕН. ВЕЛИАМИНОВ 22",
+    "worktime1": "10:00 - 17:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=712"
+  },
+  {
+    "name": "САНДАНСКИ  [30]",
+    "city": "САНДАНСКИ",
+    "address": "ул. МЕСТА 24",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=30"
+  },
+  {
+    "name": "САНДАНСКИ-СКЛАД  [116]",
+    "city": "САНДАНСКИ",
+    "address": "м. СОКОЛОВЕЦ ОКС БАЗА",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=116"
+  },
+  {
+    "name": "САТОВЧА (SPS)  [566]",
+    "city": "САТОВЧА",
+    "zipCode": "2950",
+    "address": "ул. АЛ. СТАМБОЛИЙСКИ 5Б",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=566"
+  },
+  {
+    "name": "СВЕТИ ВЛАС (SPS)  [663]",
+    "city": "СВЕТИ ВЛАС",
+    "address": "ул. СВ. ВЛАСИЙ 1",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=663"
+  },
+  {
+    "name": "СВИЛЕНГРАД  [48]",
+    "city": "СВИЛЕНГРАД",
+    "address": "пл. 14-ТИ МАРТ 13",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=48"
+  },
+  {
+    "name": "СВИЩОВ  [36]",
+    "city": "СВИЩОВ",
+    "address": "ул. АЛЕКО КОНСТАНТИНОВ 1",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=36"
+  },
+  {
+    "name": "СЕВЛИЕВО  [33]",
+    "city": "СЕВЛИЕВО",
+    "address": "ул. СТЕФАН ПЕШЕВ 101 МАГАЗИН А",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=33"
+  },
+  {
+    "name": "СИЛИСТРА  [24]",
+    "city": "СИЛИСТРА",
+    "address": "ул. ТУТРАКАН 14",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=24"
+  },
+  {
+    "name": "СИМИТЛИ (SPS)  [503]",
+    "city": "СИМИТЛИ",
+    "address": "ул. ХРИСТО БОТЕВ 37",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=503"
+  },
+  {
+    "name": "СЛИВЕН-СТЕФАН КАРАДЖА  [7]",
+    "city": "СЛИВЕН",
+    "address": "бул. СТЕФАН КАРАДЖА 38",
+    "worktime1": "08:00 - 19:30",
+    "worktime2": "08:00 - 14:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=7"
+  },
+  {
+    "name": "СЛИВЕН-ЛЪДЖЕНСКА  [92]",
+    "city": "СЛИВЕН",
+    "address": "ул. ЛЪДЖЕНСКА 11",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=92"
+  },
+  {
+    "name": "СЛИВЕН-ЦАР ОСВОБОДИТЕЛ  [123]",
+    "city": "СЛИВЕН",
+    "address": "бул. ЦАР ОСВОБОДИТЕЛ 28",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=123"
+  },
+  {
+    "name": "СЛИВЕН - БУЛ. П. ХИТОВ (SPS)  [615]",
+    "city": "СЛИВЕН",
+    "address": "бул. ПАНАЙОТ ХИТОВ 77",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=615"
+  },
+  {
+    "name": "СЛИВЕН-ЖК. ДРУЖБА (SPS)  [616]",
+    "city": "СЛИВЕН",
+    "address": "жк ДРУЖБА бул. СТЕФАН СТАМБОЛОВ 14А М-Н ХОЛИС",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=616"
+  },
+  {
+    "name": "СМОЛЯН  [29]",
+    "city": "СМОЛЯН",
+    "address": "бул. БЪЛГАРИЯ 9А",
+    "worktime1": "09:00 - 16:30",
+    "worktime2": "09:00 - 12:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=29"
+  },
+  {
+    "name": "СОФИЯ-СОМАТ  [2]",
+    "city": "СОФИЯ",
+    "address": "ул. АБАГАР БАЗА СОМАТ",
+    "worktime1": "07:30 - 20:30",
+    "worktime2": "07:30 - 15:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=2"
+  },
+  {
+    "name": "СОФИЯ-БОИЛА  [41]",
+    "city": "СОФИЯ",
+    "address": "ул. САМОКОВСКО ШОСЕ 2Л ТЦ БОИЛА",
+    "worktime1": "08:30 - 20:00",
+    "worktime2": "08:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=41"
+  },
+  {
+    "name": "СОФИЯ-СЕРДИКА  [65]",
+    "city": "СОФИЯ",
+    "address": "жк СЕРДИКА бул. АКАД. ИВАН ЕВСТРАТИЕВ ГЕШОВ 2Е бл. 1 ет. 0 ап. 002 УЛ. ГЮЕШЕВО №83",
+    "worktime1": "08:30 - 19:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=65"
+  },
+  {
+    "name": "СОФИЯ-МЛАДОСТ 4  [66]",
+    "city": "СОФИЯ",
+    "address": "жк МЛАДОСТ 4 ул. БИЗНЕС ПАРК СОФИЯ бл. 2",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=66"
+  },
+  {
+    "name": "СОФИЯ-СТОЧНА ГАРА  [67]",
+    "city": "СОФИЯ",
+    "address": "ул. ВЛАДАЙСКА РЕКА 2 СТОЧНА ГАРА-СКЛ. ТОПЛИВО",
+    "worktime1": "09:00 - 19:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=67"
+  },
+  {
+    "name": "СОФИЯ-КУКУШ  [68]",
+    "city": "СОФИЯ",
+    "address": "жк ЗАХАРНА ФАБРИКА бл. 51А В СГР. НА ОБЩИНАТА",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=68"
+  },
+  {
+    "name": "СОФИЯ-ЧЕРНИ ВРЪХ  [75]",
+    "city": "СОФИЯ",
+    "address": "бул. ЧЕРНИ ВРЪХ 67",
+    "worktime1": "08:00 - 20:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=75"
+  },
+  {
+    "name": "СОФИЯ-ПОДУЯНЕ  [89]",
+    "city": "СОФИЯ",
+    "address": "кв. ПОДУЯНЕ ГАРА ПОДУЯНЕ",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=89"
+  },
+  {
+    "name": "СОФИЯ-ЙЕРУСАЛИМ  [98]",
+    "city": "СОФИЯ",
+    "address": "ул. ЙЕРУСАЛИМ бл. 141 МАГАЗИН 8",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=98"
+  },
+  {
+    "name": "СОФИЯ-ЦАР СИМЕОН  [110]",
+    "city": "СОФИЯ",
+    "address": "ул. ЦАР СИМЕОН 172 СГР. НА ПЕТРОЛ",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=110"
+  },
+  {
+    "name": "СОФИЯ-ИЛИЯНЦИ  [112]",
+    "city": "СОФИЯ",
+    "address": "ул. ПЕТЪР ПАНАЙОТОВ 3 РАЙОН НАДЕЖДА, ДО ПАЗАР ИЛИЯНЦИ\"",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=112"
+  },
+  {
+    "name": "СОФИЯ-УЛ. СРЕДНА ГОРА  [133]",
+    "city": "СОФИЯ",
+    "address": "ул. СРЕДНА ГОРА 48",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=133"
+  },
+  {
+    "name": "СОФИЯ-ПАЗАР СЛАТИНА  [134]",
+    "city": "СОФИЯ",
+    "address": "жк СЛАТИНА ПАЗАР \"\"СЛАТИНА\"\"\"",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=134"
+  },
+  {
+    "name": "СОФИЯ - ЖК. ЛЮЛИН 8  [138]",
+    "city": "СОФИЯ",
+    "address": "жк ЛЮЛИН 8 бул. ПАНЧО ВЛАДИГЕРОВ 9",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=138"
+  },
+  {
+    "name": "СОФИЯ-СТУДЕНТСКИ ГРАД (SPS)  [505]",
+    "city": "СОФИЯ",
+    "address": "ул. АКАД. СТЕФАН МЛАДЕНОВ 50",
+    "worktime1": "09:00 - 19:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=505"
+  },
+  {
+    "name": "СОФИЯ-ЗОНА Б-18 (SPS)  [534]",
+    "city": "СОФИЯ",
+    "address": "жк ЗОНА Б-18 бл. 1",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=534"
+  },
+  {
+    "name": "СОФИЯ-СТРЕЛБИЩЕ (SPS)  [535]",
+    "city": "СОФИЯ",
+    "address": "жк СТРЕЛБИЩЕ ул. ЗЛАТНА ВРАТА 15",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=535"
+  },
+  {
+    "name": "СОФИЯ-МАНАСТИРСКИ ЛИВАДИ  [536]",
+    "city": "СОФИЯ",
+    "address": "кв. МАНАСТИРСКИ ЛИВАДИ ул. КАЗБЕК 62",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=536"
+  },
+  {
+    "name": "СОФИЯ-НАДЕЖДА 2 (SPS)  [538]",
+    "city": "СОФИЯ",
+    "address": "жк НАДЕЖДА 2 ул. ХРИСТО СИЛЯНОВ 55",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=538"
+  },
+  {
+    "name": "СОФИЯ-СТУДЕНТСКИ ГРАД 2 (SPS)  [559]",
+    "city": "СОФИЯ",
+    "address": "ул. ПРОФ. Д-Р ИВАН СТРАНСКИ 9",
+    "worktime1": "09:00 - 19:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=559"
+  },
+  {
+    "name": "СОФИЯ-ДРУЖБА 1 - ДО ЕЗЕРОТО (SPS)  [565]",
+    "city": "СОФИЯ",
+    "address": "жк ДРУЖБА 1 ул. ТИРАНА 14-16 ДО ЕЗЕРОТО, ПАЗАР КЛАСИК\"",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=565"
+  },
+  {
+    "name": "СОФИЯ-ПАТР. ЕВТИМИЙ (SPS)  [571]",
+    "city": "СОФИЯ",
+    "address": "бул. ПАТРИАРХ ЕВТИМИЙ 19А",
+    "worktime1": "10:00 - 19:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=571"
+  },
+  {
+    "name": "СОФИЯ-ОВЧА КУПЕЛ - СТАРА ЧАСТ (SPS)  [586]",
+    "city": "СОФИЯ",
+    "address": "жк ОВЧА КУПЕЛ ул. НАРОДНО ХОРО 33",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=586"
+  },
+  {
+    "name": "СОФИЯ-ОВЧА КУПЕЛ 2 (SPS)  [587]",
+    "city": "СОФИЯ",
+    "address": "жк ОВЧА КУПЕЛ 2 КНИЖАРНИЦА С/У ПОСЛ. СПИРКА АВТОБУСИ 11, 60, 73 И 102\"",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=587"
+  },
+  {
+    "name": "СОФИЯ-УЛ. ВЕСЛЕЦ (SPS)  [599]",
+    "city": "СОФИЯ",
+    "address": "ул. ВЕСЛЕЦ 18",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=599"
+  },
+  {
+    "name": "СОФИЯ-СТАМБОЛИЙСКИ (SPS)  [619]",
+    "city": "СОФИЯ",
+    "address": "жк ЗОНА Б-5 бл. 7 вх. Г",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=619"
+  },
+  {
+    "name": "СОФИЯ-УЛ. ВЛАДАЙСКА (SPS)  [620]",
+    "city": "СОФИЯ",
+    "address": "ул. ВЛАДАЙСКА 12",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=620"
+  },
+  {
+    "name": "СОФИЯ-ОРЛАНДОВЦИ (SPS)  [621]",
+    "city": "СОФИЯ",
+    "address": "кв. ОРЛАНДОВЦИ ул. МАРА БУНЕВА 42",
+    "worktime1": "10:00 - 18:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=621"
+  },
+  {
+    "name": "СОФИЯ-ЖК СВОБОДА (SPS)  [623]",
+    "city": "СОФИЯ",
+    "address": "жк СВОБОДА ул. СВ. НИКОЛАЙ ЧУДОТВОРЕЦ 7-11",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=623"
+  },
+  {
+    "name": "СОФИЯ-УЛ. ШАНДОР ПЕТЬОФИ (SPS)  [634]",
+    "city": "СОФИЯ",
+    "address": "ул. ШАНДОР ПЕТЬОФИ 1",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=634"
+  },
+  {
+    "name": "СОФИЯ-ЖК БЪКСТОН (SPS)  [635]",
+    "city": "СОФИЯ",
+    "address": "жк КРАСНО СЕЛО бул. БРАТЯ БЪКСТОН бл. 207А",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=635"
+  },
+  {
+    "name": "СОФИЯ-ЖК БЕЛИТЕ БРЕЗИ (SPS)  [636]",
+    "city": "СОФИЯ",
+    "address": "жк БЕЛИТЕ БРЕЗИ ул. ПРОФ. Д-Р ДИМИТЪР АТАНАСОВ 18 вх. Б",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=636"
+  },
+  {
+    "name": "СОФИЯ-УЛ. ГЛАДСТОН (SPS)  [639]",
+    "city": "СОФИЯ",
+    "address": "ул. УИЛЯМ ГЛАДСТОН 40",
+    "worktime1": "10:00 - 18:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=639"
+  },
+  {
+    "name": "СОФИЯ-УЛ. АМИ БУЕ (SPS)  [642]",
+    "city": "СОФИЯ",
+    "address": "ул. АМИ БУЕ 2",
+    "worktime1": "07:30 - 19:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=642"
+  },
+  {
+    "name": "СОФИЯ-УЛ. ПОЗИТАНО (SPS)  [652]",
+    "city": "СОФИЯ",
+    "address": "ул. ПОЗИТАНО 30",
+    "worktime1": "09:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=652"
+  },
+  {
+    "name": "СОФИЯ-КВ. БОЯНА (SPS)  [669]",
+    "city": "СОФИЯ",
+    "address": "кв. БОЯНА ул. ДЕСИСЛАВА 12А",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=669"
+  },
+  {
+    "name": "СОФИЯ-ЖК ХАДЖИ ДИМИТЪР (SPS)  [675]",
+    "city": "СОФИЯ",
+    "address": "жк ХАДЖИ ДИМИТЪР ул. НИКОЛА ВОЙНОВСКИ 67",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=675"
+  },
+  {
+    "name": "СОФИЯ-ЖК ЛЮЛИН 3 (SPS)  [681]",
+    "city": "СОФИЯ",
+    "address": "жк ЛЮЛИН бл. 389",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=681"
+  },
+  {
+    "name": "СОФИЯ-ЖК ЛОЗЕНЕЦ (SPS)  [683]",
+    "city": "СОФИЯ",
+    "address": "жк ЛОЗЕНЕЦ бул. СВ. НАУМ 10 ет. П",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=683"
+  },
+  {
+    "name": "СОФИЯ-МЕГАПАРК (SPS)  [691]",
+    "city": "СОФИЯ",
+    "address": "бул. ЦАРИГРАДСКО ШОСЕ 115Г",
+    "worktime1": "09:30 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=691"
+  },
+  {
+    "name": "СОФИЯ-ЖК ДРУЖБА БЛ. 108 (SPS)  [697]",
+    "city": "СОФИЯ",
+    "address": "жк ДРУЖБА бл. 108 ПАРТЕР",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=697"
+  },
+  {
+    "name": "СОФИЯ-ПАЗАР Д. ПЕТКОВ (SPS)  [698]",
+    "city": "СОФИЯ",
+    "address": "ул. ПЕРНИК 109",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:30 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=698"
+  },
+  {
+    "name": "СОФИЯ-ОКОЛОВРЪСТЕН ПЪТ (SPS)  [703]",
+    "city": "СОФИЯ",
+    "address": "бул. БЪЛГАРИЯ 132 ФИТНЕС ЦЕНТЪР ПУЛС",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=703"
+  },
+  {
+    "name": "СОФИЯ-БУЛ. НИКОЛА ПЕТКОВ (SPS)  [710]",
+    "city": "СОФИЯ",
+    "address": "бул. НИКОЛА ПЕТКОВ 73",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=710"
+  },
+  {
+    "name": "СОФИЯ-УЛ. КАЙМАКЧАЛАН (SPS)  [711]",
+    "city": "СОФИЯ",
+    "address": "ул. КАЙМАКЧАЛАН 11",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=711"
+  },
+  {
+    "name": "СОФИЯ-ЖК МУСАГЕНИЦА (SPS)  [716]",
+    "city": "СОФИЯ",
+    "address": "жк МУСАГЕНИЦА бл. 88 ПАРТЕР",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=716"
+  },
+  {
+    "name": "СОФИЯ-КВ. ИЗТОК (SPS)  [717]",
+    "city": "СОФИЯ",
+    "address": "жк ИЗТОК ул. ТАРАС ШЕВЧЕНКО 5 ПАРТЕР",
+    "worktime1": "10:00 - 18:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=717"
+  },
+  {
+    "name": "СТАМБОЛИЙСКИ (SPS)  [607]",
+    "city": "СТАМБОЛИЙСКИ",
+    "address": "ул. ПЕРУЩИЦА 7А",
+    "worktime1": "10:00 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=607"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-СКЛАД  [5]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "бул. СВ. ПАТРИАРХ ЕВТИМИЙ 50 НА ГЪРБА НА МЕБЕЛИ АИКО",
+    "worktime1": "08:00 - 19:30",
+    "worktime2": "08:00 - 14:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=5"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-ОФИС  [84]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "ул. ГЕО МИЛЕВ 58",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=84"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-ЦАР СИМЕОН ВЕЛИКИ  [122]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "бул. ЦАР СИМЕОН ВЕЛИКИ 6",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=122"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-УЛ. П. Р. СЛАВЕЙКОВ (SPS)  [560]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "ул. ПЕТКО Р. СЛАВЕЙКОВ 112",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=560"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-М. КУСЕВ (SPS)  [614]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "бул. МИТРОПОЛИТ МЕТОДИЙ КУСЕВ 4",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=614"
+  },
+  {
+    "name": "СТАРА ЗАГОРА-СЛАВЯНСКИ (SPS)  [632]",
+    "city": "СТАРА ЗАГОРА",
+    "address": "бул. СЛАВЯНСКИ 45",
+    "worktime1": "09:30 - 18:00",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=632"
+  },
+  {
+    "name": "СЪЕДИНЕНИЕ (SPS)  [581]",
+    "city": "СЪЕДИНЕНИЕ",
+    "address": "ул. ПЛОВДИВ 9",
+    "worktime1": "08:30 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=581"
+  },
+  {
+    "name": "ТЕТЕВЕН  [88]",
+    "city": "ТЕТЕВЕН",
+    "address": "ул. ИВАН ВАЗОВ 1",
+    "worktime1": "09:00 - 17:00",
+    "worktime2": "09:00 - 12:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=88"
+  },
+  {
+    "name": "ТРОЯН  [44]",
+    "city": "ТРОЯН",
+    "address": "ул. ХРИСТО БОТЕВ 214",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=44"
+  },
+  {
+    "name": "ТРЯВНА (SPS)  [556]",
+    "city": "ТРЯВНА",
+    "address": "ул. АНГЕЛ КЪНЧЕВ 41",
+    "worktime1": "09:30 - 19:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=556"
+  },
+  {
+    "name": "ТУТРАКАН (SPS)  [523]",
+    "city": "ТУТРАКАН",
+    "address": "ул. ТРАНСМАРИСКА 35",
+    "worktime1": "08:30 - 17:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=523"
+  },
+  {
+    "name": "ТЪРГОВИЩЕ - СКЛАД  [16]",
+    "city": "ТЪРГОВИЩЕ",
+    "address": "ул. ЦАР СИМЕОН 50 СГРАДАТА НА ТЕРСНАБ",
+    "worktime1": "08:30 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=16"
+  },
+  {
+    "name": "ТЪРГОВИЩЕ-ОФИС  [132]",
+    "city": "ТЪРГОВИЩЕ",
+    "address": "ул. Г. С. РАКОВСКИ 17",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=132"
+  },
+  {
+    "name": "ХАРМАНЛИ  [47]",
+    "city": "ХАРМАНЛИ",
+    "address": "ул. НИКОЛА ПЕТКОВ 13",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=47"
+  },
+  {
+    "name": "ХАСКОВО-СКЛАД  [6]",
+    "city": "ХАСКОВО",
+    "address": "ул. ПЛОВДИВСКО ШОСЕ 2",
+    "worktime1": "08:00 - 19:30",
+    "worktime2": "08:00 - 14:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=6"
+  },
+  {
+    "name": "ХАСКОВО-ОФИС  [82]",
+    "city": "ХАСКОВО",
+    "address": "ул. ТРИ УШИ 4",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=82"
+  },
+  {
+    "name": "ХАСКОВО-БУЛ. СЪЕДИНЕНИЕ (SPS)  [670]",
+    "city": "ХАСКОВО",
+    "address": "бул. СЪЕДИНЕНИЕ 29",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "09:30 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=670"
+  },
+  {
+    "name": "ХЪРЛЕЦ (SPS)  [644]",
+    "city": "ХЪРЛЕЦ",
+    "zipCode": "3329",
+    "address": "ул. ГЕОРГИ ДИМИТРОВ 1",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=644"
+  },
+  {
+    "name": "ЦАРЕВО (SPS)  [508]",
+    "city": "ЦАРЕВО",
+    "address": "ул. МИХАИЛ ГЕРДЖИКОВ 15",
+    "worktime1": "10:00 - 17:00",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=508"
+  },
+  {
+    "name": "ЧЕПЕЛАРЕ (SPS)  [629]",
+    "city": "ЧЕПЕЛАРЕ",
+    "address": "ул. ХРИСТО БОТЕВ 2",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "10:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=629"
+  },
+  {
+    "name": "ЧЕРВЕН БРЯГ (SPS)  [563]",
+    "city": "ЧЕРВЕН БРЯГ",
+    "address": "ул. АНТИМ 4",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:30",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=563"
+  },
+  {
+    "name": "ЧИРПАН (SPS)  [654]",
+    "city": "ЧИРПАН",
+    "address": "ул. ВАСИЛ ЛЕВСКИ 2",
+    "worktime1": "10:00 - 17:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=654"
+  },
+  {
+    "name": "ШУМЕН-СКЛАД  [8]",
+    "city": "ШУМЕН",
+    "address": "кв. ТРАКИЯ ул. ИНДУСТРИАЛНА СКЛ. БАЗА АГРО-НАЙЛ",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=8"
+  },
+  {
+    "name": "ШУМЕН-ОФИС  [86]",
+    "city": "ШУМЕН",
+    "address": "ул. ХАН ОМУРТАГ 11А",
+    "worktime1": "09:00 - 17:30",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=86"
+  },
+  {
+    "name": "ШУМЕН-УЛ. СЪЕДИНЕНИЕ (SPS)  [690]",
+    "city": "ШУМЕН",
+    "address": "ул. СЪЕДИНЕНИЕ 66",
+    "worktime1": "09:30 - 17:30",
+    "worktime2": "10:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=690"
+  },
+  {
+    "name": "ШУМЕН-ПЛ. ОСВОБОЖДЕНИЕ(SPS)  [713]",
+    "city": "ШУМЕН",
+    "address": "пл. ОСВОБОЖДЕНИЕ 1",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=713"
+  },
+  {
+    "name": "ЯКОРУДА (SPS)  [567]",
+    "city": "ЯКОРУДА",
+    "address": "ул. ХРИСТО БОТЕВ 5",
+    "worktime1": "09:30 - 18:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=567"
+  },
+  {
+    "name": "ЯМБОЛ-ОФИС  [55]",
+    "city": "ЯМБОЛ",
+    "address": "ул. ДИМИТЪР БЛАГОЕВ 6",
+    "worktime1": "09:00 - 18:30",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=55"
+  },
+  {
+    "name": "ЯМБОЛ-СКЛАД  [93]",
+    "city": "ЯМБОЛ",
+    "address": "бул. ЕВРОПА 45",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 14:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=93"
+  },
+  {
+    "name": "ЯМБОЛ (SPS)  [578]",
+    "city": "ЯМБОЛ",
+    "address": "ул. МИЛИН КАМЪК 24 (ФОТО АВРЕН)",
+    "worktime1": "09:00 - 18:00",
+    "worktime2": "09:00 - 13:00",
+    "href": "http://www.speedy.bg/googleMaps.php?lang=bg&id=578"
+  }
+]
