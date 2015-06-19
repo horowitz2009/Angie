@@ -33,7 +33,7 @@ if (! empty($_POST) && isset($_POST['username'])) {
   session_start();
   
   $username = $_POST['username'];
-  $cartService->setCookieName('CART_' . $username);
+  $cartService->setCookieName($username);
   
   $cart = $cartService->loadCart($username);
   if ($cart != null) {

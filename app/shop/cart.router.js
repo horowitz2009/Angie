@@ -98,6 +98,73 @@ angular.module('felt.shop.cart')
             }
 
           })
+          
+          .state('shop.order', {
+            url: '/order/{orderId}',
+            data : {
+              displayName : 'Поръчка #{{order.id}}'
+            },
+            
+            resolve: {
+              order: ['$stateParams', 'utils',
+                function ($stateParams, utils) {
+                  //return utils.findById(categories, $stateParams.categoryId);
+                  return {"id": "12345"};
+                }]
+            },
+            
+            views : {
+              'cartContent' : {
+                templateUrl : 'app/shop/partials/cart.done.html',
+                controller : [ '$scope', 'shippingCtrl', function($scope, shippingCtrl) {
+                  $scope.shippingCtrl = shippingCtrl;
+                  $scope.cart = shippingCtrl.cart;
+                  $scope.shippingData = shippingCtrl.shippingData;
+                  
+                  $scope.showOrder = false;
+                  
+                  $scope.myhref = $state.href;
+                  
+                  $scope.showDetails = function() {
+                    $scope.showOrder = true;
+                  };
+                  
+                  
+                } ]
+              }
+            }
+          })
+          
+          .state('shop.cart.done', {
+
+            url: '/done',
+
+            data : {
+              displayName : 'Вашата поръчка е приета'
+            },
+
+            views : {
+              'cartContent' : {
+                templateUrl : 'app/shop/partials/cart.done.html',
+                controller : [ '$scope', 'shippingCtrl', function($scope, shippingCtrl) {
+                  $scope.shippingCtrl = shippingCtrl;
+                  $scope.cart = shippingCtrl.cart;
+                  $scope.shippingData = shippingCtrl.shippingData;
+                  
+                  $scope.showOrder = false;
+                  
+                  $scope.myhref = this.href;
+                  
+                  $scope.showDetails = function() {
+                    $scope.showOrder = true;
+                  };
+                  
+                  
+                } ]
+              }
+            }
+
+          })
 
           .state(
               'shop.cart.checkout',
@@ -151,6 +218,18 @@ angular.module('felt.shop.cart')
                             return CartService.isAddressDataOK();
                           }
 
+                          $scope.isOfficesOK = function(form) {
+                            var opt = $scope.cart.shippingData.getOption();
+                            if (opt) {
+                              if (opt.type === 'atelier')
+                                return true;
+                              var test = form['officeInput_' + opt.courier];
+                              if (test)
+                                return !test.$invalid;
+                            }
+                            return false;
+                          }
+                          
                           $scope.isPaymentDataOK = function() {
                             // TODO nothing to check yet
                             return true;
@@ -323,6 +402,12 @@ angular.module('felt.shop.cart')
 
                           $scope.submitOrder = function() {
                             // TODO
+                            console.log("submit order...");
+                            
+                            
+                            
+                            $state.go('shop.cart.done');
+                            
                           }
 
                           // //////////////////////////

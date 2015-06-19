@@ -40,7 +40,7 @@ if (! empty($_POST) && isset($_POST['oldusername']) && isset($_POST['newusername
   $cartService->setCookieName('CART_' . $newusername);
   $cartService->saveCart($newusername, $cart);
   
-  $cartService->setCookieName('CART_' . $oldusername);
+  $cartService->setCookieName($oldusername);
   $cartService->deleteCart($oldusername);
   
   set_result('200', 'OK');

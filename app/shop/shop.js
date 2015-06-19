@@ -15,6 +15,9 @@ angular.module('felt.shop', [
       // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
       $urlRouterProvider
           
+          .when('/shop/order', ['$state', function ($state) {
+            $state.go('shop.order');
+          }])
           .when('/shop/cart', ['$state', function ($state) {
             $state.go('shop.cart.edit');
           }])

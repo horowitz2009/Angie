@@ -97,6 +97,7 @@ angular.module('felt.shipping.service', [
   }
 
   factory.isZipCodeInSofia = function(str, zipCodesExceptions) {
+    zipCodesExceptions = zipCodesExceptions ? zipCodesExceptions : factory.zipCodesExceptions;
     console.log("isZipCodeInSofia...");
     if (!isNaN(str) && parseInt(str) < 2000) {
       var s = str;
@@ -274,10 +275,10 @@ angular.module('felt.shipping.service', [
   
       var fromAtelier = new ShippingOption("вземане от ателието (София, ул. 488 2Б)", "atelier","");
       fromAtelier.amount = 0.00;
-      var toDoorSpeedy = new ShippingOption("до адрес", "address", "Спиди");
-      var toDoorEkont = new ShippingOption("до адрес", "address", "Еконт");
-      var toOfficeSpeedy = new ShippingOption("до офис на Спиди", "office", "Спиди");
-      var toOfficeEkont = new ShippingOption("до офис на Еконт", "office", "Еконт");
+      var toDoorSpeedy = new ShippingOption("до адрес", "address", "Speedy");
+      var toDoorEkont = new ShippingOption("до адрес", "address", "Ekont");
+      var toOfficeSpeedy = new ShippingOption("до офис на Спиди", "office", "Speedy");
+      var toOfficeEkont = new ShippingOption("до офис на Еконт", "office", "Ekont");
 
       var speedyOptions = { "toDoor": toDoorSpeedy, "toOffice": toOfficeSpeedy};
       var ekontOptions = { "toDoor": toDoorEkont, "toOffice": toOfficeEkont};
@@ -326,6 +327,8 @@ angular.module('felt.shipping.service', [
     var zipEntry = factory.getZipEntry(zipCode, city);
     if (zipEntry)
       return zipEntry.speedyOffices.length > 0;
+    //if (zipCode < 2000)
+    //  return factory.zipCodes[0].speedyOffices.length > 0;  
     return false;
   }
 
@@ -333,13 +336,15 @@ angular.module('felt.shipping.service', [
     var zipEntry = factory.getZipEntry(zipCode, city);
     if (zipEntry)
       return zipEntry.ekontOffices.length > 0;
+    if (zipCode < 2000)
+      return factory.zipCodes[0].ekontOffices.length > 0;
     return false;
   }
 
   factory.getOffices = function(courier, zipCode, city) {
-    if (courier == "Спиди")
+    if (courier == "Speedy")
       return factory.getSpeedyOffices(zipCode, city);
-    else if (courier == "Еконт")
+    else if (courier == "Ekont")
       return factory.getEkontOffices(zipCode, city);
     else
       return [];
@@ -349,6 +354,8 @@ angular.module('felt.shipping.service', [
     var zipEntry = factory.getZipEntry(zipCode, city);
     if (zipEntry)
       return zipEntry.speedyOffices;
+    if (zipCode < 2000) 
+      return factory.zipCodes[0].speedyOffices;
     return null;
   }
   
@@ -356,6 +363,8 @@ angular.module('felt.shipping.service', [
     var zipEntry = factory.getZipEntry(zipCode, city);
     if (zipEntry)
       return zipEntry.ekontOffices;
+    if (zipCode < 2000) 
+      return factory.zipCodes[0].ekontOffices;
     return [];
   }
 

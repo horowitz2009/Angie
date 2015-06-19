@@ -254,7 +254,7 @@
                 custom-lookup="shippingCtrl.customLookup"
                 custom-matching="shippingCtrl.customMatching"
                 custom-select="shippingCtrl.customSelectCity"
-                keep-initial-value-binding="true"
+                keep-initial-value-binding="false"
                 
                 initial-value="cart.shippingData.getCityPretty()"
                 field-required="true"
@@ -283,23 +283,20 @@
         <!-- ============================================================ -->
         <script type="text/ng-template" id="/offices-template.html">
         <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
-           
-          <input type="text" class="form-control input" id="office" name="office"
-            ng-model="searchStr" ng-focus="onFocusHandler()" ng-disabled="disableInput"
-            ng-focus="resetHideResults()" ng-blur="hideResults($event)" ng-change="inputChangeHandler(searchStr)"
-            autocapitalize="off" autocorrect="off" autocomplete="off" required />
-
-          <div class="angucomplete-dropdown" ng-show="showDropdown" style="min-width:400px; float:right">
+          <input id="{{id}}_value" name={{inputName}} ng-class="{'angucomplete-input-not-empty': notEmpty}" ng-model="searchStr" ng-disabled="disableInput" type="{{type}}" placeholder="{{placeholder}}" maxlength="{{maxlength}}" ng-focus="onFocusHandler()" class="{{inputClass}}" ng-focus="resetHideResults()" ng-blur="hideResults($event)" 
+            autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)" required/>
+          <div id="{{id}}_dropdown" class="angucomplete-dropdown" ng-show="showDropdown"  style="min-width:400px; float:right">
             <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
             <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
-
-            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
-                 ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
-              <div class="angucomplete-title">
-                <span ng-bind-html="result.title"></span>
-              </div
-
-              <div class="angucomplete-description" ng-bind-html="result.description"></div>
+            <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+              <div ng-if="imageField" class="angucomplete-image-holder">
+                <img ng-if="result.image && result.image != ''" ng-src="{{result.image}}" class="angucomplete-image"/>
+                <div ng-if="!result.image && result.image != ''" class="angucomplete-image-default"></div>
+              </div>
+              <div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>
+              <div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>
+              <div ng-if="matchClass && result.description && result.description != ''" class="angucomplete-description" ng-bind-html="result.description"></div>
+              <div ng-if="!matchClass && result.description && result.description != ''" class="angucomplete-description">{{result.description}}</div>
             </div>
           </div>
         </div>
@@ -308,11 +305,12 @@
         <div id="options" ng-show="cart.shippingData.options && cart.shippingData.options.length > 0">
           <div class="form-group" style="" ng-repeat="option in cart.shippingData.options" ng-class="{notSelected: option.toString() !== cart.shippingData.selectedOption}">
             <hr>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 
+                 ng-class="{ 'has-error' : zipForm.officeInput_1.$invalid }">
               <!-- RADIO -->
                 <label> 
                   <input type="radio" name="optionsRadios" ng-model="cart.shippingData.selectedOption"
-                         ng-value="option.toString()" ng-click="shippingCtrl.setOption2(option)">
+                         ng-value="option.toString()" ng-click="shippingCtrl.setOption2(option)" required>
                   <span>{{ option.getNameAndService() }}
                     <small style="padding-left: 10px;"> {{ option.amount | number:2 }} лв </small>
                   </span>  
@@ -332,21 +330,24 @@
                 selected-object="shippingCtrl.setOffice"
                 keep-initial-value-binding="true"
                 custom-lookup="shippingCtrl.lookupOffices"
-                custom-lookup-Only="true"
+                custom-lookup-only="true"
                 
                 initial-value="cart.shippingData.office[option.courier]"
-                field-required="true"
                 
+                id="{{ 'officeInput_' + option.courier }}"
+                input-name="{{ 'officeInput_' + option.courier }}"
+                field-required="true"                                
                 local-data="option.courier"
                 search-fields="name,address"
                 title-field="name"
                 description-field="address"
-                minlength="3"
+                minlength="0"
                 maxlength="50"
                 input-class="form-control"
                 match-class="highlight" 
                 
-                > <!--template-url="/offices-template.html"  -->
+                template-url="/offices-template.html"
+                > <!--field-required="true" template-url="/offices-template.html"  -->
             </div>
                 <!-- 44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444 -->
                 
@@ -428,7 +429,7 @@
         <div class="form-group" style="margin-bottom: 0px">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <input name="submit" class="btn btn-primary" value="Продължи" type="submit"
-              ng-disabled="!isAddressDataOK()">
+              ng-disabled="!isAddressDataOK() || !isOfficesOK(addressForm)">
           </div>
         </div>
 
@@ -521,7 +522,7 @@
 
 <a ui-sref="shop.cart.edit" class="btn btn-primary">Обратно към количката</a>
 
-<input type="button" class="btn btn-lg btn-danger" value="Поръчай" bg-click="submitOrder()"
+<input type="button" class="btn btn-lg btn-danger" value="Поръчай" ng-click="submitOrder()"
   style="float: right; padding-left: 36px; padding-right: 36px;"
   ng-disabled="!isContactDataOK() || !isAddressDataOK() || !isPaymentDataOK()">
 

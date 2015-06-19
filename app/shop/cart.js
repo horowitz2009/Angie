@@ -144,7 +144,17 @@ angular
     .config(['$filterProvider', function($filterProvider) {
       console.log("[ 17 cart.config1]");
       // register a filter factory which uses the
-      // greet service to demonstrate DI.
+      $filterProvider.register('courier', function() {
+        return function(text) {
+          if (text === "Speedy")
+            return "Спиди";
+          if (text === "Ekont")
+            return "Еконт";
+          if (text === "address")
+            return "";
+          return text;
+        };
+      });
       $filterProvider.register('shortCategory', function() {
         return function(text) {
           if (text === "wool")
@@ -438,7 +448,7 @@ angular
               type : "POST",
               encoding:"UTF-8",
               url : 'php/save_cart.php',
-              data : { 'cart': jsonStr, 'username': username },//TODO use replacer to exclude some fields
+              data : { 'cart': jsonStr, 'username': username },
               success : successCallback,
               error : errorCallback
             });
@@ -479,11 +489,6 @@ angular
           
           return service;
         } ])
-
-.run(function () { console.log("[363 cart.run]"); })
-.config([ '$stateProvider', '$filterProvider', function($stateProvider, $filterProvider) {
-      console.log("[365 cart.config2]");
-}])
 
 ;
 

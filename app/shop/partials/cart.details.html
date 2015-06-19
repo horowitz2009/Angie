@@ -489,7 +489,7 @@
           <div class="form-group country">
             <div>
               <label class="control-label " for="country">Държава</label> <select class="form-control" id="country"
-                name="country" ng-model="shippingCtrl.shippingData.settlement.country">
+                name="country" ng-model="shippingCtrl.shippingData.settlement.country" required>
                 <option>България</option>
                 <option>Македония</option>
                 <option>Гърция</option>
@@ -515,7 +515,7 @@
             autocapitalize="off"
             autocorrect="off"
             autocomplete="off"
-            ng-change="inputChangeHandler(searchStr)"/>
+            ng-change="inputChangeHandler(searchStr)" required />
           <div class="angucomplete-dropdown" ng-show="showDropdown">
             <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
             <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
@@ -544,7 +544,7 @@
           custom-select="shippingCtrl.customSelectZipAndCity"
           custom-lookup="shippingCtrl.customLookup"
           custom-matching="shippingCtrl.customMatching"
-          keep-initial-value-binding="true"
+          keep-initial-value-binding="false"
           
           initial-value="shippingCtrl.shippingData.getCityAndZipPretty()"
           local-data="shippingCtrl.zipCodes"
@@ -567,13 +567,15 @@
           <div class="form-group options" ng-show="shippingCtrl.shippingData.options && shippingCtrl.shippingData.options.length > 0">
             <div ng-repeat="option in shippingCtrl.shippingData.options">
               <label> <input type="radio" name="newAddressOption" ng-model="shippingCtrl.shippingData.selectedOption" 
-                               ng-value="option.toString()">
+                               ng-value="option.toString()" required>
                 {{ option.getNameAndService() }}
                 <span class="pull-right"> {{ option.amount | number:2 }} лв</span>
               </label>
             </div>
           </div>
-          <div class="form-group options" ng-show="shippingCtrl.shippingData.options && shippingCtrl.shippingData.options.length == 0">
+          
+          <!-- TODO make it visible after user has entered something -->
+          <div class="form-group options" ng-show="false && !zipForm.zipCodeAndCity2.$pristine && shippingCtrl.shippingData.options && shippingCtrl.shippingData.options.length == 0">
             <div>
               <label> За съжаление не можахме да изчислим сумата по Вашата доставка. Това не означава че няма да можем да ви изпълним и доставим поръчката. 
                 За точната сума и избор на най-подходящия куриер ще Ви уведомим по телефон или имейл, които можете да въведете в следващата стъпка. 
@@ -583,6 +585,10 @@
 
         </div>
         <div class="modal-footer">
+          <div class="pull-right">
+            <input name="submit" class="btn btn-block btn-primary" value="Избери" type="submit" ng-disabled="zipForm.$invalid">
+          </div>
+          <!-- 
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
@@ -594,7 +600,7 @@
               </div>
             </div>
           </div>
-
+          -->
         </div>
       </form>
     </div>

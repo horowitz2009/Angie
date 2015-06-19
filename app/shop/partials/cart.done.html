@@ -1,0 +1,307 @@
+<style>
+.editCart {
+	float: left;
+	width: 100%;
+}
+
+.editCart .cartItem {
+	/*display: block;*/
+	height: auto;
+	transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-webkit-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	-ms-transition: all 0.3s ease 0s;
+	/*margin-bottom: 15px;*/
+	padding: 15px 7px;
+}
+
+.editCart .cartItem h4 a {
+	/*color: #2c3e50;*/
+	font-family: Oswald, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	text-decoration: none;
+	/*text-transform: uppercase;*/
+	line-height: 20px;
+}
+
+.editCart .cartItem .price {
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.editCart .cartItem span {
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.editCart a.dropdown-toggle {
+	padding-bottom: 15px;
+	padding-top: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #FFFFFF;
+	font-size: 17px;
+	font-weight: 600;
+	text-transform: uppercase;
+	line-height: 20px;
+	display: block;
+}
+
+.editCart .dropdown-menu {
+	padding-bottom: 0;
+	border-radius: 0;
+	margin-top: 0;
+}
+
+.editCart .miniCartProductThumb {
+	text-align: center;
+}
+
+.editCart img {
+	min-width: 50px;
+}
+
+.editCart h4 {
+	padding-bottom: 0;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.editCart .miniCartDescription .size {
+	color: #888888;
+	font-size: 11px;
+}
+
+.editCart .miniCartDescription .price {
+	color: #444444;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.editCart .old-price {
+	color: #666666;
+	font-size: 14px;
+	font-weight: normal;
+	text-decoration: line-through;
+}
+
+.editCart table {
+	width: 100%;
+	height: auto;
+}
+
+.editCart table tr {
+	border-bottom: solid 1px #ddd;
+}
+
+.editCart table tr td {
+	padding: 7px 7px;
+}
+
+.editCart table tr th {
+	vertical-align: bottom;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.editCart .miniCartFooter {
+	background: #ECF0F1;
+	padding: 10px 10px 10px;
+}
+
+.editCart .miniCartFooter .subtotal {
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: normal;
+	margin-bottom: 0;
+	/*text-transform: uppercase;*/
+}
+
+.editCart .incaps {
+	display: block;
+	float: left;
+	font-family: 'Oswald', sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+.editCart .incaps i {
+	font-size: 12px;
+}
+
+.editCart .color-in {
+	color: #4CC94A;
+}
+
+.editCart .product-code {
+	font-family: oswald, Helvetica Neue, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: lighter;
+	letter-spacing: 1px;
+	margin: 0 0 8px;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+.fix-align-char td.char-align {
+	width: 72px;
+}
+
+.fix-align-char span.left {
+	float: left;
+	text-align: right;
+	width: 44px;
+}
+
+.fix-align-char span.currency {
+	text-align: left;
+	float: left;
+}
+
+.fix-align-char span.right {
+	float: right;
+	text-align: left;
+	width: 28px;
+}
+
+.cart-item-quantity {
+	max-width: 120px;
+	min-width: 109px;
+}
+
+@media ( max-width : 540px) {
+	.editCart .cartItem {
+		padding: 10px 4px;
+	}
+	.editCart .cartItem h4 a {
+		font-size: 14px;
+		line-height: 16px;
+	}
+	.editCart .cartItem .price {
+		font-size: 12px;
+	}
+	.editCart .cartItem span {
+		font-size: 12px;
+	}
+	.editCart a.dropdown-toggle {
+		padding-bottom: 10px;
+		padding-top: 10px;
+		padding-left: 15px;
+		padding-right: 15px;
+		font-size: 13px;
+		line-height: 17px;
+	}
+	.editCart h4 {
+		font-size: 10px;
+	}
+	.editCart .miniCartDescription .size {
+		font-size: 9px;
+	}
+	.editCart .miniCartDescription .price {
+		font-size: 12px;
+	}
+	.editCart .old-price {
+		font-size: 12px;
+	}
+	.editCart table tr td {
+		padding: 5px 5px;
+	}
+	.editCart table tr th {
+		font-size: 10px;
+	}
+	.editCart .miniCartFooter {
+		padding: 7px 7px 7px;
+	}
+	.editCart .miniCartFooter .subtotal {
+		font-size: 13px;
+	}
+	.editCart .incaps {
+		font-size: 8px;
+	}
+	.editCart .incaps i {
+		font-size: 10px;
+	}
+	.editCart .product-code {
+		font-size: 10px;
+	}
+	.input-group-sm>.input-group-btn>.btn {
+		height: 26px;
+		padding: 2px 6px;
+		font-size: 10px;
+		line-height: 1.2;
+		border-radius: 2px;
+	}
+	.input-group-sm>.form-control, .input-group-sm>.input-group-addon {
+		height: 26px;
+		padding: 2px 6px;
+		font-size: 12px;
+		line-height: 1.2;
+		border-radius: 2px;
+	}
+	.cart-item-quantity {
+		max-width: 85px;
+		min-width: 78px;
+	}
+}
+</style>
+<!-- ==================================================================== -->
+<style>
+.cart-totals {
+	
+}
+
+.cart-totals table {
+	float: right;
+	width: auto;
+	/* width: 400px; */
+	/* min-width: 300px; */
+	margin: 8px 0;
+	border: 0;
+	border-spacing: 0;
+	empty-cells: show;
+}
+
+.editCart table>tfoot>tr {
+	border-bottom: 0; /* will appy to both tables */
+}
+
+.cart-totals td {
+	font-size: 14px;
+	font-weight: 400;
+	padding: 10px 0 0 5px;
+}
+
+.bigPrice {
+	font-size: 17px;
+	font-weight: 700;
+}
+
+@media ( max-width : 540px) {
+	.bigPrice {
+		font-size: 17px;
+	}
+}
+</style>
+
+
+
+
+
+
+<!-- cart.details.html -->
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false">
+  <h3>Поздравления! Вашата поръчка е приета! <small ng-if="!showOrder"><a ng-click="showDetails()">ВижтеПодробно.</a></small></h3>
+  <div>За да следите прогреса на изпълнение на Вашата поръчка, ползвайте следния линк:</div>
+  <div><a ui-sref="shop.order({orderId:'12345'})">localhost/Angie/#/shop/order/12345</a> {{myhref}}</div>
+</div>
+
+
+<div class="clearfix visible-xs-block"></div>
+
+<!--/ cart.done.html -->

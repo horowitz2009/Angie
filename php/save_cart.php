@@ -34,8 +34,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['cart'])) {
   $cartService = new CartService($storage, $tokenGenerator);
   
   $username = $_POST['username'];
-
-  $cartService->setCookieName('CART_' . $username);
+  $cartService->setCookieName($username);
   
   $cart = $_POST['cart'];
   $cartObj = json_decode($cart);

@@ -59,11 +59,13 @@ class CartService {
   /**
    *
    * @param
-   *          $name
+   *          $username
    * @return $this
    */
-  public function setCookieName($name) {
-    $this->cookieName = $name;
+  public function setCookieName($username) {
+    $cookieName = 'CART_' . $username;
+    $cookieName = str_replace('.', '_', $cookieName);
+    $this->cookieName = $cookieName;
     return $this;
   }
 

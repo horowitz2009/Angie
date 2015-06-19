@@ -19,6 +19,23 @@ angular.module('common.utils.service', [
       return -1;
     },
 
+    indexOf : function(arr, needle) {
+      if(typeof arr.indexOf === 'function') {
+        return arr.indexOf(needle);
+      } else {
+        var i = -1, index = -1;
+
+        for(i = 0; i < arr.length; i++) {
+          if(arr[i] === needle) {
+            index = i;
+            break;
+          }
+        }
+
+        return index;
+      }
+    },
+    
     // Util for returning a random key from a collection that also isn't the current key
     newRandomKey: function newRandomKey(coll, key, currentKey){
       var randKey;
