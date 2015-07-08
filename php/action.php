@@ -7,9 +7,9 @@
  *
  * @author Gabriel Birke
  */
-
-require_once __DIR__.'/RememberMe/Authenticator.php';
-require_once __DIR__.'/RememberMe/Storage/PDO.php';
+require_once __DIR__.'/DBService.php';
+require_once __DIR__.'/Rememberme/Authenticator.php';
+require_once __DIR__.'/Rememberme/Storage/PDO.php';
 
 
 use Birke\Rememberme;
@@ -36,17 +36,14 @@ $options = array(
   "credentialColumn" => "credential",
   "expiresColumn" => "expires",
   "tokenColumn" => "token",
-  "tableName" => "tokens",
+  "tableName" => "tokens"
 );
 
 $storage = new Rememberme\Storage\PDO($options);
-
-$servername = "localhost";
-$usernameDB = "zhristov";
-$passwordDB = "totaasha";
-$dbname = "felt";
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $usernameDB, $passwordDB);
+$db = new DBService();
+$conn = $db->createPDOConnection();
 $storage->setConnection($conn);
+
 
 $authenticator = new Rememberme\Authenticator($storage);
 

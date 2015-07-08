@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/RememberMe/TokenGenerator.php';
-require_once __DIR__ . '/RememberMe/Storage/PDOCart.php';
+require_once __DIR__ . '/Rememberme/TokenGenerator.php';
+require_once __DIR__ . '/Rememberme/Storage/PDOCart.php';
 require_once __DIR__ . '/CartService.php';
 require_once __DIR__ . '/DBService.php';
 

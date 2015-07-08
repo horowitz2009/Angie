@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/RememberMe/Cookie.php';
-require_once __DIR__ . '/RememberMe/TokenGenerator.php';
+require_once __DIR__ . '/Rememberme/Cookie.php';
+require_once __DIR__ . '/Rememberme/TokenGenerator.php';
 
 use Birke\Rememberme\Storage\PDOCart;
 use Birke\Rememberme\Cookie;

@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/RememberMe/TokenGenerator.php';
-require_once __DIR__ . '/RememberMe/Authenticator.php';
-require_once __DIR__ . '/RememberMe/Storage/PDO.php';
+require_once __DIR__ . '/Rememberme/TokenGenerator.php';
+require_once __DIR__ . '/Rememberme/Authenticator.php';
+require_once __DIR__ . '/Rememberme/Storage/PDO.php';
 require_once __DIR__ . '/DBService.php';
 
 use Birke\Rememberme;
