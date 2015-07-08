@@ -98,73 +98,6 @@ angular.module('felt.shop.cart')
             }
 
           })
-          
-          .state('shop.order', {
-            url: '/order/{orderId}',
-            data : {
-              displayName : 'Поръчка #{{order.id}}'
-            },
-            
-            resolve: {
-              order: ['$stateParams', 'utils',
-                function ($stateParams, utils) {
-                  //return utils.findById(categories, $stateParams.categoryId);
-                  return {"id": "12345"};
-                }]
-            },
-            
-            views : {
-              'cartContent' : {
-                templateUrl : 'app/shop/partials/cart.done.html',
-                controller : [ '$scope', 'shippingCtrl', function($scope, shippingCtrl) {
-                  $scope.shippingCtrl = shippingCtrl;
-                  $scope.cart = shippingCtrl.cart;
-                  $scope.shippingData = shippingCtrl.shippingData;
-                  
-                  $scope.showOrder = false;
-                  
-                  $scope.myhref = $state.href;
-                  
-                  $scope.showDetails = function() {
-                    $scope.showOrder = true;
-                  };
-                  
-                  
-                } ]
-              }
-            }
-          })
-          
-          .state('shop.cart.done', {
-
-            url: '/done',
-
-            data : {
-              displayName : 'Вашата поръчка е приета'
-            },
-
-            views : {
-              'cartContent' : {
-                templateUrl : 'app/shop/partials/cart.done.html',
-                controller : [ '$scope', 'shippingCtrl', function($scope, shippingCtrl) {
-                  $scope.shippingCtrl = shippingCtrl;
-                  $scope.cart = shippingCtrl.cart;
-                  $scope.shippingData = shippingCtrl.shippingData;
-                  
-                  $scope.showOrder = false;
-                  
-                  $scope.myhref = this.href;
-                  
-                  $scope.showDetails = function() {
-                    $scope.showOrder = true;
-                  };
-                  
-                  
-                } ]
-              }
-            }
-
-          })
 
           .state(
               'shop.cart.checkout',
@@ -188,8 +121,8 @@ angular.module('felt.shop.cart')
                 views : {
                   'cartContent' : {
                     templateUrl : 'app/shop/partials/cart.checkout.html',
-                    controller : [ '$scope', '$rootScope', 'cart', 'shippingCtrl', '$state', 'CartService', 'CART_EVENTS', '$timeout',
-                        function($scope, $rootScope, cart, shippingCtrl, $state, CartService, CART_EVENTS, $timeout) {
+                    controller : [ '$scope', '$rootScope', 'cart', 'shippingCtrl', '$state', 'CartService', 'OrderPersistenceService', 'CART_EVENTS', '$timeout',
+                        function($scope, $rootScope, cart, shippingCtrl, $state, CartService, OrderPersistenceService, CART_EVENTS, $timeout) {
 
                           $scope.shippingCtrl = shippingCtrl;
                           $scope.cart = shippingCtrl.cart;
@@ -404,9 +337,16 @@ angular.module('felt.shop.cart')
                             // TODO
                             console.log("submit order...");
                             
-                            
-                            
-                            $state.go('shop.cart.done');
+                            //1. save the order
+                            OrderPersistenceService.saveOrder($scope.getUsername(), $scope.cart, function(resp) {
+                              //on success
+                              //2. clear the cart
+                              //3. display the "congrats" page
+                              console.log(resp);
+                              $state.go('shop.order.placed', resp);
+                            }, function(err) {
+                              console.log("whaaat" + err);
+                            });
                             
                           }
 

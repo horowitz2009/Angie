@@ -21,11 +21,26 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `expires` datetime NOT NULL,
   `data` mediumtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'loki data',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=116
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7
 ";
 
 $conn->exec($sql);
 echo "<p>Table `carts` created.</p>";
+
+$sql = "
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(254) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `status` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `date_placed` datetime NOT NULL,
+  `date_changed` datetime NOT NULL,
+  `data` mediumtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'loki data',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17
+";
+
+$conn->exec($sql);
+echo "<p>Table `orders` created.</p>";
 
 $sql = "
 CREATE TABLE IF NOT EXISTS `lokidbs` (

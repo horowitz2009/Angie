@@ -292,16 +292,39 @@
 
 
 
-
-
-<!-- cart.details.html -->
-<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false">
-  <h3>Поздравления! Вашата поръчка е приета! <small ng-if="!showOrder"><a ng-click="showDetails()">ВижтеПодробно.</a></small></h3>
-  <div>За да следите прогреса на изпълнение на Вашата поръчка, ползвайте следния линк:</div>
-  <div><a ui-sref="shop.order({orderId:'12345'})">localhost/Angie/#/shop/order/12345</a> {{myhref}}</div>
+<div class="col-lg-10 col-md-10 col-sm-12 view-slide-in">
+  <h3>Поздравления! Вашата поръчка е приета!</h3>
+  
+  <div ng-if="getUsername() === 'guest'">
+    <div>Вие направихте тази поръчка като нерегистриран потребител. Можете да следите прогреса на изпълнението й <a ui-sref="shop.order.display({id:id})">тук</a>.</div>
+    <!-- <div><a ui-sref="shop.order.display({id:id})">{{myhref}}</a> </div> -->
+    
+    <div><p><br>Вие сте съвсем близо до създаване на профил.</p><br>
+    <p>Ако въведете имейл и парола, ние ще запомним Вашите данни за контакт и доставка, 
+    които ще можете да ползвате за бъдещи поръчки. Освен това, ще пазим списък с всички Ваши поръчки и техния статус, които ще можете да преглеждате по всяко време.</p><br>
+    <p style="font-style:italic">Данните Ви няма да бъдат предоставяни на трети лица и ще бъдат ползвани единствено за нуждите на този сайт!</p>
+    </div>
+    <div>
+    TODO form goes here
+    </div>
+  </div>
+  <div ng-if="getUsername() !== 'guest'">
+    Заповядайте отново!
+  </div>
 </div>
 
 
 <div class="clearfix visible-xs-block"></div>
 
+<!--  buttons -->
+<div class="col-lg-12 col-md-12 col-sm-12" style="width: 100%; padding-top: 15px;">
+
+  <a class="btn btn-primary" ui-sref="shop.order.display({id:id})"> Подробна информация по поръчката </a>
+  <a class="btn btn-primary" ui-sref="shop.order.all" ng-if="getUsername() !== 'guest'"> Вашите поръчки </a>
+  
+  <a class="btn btn-primary" ui-sref="shop.all"  style="float: right">Към магазина</a> 
+    
+    
+    
+</div>
 <!--/ cart.done.html -->

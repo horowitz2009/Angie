@@ -3,6 +3,7 @@ angular.module('felt', [
 
     'felt.shop',
     'felt.shop.cart',
+    'felt.shop.orders',
     'felt.shop.service',
     'felt.color.service',
     'felt.shipping.service',
