@@ -6,6 +6,7 @@ angular.module('common.authentication', [
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',
   loginFromRememberMeFailed: 'auth-login-from-rememberme-failed',
+  registrationSuccess: 'auth-register-success',
   registrationFailed: 'auth-register-failed',
   logoutSuccess: 'auth-logout-success',
   sessionTimeout: 'auth-session-timeout',
@@ -36,10 +37,12 @@ angular.module('common.authentication', [
   };
 })
 
-.factory('AuthService', ["$http", "Session", function ($http, Session) {
+.factory('AuthService', ["$http", "$rootScope", "Session", 'AUTH_EVENTS', function ($http, $rootScope, Session, AUTH_EVENTS) {
   console.log("[ 39 auth.factory AuthService]");
   var authService = {};
- 
+  
+  Session.create("", "guest", "guest");
+  
   //LOGIN
   authService.login = function(credentials) {
     return $.ajax({
@@ -47,13 +50,14 @@ angular.module('common.authentication', [
       url : 'php/login.php',
       data : credentials,
       success : function(res) {
-        if (res && res.email)
+        if (res && res.email) {
           Session.create(res.id, res.email, res.roles);
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, res);
+        }
         return res;
       },
       error : function(res) {
-        console.log("Login failed");// TODO error. do what?
-        console.log(res);
+        $rootScope.$broadcast(AUTH_EVENTS.loginFailed, null);
       }
     });
 
@@ -66,13 +70,12 @@ angular.module('common.authentication', [
       url : 'php/register.php',
       data : newUser,
       success : function(res) {
-        //Session.create(res.id, res.email, res.roles);
-        // return res;
-        //authService.login(newUser);
+        $rootScope.$broadcast(AUTH_EVENTS.registrationSuccess, newUser);
       },
       error : function(res) {
-        console.log("Register failed");// TODO error. do what?
+        console.log("Register failed");
         console.log(res);
+        $rootScope.$broadcast(AUTH_EVENTS.registrationFailed, res);
       }
     });
 
@@ -88,39 +91,50 @@ angular.module('common.authentication', [
       },
       success : function(res) {
         Session.destroy();
+        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         return res;
       },
       error : function(res) {
         Session.destroy();
+        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
       }
     });
 
   }
   
   //LOGIN FROM REMEMBER ME
-  authService.loginFromRememberMe = function() {
+  authService.loginFromRememberMe = function(asynchro) {
     return $.ajax({
+      async: asynchro,
       type : "POST",
       data : {
         'loginWithRememberMe' : true
       },
-      url : 'php/login.php',// TODO make login.php with no credentials trying
-                            // cookie way
+      url : 'php/login.php',
       success : function(res) {
-        if (res && res.email)
+        if (res && res.email) {
           Session.create(res.id, res.email, res.roles);
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, res);
+        }
         return res;
       },
       error : function(res) {
-        console.log("login from remember me failed");// TODO error. do what? uh?
+        console.log("login from remember me failed");
+        Session.create("", "guest", "guest");
+        $rootScope.$broadcast(AUTH_EVENTS.loginFromRememberMeFailed, res);
+        return res;
       }
     });
 
   }
   
-  authService.isAuthenticated = function () {
+  authService.isAuthenticated = function () {//TODO in my case it's always authenticated: guest or logged
 	  console.log("[CHECK SESSION.userID: " + Session.userId);
     return Session.userId != null && Session.userId.length > 0;
+  };
+  
+  authService.isGuest = function () {
+    return Session.userId === 'guest';
   };
   
   authService.isAuthorized = function (authorizedRoles) {
@@ -131,11 +145,19 @@ angular.module('common.authentication', [
         authorizedRoles.indexOf(Session.userRoles) !== -1);//TODO user can have more than one role. fix it!
   };
   
+  authService.getUsername = function() {
+    return Session.userId;
+  }
+  
+  authService.getSession = function() {
+    return Session;
+  }
+  
   return authService;
 }])
 
 .config(['$httpProvider', function ($httpProvider) {
-  console.log("[128 auth.config]");
+  console.log("[160 auth.config]");
   $httpProvider.interceptors.push([
     '$injector',
     function ($injector) {
@@ -146,7 +168,7 @@ angular.module('common.authentication', [
 
 .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', 
                              function ($rootScope, $q, AUTH_EVENTS) {
-  console.log("[139 auth.factory AuthInterceptor]");
+  console.log("[171 auth.factory AuthInterceptor]");
   return {
     responseError: function (response) { 
       $rootScope.$broadcast({
@@ -164,7 +186,7 @@ angular.module('common.authentication', [
 .controller('LoginController', ["$scope", "$rootScope", "AUTH_EVENTS", "AuthService", '$timeout',
                                 function ($scope, $rootScope, AUTH_EVENTS, AuthService, $timeout) {
   
-  console.log("[158 auth.controller LoginController]");
+  console.log("[189 auth.controller LoginController]");
   $scope.result = ' ';
   
   $scope.credentials = {
@@ -174,27 +196,9 @@ angular.module('common.authentication', [
   };
   
   $scope.login = function (credentials) {
-    AuthService.login(credentials).then(function (user) {
-      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
-      //$scope.setCurrentUser(user);
-    }, function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginFailed, null);
-    });
+    AuthService.login(credentials);
   };
 
-  //TODO THIS IS NOT USED?! CHECK!!!
-  $scope.loginFromRememberMe = function () {
-    AuthService.loginFromRememberMe().then(function (user) {
-  	  if (user) {
-  		  //$scope.setCurrentUser(user);
-        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
-  	  }
-    }, function () {
-         $scope.setCurrentUser(null);
-         $rootScope.$broadcast(AUTH_EVENTS.loginFromRememberMeFailed);
-       });
-  };
-  
   $scope.setResult = function(msg) {
 	  $scope.result = msg;
       $timeout(function(){
@@ -210,18 +214,15 @@ angular.module('common.authentication', [
   }
   
   $scope.$on(AUTH_EVENTS.loginFailed, function(event, args) {
-       console.log("LOGIN FAILED");
-       //TODO what now?
-       $scope.setResult('Incorrect username or password!');
+    $scope.setResult('Incorrect username or password!');
 	});
   
   $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
-	  console.log("LOGIN SUCCESS");
-      $scope.setResult(' ');
+    $scope.setResult(' ');
 	  $("#ModalLogin").modal('hide');
   });
+  
   $scope.$on(AUTH_EVENTS.logoutSuccess, function(event, args) {
-	  console.log("LOGOUT SUCCESS");
 	  $scope.result = '';
 	  $scope.credentials.email='';
 	  $scope.credentials.password='';
@@ -232,9 +233,6 @@ angular.module('common.authentication', [
 	  $scope.reset();
   });
 
-  //console.log("[224 auth.controller LoginController] login from remember me ...");
-  //$scope.loginFromRememberMe();
-  
 }])
 
 .controller('RegisterController', ["$scope", "$rootScope", "AUTH_EVENTS", "AuthService", '$timeout',
@@ -251,26 +249,28 @@ angular.module('common.authentication', [
 	};
 	
 	$scope.register = function (newUser) {
-		AuthService.register(newUser).then(function (user) {
-		  console.log(">>>register good. set user...");
-		  
-		  
-	    AuthService.login(newUser).then(function (user) {
-	      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
-	      //$scope.setCurrentUser(user);
-	    }, function () {
-	      $rootScope.$broadcast(AUTH_EVENTS.loginFailed, null);
-	    });
-
-		  
-		  
-			//$rootScope.$broadcast(AUTH_EVENTS.loginSuccess, user);
-			//$scope.setCurrentUser(user);
-		}, function () {
-			$rootScope.$broadcast(AUTH_EVENTS.registrationFailed);
-		});
-	};
+	  $scope.setResult(' ');
+	  AuthService.register(newUser);
+	}
+//		AuthService.register(newUser).then(function (user) {
+//		  console.log("Registration successful. Now login...");
+//		  
+//	    AuthService.login(newUser);
+//
+//		}, function () {
+//			$rootScope.$broadcast(AUTH_EVENTS.registrationFailed);
+//		});
+//	};
 	
+	$scope.$on(AUTH_EVENTS.registrationSuccess, function(event, args) {
+	  AuthService.login(args);
+	});
+	
+	$scope.$on(AUTH_EVENTS.registrationFailed, function(event, args) {
+      $scope.setResult(args.statusText);
+	});
+
+
 	$scope.setResult = function(msg) {
 		$scope.result = msg;
 		$timeout(function(){
@@ -287,11 +287,6 @@ angular.module('common.authentication', [
 		$scope.setResult(" ");
 	}
 	
-	$scope.$on(AUTH_EVENTS.registrationFailed, function(event, args) {
-		console.log("Registration FAILED");
-		//TODO what now?
-		$scope.setResult('Registration failed!');
-	});
 	$scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
 		console.log("LOGIN SUCCESS");
 		$scope.setResult(' ');
@@ -344,5 +339,4 @@ angular.module('common.authentication', [
 }])
 
 
-.run(function () { console.log("[325 auth.run]"); })
 ;

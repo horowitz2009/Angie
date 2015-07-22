@@ -90,7 +90,20 @@ angular.module('felt.shop.cart')
                     console.log("CART CHANGED AND I'M GONNA RECALCULATE THE SHIPPING COSTS");
                     console.log(cart);
                     shippingCtrl.refreshCart(cart);
+                  });
+                  
+                  $scope.$watch('shippingCtrl.shippingData.settlement.country', function(newValue, oldValue) {
+                    console.log("country changed from " + oldValue + " to " + newValue);
                     
+                    if (oldValue !== newValue) {
+                      shippingCtrl.shippingData.clearAddress();
+                      $scope.cart.shippingData.clearAddress();
+//                      var input = $('#city2');
+//                      input.val(cart.shippingData.getCityPretty());
+//                      input = $('#zipCode2');
+//                      input.val(cart.shippingData.zipCode);
+                      shippingCtrl.recalcOptions($scope.cart, shippingCtrl.shippingData);
+                    }
                   });
 
                 } ]
@@ -121,8 +134,8 @@ angular.module('felt.shop.cart')
                 views : {
                   'cartContent' : {
                     templateUrl : 'app/shop/partials/cart.checkout.html',
-                    controller : [ '$scope', '$rootScope', 'cart', 'shippingCtrl', '$state', 'CartService', 'OrderPersistenceService', 'CART_EVENTS', '$timeout',
-                        function($scope, $rootScope, cart, shippingCtrl, $state, CartService, OrderPersistenceService, CART_EVENTS, $timeout) {
+                    controller : [ '$scope', '$rootScope', 'cart', 'shippingCtrl', '$state', 'CartService', 'OrderService', 'CART_EVENTS', '$timeout',
+                        function($scope, $rootScope, cart, shippingCtrl, $state, CartService, OrderService, CART_EVENTS, $timeout) {
 
                           $scope.shippingCtrl = shippingCtrl;
                           $scope.cart = shippingCtrl.cart;
@@ -134,7 +147,19 @@ angular.module('felt.shop.cart')
                           }
                           
                           shippingCtrl.recalcOptions(cart, cart.shippingData);
-                          
+
+                          $scope.$watch('cart.shippingData.settlement.country', function(newValue, oldValue) {
+                            console.log("country changed from " + oldValue + " to " + newValue);
+                            if (oldValue !== newValue) {
+                              $scope.cart.shippingData.clearAddress();
+                              var input = $('#city2');
+                              input.val(cart.shippingData.getCityPretty());
+                              input = $('#zipCode2');
+                              input.val(cart.shippingData.zipCode);
+                              shippingCtrl.recalcOptions($scope.cart, cart.shippingData);
+                            }
+                          });
+
 
                           // ///////////////////////
                           // isXXXXXXDataOK
@@ -154,13 +179,14 @@ angular.module('felt.shop.cart')
                           $scope.isOfficesOK = function(form) {
                             var opt = $scope.cart.shippingData.getOption();
                             if (opt) {
-                              if (opt.type === 'atelier')
+                              if (opt.type === 'atelier' || opt.type === 'address')
                                 return true;
+                                
                               var test = form['officeInput_' + opt.courier];
                               if (test)
                                 return !test.$invalid;
                             }
-                            return false;
+                            return true;
                           }
                           
                           $scope.isPaymentDataOK = function() {
@@ -334,48 +360,16 @@ angular.module('felt.shop.cart')
                           }
 
                           $scope.submitOrder = function() {
-                            // TODO
-                            console.log("submit order...");
-                            
-                            //1. save the order
-                            OrderPersistenceService.saveOrder($scope.getUsername(), $scope.cart, function(resp) {
-                              //on success
-                              //2. clear the cart
-                              //3. display the "congrats" page
-                              console.log(resp);
-                              $state.go('shop.order.placed', resp);
-                            }, function(err) {
-                              console.log("whaaat" + err);
-                            });
-                            
+                            OrderService.submitOrder();
                           }
 
                           // //////////////////////////
                           // WATCHERS
                           // //////////////////////////
-                          //TODO HMMMMMM
-                          $scope.$watch('cart.shippingData.settlement.country', function(newValue, oldValue) {
-                            console.log("country is being watched:");
-                            console.log(oldValue);
-                            console.log(newValue);
-                            if (newValue == "България") {
-                              $scope.showOptions(true);
-                            }
-
-                            if (oldValue == "България" && newValue !== "България") {
-                              $scope.showOptions(false);
-                            }
-
-                          });
-
                           $scope.$watch('cart', function(newValue, oldValue) {
                             console.log("CART CHANGED");
                             console.log(oldValue);
                             console.log(newValue);
-
-//                            if ($scope.cart.address.country == "България") {
-//                              $scope.showOptions(true);
-//                            }
 
                             $scope.gotoNext(1);
 
@@ -515,6 +509,14 @@ angular.module('felt.shop.cart')
     return (result.originalObject.type ? result.originalObject.type + ' ': '') + result.originalObject.city;
   }
 
+  factory.setZipCodeAndCity1 = function(result) {
+    factory.setZipCodeAndCity(result);
+    if (result) {
+      var input = $('#city2');
+      input.val(cart.shippingData.getCityPretty());
+    }
+  }
+  
   factory.setZipCodeAndCity = function(result) {
     if (result) {
       console.log("SELECTED " + result.originalObject.city);
@@ -548,6 +550,8 @@ angular.module('felt.shop.cart')
     if (shippingData.canShippingBeCalculated()) {
       var newOptions = ShippingService.calculateShippingCosts(cart.weight, shippingData.settlement);
       shippingData.updateOptions(newOptions);
+    } else {
+      shippingData.updateOptions([]);
     }
   }
   
@@ -607,10 +611,6 @@ angular.module('felt.shop.cart')
         }
       }
     }
-  }
-  
-  factory.canShippingBeCalculated = function() {
-    return CartService.canShippingBeCalculated();
   }
   
   factory.getSpeedyOffices = function() {

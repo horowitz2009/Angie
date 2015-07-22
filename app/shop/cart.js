@@ -1,130 +1,3 @@
-function ShippingOption(name, type, courier) {
-  if (typeof name === 'object') {
-    this.name = name.name;
-    this.type = name.type;
-    this.amount = name.amount;
-    this.service = name.service;
-    this.courier = name.courier;
-  } else {
-    this.name = name;
-    this.type = type;
-    this.amount = -1.00;
-    this.service = "";
-    this.courier = courier;
-  }
-}
-
-ShippingOption.prototype.toString = function() {
-  return this.type + "|" + this.service + "|" + this.amount;    
-};
-
-ShippingOption.prototype.getNameAndService = function() {
-  var s = this.name;
-  if (this.service) {
-    s += (" - (" + this.service + ")");
-  }
-  return s;
-};
-  
-function ShippingData() {
-  this.settlement = { "country": "България" };
-  this.options = [];
-  this.selectedOption = null;
-  this.office = {};
-}
-
-ShippingData.prototype.canShippingBeCalculated = function() {
-  if (!this.settlement.country)
-    return false;
-
-  if (this.settlement.country == 'България') {
-    if (!this.settlement.zipCode || !this.settlement.city)
-      return false;
-  }
-  
-  return true;  
-}
-
-ShippingData.prototype.getCityPretty = function () {
-  var s = this.settlement;
-  var res='';
-  if (s.type) 
-    res += s.type + ' ';
-  if (s.city)  
-    res += s.city;
-  return res;
-}
-
-ShippingData.prototype.getCityAndZipPretty = function () {
-  var res = this.getCityPretty();
-  if (this.settlement.zipCode)
-    res += ' ' + this.settlement.zipCode;
-  return res;  
-}
-
-ShippingData.prototype.getOption = function () {
-  if (this.selectedOptionObj == null)
-    for (var i = 0; this.options && i < this.options.length; i++) {
-      if (this.options[i].toString() === this.selectedOption) {
-        this.selectedOptionObj = this.options[i];
-        break;
-      }
-    }
-  return this.selectedOptionObj;
-}
-
-ShippingData.prototype.setOption = function (optionStrOrObj) {
-  if (typeof optionStrOrObj === 'string')
-    this.selectedOption = optionStrOrObj;
-  else {
-    this.selectedOption = optionStrOrObj ? optionStrOrObj.toString() : null;
-    this.selectedOptionObj = optionStrOrObj;
-  }
-}
-
-ShippingData.prototype.updateOptions = function (newOptions) {
-  { //if (!angular.equals(this.options, newOptions)){
-    this.options = newOptions;
-    if (this.selectedOption) {
-      var ss = this.selectedOption.split("|");
-      var found = false;
-      for (var i = 0; !found && i < this.options.length; i++) {
-        if (this.options[i].type === ss[0] && this.options[i].service === ss[1]) {
-          this.selectedOptionObj = this.options[i];
-          this.selectedOption = this.options[i].toString();
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        this.selectedOptionObj = null;
-        this.selectedOption = null;
-      }
-    } else {
-      this.selectedOptionObj = null;
-    }
-  }
-}
-
-ShippingData.prototype.copyTo = function(obj) {
-  angular.copy(this.settlement, obj.settlement);
-  angular.copy(this.options, obj.options);
-  obj.selectedOptionObj = null;
-  obj.selectedOption = this.selectedOption;
-
-  //angular.copy(this.prototype, obj.prototype);
-}
-
-ShippingData.prototype.propagateSettlement = function(obj) {
-  this.settlement.type = obj.type;
-  this.settlement.city = obj.city;
-  this.settlement.zipCode = obj.zipCode;
-  this.settlement.combo = obj.combo;
-}
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
 angular
     .module('felt.shop.cart', [ 'ui.router', 'angularUtils.directives.uiBreadcrumbs', 'common.utils.service'
 
@@ -327,19 +200,6 @@ angular
             // service.recalcTotals();
           }
           
-          service.canShippingBeCalculated = function() {
-            var a = cart.shippingData.settlement;
-            if (!a || !a.country)
-              return false;
-
-            if (a.country == 'България') {
-              if (!a.zipCode || !a.city)
-                return false;
-            }
-            
-            return true;
-          }
-          
           // recalcTotals
           service.recalcTotals = function() {
             var oldCart = angular.copy(cart);
@@ -356,18 +216,18 @@ angular
             cart.subTotal = newTotal;
             cart.count = cnt;
             cart.weight = weight;
-            //TODO recalc shipping costs
-            cart.shippingCosts = 0.00;
-            if (service.canShippingBeCalculated()) {
-              cart.shippingCosts = 6.00;
-              if (cart.subTotal == 0)
-                  cart.shippingCosts = 0.00;
-              if (cart.subTotal >= 40)
-                cart.shippingCosts = 3.00;
-              if (cart.subTotal >= 60)
-                cart.shippingCosts = 0.00;
-            }
-            cart.total = cart.subTotal + cart.shippingCosts;
+//            //TODO recalc shipping costs
+//            cart.shippingCosts = 0.00;
+//            if (cart.shippingData.canShippingBeCalculated()) {
+//              cart.shippingCosts = 6.00;
+//              if (cart.subTotal == 0)
+//                  cart.shippingCosts = 0.00;
+//              if (cart.subTotal >= 40)
+//                cart.shippingCosts = 3.00;
+//              if (cart.subTotal >= 60)
+//                cart.shippingCosts = 0.00;
+//            }
+//            cart.total = cart.subTotal + cart.shippingCosts;
             
             if(!angular.equals(oldCart, cart)) {
               console.log("broadcast change cart...");
@@ -382,7 +242,7 @@ angular
           
           service.isAddressDataOK = function() {
             
-            if (!service.canShippingBeCalculated()) 
+            if (!cart.shippingData.settlement.zipCode || !cart.shippingData.settlement.city)
               return false;
 
             var sd = cart.shippingData;

@@ -33,11 +33,9 @@ angular.module('felt.shop.orders')
     },
 
     resolve : {
-      order : [ '$stateParams', 'utils', function($stateParams, utils) {
+      order : [ '$stateParams', 'utils', 'OrderService', function($stateParams, utils, OrderService) {
         // return utils.findById(categories, $stateParams.categoryId);
-        return {
-          "id" : $stateParams['id']
-        };
+        return OrderService.getOrder($stateParams['id']);
       } ]
     }
 
@@ -54,11 +52,11 @@ angular.module('felt.shop.orders')
 
     views : {
       'cartContent' : {
-        templateUrl : 'app/shop/partials/cart.done.html',
+        templateUrl : 'app/shop/partials/order.display.html',
         controller : [ '$scope', 'shippingCtrl', 'order', '$state', function($scope, shippingCtrl, order, $state) {
           $scope.id = order.id;
           $scope.order = order;
-          $scope.shippingCtrl = shippingCtrl;
+          $scope.shippingCtrl = shippingCtrl;//TODO cleanup here
           $scope.cart = shippingCtrl.cart;
           $scope.shippingData = shippingCtrl.shippingData;
 
@@ -88,7 +86,7 @@ angular.module('felt.shop.orders')
         templateUrl : 'app/shop/partials/cart.done.html',
         controller : [ '$scope', 'shippingCtrl', 'order', '$state', function($scope, shippingCtrl, order, $state) {
           $scope.order = order;
-          $scope.id = order.id;
+          $scope.id = order.id;//TODO cleanup here too
           $scope.shippingCtrl = shippingCtrl;
           $scope.cart = shippingCtrl.cart;
           $scope.shippingData = shippingCtrl.shippingData;

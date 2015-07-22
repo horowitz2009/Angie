@@ -10,6 +10,7 @@ angular.module('felt', [
     
     'common.utils.service',
     'common.authentication',
+    'home.account',
 	  
     'ui.bootstrap',
     'ui.router',
@@ -74,6 +75,12 @@ angular.module('felt', [
                     data: {
                       displayName: 'Моят акаунт'
                     },
+                    
+                    resolve: {
+                      account : [ 'AccountService', 'Session', function(AccountService, Session) {
+                        return AccountService.loadAccount(Session.userId);
+                      } ]
+                    },
 
                     views: {
                         'banner': {
@@ -81,7 +88,27 @@ angular.module('felt', [
                         },
 
                         '': {
-                          templateUrl: 'app/home/partials/myaccount.html'
+                          templateUrl: 'app/home/partials/myaccount.html',
+                          controller : [ '$scope', 'AccountService', 'account', 'Session', function($scope, AccountService, account, Session) {
+                            $scope.account = angular.copy(account);
+                            $scope.account.contactData.email = Session.userId;
+                            $scope.editPassword = false;
+                            $scope.message = '';
+                            $scope.saveAccount = function() {
+                              $scope.message = '...';
+                              console.log("Saving account: ");
+                              console.log($scope.account);
+                              AccountService.saveAccount($scope.account, function() {
+                                console.log("good");
+                                $scope.message = 'Профилът е записан успешно!';
+                              },
+                              
+                              function() {
+                                console.log("UH OH");
+                                $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                              });
+                            }
+                          }]
                         }
 
                     },
@@ -123,8 +150,8 @@ angular.module('felt', [
   }
 ])
 
-.run(['$rootScope', '$state', '$stateParams',
-  function ($rootScope, $state, $stateParams) {
+.run(['$rootScope', '$state', '$stateParams', 'AuthService',
+  function ($rootScope, $state, $stateParams, AuthService) {
     console.log("[333 21 app.run]");
 
     // It's very handy to add references to $state and $stateParams to the $rootScope
@@ -134,6 +161,13 @@ angular.module('felt', [
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 
+//     // TRY LOGIN FROM REMEMBER ME
+//     console.log("LOGIN FROM REMEMBER ME...");
+//     AuthService.loginFromRememberMe(false).then(function(user) {
+//       console.log("successfully logged through RememberMe service");
+//     }, function() {
+//       console.log("FAILED TO LOG through RememberMe service");
+//     })
     
 
 
@@ -188,6 +222,21 @@ angular.module('felt', [
 
   }
 ])
+
+.directive('pwCheck', function () {
+  return {
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+      
+      var me = attrs.ngModel;
+      var matchTo = attrs.pwCheck;
+      scope.$watchGroup([me, matchTo], function(value) {
+        ctrl.$setValidity('pwmatch', value[0] === value[1] );
+      });
+      
+    }
+  }
+})
    
 .directive('updateTitle', ['$rootScope', '$timeout', 'Title',
   function($rootScope, $timeout, Title) {
@@ -209,6 +258,11 @@ angular.module('felt', [
   }
 ])
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MAIN CONTROLLER
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 .controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService','AUTH_EVENTS',
                          'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
@@ -218,17 +272,19 @@ angular.module('felt', [
             		         $animate, $timeout, $interval) {
   
   console.log("[217 app.controller] MainCtrl");
-  $scope.currentUser = null;
+  $scope.currentUser = 'guest';
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
   
   $scope.getUsername = function() {
-    return $scope.currentUser != null ? $scope.currentUser.email : "guest";
+    return $scope.currentUser;
   }
   
   $scope.setCurrentUser = function(user) {
+    //MAY BE NOT DEPRECATED
+    console.log('MAY BE NOT DEPRECATED');
     var oldUsername = $scope.getUsername();
-    $scope.currentUser = user;
+    $scope.currentUser = user == null ? 'guest' : user.email;
     var newUsername = $scope.getUsername();
     console.log("SET CURRENT USER: " + newUsername);
     $rootScope.$broadcast("user-changed", oldUsername, newUsername);
@@ -237,7 +293,7 @@ angular.module('felt', [
   $scope.logout = function (logoutAll) {
 	  console.log("LOGOUT CLICKED");
 	  AuthService.logout(logoutAll).always(function (user) {
-		  $scope.setCurrentUser(null);
+		  $scope.setCurrentUser('guest');
 		  $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 	  });
   };
@@ -250,30 +306,34 @@ angular.module('felt', [
     //wire cart persistence
     $scope.cartEvents = $scope.$on(CART_EVENTS.cartChanged, function(event, args) {
       
-      var username = $scope.currentUser != null ? $scope.currentUser.email : "guest";
-      
       if (saveCartPromise) {
         $timeout.cancel(saveCartPromise);  
       }
       
       saveCartPromise = $timeout(function() {
         console.log("SAVING CART...")
-        CartPersistenceService.saveCart(username);
+        CartPersistenceService.saveCart(AuthService.getUsername());
       }, 1000);
       
     });
-    
+    return $scope.cartEvents;
   }
   
   $scope.loadCart = function(oldUsername, newUsername) {
-    console.log("LOADING CART " + oldUsername + " -> " + newUsername + "   - " + $scope.getUsername());
+    console.log("LOADING CART " + oldUsername + " -> " + newUsername + "   - " + AuthService.getUsername());
     var oldCart = angular.copy($scope.cart);
-    var promise = CartPersistenceService.loadCart($scope.getUsername());
-    if($scope.cartEvents == null) {
-      promise = promise.then($scope.wireCartEvents);
+    CartPersistenceService.loadCart(AuthService.getUsername()).then(function(){
+      if($scope.cartEvents != null) {
+        console.log("................................................................WIRING...");
+        $scope.cartEvents();
+        console.log("................................................................WIRING...");
+        $scope.wireCartEvents();
+    } else {
+      $scope.wireCartEvents();
     }
-    
-    promise.then(function() {
+
+
+    }).then(function() {
       //newCart is a copy!!!
       console.log("THIS IS IT. 000000000000000000000000000000000000000000000000000");
       console.log("OLD cart");
@@ -323,24 +383,39 @@ angular.module('felt', [
       console.log("===============================================================");
       
       
+    }).then(function(){
+      $scope.$apply();
     });
 
     
     
     
-    return promise;
+    
   }
+
+  //HMM
+//  $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
+//    if (args.email) {
+//      $scope.loadCart('guest', args.email);
+//      
+//    }
+//  });
 
   // TRY LOGIN FROM REMEMBER ME
   console.log("LOGIN FROM REMEMBER ME...");
-  AuthService.loginFromRememberMe().then(function(user) {
+  //AuthService.loginFromRememberMe(false);
+  
+  AuthService.loginFromRememberMe(true).then(function(user) {
     if (user) {
+      console.log("Logged by RememberMe...");
       $scope.setCurrentUser(user);
     } else {
+      console.log("No valid token found...");
       $scope.setCurrentUser(null);
     }
     
   }, function() {
+    console.log("Failed to login by RememberMe...");
     $scope.setCurrentUser(null);
   })
   
@@ -348,7 +423,9 @@ angular.module('felt', [
     $('#userMenu').removeClass('hide');
     $scope.$apply();
   });
-
+  
+  
+  
   $scope.$on("user-changed", function(event, oldUsername, newUsername) {
     console.log("user changed:");
     console.log("old username: " + oldUsername);
@@ -459,14 +536,16 @@ angular.module('felt', [
   });
   
 
-  
+  //HAS FOCUS FEATURE OFF ////////////////
   
   $scope.hasFocus = false;
-  
-  
-  $interval(function() {
-    $scope.hasFocus = document.hasFocus();
-  }, 333);
+
+
+  //   $interval(function() {
+  //     $scope.hasFocus = document.hasFocus();
+  //   }, 333);
+
+  ////////////////////////////////////////  
 
 }])
     

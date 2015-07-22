@@ -241,23 +241,23 @@
             <div class="pull-right">
               <ul id="userMenu" class="userMenu hide">
                 <!-- logged -->
-                <li ng-if="currentUser"><a href="#"> <span class="hidden-xs"
-                    style="text-transform: none; font-size: 14px; line-height: 28px;" ng-bind="currentUser.email"> ... </span></a>
+                <li ng-if="getUsername() !== 'guest'"><a href="#"> <span class="hidden-xs"
+                    style="text-transform: none; font-size: 14px; line-height: 28px;" ng-bind="getUsername()"> ... </span></a>
                 </li>
 
-                <li ng-if="currentUser" ng-cloak><a ui-sref="myaccount"><span class="hidden-xs"> Моят акаунт</span> <i
+                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="myaccount"><span class="hidden-xs"> Моят акаунт</span> <i
                     class="glyphicon glyphicon-user hide visible-xs "></i> </a></li>
 
-                <li ng-if="currentUser" ng-cloak><a ng-click="logout(false)"> <span class="hidden-xs">Изход</span> <i
+                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ng-click="logout(false)"> <span class="hidden-xs">Изход</span> <i
                     class="glyphicon glyphicon-log-out hide visible-xs "></i>
                 </a></li>
 
                 <!-- not logged -->
-                <li ng-if="currentUser == null" ng-cloak><a data-toggle="modal" data-target="#ModalLogin"> <span
+                <li ng-if="getUsername() == 'guest'" ng-cloak><a data-toggle="modal" data-target="#ModalLogin"> <span
                     class="hidden-xs">Вход</span> <i class="glyphicon glyphicon-log-in hide visible-xs "></i>
                 </a></li>
 
-                <li ng-if="currentUser == null" ng-cloak class="hidden-xs"><a href="#" data-toggle="modal"
+                <li ng-if="getUsername() == 'guest'" ng-cloak class="hidden-xs"><a href="#" data-toggle="modal"
                   data-target="#ModalSignup"> Регистрирайте акаунт </a></li>
               </ul>
             </div>
@@ -1039,7 +1039,10 @@
 
   <!-- APP -->
   <script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="app/home/account.js"></script>
+  <script type="text/javascript" src="common/auth/authentication.js"></script>
   <script type="text/javascript" src="app/shop/shop.js"></script>
+  <script type="text/javascript" src="app/shop/shipping.js"></script>
   <script type="text/javascript" src="app/shop/cart.js"></script>
   <script type="text/javascript" src="app/shop/cart.router.js"></script>
   <script type="text/javascript" src="app/shop/shop-service.js"></script>
@@ -1048,7 +1051,6 @@
   <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
   <script type="text/javascript" src="app/common/color-service.js"></script>
   <script type="text/javascript" src="common/utils/utils-service.js"></script>
-  <script type="text/javascript" src="common/auth/authentication.js"></script>
 
   <!-- include touchspin.js // touch friendly input spinner component   -->
   <script type="text/javascript" src="js/touchspin/src/jquery.bootstrap-touchspin-mine.js"></script>

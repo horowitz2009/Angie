@@ -1,3 +1,124 @@
-<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
-<span>my account goes here</span>
+<div class="col-lg-9 col-sm-8 col-xs-12 col-md-8 no-margin no-padding">
+
+  <div class="panel panel-success">
+    <div class="panel-heading">Профил</div>
+    <div class="panel-body">
+
+      <!-- ДАННИ ЗА КОНТАКТ -->
+      <form name="accountForm" class="form-horizontal" ng-submit="saveAccount()" novalidate>
+
+        <div class="form-group" style="">
+          <!-- firstName -->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+            ng-class="{ 'has-error' : accountForm.firstName.$invalid && !accountForm.firstName.$pristine }">
+            <label class="control-label " for="firstName">Име</label> <input type="text" class="form-control"
+              id="firstName" name="firstName" ng-model="account.contactData.firstName"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="accountForm.firstName.$invalid && !accountForm.firstName.$pristine" class="help-block">Въведете
+              име.</p>
+          </div>
+          <!-- lastName -->
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
+            ng-class="{ 'has-error' : accountForm.lastName.$invalid && !accountForm.lastName.$pristine }">
+            <label class="control-label " for="lastName">Фамилия</label> <input type="text" class="form-control"
+              id="lastName" name="lastName" ng-model="account.contactData.lastName"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="accountForm.lastName.$invalid && !accountForm.lastName.$pristine" class="help-block">Въведете
+              фамилно име.</p>
+          </div>
+        </div>
+
+        <!-- phone -->
+        <div class="form-group"
+          ng-class="{ 'has-error' : accountForm.phone.$error.required && !accountForm.phone.$pristine }">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="phone">Телефон</label> <input type="text" class="form-control" id="phone"
+              name="phone" ng-model="account.contactData.phone"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+            <p ng-show="accountForm.phone.$error.required && !accountForm.phone.$pristine" class="help-block">Въведете
+              телефонен номер.</p>
+          </div>
+        </div>
+
+        <!-- email -->
+        <div class="form-group" ng-class="{ 'has-error' : accountForm.email.$invalid && !accountForm.email.$pristine }">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label " for="email">Имейл</label> <input type="email" class="form-control" id="email"
+              name="email" ng-model="account.contactData.email">
+            <p ng-show="accountForm.email.$invalid && !accountForm.email.$pristine" class="help-block">Въведете
+              валиден имейл адрес.</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a ng-click="editPassword = true">Смяна на парола</a> 
+            <div ng-if="editPassword">
+              <!-- oldPassword -->
+              <div class="form-group"
+                ng-class="{ 'has-error' : accountForm.oldPassword.$error.required && !accountForm.oldPassword.$pristine }">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label " for="oldPassword">Стара парола</label> <input type="password" class="form-control" id="oldPassword"
+                    name="oldPassword" ng-model="account.contactData.oldPassword"
+                    ng-model-options="{ updateOn: 'default blur', debounce: {'default': 100, 'blur': 0} }" required>
+                  <p ng-show="accountForm.oldPassword.$error.required && !accountForm.oldPassword.$pristine" class="help-block">Въведете
+                    старата си парола.</p>
+                </div>
+              </div>
+              <!-- newPassword1 -->
+              <div class="form-group"
+                ng-class="{ 'has-error' : accountForm.newPassword1.$error.required && !accountForm.newPassword1.$pristine }">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label " for="newPassword1">Нова парола</label> <input type="password" class="form-control" id="newPassword1"
+                    name="newPassword1" ng-model="account.contactData.newPassword1" pw-check="account.contactData.newPassword2"
+                    ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
+                  <p ng-show="accountForm.newPassword1.$error.required && !accountForm.newPassword1.$pristine" class="help-block">Въведете
+                    нова парола.</p>
+                </div>
+              </div>
+              <!-- newPassword2 -->
+              <div class="form-group"
+                ng-class="{ 'has-error' : accountForm.newPassword2.$error.required && !accountForm.newPassword2.$pristine }">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label " for="newPassword2">Нова парола отново</label> <input type="password" class="form-control" id="newPassword2"
+                    name="newPassword2" ng-model="account.contactData.newPassword2" 
+                    ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
+                  <p ng-show="accountForm.newPassword2.$error.required && !accountForm.newPassword2.$pristine" class="help-block">Въведете
+                    нова парола още веднъж.</p>
+                  <p class="help-block" style="color: #a94442;" ng-show="accountForm.newPassword1.$error.pwmatch && !accountForm.newPassword2.$pristine && !accountForm.newPassword1.$pristine"> 
+                  Паролите не съвпадат! 
+                  </p>
+                    
+                </div>
+              </div>
+            
+            
+            
+            
+            
+            
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <hr> <!-- footer line -->
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0px">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input name="submit" class="btn btn-primary" value="Запиши" type="submit" ng-disabled="accountForm.$invalid">
+            <label style="padding-left:15px">{{message}}</label>
+          </div>
+        </div>
+
+      </form>
+      <!--/ДАННИ ЗА КОНТАКТ-->
+
+
+    </div>
+    <!-- end of panel-body -->
+  </div>
+  <!-- end of panel -->
+
 </div>

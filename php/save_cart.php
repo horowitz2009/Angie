@@ -30,7 +30,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['cart'])) {
   $db = new DBService();
   $conn = $db->createPDOConnection();
   $storage->setConnection($conn);
-  $tokenGenerator = new Rememberme\TokenGenerator("horowitz_" . $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+  $tokenGenerator = new Rememberme\TokenGenerator("horowitz_" . $_SERVER['REMOTE_ADDR']); //. $_SERVER['HTTP_USER_AGENT']
   $cartService = new CartService($storage, $tokenGenerator);
   
   $username = $_POST['username'];

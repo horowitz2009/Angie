@@ -409,7 +409,6 @@
                 <td style="" class="text-right">Доставка:<br>
                 <small ng-show="cart.shippingData.selectedOption">{{cart.shippingData.getOption().getNameAndService()}}</small></td>
                 <td style="" class="text-right">
-                  <!-- ng-show="!canShippingBeCalculated()"  -->
                   <a data-toggle="modal" data-target="#ModalZip"
                       class="btn btn-xs btn-info"><span ng-show="!cart.shippingData.selectedOption">изчисли!</span><span ng-show="cart.shippingData.selectedOption">промени!</span></a>
                   <span ng-show="cart.shippingData.selectedOption" class="text-nowrap bigPrice">
@@ -477,7 +476,7 @@
       <form name="zipForm" method="post" ng-submit="shippingCtrl.submitSettlement(cart)" novalidate>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title-site text-center">Въведете пощенски код или населено място</h3>
+          <h3 class="modal-title-site text-center">Калкулатор на доставка</h3>
         </div>
         <div class="modal-body" style="min-height:290px">
           <div class="control-group">
@@ -498,7 +497,7 @@
             </div>
           </div>
 
-          <div class="form-group zipCity" ng-show="shippingCtrl.shippingData.settlement.country == 'България'">
+          <div class="form-group zipCity" ng-if="shippingCtrl.shippingData.settlement.country == 'България'">
             <div>
               <label class="control-label " for="zipCodeAndCity2">Пощенски код или населено място</label> 
       <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
@@ -586,7 +585,7 @@
         </div>
         <div class="modal-footer">
           <div class="pull-right">
-            <input name="submit" class="btn btn-block btn-primary" value="Избери" type="submit" ng-disabled="zipForm.$invalid">
+            <input name="submit" class="btn btn-block btn-primary" value="Избери" type="submit" ng-disabled="!shippingCtrl.shippingData.getOption()">
           </div>
           <!-- 
           <div class="container-fluid">

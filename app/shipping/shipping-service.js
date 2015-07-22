@@ -132,56 +132,36 @@ angular.module('felt.shipping.service', [
     var tableGK = factory.speedyTables.tableGK;
     var tableECO = factory.speedyTables.tableECO;
     var table358 = factory.speedyTables.table358;
-
-    isSofia = false;
-    hasOffice = false;
-
-    if (!isNaN(zip) && parseInt(zip) < 2000) {
-      found = utils.indexOf(factory.zipCodesExceptions, zip) >= 0;
-      if (found) {
-        // these zips are threated as Sofia
-        found = !(utils.indexOf(exceptions, zip) >= 0);
-      }
-      isSofia = !found;
-    }
+    var tableMac = factory.speedyTables.tableMacedonia;
+    var tableEB = factory.speedyTables.tableExpressBalkans;
     
-    if (isSofia) {
-      //Speedy: Gradski kurier ili 3-5-8 (do 8kg) do ofis na Speedy
-      hasOffice = true;
-      options.toDoor.service = "Градски куриер";
-
-      // first calc GK
-      var rate = findTariff(weight, tableGK);
-      rate2 = applyReductionsAndTaxes(rate, true, false);
-      options.toDoor.amount = rate2;
-
-      // NOW to Office options
-      rate2 = applyReductionsAndTaxes(rate, true, true);
-      options.toOffice.amount = rate2;
-      options.toOffice.service = "Градски куриер";
-      if (weight - 8.0 <= 0.0000001) {
-        // try 358
-        rate = findTariff(weight, table358);
-        if (rate - rate2 <= 0.0000001) {
-          options.toOffice.amount = rate;
-          options.toOffice.service = "3-5-8";
+    if (country === 'България') {
+      isSofia = false;
+      hasOffice = false;
+  
+      if (!isNaN(zip) && parseInt(zip) < 2000) {
+        found = utils.indexOf(factory.zipCodesExceptions, zip) >= 0;
+        if (found) {
+          // these zips are threated as Sofia
+          found = !(utils.indexOf(exceptions, zip) >= 0);
         }
+        isSofia = !found;
       }
       
-    } else {
-      //NOT SOFIA
-      //Speedy: eco
-      options.toDoor.service = "Икономична";
-      rate = findTariff(weight, tableECO);
-      rate2 = applyReductionsAndTaxes(rate, true, false);
-      options.toDoor.amount = rate2;
-
-      
-      if (zipE ? zipE.speedyOffices.length > 0 : factory.hasSpeedyOffice(zip, city)) {
-        // try do ofis na Speedy
+      if (isSofia) {
+        //Speedy: Gradski kurier ili 3-5-8 (do 8kg) do ofis na Speedy
+        hasOffice = true;
+        options.toDoor.service = "Градски куриер";
+  
+        // first calc GK
+        var rate = findTariff(weight, tableGK);
+        rate2 = applyReductionsAndTaxes(rate, true, false);
+        options.toDoor.amount = rate2;
+  
+        // NOW to Office options
         rate2 = applyReductionsAndTaxes(rate, true, true);
         options.toOffice.amount = rate2;
-        options.toOffice.service = "Икономична";
+        options.toOffice.service = "Градски куриер";
         if (weight - 8.0 <= 0.0000001) {
           // try 358
           rate = findTariff(weight, table358);
@@ -190,7 +170,44 @@ angular.module('felt.shipping.service', [
             options.toOffice.service = "3-5-8";
           }
         }
+        
+      } else {
+        //NOT SOFIA
+        //Speedy: eco
+        options.toDoor.service = "Икономична";
+        rate = findTariff(weight, tableECO);
+        rate2 = applyReductionsAndTaxes(rate, true, false);
+        options.toDoor.amount = rate2;
+  
+        
+        if (zipE ? zipE.speedyOffices.length > 0 : factory.hasSpeedyOffice(zip, city)) {
+          // try do ofis na Speedy
+          rate2 = applyReductionsAndTaxes(rate, true, true);
+          options.toOffice.amount = rate2;
+          options.toOffice.service = "Икономична";
+          if (weight - 8.0 <= 0.0000001) {
+            // try 358
+            rate = findTariff(weight, table358);
+            if (rate - rate2 <= 0.0000001) {
+              options.toOffice.amount = rate;
+              options.toOffice.service = "3-5-8";
+            }
+          }
+        }
       }
+    } else if (country === 'Македония') {
+      options.toDoor.service = "Международна";
+      rate = findTariff(weight, tableMac);
+      //the VAT and fuel tax are already included
+      options.toDoor.amount = rate;
+      
+    } else if (country === 'Гърция' || country === 'Румъния') {
+      options.toDoor.service = "ExpressBalkans";
+      var rate = findTariff(weight, tableEB);
+      //the VAT and fuel tax are already included
+      //reduce with 5% if package sent from office
+      rate = rate * 0.95;
+      options.toDoor.amount = rate;
     }
     
   }
@@ -201,54 +218,70 @@ angular.module('felt.shipping.service', [
     var tableOD = factory.ekontTables.tableOD;
     var tableDD = factory.ekontTables.tableDD;
     var tablePS = factory.ekontTables.tablePS;
-    
-    hasOffice = zipE ? zipE.ekontOffices.length > 0 : factory.hasEkontOffice(zip, city);
-    
-    var isSofia = false;
-
-    if (!isNaN(zip) && parseInt(zip) < 2000) {
-      if (utils.indexOf(factory.zipCodesExceptions, zip) < 0) {
-        zip = 1000; 
-      }
-    }
+    var tableGR = factory.ekontTables.tableGR;
+    var tableRO = factory.ekontTables.tableRO;
     
     var rate, rate2;
     var fuelTaxMultiplier = 1 + parseFloat(factory.ekontTables.fuelTax);
-    
-    if (hasOffice) {
-      //toOffice
-      if (weight - 20.0 <= 0.0000001) {
-        //1. toOffice - PS
-        options.toOffice.service = "Пощенска";
-        rate = findTariff(weight, tablePS);
-      } else {
-        //2. toOffice - OO
-        options.toOffice.service = "Офис-Офис";
-        rate = findTariff(weight, tableOO);
+
+    if (country === 'България') {
+      
+      hasOffice = zipE ? zipE.ekontOffices.length > 0 : factory.hasEkontOffice(zip, city);
+      
+      var isSofia = false;
+  
+      if (!isNaN(zip) && parseInt(zip) < 2000) {
+        if (utils.indexOf(factory.zipCodesExceptions, zip) < 0) {
+          zip = 1000; 
+        }
       }
-      rate2 = rate * fuelTaxMultiplier;
-      options.toOffice.amount = rate2;
       
       
-      //toDoor - GK, OD if less than 2kg
-      if (weight - 2.0 <= 0.0000001) {
+      if (hasOffice) {
+        //toOffice
+        if (weight - 20.0 <= 0.0000001) {
+          //1. toOffice - PS
+          options.toOffice.service = "Пощенска";
+          rate = findTariff(weight, tablePS);
+        } else {
+          //2. toOffice - OO
+          options.toOffice.service = "Офис-Офис";
+          rate = findTariff(weight, tableOO);
+        }
+        rate2 = rate * fuelTaxMultiplier;
+        options.toOffice.amount = rate2;
+        
+        
+        //toDoor - GK, OD if less than 2kg
+        if (weight - 2.0 <= 0.0000001) {
+          options.toDoor.service = "Офис-Врата";
+          rate = findTariff(weight, tableOD);
+        } else {
+          options.toDoor.service = "Градски куриер";
+          rate = findTariff(weight, tableGK);
+        }
+        rate2 = rate * fuelTaxMultiplier;
+        options.toDoor.amount = rate2;
+        
+      } else {
+        //no office - DD
         options.toDoor.service = "Офис-Врата";
-        rate = findTariff(weight, tableOD);
-      } else {
-        options.toDoor.service = "Градски куриер";
-        rate = findTariff(weight, tableGK);
+        rate = findTariff(weight, tableDD);
+        rate2 = rate * fuelTaxMultiplier;
+        options.toDoor.amount = rate2;
       }
+    } else if (country === 'Гърция') {
+      var rate = findTariff(weight, tableGR);
+      options.toDoor.service = "Международна";
       rate2 = rate * fuelTaxMultiplier;
       options.toDoor.amount = rate2;
       
-    } else {
-      //no office - DD
-      options.toDoor.service = "Офис-Врата";
-      rate = findTariff(weight, tableDD);
+    } else if (country === 'Румъния') {
+      var rate = findTariff(weight, tableRO);
+      options.toDoor.service = "Международна";
       rate2 = rate * fuelTaxMultiplier;
       options.toDoor.amount = rate2;
-    }
-    
+    }     
   }
   
   factory.calculateShippingCosts = function(weight, countryOrObj, zip, city, zipE) {
@@ -260,12 +293,12 @@ angular.module('felt.shipping.service', [
       zip = countryOrObj.zipCode;
       city = countryOrObj.city;
     }
-    if (country == 'България') {//TODO refactor
+
       if (zipE) {
         zip = zipE.zipCode;
         city = zipE.city;
       }
-      if (!zip || !city)
+      if (country==='България' && (!zip || !city))
         return options;
         
       weight = weight + 200.0;//TODO tune this later
@@ -309,7 +342,6 @@ angular.module('felt.shipping.service', [
       } else if (toDoorOptions.length == 1) {
         options.push(toDoorOptions[0]);
       }
-    }
     console.log("calculateShippingCosts...done");
     return options;
   }

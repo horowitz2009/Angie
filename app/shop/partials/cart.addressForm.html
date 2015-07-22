@@ -143,13 +143,17 @@
         
         <!-- zipCode and city -->
         <div class="form-group" style="">
-          <!-- zipCode -->
+        
+        
+<!-- ZIP CODE =================================================== ZIP CODE =============================================================== -->
           <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"
             ng-class="{ 'has-error' : addressForm.zipCode2.$invalid && !addressForm.zipCode2.$pristine }">
           
             <label class="control-label" for="zipCode2">Пощенски код</label>  
             
-            
+            <div ng-if="cart.shippingData.settlement.country !== 'България'">
+              <input type="text" class="form-control input" id="zipCode2" name="zipCode2" ng-model="cart.shippingData.settlement.zipCode" required>
+            </div>
       <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
       <script type="text/ng-template" id="/zip-code-template.html">
         <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
@@ -182,9 +186,11 @@
           </div>
         </div>
       </script>
-            <div angucomplete-alt pause="400"
+            <div ng-if="cart.shippingData.settlement.country === 'България'" 
+                
+                angucomplete-alt pause="400"
             
-                selected-object="shippingCtrl.setZipCodeAndCity"
+                selected-object="shippingCtrl.setZipCodeAndCity1"
                 custom-lookup="shippingCtrl.customLookup"
                 custom-matching="shippingCtrl.customMatching"
                 custom-select="shippingCtrl.customSelectZipCode"
@@ -211,11 +217,14 @@
             
           </div>
 
-          <!-- city -->
+<!-- CITY ====================================================== CITY ====================================================================== -->
           <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"
             ng-class="{ 'has-error' : addressForm.city2.$invalid && !addressForm.city2.$pristine }">
             <label class="control-label " for="city2">Населено място</label> 
             
+            <div ng-if="cart.shippingData.settlement.country !== 'България'">
+              <input type="text" class="form-control input" id="city2" name="city2" ng-model="cart.shippingData.settlement.city" required>
+            </div>
             
       <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
       <script type="text/ng-template" id="/city-template.html">
@@ -249,7 +258,8 @@
           </div>
         </div>
       </script>
-            <div angucomplete-alt pause="400"
+            <div ng-if="cart.shippingData.settlement.country === 'България'"
+                angucomplete-alt pause="400"
                 selected-object="shippingCtrl.setZipCodeAndCity"
                 custom-lookup="shippingCtrl.customLookup"
                 custom-matching="shippingCtrl.customMatching"
@@ -377,9 +387,8 @@
         <div class="form-group options" ng-show="cart.shippingData.options && cart.shippingData.options.length == 0">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <!-- INPUT TEXT Courier Office dropdown-->
-            <label class="control-label " for="streetAddress1">Адрес (ул. номер, бл., ет., ...)</label> 
-            <input type="text" class="form-control" name="streetAddress1"
-                   ng-model="cart.shippingData.streetAddress1" required>
+            <label class="control-label " for="cart.shippingData.office['address']">Адрес (ул. номер, бл., ет., ...)</label> 
+            <input type="text" class="form-control" ng-model="cart.shippingData.office['address']" required>
             <!--   
             <p ng-show="addressForm.streetAddress1.$error.required && !addressForm.streetAddress1.$pristine"
                class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
