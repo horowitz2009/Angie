@@ -30,14 +30,14 @@ if (! empty($_POST) && isset($_POST['oldusername']) && isset($_POST['newusername
   $db = new DBService();
   $conn = $db->createPDOConnection();
   $storage->setConnection($conn);
-  $tokenGenerator = new Rememberme\TokenGenerator("horowitz_" . $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+  $tokenGenerator = new Rememberme\TokenGenerator("horowitz_" . $_SERVER['REMOTE_ADDR']); //. $_SERVER['HTTP_USER_AGENT']
   $cartService = new CartService($storage, $tokenGenerator);
   
   $oldusername = $_POST['oldusername'];
   $newusername = $_POST['newusername'];
   $cart = $_POST['cart'];
   
-  $cartService->setCookieName('CART_' . $newusername);
+  $cartService->setCookieName($newusername);
   $cartService->saveCart($newusername, $cart);
   
   $cartService->setCookieName($oldusername);

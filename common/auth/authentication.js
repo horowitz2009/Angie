@@ -121,7 +121,7 @@ angular.module('common.authentication', [
       error : function(res) {
         console.log("login from remember me failed");
         Session.create("", "guest", "guest");
-        $rootScope.$broadcast(AUTH_EVENTS.loginFromRememberMeFailed, res);
+        $rootScope.$broadcast(AUTH_EVENTS.loginFailed, res);
         return res;
       }
     });

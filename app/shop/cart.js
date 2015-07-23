@@ -338,11 +338,25 @@ angular
           
           service.transferCart = function(oldUsername, newUsername) {
             console.log("Transferring cart from " + oldUsername + " to " + newUsername);
+            
+            var jsonStr = JSON.stringify(service.cart, function(key, value) {
+              if (key === 'options')
+                return [];
+              else if (key === 'selectedOptionObj')
+                return null;
+              else if (key === 'ekontOffices')
+                return [];
+              else if (key === 'speedyOffices')
+                return [];
+                
+              return value;  
+            });
+            
             return $.ajax({
               type : "POST",
               encoding:"UTF-8",
               url : 'php/transfer_cart.php',
-              data : { 'cart': JSON.stringify(service.cart), 'oldusername': oldUsername, 'newusername': newUsername }
+              data : { 'cart': jsonStr, 'oldusername': oldUsername, 'newusername': newUsername }
             });
               
           }

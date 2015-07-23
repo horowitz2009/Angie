@@ -710,7 +710,7 @@
 
         <!--- this part will be hidden for mobile version -->
         <div class="nav navbar-nav navbar-right hidden-xs">
-          <div class="dropdown  cartMenu cartMenu1 ">
+          <div class="dropdown  cartMenu cartMenu1 " ng-cloak>
             <a ui-sref="shop.cart.edit" class="dropdown-toggle cart111" data-toggle="dropdown" data-hover="dropdown"> <i
               class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Количка ({{cart.subTotal | number:2}}) </span>
               <b class="caret"> </b>

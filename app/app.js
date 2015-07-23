@@ -281,8 +281,6 @@ angular.module('felt', [
   }
   
   $scope.setCurrentUser = function(user) {
-    //MAY BE NOT DEPRECATED
-    console.log('MAY BE NOT DEPRECATED');
     var oldUsername = $scope.getUsername();
     $scope.currentUser = user == null ? 'guest' : user.email;
     var newUsername = $scope.getUsername();
@@ -290,13 +288,7 @@ angular.module('felt', [
     $rootScope.$broadcast("user-changed", oldUsername, newUsername);
   };
   
-  $scope.logout = function (logoutAll) {
-	  console.log("LOGOUT CLICKED");
-	  AuthService.logout(logoutAll).always(function (user) {
-		  $scope.setCurrentUser('guest');
-		  $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-	  });
-  };
+  $scope.logout = AuthService.logout;
 
   $scope.isLoginPage = false;
   $scope.cartEvents = null;
@@ -322,74 +314,74 @@ angular.module('felt', [
   $scope.loadCart = function(oldUsername, newUsername) {
     console.log("LOADING CART " + oldUsername + " -> " + newUsername + "   - " + AuthService.getUsername());
     var oldCart = angular.copy($scope.cart);
-    CartPersistenceService.loadCart(AuthService.getUsername()).then(function(){
-      if($scope.cartEvents != null) {
-        console.log("................................................................WIRING...");
-        $scope.cartEvents();
-        console.log("................................................................WIRING...");
-        $scope.wireCartEvents();
-    } else {
-      $scope.wireCartEvents();
-    }
-
-
-    }).then(function() {
-      //newCart is a copy!!!
-      console.log("THIS IS IT. 000000000000000000000000000000000000000000000000000");
-      console.log("OLD cart");
-      console.log(oldCart);
-      console.log("NEW cart");
-      newCart = $scope.cart;
-      console.log(newCart);
-      $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
-
-      if (isEmpty(oldCart)) {
-         //no problem for all situations
-      } else {
-         if(isEmpty(newCart)) {
-           //copy oldCart to newCart. remove oldCart from DB
-           CartService.mergeCarts(oldCart, newCart);
-         } else {
-           if (!angular.equals(oldCart, newCart)) {
-             //STRATEGY 'USE NEWEST'
-             //means although user has a cart as logged, the current and newest cart as guest will be used
-             angular.copy(oldCart, $scope.cart);             
-           }
-           if (oldUsername == "guest" && newUsername != "guest") {
-             //transfer the cart from guest to logged
-             CartPersistenceService.transferCart(oldUsername, newUsername);
-           } else {
-             CartService.resetCart();
-           } 
-         }
-       }
-      
-      //1. if different and both are not empty
-      //have to choose
-      
-      //2. if different and old is empty guest, new is user and not empty
-      //no problem - load new and do nothing
-      
-      //3. if different and old is empty user, new is guest and not empty - should be not possible
-      
-      //4. if different and old is full user, new is guest
-      // -> remove the cart
-      
-      //5. if different, old is full guest, new empty user
-      // -> copy old cart to new cart and remove guest cart
-      
-      console.log("oldCart isEmpty: " + isEmpty(oldCart));
-      console.log("newCart isEmpty: " + isEmpty(newCart));
-      console.log("===============================================================");
-      
-      
-    }).then(function(){
-      $scope.$apply();
-    });
-
     
+    CartPersistenceService.loadCart(AuthService.getUsername())
     
+    .then(function(){
+        if($scope.cartEvents != null) {
+          $scope.cartEvents();
+          $scope.wireCartEvents();
+        } else {
+          $scope.wireCartEvents();
+        }
+      })
+      
+    .then(function() {
+        //newCart is a copy!!!
+        console.log("THIS IS IT. 000000000000000000000000000000000000000000000000000");
+        console.log("OLD cart");
+        console.log(oldCart);
+        console.log("NEW cart");
+        newCart = $scope.cart;
+        console.log(newCart);
+        $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
+
+        if (isEmpty(oldCart)) {
+          //no problem for all situations
+        } else {
+          if(isEmpty(newCart)) {
+            //copy oldCart to newCart. remove oldCart from DB
+            CartService.mergeCarts(oldCart, newCart);
+          } else {
+            if (!angular.equals(oldCart, newCart)) {
+              //STRATEGY 'USE NEWEST'
+              //means although user has a cart as logged, the current and newest cart as guest will be used
+              angular.copy(oldCart, $scope.cart);             
+            }
+            if (oldUsername == "guest" && newUsername != "guest") {
+              //transfer the cart from guest to logged
+              CartPersistenceService.transferCart(oldUsername, newUsername);
+            } else {
+              CartService.resetCart();
+            } 
+          }
+        }
+      
+        //1. if different and both are not empty
+        //have to choose
+      
+        //2. if different and old is empty guest, new is user and not empty
+        //no problem - load new and do nothing
+      
+        //3. if different and old is empty user, new is guest and not empty - should be not possible
+      
+        //4. if different and old is full user, new is guest
+        // -> remove the cart
+      
+        //5. if different, old is full guest, new empty user
+        // -> copy old cart to new cart and remove guest cart
+      
+        console.log("oldCart isEmpty: " + isEmpty(oldCart));
+        console.log("newCart isEmpty: " + isEmpty(newCart));
+        console.log("===============================================================");
+      
+      
+      })
     
+    .then(function(){
+        $scope.$apply();
+      });
+
     
   }
 
@@ -405,7 +397,9 @@ angular.module('felt', [
   console.log("LOGIN FROM REMEMBER ME...");
   //AuthService.loginFromRememberMe(false);
   
-  AuthService.loginFromRememberMe(true).then(function(user) {
+  AuthService.loginFromRememberMe(true)
+  /*
+  .then(function(user) {
     if (user) {
       console.log("Logged by RememberMe...");
       $scope.setCurrentUser(user);
@@ -414,10 +408,10 @@ angular.module('felt', [
       $scope.setCurrentUser(null);
     }
     
-  }, function() {
-    console.log("Failed to login by RememberMe...");
+  }, function(res) {
+    console.log("Failed to login by RememberMe..." + res);
     $scope.setCurrentUser(null);
-  })
+  })*/
   
   .always(function() {
     $('#userMenu').removeClass('hide');
@@ -458,6 +452,16 @@ angular.module('felt', [
     $scope.setCurrentUser(args);
   });
 
+  $scope.$on(AUTH_EVENTS.logoutSuccess, function(event, args) {
+    console.log("logout success caught");
+    $scope.setCurrentUser(null);
+  });
+  
+  $scope.$on(AUTH_EVENTS.loginFailed, function(event, args) {
+    console.log("login failed caught");
+    $scope.setCurrentUser(null);
+  });
+  
   var subTotalPromise = null;
   var addToCartPromise = null;
   var saveCartPromise = null;
