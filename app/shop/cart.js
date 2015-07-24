@@ -183,6 +183,8 @@ angular
           // reset cart
           service.resetCart = function() {
             cart.items.splice(0, cart.items.length);
+            cart.contactData = {};
+            cart.shippingData = new ShippingData();
             service.recalcTotals();
           }
           

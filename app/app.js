@@ -315,7 +315,7 @@ angular.module('felt', [
     console.log("LOADING CART " + oldUsername + " -> " + newUsername + "   - " + AuthService.getUsername());
     var oldCart = angular.copy($scope.cart);
     
-    CartPersistenceService.loadCart(AuthService.getUsername())
+    CartPersistenceService.loadCart(newUsername)
     
     .then(function(){
         if($scope.cartEvents != null) {

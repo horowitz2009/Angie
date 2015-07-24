@@ -31,7 +31,7 @@ angular.module('common.authentication', [
   };
   this.destroy = function () {
     this.id = null;
-    this.userId = null;
+    this.userId = "guest";
     console.log("SESSION DESTROY: " + this.userId);
     this.userRoles = null;
   };
