@@ -5,24 +5,33 @@ angular.module('home.account', [
 .service('Account', function () {
   console.log("[  6 home.service Account]");
   
-  this.contactData = {"email" : "guest"};
-  this.shippingData = new ShippingData();
-  this.orders = [];
-  
+  this.reset = function() {
+    this.contactData = {"email" : ""};
+    this.shippingData = new ShippingData();
+    this.orders = [];
+  }
+
   this.setData = function (data) {
-    //this.data = data;//TODO parse it
-    if(data.contactData)
-      angular.copy(data, this);
+    if(data.contactData) {
+      angular.copy(data.contactData, this.contactData);
+      angular.copy(data.shippingData, this.shippingData);
+      angular.copy(data.orders, this.orders);
+    } else {
+      this.reset();
+    }
   };
+
+  this.reset();
   
 })
 
 .factory('AccountService', ["$http", "Account", function ($http, Account) {
-  console.log("[ 39 home.factory AccountService]");
+  console.log("[ 20 home.factory AccountService]");
   var accountService = {};
   
   //LOAD ACCOUNT
   accountService.loadAccount = function(username) {
+    console.log("Loading account...");
     return $.ajax({
       type : "POST",
       data : {
@@ -30,8 +39,13 @@ angular.module('home.account', [
       },
       url : 'php/load_account.php',
       success : function(res) {
-        if (res)
+        console.log("-------------========================---------------------------");
+        if (res) {
+          console.log("Account loaded");
+          console.log(res);
           Account.setData(res);
+          console.log(Account);
+        }
         return Account;
       },
       error : function(res) {

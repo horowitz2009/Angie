@@ -65,9 +65,9 @@ angular.module('felt', [
                 })
 
                 
-                //////////
+                ////////////////
                 // My Account //
-                //////////
+                ////////////////
                 .state("myaccount", {
 
                     url: "/myaccount",
@@ -76,12 +76,10 @@ angular.module('felt', [
                       displayName: 'Моят акаунт'
                     },
                     
-                    resolve: {
-                      account : [ 'AccountService', 'Session', function(AccountService, Session) {
-                        return AccountService.loadAccount(Session.userId);
-                      } ]
+                    params: {
+                      newAccount: false
                     },
-
+                    
                     views: {
                         'banner': {
                             
@@ -89,36 +87,120 @@ angular.module('felt', [
 
                         '': {
                           templateUrl: 'app/home/partials/myaccount.html',
-                          controller : [ '$scope', 'AccountService', 'account', 'Session', function($scope, AccountService, account, Session) {
-                            $scope.account = angular.copy(account);
-                            $scope.account.contactData.email = Session.userId;
-                            $scope.editPassword = false;
-                            $scope.message = '';
-                            $scope.saveAccount = function() {
-                              $scope.message = '...';
-                              console.log("Saving account: ");
-                              console.log($scope.account);
-                              AccountService.saveAccount($scope.account, function() {
-                                console.log("good");
-                                $scope.message = 'Профилът е записан успешно!';
-                              },
+                          controller : [ '$scope', '$state', 'AuthService', 'AccountService', 'Account', 'Session', '$timeout',
+                            function($scope, $state, AuthService, AccountService, Account, Session, $timeout) {
+                            
+                            $scope.headingLabel = "Моят акаунт";
+                            $scope.newPasswordLabel = "Нова парола";
+                            $scope.newPasswordAgainLabel = "Нова парола отново";
+
+                            
+                            if (AuthService.isGuest()) {
+                              if($state.params.newAccount) {
+                                console.log("OK. I'm gonna register you...");
+                                $state.go('register');
+                              } else {
+                                $state.go('home');
+                              }
+                            } else {
+                              $scope.account = Account;
+                              $scope.account.contactData.email = Session.userId;
+                              $scope.editPassword = false;
+                              $scope.message = '';
                               
-                              function() {
-                                console.log("UH OH");
-                                $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
-                              });
+                              $scope.saveAccount = function() {
+                                $scope.message = '...';
+                                console.log("Saving account: ");
+                                console.log($scope.account);
+                                AccountService.saveAccount($scope.account, function() {
+                                  console.log("good");
+                                  $scope.message = 'Акаунтът е записан успешно!';
+                                  $scope.$apply();
+                                  //TODO timeout 30sec and remove the message
+                                  $timeout(function() {
+                                    $scope.message = '';
+                                    $scope.$apply();
+                                  }, 10000);
+                                },
+
+                                function() {
+                                  console.log("UH OH");
+                                  $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                                });
+                              }
                             }
                           }]
                         }
 
-                    },
-                    
-                    onExit: function () {
-                        $('.slider-v1').cycle('destroy');
                     }
 
                 })
 
+                ////////////////
+                // Register //
+                ////////////////
+                .state("register", {
+                  
+                  url: "/register",
+                  
+                  data: {
+                    displayName: 'Регистрация на акаунт'
+                  },
+                  
+                  params: {
+                    newAccount: true
+                  },
+                  
+                  views: {
+                    'banner': {
+                      
+                    },
+                    
+                    '': {
+                      templateUrl: 'app/home/partials/myaccount.html',
+                      controller : [ '$scope', '$state', 'AuthService', 'AccountService', 'Account', 'Session', 'CartService', '$timeout',
+                                     function($scope, $state, AuthService, AccountService, Account, Session, CartService, $timeout) {
+                        
+                        $scope.headingLabel = "Регистрация на акаунт";
+                        $scope.newPasswordLabel = "Парола";
+                        $scope.newPasswordAgainLabel = "Парола отново";
+                        
+                        var cart = CartService.cart;
+                        angular.copy(cart.contactData, Account.contactData);
+                        
+                        $scope.account = Account;
+                        //$scope.account.contactData.email = Session.userId;
+                        $scope.newAccount = true;
+                        $scope.editPassword = true;
+                        $scope.message = '';
+                        
+                        $scope.saveAccount = function() {
+                          $scope.message = '...';
+                          console.log("Saving account: ");
+                          console.log($scope.account);
+                          AccountService.saveAccount($scope.account, function() {
+                            console.log("good");
+                            $scope.message = 'Акаунтът е записан успешно!';
+                            $scope.$apply();
+                            //TODO timeout 30sec and remove the message
+                            $timeout(function() {
+                              $scope.message = '';
+                              $scope.$apply();
+                            }, 10000);
+                          },
+                          
+                          function() {
+                            console.log("UH OH");
+                            $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                          });
+                        }
+                      }]
+                    }
+                    
+                  }
+                  
+                })
+                
                 ///////////
                 // About //
                 ///////////
@@ -263,11 +345,12 @@ angular.module('felt', [
 // MAIN CONTROLLER
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService','AUTH_EVENTS',
-                         'ShopService', 'maxVisibleElements',
+.controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', //'shippingCtrl',
+                         'Account', 'AUTH_EVENTS', 'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
                          '$animate', '$timeout', '$interval',
-                    function($scope, $rootScope, USER_ROLES, AuthService, AUTH_EVENTS, ShopService, maxVisibleElements, 
+                    function($scope, $rootScope, USER_ROLES, AuthService, AccountService, //shippingCtrl,
+                         Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval) {
   
@@ -334,8 +417,7 @@ angular.module('felt', [
         console.log("NEW cart");
         newCart = $scope.cart;
         console.log(newCart);
-        $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
-
+        
         if (isEmpty(oldCart)) {
           //no problem for all situations
         } else {
@@ -349,33 +431,27 @@ angular.module('felt', [
               angular.copy(oldCart, $scope.cart);             
             }
             if (oldUsername == "guest" && newUsername != "guest") {
+              //login
               //transfer the cart from guest to logged
+              
+              manageAccount($scope.cart, Account);
+
               CartPersistenceService.transferCart(oldUsername, newUsername);
+
+
             } else {
+              //logout
+
               CartService.resetCart();
+              //FIXME shippingCtrl.reset();
+
             } 
           }
         }
-      
-        //1. if different and both are not empty
-        //have to choose
-      
-        //2. if different and old is empty guest, new is user and not empty
-        //no problem - load new and do nothing
-      
-        //3. if different and old is empty user, new is guest and not empty - should be not possible
-      
-        //4. if different and old is full user, new is guest
-        // -> remove the cart
-      
-        //5. if different, old is full guest, new empty user
-        // -> copy old cart to new cart and remove guest cart
-      
-        console.log("oldCart isEmpty: " + isEmpty(oldCart));
-        console.log("newCart isEmpty: " + isEmpty(newCart));
+
+        $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
+        
         console.log("===============================================================");
-      
-      
       })
     
     .then(function(){
@@ -385,46 +461,14 @@ angular.module('felt', [
     
   }
 
-  //HMM
-//  $scope.$on(AUTH_EVENTS.loginSuccess, function(event, args) {
-//    if (args.email) {
-//      $scope.loadCart('guest', args.email);
-//      
-//    }
-//  });
-
-  // TRY LOGIN FROM REMEMBER ME
+  //LOGIN FROM REMEMBER ME
   console.log("LOGIN FROM REMEMBER ME...");
-  //AuthService.loginFromRememberMe(false);
-  
-  AuthService.loginFromRememberMe(true)
-  /*
-  .then(function(user) {
-    if (user) {
-      console.log("Logged by RememberMe...");
-      $scope.setCurrentUser(user);
-    } else {
-      console.log("No valid token found...");
-      $scope.setCurrentUser(null);
-    }
-    
-  }, function(res) {
-    console.log("Failed to login by RememberMe..." + res);
-    $scope.setCurrentUser(null);
-  })*/
-  
-  .always(function() {
+  AuthService.loginFromRememberMe(true).always(function() {
     $('#userMenu').removeClass('hide');
     $scope.$apply();
   });
   
-  
-  
-  $scope.$on("user-changed", function(event, oldUsername, newUsername) {
-    console.log("user changed:");
-    console.log("old username: " + oldUsername);
-    console.log("new username: " + newUsername);
-    
+  $scope.userChanged = function(oldUsername, newUsername) {
     var oldCart2 = angular.copy($scope.cart);
     
     var savePromise = null;
@@ -442,6 +486,28 @@ angular.module('felt', [
       });
     else 
       $scope.loadCart(oldUsername, newUsername);//load cart. no cart is being saved
+    
+  }
+  
+  
+  $scope.$on("user-changed", function(event, oldUsername, newUsername) {
+    console.log("user changed:");
+    console.log("old username: " + oldUsername);
+    console.log("new username: " + newUsername);
+    var accountPromise = null;
+    if (!AuthService.isGuest()) {
+      accountPromise = AccountService.loadAccount(newUsername);
+    } else {
+      if ($rootScope.$state.current.name === 'myaccount')
+        $rootScope.$state.go('home');
+    }
+    
+    if (accountPromise)
+      accountPromise.always(function(){
+        $scope.userChanged(oldUsername, newUsername);
+      });
+    else
+      $scope.userChanged(oldUsername, newUsername);
     
   });
   
@@ -566,4 +632,20 @@ angular.module('felt', [
 
 function isEmpty(cart) {
   return  cart == null || (cart.items && cart.items.length == 0);  
+}
+
+function manageAccount(cart, account) {
+  if (hasContactData(account.contactData)) {
+    //we have contactData //copy it to cart
+    angular.copy(account.contactData, cart.contactData);
+    //TODO account.shippingData.copyTo(cart.shippingData);
+  } else {
+    if (hasContactData(cart.contactData)) {
+      angular.copy(cart.contactData, account.contactData);
+    }
+  }
+}
+
+function hasContactData(a) {
+  return a && a.firstName && a.lastName && a.phone;
 }

@@ -1,7 +1,9 @@
 <div class="col-lg-9 col-sm-8 col-xs-12 col-md-8 no-margin no-padding">
 
   <div class="panel panel-success">
-    <div class="panel-heading">Профил</div>
+  
+    <div class="panel-heading">{{headingLabel}}</div>
+    
     <div class="panel-body">
 
       <!-- ДАННИ ЗА КОНТАКТ -->
@@ -52,10 +54,10 @@
         
         <div class="form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <a ng-click="editPassword = true">Смяна на парола</a> 
+            <a ng-click="editPassword = true" ng-if="!newAccount">Смяна на парола</a> 
             <div ng-if="editPassword">
               <!-- oldPassword -->
-              <div class="form-group"
+              <div class="form-group" ng-if="!newAccount"
                 ng-class="{ 'has-error' : accountForm.oldPassword.$error.required && !accountForm.oldPassword.$pristine }">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label " for="oldPassword">Стара парола</label> <input type="password" class="form-control" id="oldPassword"
@@ -69,7 +71,7 @@
               <div class="form-group"
                 ng-class="{ 'has-error' : accountForm.newPassword1.$error.required && !accountForm.newPassword1.$pristine }">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label " for="newPassword1">Нова парола</label> <input type="password" class="form-control" id="newPassword1"
+                  <label class="control-label " for="newPassword1">{{newPasswordLabel}}</label> <input type="password" class="form-control" id="newPassword1"
                     name="newPassword1" ng-model="account.contactData.newPassword1" pw-check="account.contactData.newPassword2"
                     ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
                   <p ng-show="accountForm.newPassword1.$error.required && !accountForm.newPassword1.$pristine" class="help-block">Въведете
@@ -80,7 +82,7 @@
               <div class="form-group"
                 ng-class="{ 'has-error' : accountForm.newPassword2.$error.required && !accountForm.newPassword2.$pristine }">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label " for="newPassword2">Нова парола отново</label> <input type="password" class="form-control" id="newPassword2"
+                  <label class="control-label " for="newPassword2">{{newPasswordAgainLabel}}</label> <input type="password" class="form-control" id="newPassword2"
                     name="newPassword2" ng-model="account.contactData.newPassword2" 
                     ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
                   <p ng-show="accountForm.newPassword2.$error.required && !accountForm.newPassword2.$pristine" class="help-block">Въведете

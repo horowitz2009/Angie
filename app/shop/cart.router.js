@@ -86,6 +86,15 @@ angular.module('felt.shop.cart')
                     }
                   });
                   
+                  //$rootScope.$broadcast("user-changed", oldUsername, newUsername);
+                  
+                  $scope.$on("user-changed", function(event, oldUsername, newUsername) {
+                    console.log("USER CHANGED");
+                    if (oldUsername !== "guest" && newUsername === "guest") {
+                      shippingCtrl.reset();
+                    }
+                  });
+                  
                   $scope.$on("cart-changed", function(event, cart) {
                     console.log("CART CHANGED AND I'M GONNA RECALCULATE THE SHIPPING COSTS");
                     console.log(cart);
@@ -560,6 +569,12 @@ angular.module('felt.shop.cart')
     angular.copy(cart.shippingData.settlement, factory.shippingData.settlement);
     factory.shippingData.selectedOption = cart.shippingData.selectedOption;
     factory.refreshCart(cart);
+  }
+  
+  //ok
+  factory.reset = function() {
+    factory.contactData = {};
+    factory.shippingData = new ShippingData();
   }
   
   //ok

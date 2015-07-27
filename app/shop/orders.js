@@ -7,8 +7,8 @@ angular.module('felt.shop.orders', [
 // ////////////////////////////////////////////////////////////////////////
 .factory(
     'OrderService',
-    [ '$http', 'utils', '$q', '$state', 'AuthService', 'CartService', 'OrderPersistenceService',
-        function($http, utils, $q, $state, AuthService, CartService, OrderPersistenceService) {
+    [ '$http', 'utils', '$q', '$state', 'AuthService', 'CartService', 'shippingCtrl','OrderPersistenceService',
+        function($http, utils, $q, $state, AuthService, CartService, shippingCtrl, OrderPersistenceService) {
           console.log("[  6 order.factory OrderService]");
 
           var factory = {};
@@ -44,6 +44,9 @@ angular.module('felt.shop.orders', [
               // 2. clear the cart
               // 3. display the "congrats" page
               console.log(resp);
+              CartService.resetCart();
+              shippingCtrl.reset();
+              
               $state.go('shop.order.placed', resp);
               
             }, function(err) {

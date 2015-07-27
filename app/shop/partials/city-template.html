@@ -1,0 +1,28 @@
+<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+  <input type="text" class="form-control input" id="city2" name="city2"
+    ng-model="searchStr" ng-focus="onFocusHandler()" ng-disabled="disableInput"
+    ng-focus="resetHideResults()" ng-blur="hideResults($event)" ng-change="inputChangeHandler(searchStr)"
+    autocapitalize="off" autocorrect="off" autocomplete="off" required />
+
+  <div class="angucomplete-dropdown" ng-show="showDropdown" style="min-width:400px; float:right">
+    <div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+    <div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+
+    <div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" 
+         ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+      <div class="angucomplete-title">
+        <span>{{result.originalObject.type}}</span> <span ng-bind-html="result.title"></span>
+        
+         <span ng-if="result.originalObject.speedyOffices.length > 0" class="pull-right"><img src="images/speedy_logo_17.png"></img></span>
+      </div>
+      
+      <div class="angucomplete-description">
+        <small><span ng-if="result.originalObject.municipality.indexOf('район') < 0">общ. </span>{{result.originalObject.municipality}}, обл. {{result.originalObject.district}}</small>
+        
+        <span ng-if="result.originalObject.ekontOffices.length > 0" class="pull-right"><img src="images/econt-logo-12.png" width="54" height="12"></img></span> 
+      </div>
+
+    </div>
+
+  </div>
+</div>
