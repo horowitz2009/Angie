@@ -33,14 +33,6 @@ angular.module('felt.shop.cart')
               ekontTables : [ 'ShippingService', function(ShippingService) {
                 return ShippingService.getEkontTables();
               } ]
-              
-              /*,speedyOffices : [ 'ShippingService', function(ShippingService) {
-                return ShippingService.getSpeedyOffices();
-              } ],
-              
-              ekontOffices : [ 'ShippingService', function(ShippingService) {
-                return ShippingService.getEkontOffices();
-              } ]*/
             },
 
             views : {
@@ -59,6 +51,9 @@ angular.module('felt.shop.cart')
 
           })
 
+          //////////////////////////////////////////////////
+          // EDIT
+          //////////////////////////////////////////////////
           .state('shop.cart.edit', {
 
             url : '',
@@ -70,57 +65,93 @@ angular.module('felt.shop.cart')
             views : {
               'cartContent' : {
                 templateUrl : 'app/shop/partials/cart.details.html',
-                controller : [ '$scope', 'shippingCtrl', function($scope, shippingCtrl) {
-                  $scope.shippingCtrl = shippingCtrl;
-                  $scope.cart = shippingCtrl.cart;
-                  $scope.shippingData = shippingCtrl.shippingData;
+                controller : [ '$scope', '$rootScope', 'ShippingService', 'ShippingFactory', 'cart',
+                               function($scope, $rootScope, ShippingService, ShippingFactory, cart) {
                   
-                  //TODO ================================
-                  if (!$scope.shippingCtrl.shippingData.settlement.city) {
-                    shippingCtrl.loadCartToCtrl($scope.cart);
+                  console.log("shop.cart.edit controller...");
+                  $scope.shippingCtrl = ShippingFactory.getInstance('shop.cart.edit');
+                  $scope.shippingCtrl.factory(ShippingService, $rootScope);
+                  $scope.shippingData = $scope.shippingCtrl.shippingData;
+                  $scope.cart = cart;
+
+                  //only those functions that mess with external services need to be wrapped
+                  $scope.setZipCodeAndCity = function(result) {
+                    $scope.shippingCtrl.setZipCodeAndCity(result);
                   }
                   
+                  $scope.customLookup = function(str, data) {
+                    return $scope.shippingCtrl.customLookup(str, data);
+                  }
+                  
+                  $scope.submitSettlement = function () {
+                    console.log("submitSettlement...");
+                    if ($scope.shippingData.selectedOption) {
+                      angular.copy($scope.shippingData.settlement, cart.shippingData.settlement);
+                      cart.shippingData.selectedOption = $scope.shippingData.selectedOption;
+                      $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
+                      $scope.shippingCtrl.updateOffices(cart);
+                      $rootScope.$broadcast('cart-changed', cart);
+                    }  
+                    
+                    $("#ModalZip").modal('hide');
+                  }
+
+                  
+                  $scope.$on("settlement-changed", function(event, shippingData) {
+                    $scope.shippingCtrl.recalcOptions(cart, shippingData);
+                  });
+                  
                   $scope.$on("cart-loaded", function(event, oldCart, newCart) {
-                    if (!$scope.shippingCtrl.shippingData.settlement.city) {
-                      shippingCtrl.loadCartToCtrl(newCart);
+                    console.log("shop.cart.edit cart-loaded...");
+                    $scope.shippingCtrl.recalcOptions(newCart, newCart.shippingData);
+                    if (!$scope.shippingCtrl.shippingData.settlement.city) {//TODO improve it
+                      $scope.shippingCtrl.setShippingData(newCart.shippingData);
                     }
                   });
                   
-                  //$rootScope.$broadcast("user-changed", oldUsername, newUsername);
-                  
                   $scope.$on("user-changed", function(event, oldUsername, newUsername) {
-                    console.log("USER CHANGED");
+                    console.log("shop.cart.edit user-changed...");
                     if (oldUsername !== "guest" && newUsername === "guest") {
-                      shippingCtrl.reset();
+                      $scope.shippingCtrl.reset();
                     }
                   });
                   
                   $scope.$on("cart-changed", function(event, cart) {
-                    console.log("CART CHANGED AND I'M GONNA RECALCULATE THE SHIPPING COSTS");
+                    console.log("shop.cart.edit cart-changed...");
                     console.log(cart);
-                    shippingCtrl.refreshCart(cart);
+                    $scope.shippingCtrl.recalcOptions(cart, $scope.shippingCtrl.shippingData);
+                    $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
                   });
                   
                   $scope.$watch('shippingCtrl.shippingData.settlement.country', function(newValue, oldValue) {
-                    console.log("country changed from " + oldValue + " to " + newValue);
+                    console.log("shop.cart.edit country changed from " + oldValue + " to " + newValue);
                     
                     if (oldValue !== newValue) {
-                      shippingCtrl.shippingData.clearAddress();
-                      $scope.cart.shippingData.clearAddress();
+                      $scope.shippingCtrl.shippingData.clearAddress();
+                      ////$scope.cart.shippingData.clearAddress();
 //                      var input = $('#city2');
 //                      input.val(cart.shippingData.getCityPretty());
 //                      input = $('#zipCode2');
 //                      input.val(cart.shippingData.zipCode);
-                      shippingCtrl.recalcOptions($scope.cart, shippingCtrl.shippingData);
+                      $scope.shippingCtrl.recalcOptions(cart, $scope.shippingCtrl.shippingData);
                     }
                   });
 
+                  //in case cart is loaded before all watchers and listeners get assigned
+
+                  $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
+                  if (cart.shippingData.settlement.city) {
+                    $scope.shippingCtrl.setShippingData(cart.shippingData);
+                  }
                 } ]
               }
             }
 
           })
-
+          
+          //////////////////////////////////////////////////
+          // CHECKOUT
+          //////////////////////////////////////////////////
           .state(
               'shop.cart.checkout',
               {
@@ -143,198 +174,239 @@ angular.module('felt.shop.cart')
                 views : {
                   'cartContent' : {
                     templateUrl : 'app/shop/partials/cart.checkout.html',
-                    controller : [ '$scope', '$rootScope', 'cart', 'shippingCtrl', '$state', 'CartService', 'OrderService', 'CART_EVENTS', '$timeout',
-                        function($scope, $rootScope, cart, shippingCtrl, $state, CartService, OrderService, CART_EVENTS, $timeout) {
+                    controller : [ '$scope', '$rootScope', 'cart', 'ShippingService', 'ShippingFactory', '$state', 
+                                       'CartService', 'OrderService', 'CART_EVENTS', '$timeout',
+                                   function($scope, $rootScope, cart, ShippingService, ShippingFactory, $state, 
+                                       CartService, OrderService, CART_EVENTS, $timeout) {
 
-                          $scope.shippingCtrl = shippingCtrl;
-                          $scope.cart = shippingCtrl.cart;
+                      console.log("shop.cart.checkout controller...");
 
-                          if ($scope.cart.count == 0) {
-                            // cart is empty
-                            $state.go('shop.cart.edit');
-                            return;
-                          }
+                      $scope.shippingCtrl = ShippingFactory.getInstance('shop.cart.checkout', cart.shippingData);
+                      $scope.shippingCtrl.factory(ShippingService, $rootScope);
+                      $scope.shippingData = $scope.shippingCtrl.shippingData;//it's cart.shippingData
+                      $scope.cart = cart;
+
+                      /*if ($scope.cart.count == 0) {
+                        // cart is empty
+                        $state.go('shop.cart.edit');
+                        return;
+                      }*/
                           
-                          shippingCtrl.recalcOptions(cart, cart.shippingData);
+                      $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
+                      
+                      
+                      //only those functions that mess with external services need to be wrapped
+                      $scope.setZipCodeAndCity = function(result) {
+                        $scope.shippingCtrl.setZipCodeAndCity(result);
+                      }
+                      
+                      $scope.setZipCodeAndCity1 = function(result) {
+                        $scope.shippingCtrl.setZipCodeAndCity(result);
+                        if (result) {
+                          var input = $('#city2'); //TODO perhaps class is better than id
+                          input.val($scope.cart.shippingData.getCityPretty());
+                        }
+                      }
+                      
+                      $scope.customLookup = function(str, data) {
+                        return $scope.shippingCtrl.customLookup(str, data);
+                      }
+                      
+                      $scope.setOffice = function(result, courier) {
+                        $scope.shippingCtrl.setOffice(result, courier);
+                      }
+                      
+                      $scope.lookupOffices = function(str, courier) {
+                        return $scope.shippingCtrl.lookupOffices(str, courier);
+                      }
+                      
 
-                          $scope.$watch('cart.shippingData.settlement.country', function(newValue, oldValue) {
-                            console.log("country changed from " + oldValue + " to " + newValue);
-                            if (oldValue !== newValue) {
-                              $scope.cart.shippingData.clearAddress();
-                              var input = $('#city2');
-                              input.val(cart.shippingData.getCityPretty());
-                              input = $('#zipCode2');
-                              input.val(cart.shippingData.zipCode);
-                              shippingCtrl.recalcOptions($scope.cart, cart.shippingData);
-                            }
-                          });
+                      $scope.$on("settlement-changed", function(event, shippingData) {
+                        $scope.shippingCtrl.recalcOptions(cart, shippingData);
+                        $scope.shippingCtrl.updateOffices(cart);
+                        //shippingCtrlEdit.setShippingData(shippingData);
+                      });
+                      
+                      
+                      
+                      $scope.$watch('cart.shippingData.settlement.country', function(newValue, oldValue) {
+                        console.log("shop.cart.checkout country changed from " + oldValue + " to " + newValue);
+                        if (oldValue !== newValue) {
+                          $scope.cart.shippingData.clearAddress();
+                          var input = $('#city2');
+                          input.val(cart.shippingData.getCityPretty());
+                          input = $('#zipCode2');
+                          input.val(cart.shippingData.zipCode);
+                          $scope.shippingCtrl.recalcOptions($scope.cart, $scope.cart.shippingData);
+                        }
+                      });
 
 
-                          // ///////////////////////
-                          // isXXXXXXDataOK
-                          // ///////////////////////
-                          $scope.isContactDataOK = function() {
-                            var a = shippingCtrl.cart.contactData;
-                            if (!a || !a.firstName || !a.lastName || !a.phone)
-                              return false;
+                      // ///////////////////////
+                      // isXXXXXXDataOK
+                      // ///////////////////////
+                      $scope.isContactDataOK = function() {
+                        var a = $scope.cart.contactData;
+                        if (!a || !a.firstName || !a.lastName || !a.phone)
+                          return false;
 
+                        return true;
+                      }
+
+                      $scope.isAddressDataOK = function() {
+                        return CartService.isAddressDataOK();
+                      }
+
+                      $scope.isOfficesOK = function(form) {
+                        var opt = $scope.cart.shippingData.getOption();
+                        if (opt) {
+                          if (opt.type === 'atelier' || opt.type === 'address')
                             return true;
-                          }
+                            
+                          var test = form['officeInput_' + opt.courier];
+                          if (test)
+                            return !test.$invalid;
+                        }
+                        return true;
+                      }
+                      
+                      $scope.isPaymentDataOK = function() {
+                        // TODO nothing to check yet
+                        return true;
+                      }
 
-                          $scope.isAddressDataOK = function() {
-                            return CartService.isAddressDataOK();
-                          }
-
-                          $scope.isOfficesOK = function(form) {
-                            var opt = $scope.cart.shippingData.getOption();
-                            if (opt) {
-                              if (opt.type === 'atelier' || opt.type === 'address')
-                                return true;
-                                
-                              var test = form['officeInput_' + opt.courier];
-                              if (test)
-                                return !test.$invalid;
+                      $scope.showFullAddress = function() {
+                        var str = '';
+                        if ($scope.isContactDataOK() && $scope.isAddressDataOK()) {
+                          var c = $scope.cart.contactData;
+                          var sd = $scope.cart.shippingData;
+                          str = sd.country + '<br>';
+                          str += (sd.settlement.city + " " + sd.settlement.zipCode);
+                          if (a.selectedOption) {
+                            var o = a.selectedOption;
+                            if (o.type === "atelier") {
+                              str += o.name;
+                            } else if (o.type === "office") {
+                              str += o.name;
+                              str += ("<br>" + a.office[o.courier]);
+                              str += ("<br>услуга: " + o.service);
+                            } else if (o.type == "address") {
+                              str += o.name;
+                              str += ("<br>" + a.streetAddress1);
+                              str += ("<br>услуга: " + o.service);
                             }
-                            return true;
+                            if (a.streetAddress2)
+                              str += ('(<small>' + a.streetAddress2 + ')</small><br>');
                           }
-                          
-                          $scope.isPaymentDataOK = function() {
-                            // TODO nothing to check yet
-                            return true;
+                        }
+
+                        return str;
+                      }
+
+                      // ////////////////////////
+                      // setEditXXXXXXData
+                      // ////////////////////////
+                      $scope.setEditContactData = function(val) {
+                        $scope.editContactData = val;
+                      }
+
+                      $scope.setEditAddressData = function(val) {
+                        $scope.editAddressData = val;
+                      }
+
+                      $scope.setEditPaymentData = function(val) {
+                        $scope.editPaymentData = val;
+                      }
+
+                      // //////////////////////////
+                      // whichIsNext
+                      // //////////////////////////
+                      $scope.whichIsNext = function(startingStep) {
+                        var step = startingStep;
+
+                        if (step == 1) {
+                          if ($scope.isContactDataOK())
+                            step = 2;
+                        }
+
+                        if (step == 2) {
+                          if ($scope.isAddressDataOK())
+                            step = 3;
+                        }
+
+                        if (step == 3) {
+                          if ($scope.isPaymentDataOK())
+                            step = 4;
+                        }
+
+                        return step;
+                      }
+
+                      $scope.gotoNext = function(startingStep) {
+                        console.log("GOTO NEXT " + startingStep);
+                        var step = $scope.whichIsNext(startingStep);
+                        $scope.editContactData = !$scope.isContactDataOK();
+                        $scope.editAddressData = !$scope.isAddressDataOK();
+                        $scope.editPaymentData = !$scope.isPaymentDataOK();
+                        if (step == 1) {
+                          $('#collapseContactData').collapse("show");
+                          // $timeout(function() {
+                          // $('body').scrollTo('#contactData', 300,
+                          // {offset:-100});
+                          // }, 10);
+
+                          if ($scope.editAddressData) {
+                            $('#collapseAddressData').collapse("hide");
                           }
-
-                          $scope.showFullAddress = function() {
-                            var str = '';
-                            if ($scope.isContactDataOK() && $scope.isAddressDataOK()) {
-                              var c = $scope.cart.contactData;
-                              var sd = $scope.cart.shippingData;
-                              str = sd.country + '<br>';
-                              str += (sd.settlement.city + " " + sd.settlement.zipCode);
-                              if (a.selectedOption) {
-                                var o = a.selectedOption;
-                                if (o.type === "atelier") {
-                                  str += o.name;
-                                } else if (o.type === "office") {
-                                  str += o.name;
-                                  str += ("<br>" + a.office[o.courier]);
-                                  str += ("<br>услуга: " + o.service);
-                                } else if (o.type == "address") {
-                                  str += o.name;
-                                  str += ("<br>" + a.streetAddress1);
-                                  str += ("<br>услуга: " + o.service);
-                                }
-                                if (a.streetAddress2)
-                                  str += ('(<small>' + a.streetAddress2 + ')</small><br>');
-                              }
-                            }
-
-                            return str;
+                          if ($scope.editPaymentData) {
+                            $('#collapsePaymentData').collapse("hide");
                           }
+                        }
 
-                          // ////////////////////////
-                          // setEditXXXXXXData
-                          // ////////////////////////
-                          $scope.setEditContactData = function(val) {
-                            $scope.editContactData = val;
+                        if (step == 2) {
+                          $('#collapseAddressData').collapse("show");
+                          // $timeout(function() {
+                          // $('body').scrollTo('#addressData', 300,
+                          // {offset:-100});
+                          // }, 10);
+                          if ($scope.editPaymentData) {
+                            $('#collapsePaymentData').collapse("hide");
                           }
+                        }
 
-                          $scope.setEditAddressData = function(val) {
-                            $scope.editAddressData = val;
-                          }
+                        if (step == 3) {
+                          $('#collapsePaymentData').collapse("show");
+                          // $timeout(function() {
+                          // $('body').scrollTo('#paymentData', 300,
+                          // {offset:-100});
+                          // }, 10);
+                        }
+                        if (step == 4) {
+                          // TADAAAAAA We're ready!!!
 
-                          $scope.setEditPaymentData = function(val) {
-                            $scope.editPaymentData = val;
-                          }
+                          // $timeout(function() {
+                          // $('body').scrollTo('#paymentData', 300,
+                          // {offset:-100});
+                          // }, 10);
+                          $timeout(function() {
+                            $('body').scrollTo('#contactData', 300, {
+                              offset : -100
+                            });
+                          }, 10);
 
-                          // //////////////////////////
-                          // whichIsNext
-                          // //////////////////////////
-                          $scope.whichIsNext = function(startingStep) {
-                            var step = startingStep;
+                        }
 
-                            if (step == 1) {
-                              if ($scope.isContactDataOK())
-                                step = 2;
-                            }
-
-                            if (step == 2) {
-                              if ($scope.isAddressDataOK())
-                                step = 3;
-                            }
-
-                            if (step == 3) {
-                              if ($scope.isPaymentDataOK())
-                                step = 4;
-                            }
-
-                            return step;
-                          }
-
-                          $scope.gotoNext = function(startingStep) {
-                            console.log("GOTO NEXT " + startingStep);
-                            var step = $scope.whichIsNext(startingStep);
-                            $scope.editContactData = !$scope.isContactDataOK();
-                            $scope.editAddressData = !$scope.isAddressDataOK();
-                            $scope.editPaymentData = !$scope.isPaymentDataOK();
-                            if (step == 1) {
-                              $('#collapseContactData').collapse("show");
-                              // $timeout(function() {
-                              // $('body').scrollTo('#contactData', 300,
-                              // {offset:-100});
-                              // }, 10);
-
-                              if ($scope.editAddressData) {
-                                $('#collapseAddressData').collapse("hide");
-                              }
-                              if ($scope.editPaymentData) {
-                                $('#collapsePaymentData').collapse("hide");
-                              }
-                            }
-
-                            if (step == 2) {
-                              $('#collapseAddressData').collapse("show");
-                              // $timeout(function() {
-                              // $('body').scrollTo('#addressData', 300,
-                              // {offset:-100});
-                              // }, 10);
-                              if ($scope.editPaymentData) {
-                                $('#collapsePaymentData').collapse("hide");
-                              }
-                            }
-
-                            if (step == 3) {
-                              $('#collapsePaymentData').collapse("show");
-                              // $timeout(function() {
-                              // $('body').scrollTo('#paymentData', 300,
-                              // {offset:-100});
-                              // }, 10);
-                            }
-                            if (step == 4) {
-                              // TADAAAAAA We're ready!!!
-
-                              // $timeout(function() {
-                              // $('body').scrollTo('#paymentData', 300,
-                              // {offset:-100});
-                              // }, 10);
-                              $timeout(function() {
-                                $('body').scrollTo('#contactData', 300, {
-                                  offset : -100
-                                });
-                              }, 10);
-
-                            }
-
-                          }
+                      }
 
                           // //////////////////////////
                           // saveContactData
                           // //////////////////////////
                           $scope.saveContactData = function(el) {
-                            console.log(shippingCtrl.cart);
-                            $rootScope.$broadcast(CART_EVENTS.addressChanged, shippingCtrl.cart);
+                            console.log($scope.cart);
+                            $rootScope.$broadcast(CART_EVENTS.addressChanged, $scope.cart);
                             // TODO do i need this event?
                             CartService.recalcTotals();
-                            $rootScope.$broadcast(CART_EVENTS.cartChanged, shippingCtrl.cart);
+                            $rootScope.$broadcast(CART_EVENTS.cartChanged, $scope.cart);
 
                             $scope.gotoNext(1);
                           }
@@ -343,11 +415,11 @@ angular.module('felt.shop.cart')
                           // saveAddress
                           // //////////////////////////
                           $scope.saveAddress = function(el) {
-                            console.log(shippingCtrl.cart);
-                            $rootScope.$broadcast(CART_EVENTS.addressChanged, shippingCtrl.cart);
+                            console.log($scope.cart);
+                            $rootScope.$broadcast(CART_EVENTS.addressChanged, $scope.cart);
                             // TODO do i need this event?
                             CartService.recalcTotals();
-                            $rootScope.$broadcast(CART_EVENTS.cartChanged, shippingCtrl.cart);
+                            $rootScope.$broadcast(CART_EVENTS.cartChanged, $scope.cart);
 
                             $scope.gotoNext(2);
                           }
@@ -380,6 +452,11 @@ angular.module('felt.shop.cart')
                             console.log(oldValue);
                             console.log(newValue);
 
+                            if (newCart.count == 0) {
+                              // cart is empty
+                              $state.go('shop.cart.edit');
+                              return;
+                            }
                             $scope.gotoNext(1);
 
                           });
@@ -415,8 +492,6 @@ angular.module('felt.shop.cart')
   
   factory.shippingData = new ShippingData();
 
-  factory.tempSettlement = factory.shippingData.settlement;//TODO too confusing
-
   factory.cart = cart;
   
   factory.zipCodes = ShippingService.zipCodes;
@@ -425,7 +500,7 @@ angular.module('felt.shop.cart')
   
   factory.customLookup = function(str, data) {
     var res = [];
-    if (ShippingService.isZipCodeInSofia(str, ShippingService.zipCodesExceptions)) {
+    if (ShippingService.isZipCodeInSofia(str)) {
       var data = angular.copy(data[0]);
       if (str.length == 4) {
         //full zip entered. Replace the original
@@ -581,7 +656,7 @@ angular.module('felt.shop.cart')
   factory.refreshCart = function(cart) {
     factory.recalcOptions(cart, cart.shippingData);
     factory.recalcOptions(cart, factory.shippingData);
-    factory.updateOffices();
+    factory.updateOffices(cart);
   }
 
   //not used
@@ -603,25 +678,25 @@ angular.module('felt.shop.cart')
     $("#ModalZip").modal('hide');
   }
   
-  factory.updateOffices = function() {
-    var option = factory.cart.shippingData.getOption();
-    var options = factory.cart.shippingData.options;
-    var s = factory.cart.shippingData.settlement;
+  factory.updateOffices = function(cart) {
+    var option = cart.shippingData.getOption();
+    var options = cart.shippingData.options;
+    var s = cart.shippingData.settlement;
     for(var i = 0; i < options.length; i++) {
       if (options[i].type == 'office') {
-        var data = ShippingService.getOffices(options[i].courier, factory.cart.shippingData.settlement.zipCode, factory.cart.shippingData.settlement.city);
+        var data = ShippingService.getOffices(options[i].courier, cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
         if (data && data.length == 1) {
           //one office, select it
-          factory.cart.shippingData.office[options[i].courier] = data[0].name;
+          cart.shippingData.office[options[i].courier] = data[0].name;
         } else if (data && data.length > 1) {
           //more than one
           //sync currently selected to the list
           var found = false;
           for(var j = 0; !found && j < data.length; j++) {
-            found = (data[j].name === factory.cart.shippingData.office[options[i].courier])
+            found = (data[j].name === cart.shippingData.office[options[i].courier])
           }
           if (!found) {
-            factory.cart.shippingData.office[options[i].courier]='';
+            cart.shippingData.office[options[i].courier]='';
           }
         }
       }

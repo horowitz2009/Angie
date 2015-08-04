@@ -56,7 +56,6 @@ angular.module('felt.shop', [
 
           url: '/shop',
 
-          templateUrl: 'app/shop/partials/shop.html',
 
           data: {
             breadcrumbProxy: 'shop.all'
@@ -74,6 +73,7 @@ angular.module('felt.shop', [
               }]
           },
 
+          templateUrl: 'app/shop/partials/shop.html',
           controller: ['$scope', '$state', 'categories', 'utils', 'allColors', 'ShopService',
             function ($scope, $state, categories, utils, allColors, ShopService) {
 

@@ -65,77 +65,179 @@ angular.module('felt', [
                 })
 
                 
-                ////////////////
-                // My Account //
-                ////////////////
-                .state("myaccount", {
+                /////////////
+                // Account //
+                /////////////
+                .state("account", {
+                  
+                    abstract : true,
 
-                    url: "/myaccount",
+                    url: "/account",
 
-                    data: {
+                    data : {
+                      breadcrumbProxy : 'account.edit'
+                    },
+                    
+                    /*data: {
                       displayName: 'Моят акаунт'
-                    },
+                    },*/
                     
-                    params: {
-                      newAccount: false
+                    resolve : {
+                      zipCodes : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getZipCodes();
+                      } ],
+
+                      zipCodesExceptions : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getZipCodesExceptions();
+                      } ],
+                      
+                      speedyTables : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getSpeedyTables();
+                      } ],
+                      
+                      ekontTables : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getEkontTables();
+                      } ],
+                      speedyOffices : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getAllSpeedyOffices();
+                      } ],
+                      
+                      ekontOffices : [ 'ShippingService', function(ShippingService) {
+                        return ShippingService.getAllEkontOffices();
+                      } ]
+
                     },
-                    
+
                     views: {
-                        'banner': {
-                            
-                        },
-
-                        '': {
-                          templateUrl: 'app/home/partials/myaccount.html',
-                          controller : [ '$scope', '$state', 'AuthService', 'AccountService', 'Account', 'Session', '$timeout',
-                            function($scope, $state, AuthService, AccountService, Account, Session, $timeout) {
-                            
-                            $scope.headingLabel = "Моят акаунт";
-                            $scope.newPasswordLabel = "Нова парола";
-                            $scope.newPasswordAgainLabel = "Нова парола отново";
-
-                            
-                            if (AuthService.isGuest()) {
-                              if($state.params.newAccount) {
-                                console.log("OK. I'm gonna register you...");
-                                $state.go('register');
-                              } else {
-                                $state.go('home');
-                              }
-                            } else {
-                              $scope.account = Account;
-                              $scope.account.contactData.email = Session.userId;
-                              $scope.editPassword = false;
-                              $scope.message = '';
-                              
-                              $scope.saveAccount = function() {
-                                $scope.message = '...';
-                                console.log("Saving account: ");
-                                console.log($scope.account);
-                                AccountService.saveAccount($scope.account, function() {
-                                  console.log("good");
-                                  $scope.message = 'Акаунтът е записан успешно!';
-                                  $scope.$apply();
-                                  //TODO timeout 30sec and remove the message
-                                  $timeout(function() {
-                                    $scope.message = '';
-                                    $scope.$apply();
-                                  }, 10000);
-                                },
-
-                                function() {
-                                  console.log("UH OH");
-                                  $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
-                                });
-                              }
-                            }
-                          }]
-                        }
-
+                      'banner': {
+                        
+                      }
                     }
 
                 })
 
+                //////////////////
+                // Account EDIT //
+                //////////////////
+                .state("account.edit", {
+                  
+                  url: "/edit",
+                  
+                  data: {
+                      displayName: 'Моят акаунт'
+                  },
+                  
+                  views: {
+                    '': {
+                      templateUrl: 'app/home/partials/myaccount.html',
+                      controller : [ '$scope', '$state', 'AuthService', 'shippingCtrl', 
+                                     'AccountService', 'Account', 'Session', '$timeout',
+                                     function($scope, $state, AuthService, shippingCtrl, 
+                                         AccountService, Account, Session, $timeout) {
+                        
+                        $scope.headingLabel = "Моят акаунт";
+                        $scope.newPasswordLabel = "Нова парола";
+                        $scope.newPasswordAgainLabel = "Нова парола отново";
+                        
+                        $scope.shippingCtrl = shippingCtrl;
+                        
+                        if (AuthService.isGuest()) {
+                          $state.go('home');
+                        } else {
+                          $scope.account = Account;
+                          $scope.account.contactData.email = Session.userId;
+                          $scope.editPassword = false;
+                          $scope.message = '';
+                          
+                          $scope.saveAccount = function() {
+                            $scope.message = '...';
+                            console.log("Saving account: ");
+                            console.log($scope.account);
+                            AccountService.saveAccount($scope.account, function() {
+                              console.log("good");
+                              $scope.message = 'Акаунтът е записан успешно!';
+                              $scope.$apply();
+                              //TODO timeout 30sec and remove the message
+                              $timeout(function() {
+                                $scope.message = '';
+                                $scope.$apply();
+                              }, 10000);
+                            },
+                            
+                            function() {
+                              console.log("UH OH");
+                              $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                            });
+                          }
+                        }
+                      }]
+                    }
+                    
+                  }
+                  
+                })
+                
+                //////////////////
+                // Account EDIT //
+                //////////////////
+                .state("account.new", {
+                  
+                  url: "/new",
+                  
+                  data: {
+                    displayName: 'Моят акаунт'
+                  },
+                  
+                  views: {
+                    '': {
+                      templateUrl: 'app/home/partials/myaccount.html',
+                      controller : [ '$scope', '$state', 'AuthService', 'shippingCtrl', 
+                                     'AccountService', 'Account', 'Session', '$timeout',
+                                     function($scope, $state, AuthService, shippingCtrl, 
+                                         AccountService, Account, Session, $timeout) {
+                        
+                        $scope.headingLabel = "Регистрация на акаунт";
+                        $scope.newPasswordLabel = "Парола";
+                        $scope.newPasswordAgainLabel = "Парола отново";
+                        
+                        $scope.shippingCtrl = shippingCtrl;
+                        
+                        if (AuthService.isGuest()) {
+                          $state.go('home');
+                        } else {
+                          $scope.account = Account;
+                          $scope.account.contactData.email = Session.userId;
+                          $scope.editPassword = false;
+                          $scope.message = '';
+                          
+                          $scope.saveAccount = function() {
+                            $scope.message = '...';
+                            console.log("Saving account: ");
+                            console.log($scope.account);
+                            AccountService.saveAccount($scope.account, function() {
+                              console.log("good");
+                              $scope.message = 'Акаунтът е записан успешно!';
+                              $scope.$apply();
+                              //TODO timeout 30sec and remove the message
+                              $timeout(function() {
+                                $scope.message = '';
+                                $scope.$apply();
+                              }, 10000);
+                            },
+                            
+                            function() {
+                              console.log("UH OH");
+                              $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                            });
+                          }
+                        }
+                      }]
+                    }
+                  
+                  }
+                  
+                })
+                
                 ////////////////
                 // Register //
                 ////////////////

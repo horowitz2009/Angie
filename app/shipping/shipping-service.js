@@ -80,7 +80,7 @@ angular.module('felt.shipping.service', [
   }
   
   factory.getZipCodesExceptions = function() {
-    return zipCodesPromise.then(function(zipCodes) {
+    return factory.getZipCodes().then(function(zipCodes) {
       console.log("getZipCodesExceptions...");
       var ex = [];
       for (var i = 0; i < zipCodes.length; i++) {
@@ -96,8 +96,7 @@ angular.module('felt.shipping.service', [
     });
   }
 
-  factory.isZipCodeInSofia = function(str, zipCodesExceptions) {
-    zipCodesExceptions = zipCodesExceptions ? zipCodesExceptions : factory.zipCodesExceptions;
+  factory.isZipCodeInSofia = function(str) {
     console.log("isZipCodeInSofia...");
     if (!isNaN(str) && parseInt(str) < 2000) {
       var s = str;
@@ -110,8 +109,8 @@ angular.module('felt.shipping.service', [
 
         // startsWith
         var found = false;
-        for (var i = 0; i < zipCodesExceptions.length && !found; i++) {
-          if (zipCodesExceptions[i].indexOf(str) == 0) {
+        for (var i = 0; i < factory.zipCodesExceptions.length && !found; i++) {
+          if (factory.zipCodesExceptions[i].indexOf(str) == 0) {
             found = true;
           }
         }

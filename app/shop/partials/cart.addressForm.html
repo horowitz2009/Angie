@@ -160,8 +160,8 @@
                 
                 angucomplete-alt pause="400"
             
-                selected-object="shippingCtrl.setZipCodeAndCity1"
-                custom-lookup="shippingCtrl.customLookup"
+                selected-object="setZipCodeAndCity1"
+                custom-lookup="customLookup"
                 custom-matching="shippingCtrl.customMatching"
                 custom-select="shippingCtrl.customSelectZipCode"
                 keep-initial-value-binding="true"
@@ -199,8 +199,8 @@
       <!-- bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb -->
             <div ng-if="cart.shippingData.settlement.country === 'България'"
                 angucomplete-alt pause="400"
-                selected-object="shippingCtrl.setZipCodeAndCity"
-                custom-lookup="shippingCtrl.customLookup"
+                selected-object="setZipCodeAndCity"
+                custom-lookup="customLookup"
                 custom-matching="shippingCtrl.customMatching"
                 custom-select="shippingCtrl.customSelectCity"
                 keep-initial-value-binding="false"
@@ -238,7 +238,7 @@
               <!-- RADIO -->
                 <label> 
                   <input type="radio" name="optionsRadios" ng-model="cart.shippingData.selectedOption"
-                         ng-value="option.toString()" ng-click="shippingCtrl.setOption2(option)" required>
+                         ng-value="option.toString()" ng-click="cart.shippingData.setOption(option)" required>
                   <span>{{ option.getNameAndService() }}
                     <small style="padding-left: 10px;"> {{ option.amount | number:2 }} лв </small>
                   </span>  
@@ -255,9 +255,9 @@
                 
                 <!-- 3333333333333333333333333333333333333333333333333333333333333333333333333333333333 -->
                 <div angucomplete-alt pause="400"
-                selected-object="shippingCtrl.setOffice"
+                selected-object="setOffice"
                 keep-initial-value-binding="true"
-                custom-lookup="shippingCtrl.lookupOffices"
+                custom-lookup="lookupOffices"
                 custom-lookup-only="true"
                 
                 initial-value="cart.shippingData.office[option.courier]"
@@ -302,7 +302,7 @@
         </div><!-- if > 0 -->
         
         <!--  TODO MUST NOT HAPPEN!!! -->
-        <div class="form-group options" ng-show="cart.shippingData.options && cart.shippingData.options.length == 0">
+        <div class="form-group options" ng-if="cart.shippingData.options && cart.shippingData.options.length == 0">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <!-- INPUT TEXT Courier Office dropdown-->
             <label class="control-label " for="cart.shippingData.office['address']">Адрес (ул. номер, бл., ет., ...)</label> 

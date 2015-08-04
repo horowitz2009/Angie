@@ -245,7 +245,7 @@
                     style="text-transform: none; font-size: 14px; line-height: 28px;" ng-bind="getUsername()"> ... </span></a>
                 </li>
 
-                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="myaccount"><span class="hidden-xs"> Моят акаунт</span> <i
+                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.edit"><span class="hidden-xs"> Моят акаунт</span> <i
                     class="glyphicon glyphicon-user hide visible-xs "></i> </a></li>
 
                 <li ng-if="getUsername() !== 'guest'" ng-cloak><a ng-click="logout(false)"> <span class="hidden-xs">Изход</span> <i
@@ -1049,6 +1049,7 @@
   <script type="text/javascript" src="app/shop/orders.js"></script>
   <script type="text/javascript" src="app/shop/orders.router.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
+  <script type="text/javascript" src="app/shipping/shipping-factory.js"></script>
   <script type="text/javascript" src="app/common/color-service.js"></script>
   <script type="text/javascript" src="common/utils/utils-service.js"></script>
 

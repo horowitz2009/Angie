@@ -473,7 +473,7 @@
 <div class="modal fade" id="ModalZip" tabindex="-1" role="dialog">
   <div class="modal-dialog ">
     <div class="modal-content">
-      <form name="zipForm" method="post" ng-submit="shippingCtrl.submitSettlement(cart)" novalidate>
+      <form name="zipForm" method="post" ng-submit="submitSettlement(cart)" novalidate>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 class="modal-title-site text-center">Калкулатор на доставка</h3>
@@ -539,9 +539,9 @@
       </script>
       <div angucomplete-alt 
           placeholder="пощенски код или населено място"
-          pause="400" selected-object="shippingCtrl.setTempZipCodeAndCity"
+          pause="400" selected-object="setZipCodeAndCity"
           custom-select="shippingCtrl.customSelectZipAndCity"
-          custom-lookup="shippingCtrl.customLookup"
+          custom-lookup="customLookup"
           custom-matching="shippingCtrl.customMatching"
           keep-initial-value-binding="false"
           
