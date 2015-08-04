@@ -183,7 +183,8 @@ Shipping.prototype.setOffice = function(result, courier) {
 //1
 Shipping.prototype.recalcOptions = function(cart, shippingData) {
   if (shippingData.canShippingBeCalculated()) {
-    var newOptions = this.ShippingService.calculateShippingCosts(cart.weight, shippingData.settlement);
+    var weight = cart ? cart.weight : 0.0;
+    var newOptions = this.ShippingService.calculateShippingCosts(weight, shippingData.settlement);
     shippingData.updateOptions(newOptions);
   } else {
     shippingData.updateOptions([]);
