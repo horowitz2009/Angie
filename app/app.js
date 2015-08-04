@@ -109,9 +109,10 @@ angular.module('felt', [
                     },
 
                     views: {
-                      'banner': {
-                        
-                      }
+                      'banner': {},
+                      '': {
+                          template: '<div class="row view-slide-in" ui-view="content" autoscroll="false"></div>'
+                        } 
                     }
 
                 })
@@ -128,25 +129,70 @@ angular.module('felt', [
                   },
                   
                   views: {
-                    '': {
+                    'content': {
                       templateUrl: 'app/home/partials/myaccount.html',
-                      controller : [ '$scope', '$state', 'AuthService', 'shippingCtrl', 
-                                     'AccountService', 'Account', 'Session', '$timeout',
-                                     function($scope, $state, AuthService, shippingCtrl, 
-                                         AccountService, Account, Session, $timeout) {
+                      controller : [ '$scope', '$rootScope', '$state', 'AuthService', 'ShippingFactory', 
+                                     'ShippingService', 'AccountService', 'Account', 'Session', '$timeout',
+                                     function($scope, $rootScope, $state, AuthService, ShippingFactory, 
+                                         ShippingService, AccountService, Account, Session, $timeout) {
+                        
+                        console.log("account.edit controller...");
                         
                         $scope.headingLabel = "Моят акаунт";
                         $scope.newPasswordLabel = "Нова парола";
                         $scope.newPasswordAgainLabel = "Нова парола отново";
                         
-                        $scope.shippingCtrl = shippingCtrl;
-                        
                         if (AuthService.isGuest()) {
                           $state.go('home');
+                          return;
                         } else {
+                          $scope.shippingCtrl = ShippingFactory.getInstance('account.edit', Account.shippingData);
+                          $scope.shippingCtrl.factory(ShippingService, $rootScope);
+                          $scope.shippingData = $scope.shippingCtrl.shippingData;
+                          
                           $scope.account = Account;
+                          $scope.contactData = Account.contactData;
+                          
+                          //only those functions that mess with external services need to be wrapped
+                          $scope.setZipCodeAndCity = function(result) {
+                            $scope.shippingCtrl.setZipCodeAndCity(result);
+                          }
+                          
+                          $scope.setZipCodeAndCity1 = function(result) {
+                            $scope.shippingCtrl.setZipCodeAndCity(result);
+                            if (result) {
+                              var input = $('#city2'); //TODO perhaps class is better than id
+                              input.val($scope.shippingData.getCityPretty());
+                            }
+                          }
+                          
+                          $scope.customLookup = function(str, data) {
+                            return $scope.shippingCtrl.customLookup(str, data);
+                          }
+                          
+                          $scope.setOffice = function(result, courier) {
+                            $scope.shippingCtrl.setOffice(result, courier);
+                          }
+                          
+                          $scope.lookupOffices = function(str, courier) {
+                            return $scope.shippingCtrl.lookupOffices(str, courier);
+                          }
+
+                          $scope.$on("settlement-changed", function(event, shippingData) {
+                            $scope.shippingCtrl.recalcOptions(null, shippingData);
+                            if ($scope.shippingCtrl.shippingData.options == 0) {
+                              $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
+                            }
+                          });
+
+                          
+                          
                           $scope.account.contactData.email = Session.userId;
                           $scope.editPassword = false;
+                          $scope.setEditPassword = function(value) {
+                            $scope.editPassword = value;
+                          }
+                          
                           $scope.message = '';
                           
                           $scope.saveAccount = function() {
@@ -155,8 +201,17 @@ angular.module('felt', [
                             console.log($scope.account);
                             AccountService.saveAccount($scope.account, function() {
                               console.log("good");
+                              if ($scope.contactData.oldPassword) {
+                                $scope.contactData.oldPassword=null;
+                                $scope.contactData.newPassword1=null;
+                                $scope.contactData.newPassword2=null;
+                                $scope.editPassword = false;
+                                $('#changePassButton').show();
+                              }
                               $scope.message = 'Акаунтът е записан успешно!';
                               $scope.$apply();
+                              //TODO after 1-2 seconds hide the passwords and animate scroll up
+                              
                               //TODO timeout 30sec and remove the message
                               $timeout(function() {
                                 $scope.message = '';
@@ -164,11 +219,25 @@ angular.module('felt', [
                               }, 10000);
                             },
                             
-                            function() {
-                              console.log("UH OH");
-                              $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                            function(resp) {
+                              if (resp.status === 401) {
+                                console.log("UH OH");
+                                $scope.message = 'Невярна парола! Моля въведете коректно старата си парола!';
+                              } else {
+                                console.log("UH OH");
+                                $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
+                              }
+                              $scope.$apply();
                             });
                           }
+                          
+                          
+                          
+                          $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
+                          if ($scope.shippingCtrl.shippingData.options == 0) {
+                            $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
+                          }
+
                         }
                       }]
                     }
@@ -600,7 +669,7 @@ angular.module('felt', [
     if (!AuthService.isGuest()) {
       accountPromise = AccountService.loadAccount(newUsername);
     } else {
-      if ($rootScope.$state.current.name === 'myaccount')
+      if ($rootScope.$state.current.name === 'account.edit')
         $rootScope.$state.go('home');
     }
     

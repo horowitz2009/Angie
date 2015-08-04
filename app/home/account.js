@@ -60,8 +60,8 @@ angular.module('home.account', [
   accountService.saveAccount = function(account, successCallback, errorCallback) {
     console.log("Saving account " + account);
     var jsonStr = JSON.stringify(account, function(key, value) {
-        if (key === 'orders')
-          return null;
+        if (key === 'orders' || key === 'oldPassword' || key === 'newPassword1' || key === 'newPassword2')
+          return undefined;
         return value;  
       });
     
@@ -69,7 +69,12 @@ angular.module('home.account', [
       type : "POST",
       encoding:"UTF-8",
       url : 'php/save_account.php',
-      data : { 'data': jsonStr, 'username': account.contactData.email },
+      data : {
+        'data': jsonStr, 
+        'username': account.contactData.email,
+        'oldPassword': account.contactData.oldPassword,
+        'newPassword': account.contactData.newPassword1
+        },
       success : successCallback,
       error : errorCallback
     });

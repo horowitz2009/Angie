@@ -31,11 +31,17 @@ class AccountService {
    * @param string $status          
    * @param string $data          
    */
-  public function saveAccount($username, $data) {
-    $sql = "UPDATE users SET data = ? where email = ?";
-    
+  public function saveAccount($username, $data, $newPassword = null) {
+    $sql = "UPDATE users SET data = ?";
+    if ($newPassword != null)
+      $sql = $sql.", password = ?";
+      
+    $sql = $sql." where email = ?";
     $query = $this->connection->prepare($sql);
-    $query->execute(array($data, $username));
+    if ($newPassword != null)
+      $query->execute(array($data, $newPassword, $username));
+    else
+      $query->execute(array($data, $username));
   }
 
   public function loadAccount($username) {
