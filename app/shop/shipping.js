@@ -134,3 +134,10 @@ ShippingData.prototype.clearAddress = function () {
   this.streetAddress2 = null;
   //TODO clear the streetaddress
 }
+
+ShippingData.prototype.reset = function () {
+  this.clearAddress();
+  this.selectedOption = null;
+  this.selectedOptionObj = null;
+  this.options = [];  
+}

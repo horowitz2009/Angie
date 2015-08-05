@@ -5,9 +5,13 @@ angular.module('home.account', [
 .service('Account', function () {
   console.log("[  6 home.service Account]");
   
+  this.contactData = {"email" : ""};
+  this.shippingData = new ShippingData();
+  this.orders = [];
+
   this.reset = function() {
     this.contactData = {"email" : ""};
-    this.shippingData = new ShippingData();
+    this.shippingData.reset();
     this.orders = [];
   }
 
@@ -20,8 +24,6 @@ angular.module('home.account', [
       this.reset();
     }
   };
-
-  this.reset();
   
 })
 
@@ -79,6 +81,10 @@ angular.module('home.account', [
       error : errorCallback
     });
 
+  }
+  
+  accountService.reset = function() {
+    Account.reset();
   }
   
   return accountService;

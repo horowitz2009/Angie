@@ -184,7 +184,11 @@ angular.module('felt', [
                               $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
                             }
                           });
-
+                          $scope.$on("user-changed", function(event, oldUsername, newUsername) {
+                            if (newUsername === 'guest') {
+                              $scope.shippingCtrl.reset();
+                            }
+                          });
                           
                           
                           $scope.account.contactData.email = Session.userId;
@@ -234,9 +238,9 @@ angular.module('felt', [
                           
                           
                           $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
-                          if ($scope.shippingCtrl.shippingData.options == 0) {
-                            $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
-                          }
+                          //if ($scope.shippingCtrl.shippingData.options == 0) {
+                          //  $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
+                          //}
 
                         }
                       }]
@@ -669,8 +673,11 @@ angular.module('felt', [
     if (!AuthService.isGuest()) {
       accountPromise = AccountService.loadAccount(newUsername);
     } else {
-      if ($rootScope.$state.current.name === 'account.edit')
+      //IT IS GUEST
+      Account.reset();
+      if ($rootScope.$state.current.name === 'account.edit') {
         $rootScope.$state.go('home');
+      }
     }
     
     if (accountPromise)

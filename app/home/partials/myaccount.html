@@ -173,7 +173,7 @@
         <!-- ============================================================ -->
         <!-- ============== OPTIONS ===================================== -->
         <!-- ============================================================ -->
-        <div class="panel panel-default" ng-if="shippingData.options && shippingData.options.length > 1">
+        <div class="panel panel-default" ng-if="shippingData.options && shippingData.options.length > 0">
           <div class="panel-heading" ng-show="shippingData.options && shippingData.options.length > 1">
             <label>Възможни опции за доставка. Въведете тези, които най-вероятно ще ползвате.</label></div>
           <div class="panel-body">
@@ -238,7 +238,7 @@
         </div> <!-- inner panel -->
         
         <!--  TODO MUST NOT HAPPEN!!! -->
-        <div class="form-group" ng-if="shippingData.options && shippingData.options.length <= 1">
+        <div class="form-group" ng-if="shippingData.options && shippingData.options.length == 0">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <!-- INPUT TEXT Courier Office dropdown-->
             <label class="control-label " for="shippingData.office['address']">Адрес</label>

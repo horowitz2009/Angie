@@ -212,7 +212,7 @@ Shipping.prototype.setShippingData = function(shippingData) {
 //1
 Shipping.prototype.reset = function() {
   this.contactData = {};
-  this.shippingData = new ShippingData();
+  this.shippingData.reset();
 }
 
 //deprecated - use listeners
