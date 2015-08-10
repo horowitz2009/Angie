@@ -188,8 +188,10 @@
                   <label> <!--<input type="radio" name="optionsRadios" ng-model="shippingData.selectedOption"
                     ng-value="option.toString()" ng-click="shippingCtrl.setOption2(option)" required>-->
                     <span>
-                      {{ option.getNameAndService() }} 
+                      {{ option.getNameAndService() }}
+                      <!--  
                       <small style="padding-left: 10px;" ng-show="option.amount>=0"> {{ option.amount | number:2 }} лв </small>
+                      -->
                     </span>
                   </label>
                 </div>
@@ -207,7 +209,7 @@
                   <div angucomplete-alt pause="400" selected-object="setOffice" keep-initial-value-binding="true"
                     custom-lookup="lookupOffices" custom-lookup-only="true"
                     initial-value="shippingData.office[option.courier]" id="{{ 'officeInput_' + option.courier }}"
-                    input-name="{{ 'officeInput_' + option.courier }}" field-required="true" local-data="option.courier"
+                    input-name="{{ 'officeInput_' + option.courier }}" local-data="option.courier"
                     search-fields="name,address" title-field="name" description-field="address" minlength="0" maxlength="50"
                     input-class="form-control" match-class="highlight" placeholder="Изберете офис"
                     template-url="app/shop/partials/offices-template.html">
@@ -222,8 +224,7 @@
                   class="col-lg-10 col-md-10 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
                   <!-- INPUT TEXT Courier Office dropdown-->
                   <label class="control-label">Адрес</label> <input type="text" placeholder="ул. номер, бл., ет., ..."
-                    class="form-control" name="{{option.type}}" ng-model="shippingData.office['address']"
-                    ng-required="shippingData.selectedOption === option.toString()">
+                    class="form-control" name="{{option.type}}" ng-model="shippingData.office['address']" >
                   <!--   
                   <p ng-show="addressForm.streetAddress1.$error.required && !addressForm.streetAddress1.$pristine"
                      class="help-block">Въведете улица, номер или квартал, блок, вход, етаж, ап.</p>
@@ -231,13 +232,15 @@
                 </div>
               
             </div><!-- ng-repeat -->
+            <!-- 
             <div><p style="font-style:italic">* Цената на доставката се определя от редица фактори като вид услуга, тегло на поръчката, такса гориво и т.н. В тази форма е посочена цена за поръчки с тегло под 1кг.
               </p>
             </div>
+            -->
           </div><!-- inner panel-body -->    
         </div> <!-- inner panel -->
         
-        <!--  TODO MUST NOT HAPPEN!!! -->
+        <!--  STREET ONLY -->
         <div class="form-group" ng-if="shippingData.options && shippingData.options.length == 0">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <!-- INPUT TEXT Courier Office dropdown-->
@@ -261,7 +264,7 @@
 
         <div class="form-group">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <label class="control-label " for="phone">Желаете ли фактура?</label>
+            <label class="control-label " for="phone">Ще желаете ли фактура?</label>
             <div class="btn-group btn-toggle" style="margin-left: 7px">
               <input type="button" class="btn btn-sm" ng-click="setWantInvoice(true)"
                 ng-class="{ 'btn-default': !shippingData.wantInvoice, 'btn-success active': shippingData.wantInvoice }"

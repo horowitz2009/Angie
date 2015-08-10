@@ -177,13 +177,29 @@ angular.module('felt', [
                           $scope.lookupOffices = function(str, courier) {
                             return $scope.shippingCtrl.lookupOffices(str, courier);
                           }
+                          
+                          $scope.setWantInvoice = function(val) {
+                            $scope.shippingData.wantInvoice = val;
+                          }
 
                           $scope.$on("settlement-changed", function(event, shippingData) {
                             $scope.shippingCtrl.recalcOptions(null, shippingData);
-                            if ($scope.shippingCtrl.shippingData.options == 0) {
-                              $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
+                            $scope.shippingCtrl.updateOffices(shippingData);
+                          });
+                          
+                          
+                          $scope.$watch('shippingData.settlement.country', function(newValue, oldValue) {
+                            console.log("account.edit country changed from " + oldValue + " to " + newValue);
+                            if (oldValue !== newValue) {
+                              $scope.shippingData.clearAddress();
+                              var input = $('#city2');
+                              input.val($scope.shippingData.getCityPretty());
+                              input = $('#zipCode2');
+                              input.val($scope.shippingData.zipCode);
+                              $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
                             }
                           });
+
                           $scope.$on("user-changed", function(event, oldUsername, newUsername) {
                             if (newUsername === 'guest') {
                               $scope.shippingCtrl.reset();
@@ -238,9 +254,6 @@ angular.module('felt', [
                           
                           
                           $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
-                          //if ($scope.shippingCtrl.shippingData.options == 0) {
-                          //  $scope.shippingCtrl.shippingData.options.push(new ShippingOption("до адрес", "address", "Speedy"));
-                          //}
 
                         }
                       }]

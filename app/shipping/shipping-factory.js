@@ -1,7 +1,7 @@
 angular.module('felt.shipping.service')
 
 ////////////////////////////////////////////////////////////////////////
-// shippingCtrl
+// ShippingFactory
 ////////////////////////////////////////////////////////////////////////
 
 .factory('ShippingFactory', [ '$rootScope', 'ShippingService', 'CartService', 'cart', 
@@ -171,13 +171,16 @@ Shipping.prototype.setZipCodeAndCity = function(result) {
 
 //1
 Shipping.prototype.setOffice = function(result, courier) {
+  var name = '';
   if (result) {
-    console.log("SELECTED " + result.originalObject.name);
-    this.shippingData.office[courier] = result.originalObject.name;
-    
-    if (this.$rootScope)
-      this.$rootScope.$broadcast('office-changed', this.shippingData);
+    var name = result.originalObject.name ? result.originalObject.name : result.originalObject;
   }
+  console.log("SELECTED " + name);
+  this.shippingData.office[courier] = name;
+    
+  if (this.$rootScope)
+    this.$rootScope.$broadcast('office-changed', this.shippingData);
+  
 }
 
 //1
@@ -215,51 +218,33 @@ Shipping.prototype.reset = function() {
   this.shippingData.reset();
 }
 
-//deprecated - use listeners
-Shipping.prototype.refreshCart = function(cart) {
-  this.recalcOptions(cart, cart.shippingData);
-  this.recalcOptions(cart, this.shippingData);
-  this.updateOffices(cart);
-}
-
 ////////////////////////////
 // OUT OUT OUT
 //////////////////////////
 
 
 //refactor - move out
-Shipping.prototype.updateOffices = function(cart) {
-  var option = cart.shippingData.getOption();
-  var options = cart.shippingData.options;
-  var s = cart.shippingData.settlement;
+Shipping.prototype.updateOffices = function(shippingData) {
+  var option = shippingData.getOption();
+  var options = shippingData.options;
+  var s = shippingData.settlement;
   for(var i = 0; i < options.length; i++) {
     if (options[i].type == 'office') {
-      var data = this.ShippingService.getOffices(options[i].courier, cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
+      var data = this.ShippingService.getOffices(options[i].courier, shippingData.settlement.zipCode, shippingData.settlement.city);
       if (data && data.length == 1) {
         //one office, select it
-        cart.shippingData.office[options[i].courier] = data[0].name;
+        shippingData.office[options[i].courier] = data[0].name;
       } else if (data && data.length > 1) {
         //more than one
         //sync currently selected to the list
         var found = false;
         for(var j = 0; !found && j < data.length; j++) {
-          found = (data[j].name === cart.shippingData.office[options[i].courier])
+          found = (data[j].name === shippingData.office[options[i].courier])
         }
         if (!found) {
-          cart.shippingData.office[options[i].courier]='';
+          shippingData.office[options[i].courier]='';
         }
       }
     }
   }
 }
-
-//move out
-Shipping.prototype.getSpeedyOffices = function() {
-  return this.ShippingOffice.getSpeedyOffices(cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
-}
-
-//move out
-Shipping.prototype.getEkontOffices = function() {
-  return this.ShippingOffice.getEkontOffices(cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
-}
-

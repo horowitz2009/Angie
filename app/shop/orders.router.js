@@ -53,12 +53,9 @@ angular.module('felt.shop.orders')
     views : {
       'cartContent' : {
         templateUrl : 'app/shop/partials/order.display.html',
-        controller : [ '$scope', 'shippingCtrl', 'order', '$state', function($scope, shippingCtrl, order, $state) {
+        controller : [ '$scope', 'order', '$state', function($scope, order, $state) {
           $scope.id = order.id;
           $scope.order = order;
-          $scope.shippingCtrl = shippingCtrl;//TODO cleanup here
-          $scope.cart = shippingCtrl.cart;
-          $scope.shippingData = shippingCtrl.shippingData;
 
           $scope.showOrder = false;
 
@@ -84,12 +81,9 @@ angular.module('felt.shop.orders')
     views : {
       'cartContent' : {
         templateUrl : 'app/shop/partials/cart.done.html',
-        controller : [ '$scope', 'shippingCtrl', 'order', '$state', function($scope, shippingCtrl, order, $state) {
+        controller : [ '$scope', 'order', '$state', function($scope, order, $state) {
           $scope.order = order;
-          $scope.id = order.id;//TODO cleanup here too
-          $scope.shippingCtrl = shippingCtrl;
-          $scope.cart = shippingCtrl.cart;
-          $scope.shippingData = shippingCtrl.shippingData;
+          $scope.id = order.id;
 
           $scope.showOrder = false;
 

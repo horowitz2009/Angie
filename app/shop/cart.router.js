@@ -89,7 +89,7 @@ angular.module('felt.shop.cart')
                       angular.copy($scope.shippingData.settlement, cart.shippingData.settlement);
                       cart.shippingData.selectedOption = $scope.shippingData.selectedOption;
                       $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
-                      $scope.shippingCtrl.updateOffices(cart);
+                      $scope.shippingCtrl.updateOffices(cart.shippingData);
                       $rootScope.$broadcast('cart-changed', cart);
                     }  
                     
@@ -223,7 +223,7 @@ angular.module('felt.shop.cart')
 
                       $scope.$on("settlement-changed", function(event, shippingData) {
                         $scope.shippingCtrl.recalcOptions(cart, shippingData);
-                        $scope.shippingCtrl.updateOffices(cart);
+                        $scope.shippingCtrl.updateOffices(cart.shippingData);
                         //shippingCtrlEdit.setShippingData(shippingData);
                       });
                       
@@ -452,7 +452,7 @@ angular.module('felt.shop.cart')
                             console.log(oldValue);
                             console.log(newValue);
 
-                            if (newCart.count == 0) {
+                            if (newValue.count == 0) {
                               // cart is empty
                               $state.go('shop.cart.edit');
                               return;
@@ -479,240 +479,6 @@ angular.module('felt.shop.cart')
 
           ;// state chain end
         } ])
-        
-        
-
-////////////////////////////////////////////////////////////////////////
-// shippingCtrl
-////////////////////////////////////////////////////////////////////////
-
-.factory('shippingCtrl', [ '$rootScope', 'ShippingService', 'CartService', 'cart', 
-                           function($rootScope, ShippingService, CartService, cart) {
-  var factory = {};
-  
-  factory.shippingData = new ShippingData();
-
-  factory.cart = cart;
-  
-  factory.zipCodes = ShippingService.zipCodes;
-  factory.speedyOffices = ShippingService.speedyOffices;
-  factory.ekontOffices = ShippingService.ekontOffices;
-  
-  factory.customLookup = function(str, data) {
-    var res = [];
-    if (ShippingService.isZipCodeInSofia(str)) {
-      var data = angular.copy(data[0]);
-      if (str.length == 4) {
-        //full zip entered. Replace the original
-        data.zipCode = str;
-      }
-      res.push(data);
-    }            
-    return res;
-  }
-
-  factory.lookupOffices = function(str, courier) {
-    var res = [];
-    var sd = factory.cart.shippingData;
-    var data = ShippingService.getOffices(courier, sd.settlement.zipCode, sd.settlement.city);
-    
-    for(var i = 0; i < data.length; i++) {
-      if (data[i].name.toLowerCase().indexOf(str.toLowerCase()) >= 0 ||
-          data[i].address.toLowerCase().indexOf(str.toLowerCase()) >= 0) {
-        res.push(data[i]);
-      }
-    }
-    
-    return res;
-  }
-  
-  factory.customMatching = function(str, zipEntry) {
-    var isCity = false;
-    var isVillage = false;
-    var isResort = false;
-    var type = null;
-    if (str.indexOf("гр.") == 0 || str.indexOf("гр ") == 0) {
-      type="гр.";
-      str = str.substr(3);
-    } else if (str.indexOf("град ") == 0) {
-      type="гр.";
-      str = str.substr("град ".length);
-    } else if (str.indexOf("с.") == 0 || str.indexOf("с ") == 0) {
-      type="с.";
-      str = str.substr(2);
-    } else if (str.indexOf("село ") == 0) {
-      type="с.";
-      str = str.substr("село ".length);
-    } else if (str.indexOf("к.") == 0 || str.indexOf("к ") == 0) {
-      type="к.";
-      str = str.substr(2);
-    } else if (str.indexOf("курорт ") == 0) {
-      type="к.";
-      str = str.substr("курорт ".length);
-    } else if (str.indexOf("кур.") == 0) {
-      type="к.";
-      str = str.substr("кур.".length);
-    } else if (str.indexOf("к.к.") == 0) {
-      type="к.";
-      str = str.substr("к.к.".length);
-    }
-    str = str.trim();
-    var ss = str.split(" ");
-    var city = str;
-    var zip = null;
-    for (var i = 0; i < ss.length; i++) {
-      if(!isNaN(ss[i])) {
-        zip = ss[i];
-        city = str.replace(zip, "").trim();
-        break;
-      }
-    }
-    
-    var zipOK = true;
-
-    if (zip) {
-      zipOK =  zipEntry.zipCode.indexOf(zip) == 0;
-    }
-    var cityOK = true;
-    if (city)
-      cityOK = zipEntry.city.toUpperCase().indexOf(city.toUpperCase()) >= 0;
-
-    var typeOK = true;
-    if (type)  
-      typeOK = zipEntry.type.indexOf(type) >= 0;
-    return typeOK && cityOK && zipOK;
-  }
-  
-  factory.customSelectZipAndCity = function(result) {
-    return result.originalObject.combo;
-  }
-  factory.customSelectZipCode = function(result) {
-    return result.originalObject.zipCode;
-  }
-  factory.customSelectCity = function(result) {
-    return (result.originalObject.type ? result.originalObject.type + ' ': '') + result.originalObject.city;
-  }
-
-  factory.setZipCodeAndCity1 = function(result) {
-    factory.setZipCodeAndCity(result);
-    if (result) {
-      var input = $('#city2');
-      input.val(cart.shippingData.getCityPretty());
-    }
-  }
-  
-  factory.setZipCodeAndCity = function(result) {
-    if (result) {
-      console.log("SELECTED " + result.originalObject.city);
-      
-      factory.shippingData.propagateSettlement(result.originalObject); 
-      cart.shippingData.propagateSettlement(result.originalObject);
-      factory.refreshCart(cart);
-    }
-  }
-  
-  factory.setOffice = function(result, courier) {
-    if (result) {
-      console.log("SELECTED " + result.originalObject.name);
-      cart.shippingData.office[courier] = result.originalObject.name;
-    }
-  }
-    
-  //OK
-  factory.setTempZipCodeAndCity = function(result) {
-    if (result) {
-      console.log("SELECTED " + result.originalObject.city);
-      
-      factory.shippingData.propagateSettlement(result.originalObject); 
-      
-      factory.recalcOptions(cart, factory.shippingData);
-    }
-  }
-  
-  //ok
-  factory.recalcOptions = function(cart, shippingData) {
-    if (shippingData.canShippingBeCalculated()) {
-      var newOptions = ShippingService.calculateShippingCosts(cart.weight, shippingData.settlement);
-      shippingData.updateOptions(newOptions);
-    } else {
-      shippingData.updateOptions([]);
-    }
-  }
-  
-  //ok  
-  factory.loadCartToCtrl = function(cart) {
-    angular.copy(cart.shippingData.settlement, factory.shippingData.settlement);
-    factory.shippingData.selectedOption = cart.shippingData.selectedOption;
-    factory.refreshCart(cart);
-  }
-  
-  //ok
-  factory.reset = function() {
-    factory.contactData = {};
-    factory.shippingData = new ShippingData();
-  }
-  
-  //ok
-  factory.refreshCart = function(cart) {
-    factory.recalcOptions(cart, cart.shippingData);
-    factory.recalcOptions(cart, factory.shippingData);
-    factory.updateOffices(cart);
-  }
-
-  //not used
-  factory.setOption2 = function (option) {
-    cart.shippingData.setOption(option);
-    factory.shippingData.setOption(option);
-  }
-  
-  //OK
-  factory.submitSettlement = function () {
-    console.log("submitSettlement...");
-    if (factory.shippingData.selectedOption) {
-      angular.copy(factory.shippingData.settlement, cart.shippingData.settlement);
-      cart.shippingData.selectedOption = factory.shippingData.selectedOption;
-      factory.refreshCart(cart);
-      $rootScope.$broadcast('cart-changed', cart);
-    }  
-    
-    $("#ModalZip").modal('hide');
-  }
-  
-  factory.updateOffices = function(cart) {
-    var option = cart.shippingData.getOption();
-    var options = cart.shippingData.options;
-    var s = cart.shippingData.settlement;
-    for(var i = 0; i < options.length; i++) {
-      if (options[i].type == 'office') {
-        var data = ShippingService.getOffices(options[i].courier, cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
-        if (data && data.length == 1) {
-          //one office, select it
-          cart.shippingData.office[options[i].courier] = data[0].name;
-        } else if (data && data.length > 1) {
-          //more than one
-          //sync currently selected to the list
-          var found = false;
-          for(var j = 0; !found && j < data.length; j++) {
-            found = (data[j].name === cart.shippingData.office[options[i].courier])
-          }
-          if (!found) {
-            cart.shippingData.office[options[i].courier]='';
-          }
-        }
-      }
-    }
-  }
-  
-  factory.getSpeedyOffices = function() {
-    return ShippingOffice.getSpeedyOffices(cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
-  }
-
-  factory.getEkontOffices = function() {
-    return ShippingOffice.getEkontOffices(cart.shippingData.settlement.zipCode, cart.shippingData.settlement.city);
-  }
-  
-  return factory;
-}])
         
         
 ;
