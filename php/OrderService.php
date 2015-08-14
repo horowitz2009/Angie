@@ -41,10 +41,6 @@ class OrderService {
 
   public function loadOrder($username, $id) {
     $sql = "SELECT data, status FROM orders WHERE user = ? AND id = ?  LIMIT 1";
-    /*stmt = $dbh->query($sql);
-  $result = $stmt->setFetchMode(PDO::FETCH_NUM);
-  while ($row = $stmt->fetch()) {
-    print $row[0] . "\t" . $row[1] . "\t" . $row[2] . "\n";*/
   
     $query = $this->connection->prepare($sql);
     $query->execute(array($username, $id));
@@ -58,6 +54,25 @@ class OrderService {
     }
     return null;
   
+  }
+  
+  public function getAllOrders($username) {
+    $sql = "SELECT id, data, status FROM orders WHERE user = ?";
+  
+    $query = $this->connection->prepare($sql);
+    $query->execute(array($username));
+    
+    $query->setFetchMode(PDO::FETCH_NUM);
+    
+    $res = array();
+    while ($row = $query->fetch()) {
+      $obj = json_decode($row[1]);
+      $obj->id = $row[0];
+      $obj->status = $row[2];
+      $res[] = $obj;
+    }
+    
+    return json_encode($res);
   }
   
   /**

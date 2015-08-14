@@ -6,17 +6,33 @@ angular.module('felt.shipping.service')
 
 .factory('ShippingFactory', [ '$rootScope', 'ShippingService', 'CartService', 'cart', 
                            function($rootScope, ShippingService, CartService, cart) {
-  var factory = {};
+  var factory = { instances: {}
+  };
+  
+  
+  factory.get = function(name) {
+    if (name && factory.instances[name])
+      return factory.instances[name];
+    return null;    
+  }
   
   factory.getInstance = function(name, shippingData) {
     if (!name)
       return new Shipping("unknown");
-    if (factory[name])
-      return factory[name];
+    if (factory.instances[name])
+      return factory.instances[name];
     else {
       var newInstance = new Shipping(name, shippingData);
-      factory[name] = newInstance;
+      factory.instances[name] = newInstance;
       return newInstance;
+    }
+  }
+  
+  factory.resetAll = function() {
+    for (var property in factory.instances) {
+      if (factory.instances.hasOwnProperty(property)) {
+        factory.get(property).reset();
+      }
     }
   }
   

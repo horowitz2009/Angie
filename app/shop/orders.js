@@ -7,16 +7,22 @@ angular.module('felt.shop.orders', [
 // ////////////////////////////////////////////////////////////////////////
 .factory(
     'OrderService',
-    [ '$http', 'utils', '$q', '$state', 'AuthService', 'CartService', 'shippingCtrl','OrderPersistenceService',
-        function($http, utils, $q, $state, AuthService, CartService, shippingCtrl, OrderPersistenceService) {
+    [ '$http', 'utils', '$q', '$state', 'AuthService', 'CartService', 'ShippingFactory','OrderPersistenceService',
+        function($http, utils, $q, $state, AuthService, CartService, ShippingFactory, OrderPersistenceService) {
           console.log("[  6 order.factory OrderService]");
 
           var factory = {};
           
           factory.order = {};
           
+          
+          
           factory.getOrder = function(id) {
             return OrderPersistenceService.loadOrder(AuthService.getUsername(), id);
+          }
+          
+          factory.getAllOrders = function(id) {
+            return OrderPersistenceService.getAllOrders(AuthService.getUsername());
           }
           
           factory.submitOrder = function() {
@@ -44,10 +50,9 @@ angular.module('felt.shop.orders', [
               // 2. clear the cart
               // 3. display the "congrats" page
               console.log(resp);
-              CartService.resetCart();
-              shippingCtrl.reset();
+              CartService.emptyCart();
               
-              $state.go('shop.order.placed', resp);
+              $state.go('shop.cart.done', resp);
               
             }, function(err) {
               console.log("whaaat" + err);
@@ -115,6 +120,21 @@ angular.module('felt.shop.orders', [
 
   }
 
+  service.getAllOrders = function(username) {
+    return $.ajax({
+      type : "POST",
+      encoding : "UTF-8",
+      url : 'php/get_orders.php',
+      data : {
+        'username' : username
+      },
+      success : function(order) {
+        return order;
+      }
+    });
+    
+  }
+  
   service.changeOrderStatus = function(orderId, newStatus) {
     console.log("Changing status of order #" + orderId + " to " + newStatus);
     return $.ajax({

@@ -109,10 +109,11 @@ ShippingData.prototype.updateOptions = function (newOptions) {
 ShippingData.prototype.copyTo = function(obj) {
   angular.copy(this.settlement, obj.settlement);
   angular.copy(this.options, obj.options);
-  obj.selectedOptionObj = null;
-  obj.selectedOption = this.selectedOption;
-
-  //angular.copy(this.prototype, obj.prototype);
+  angular.copy(this.office, obj.office);
+  obj.wantInvoice = this.wantInvoice;
+  obj.invoiceData = this.invoiceData;
+  //obj.selectedOptionObj = null;
+  //obj.selectedOption = this.selectedOption;
 }
 
 ShippingData.prototype.propagateSettlement = function(obj) {

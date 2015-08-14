@@ -245,7 +245,7 @@
                     style="text-transform: none; font-size: 14px; line-height: 28px;" ng-bind="getUsername()"> ... </span></a>
                 </li>
 
-                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.edit"><span class="hidden-xs"> Моят акаунт</span> <i
+                <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.summary"><span class="hidden-xs"> Моят акаунт</span> <i
                     class="glyphicon glyphicon-user hide visible-xs "></i> </a></li>
 
                 <li ng-if="getUsername() !== 'guest'" ng-cloak><a ng-click="logout(false)"> <span class="hidden-xs">Изход</span> <i
@@ -831,7 +831,9 @@
       
       has focus = {{hasFocus}}
     </pre>
-
+<div ng-repeat = "st in states">
+  state: {{st.name}}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{st.url}}
+</div>
 
   <footer>
     <div class="footer" id="footer">
@@ -1040,6 +1042,7 @@
   <!-- APP -->
   <script type="text/javascript" src="app/app.js"></script>
   <script type="text/javascript" src="app/home/account.js"></script>
+  <script type="text/javascript" src="app/home/account.router.js"></script>
   <script type="text/javascript" src="common/auth/authentication.js"></script>
   <script type="text/javascript" src="app/shop/shop.js"></script>
   <script type="text/javascript" src="app/shop/shipping.js"></script>
@@ -1047,7 +1050,6 @@
   <script type="text/javascript" src="app/shop/cart.router.js"></script>
   <script type="text/javascript" src="app/shop/shop-service.js"></script>
   <script type="text/javascript" src="app/shop/orders.js"></script>
-  <script type="text/javascript" src="app/shop/orders.router.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-factory.js"></script>
   <script type="text/javascript" src="app/common/color-service.js"></script>

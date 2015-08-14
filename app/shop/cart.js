@@ -180,11 +180,16 @@ angular
             }
           }
 
+          service.emptyCart = function() {
+            cart.items.splice(0, cart.items.length);
+            service.recalcTotals();
+          }
+          
           // reset cart
           service.resetCart = function() {
             cart.items.splice(0, cart.items.length);
             cart.contactData = {};
-            cart.shippingData = new ShippingData();
+            cart.shippingData.reset();
             service.recalcTotals();
           }
           

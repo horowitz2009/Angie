@@ -1,0 +1,12 @@
+<div class="col-lg-9 col-md-10 col-sm-11 col-xs-12">
+
+  <div> Привет, {{account.contactData.firstName}} {{account.contactData.lastName}}</div>
+  <p ng-show="orders && orders.length > 0">Към момента имате {{orders.length}} поръчки.</p>
+  <ul class="">
+    <li ui-sref-active="active"><a ui-sref="account.man.edit"> Профил </a></li>
+    <li ui-sref-active="active"><a ui-sref="account.summary.orders"> Моите поръчки </a></li>
+  </ul>
+
+
+  
+</div>

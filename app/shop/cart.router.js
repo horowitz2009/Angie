@@ -90,13 +90,13 @@ angular.module('felt.shop.cart')
                       cart.shippingData.selectedOption = $scope.shippingData.selectedOption;
                       $scope.shippingCtrl.recalcOptions(cart, cart.shippingData);
                       $scope.shippingCtrl.updateOffices(cart.shippingData);
+                      $rootScope.$broadcast('address-changed', cart);
                       $rootScope.$broadcast('cart-changed', cart);
                     }  
                     
                     $("#ModalZip").modal('hide');
                   }
 
-                  
                   $scope.$on("settlement-changed", function(event, shippingData) {
                     $scope.shippingCtrl.recalcOptions(cart, shippingData);
                   });
@@ -152,9 +152,7 @@ angular.module('felt.shop.cart')
           //////////////////////////////////////////////////
           // CHECKOUT
           //////////////////////////////////////////////////
-          .state(
-              'shop.cart.checkout',
-              {
+          .state('shop.cart.checkout', {
 
                 url : '/checkout',
 
@@ -174,9 +172,9 @@ angular.module('felt.shop.cart')
                 views : {
                   'cartContent' : {
                     templateUrl : 'app/shop/partials/cart.checkout.html',
-                    controller : [ '$scope', '$rootScope', 'cart', 'ShippingService', 'ShippingFactory', '$state', 
+                    controller : [ '$scope', '$rootScope', 'cart', 'ShippingService', 'ShippingFactory', '$state', 'Account', 
                                        'CartService', 'OrderService', 'CART_EVENTS', '$timeout',
-                                   function($scope, $rootScope, cart, ShippingService, ShippingFactory, $state, 
+                                   function($scope, $rootScope, cart, ShippingService, ShippingFactory, $state, Account,
                                        CartService, OrderService, CART_EVENTS, $timeout) {
 
                       console.log("shop.cart.checkout controller...");
@@ -185,6 +183,11 @@ angular.module('felt.shop.cart')
                       $scope.shippingCtrl.factory(ShippingService, $rootScope);
                       $scope.shippingData = $scope.shippingCtrl.shippingData;//it's cart.shippingData
                       $scope.cart = cart;
+                      
+                      
+                      if (!$scope.cart.contactData.email) {
+                        $scope.cart.contactData.email = Account.getEmail();
+                      }
 
                       /*if ($scope.cart.count == 0) {
                         // cart is empty
@@ -476,6 +479,37 @@ angular.module('felt.shop.cart')
                 }
 
               })
+
+              
+          //////////////////////////////////////////////////
+          // DONE
+          //////////////////////////////////////////////////    
+          .state('shop.cart.done', {
+        
+            url : '/congrats',
+        
+            data : {
+              displayName : 'Вашата поръчка е приета'
+            },
+            
+            params: {
+              'id' : -100        
+            },
+            
+            views : {
+              'cartContent' : {
+                templateUrl : 'app/shop/partials/cart.done.html',
+                controller : [ '$scope', '$stateParams', '$state', function($scope, $stateParams, $state) {
+                  
+                  $scope.id = $stateParams['id'];
+                  
+                } ]
+        
+              }
+            }
+        
+          })//state
+
 
           ;// state chain end
         } ])

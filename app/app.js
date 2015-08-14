@@ -63,331 +63,6 @@ angular.module('felt', [
                     }
 
                 })
-
-                
-                /////////////
-                // Account //
-                /////////////
-                .state("account", {
-                  
-                    abstract : true,
-
-                    url: "/account",
-
-                    data : {
-                      breadcrumbProxy : 'account.edit'
-                    },
-                    
-                    /*data: {
-                      displayName: 'Моят акаунт'
-                    },*/
-                    
-                    resolve : {
-                      zipCodes : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getZipCodes();
-                      } ],
-
-                      zipCodesExceptions : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getZipCodesExceptions();
-                      } ],
-                      
-                      speedyTables : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getSpeedyTables();
-                      } ],
-                      
-                      ekontTables : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getEkontTables();
-                      } ],
-                      speedyOffices : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getAllSpeedyOffices();
-                      } ],
-                      
-                      ekontOffices : [ 'ShippingService', function(ShippingService) {
-                        return ShippingService.getAllEkontOffices();
-                      } ]
-
-                    },
-
-                    views: {
-                      'banner': {},
-                      '': {
-                          template: '<div class="row view-slide-in" ui-view="content" autoscroll="false"></div>'
-                        } 
-                    }
-
-                })
-
-                //////////////////
-                // Account EDIT //
-                //////////////////
-                .state("account.edit", {
-                  
-                  url: "/edit",
-                  
-                  data: {
-                      displayName: 'Моят акаунт'
-                  },
-                  
-                  views: {
-                    'content': {
-                      templateUrl: 'app/home/partials/myaccount.html',
-                      controller : [ '$scope', '$rootScope', '$state', 'AuthService', 'ShippingFactory', 
-                                     'ShippingService', 'AccountService', 'Account', 'Session', '$timeout',
-                                     function($scope, $rootScope, $state, AuthService, ShippingFactory, 
-                                         ShippingService, AccountService, Account, Session, $timeout) {
-                        
-                        console.log("account.edit controller...");
-                        
-                        $scope.headingLabel = "Моят акаунт";
-                        $scope.newPasswordLabel = "Нова парола";
-                        $scope.newPasswordAgainLabel = "Нова парола отново";
-                        
-                        if (AuthService.isGuest()) {
-                          $state.go('home');
-                          return;
-                        } else {
-                          $scope.shippingCtrl = ShippingFactory.getInstance('account.edit', Account.shippingData);
-                          $scope.shippingCtrl.factory(ShippingService, $rootScope);
-                          $scope.shippingData = $scope.shippingCtrl.shippingData;
-                          
-                          $scope.account = Account;
-                          $scope.contactData = Account.contactData;
-                          
-                          //only those functions that mess with external services need to be wrapped
-                          $scope.setZipCodeAndCity = function(result) {
-                            $scope.shippingCtrl.setZipCodeAndCity(result);
-                          }
-                          
-                          $scope.setZipCodeAndCity1 = function(result) {
-                            $scope.shippingCtrl.setZipCodeAndCity(result);
-                            if (result) {
-                              var input = $('#city2'); //TODO perhaps class is better than id
-                              input.val($scope.shippingData.getCityPretty());
-                            }
-                          }
-                          
-                          $scope.customLookup = function(str, data) {
-                            return $scope.shippingCtrl.customLookup(str, data);
-                          }
-                          
-                          $scope.setOffice = function(result, courier) {
-                            $scope.shippingCtrl.setOffice(result, courier);
-                          }
-                          
-                          $scope.lookupOffices = function(str, courier) {
-                            return $scope.shippingCtrl.lookupOffices(str, courier);
-                          }
-                          
-                          $scope.setWantInvoice = function(val) {
-                            $scope.shippingData.wantInvoice = val;
-                          }
-
-                          $scope.$on("settlement-changed", function(event, shippingData) {
-                            $scope.shippingCtrl.recalcOptions(null, shippingData);
-                            $scope.shippingCtrl.updateOffices(shippingData);
-                          });
-                          
-                          
-                          $scope.$watch('shippingData.settlement.country', function(newValue, oldValue) {
-                            console.log("account.edit country changed from " + oldValue + " to " + newValue);
-                            if (oldValue !== newValue) {
-                              $scope.shippingData.clearAddress();
-                              var input = $('#city2');
-                              input.val($scope.shippingData.getCityPretty());
-                              input = $('#zipCode2');
-                              input.val($scope.shippingData.zipCode);
-                              $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
-                            }
-                          });
-
-                          $scope.$on("user-changed", function(event, oldUsername, newUsername) {
-                            if (newUsername === 'guest') {
-                              $scope.shippingCtrl.reset();
-                            }
-                          });
-                          
-                          
-                          $scope.account.contactData.email = Session.userId;
-                          $scope.editPassword = false;
-                          $scope.setEditPassword = function(value) {
-                            $scope.editPassword = value;
-                          }
-                          
-                          $scope.message = '';
-                          
-                          $scope.saveAccount = function() {
-                            $scope.message = '...';
-                            console.log("Saving account: ");
-                            console.log($scope.account);
-                            AccountService.saveAccount($scope.account, function() {
-                              console.log("good");
-                              if ($scope.contactData.oldPassword) {
-                                $scope.contactData.oldPassword=null;
-                                $scope.contactData.newPassword1=null;
-                                $scope.contactData.newPassword2=null;
-                                $scope.editPassword = false;
-                                $('#changePassButton').show();
-                              }
-                              $scope.message = 'Акаунтът е записан успешно!';
-                              $scope.$apply();
-                              //TODO after 1-2 seconds hide the passwords and animate scroll up
-                              
-                              //TODO timeout 30sec and remove the message
-                              $timeout(function() {
-                                $scope.message = '';
-                                $scope.$apply();
-                              }, 10000);
-                            },
-                            
-                            function(resp) {
-                              if (resp.status === 401) {
-                                console.log("UH OH");
-                                $scope.message = 'Невярна парола! Моля въведете коректно старата си парола!';
-                              } else {
-                                console.log("UH OH");
-                                $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
-                              }
-                              $scope.$apply();
-                            });
-                          }
-                          
-                          
-                          
-                          $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
-
-                        }
-                      }]
-                    }
-                    
-                  }
-                  
-                })
-                
-                //////////////////
-                // Account EDIT //
-                //////////////////
-                .state("account.new", {
-                  
-                  url: "/new",
-                  
-                  data: {
-                    displayName: 'Моят акаунт'
-                  },
-                  
-                  views: {
-                    '': {
-                      templateUrl: 'app/home/partials/myaccount.html',
-                      controller : [ '$scope', '$state', 'AuthService', 'shippingCtrl', 
-                                     'AccountService', 'Account', 'Session', '$timeout',
-                                     function($scope, $state, AuthService, shippingCtrl, 
-                                         AccountService, Account, Session, $timeout) {
-                        
-                        $scope.headingLabel = "Регистрация на акаунт";
-                        $scope.newPasswordLabel = "Парола";
-                        $scope.newPasswordAgainLabel = "Парола отново";
-                        
-                        $scope.shippingCtrl = shippingCtrl;
-                        
-                        if (AuthService.isGuest()) {
-                          $state.go('home');
-                        } else {
-                          $scope.account = Account;
-                          $scope.account.contactData.email = Session.userId;
-                          $scope.editPassword = false;
-                          $scope.message = '';
-                          
-                          $scope.saveAccount = function() {
-                            $scope.message = '...';
-                            console.log("Saving account: ");
-                            console.log($scope.account);
-                            AccountService.saveAccount($scope.account, function() {
-                              console.log("good");
-                              $scope.message = 'Акаунтът е записан успешно!';
-                              $scope.$apply();
-                              //TODO timeout 30sec and remove the message
-                              $timeout(function() {
-                                $scope.message = '';
-                                $scope.$apply();
-                              }, 10000);
-                            },
-                            
-                            function() {
-                              console.log("UH OH");
-                              $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
-                            });
-                          }
-                        }
-                      }]
-                    }
-                  
-                  }
-                  
-                })
-                
-                ////////////////
-                // Register //
-                ////////////////
-                .state("register", {
-                  
-                  url: "/register",
-                  
-                  data: {
-                    displayName: 'Регистрация на акаунт'
-                  },
-                  
-                  params: {
-                    newAccount: true
-                  },
-                  
-                  views: {
-                    'banner': {
-                      
-                    },
-                    
-                    '': {
-                      templateUrl: 'app/home/partials/myaccount.html',
-                      controller : [ '$scope', '$state', 'AuthService', 'AccountService', 'Account', 'Session', 'CartService', '$timeout',
-                                     function($scope, $state, AuthService, AccountService, Account, Session, CartService, $timeout) {
-                        
-                        $scope.headingLabel = "Регистрация на акаунт";
-                        $scope.newPasswordLabel = "Парола";
-                        $scope.newPasswordAgainLabel = "Парола отново";
-                        
-                        var cart = CartService.cart;
-                        angular.copy(cart.contactData, Account.contactData);
-                        
-                        $scope.account = Account;
-                        //$scope.account.contactData.email = Session.userId;
-                        $scope.newAccount = true;
-                        $scope.editPassword = true;
-                        $scope.message = '';
-                        
-                        $scope.saveAccount = function() {
-                          $scope.message = '...';
-                          console.log("Saving account: ");
-                          console.log($scope.account);
-                          AccountService.saveAccount($scope.account, function() {
-                            console.log("good");
-                            $scope.message = 'Акаунтът е записан успешно!';
-                            $scope.$apply();
-                            //TODO timeout 30sec and remove the message
-                            $timeout(function() {
-                              $scope.message = '';
-                              $scope.$apply();
-                            }, 10000);
-                          },
-                          
-                          function() {
-                            console.log("UH OH");
-                            $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
-                          });
-                        }
-                      }]
-                    }
-                    
-                  }
-                  
-                })
                 
                 ///////////
                 // About //
@@ -446,6 +121,8 @@ angular.module('felt', [
             console.log('state changed from ' + fromState.name + ' to ' + toState.name);
 
             $("html, body").animate({ scrollTop: 0 }, 200);
+
+            console.log($rootScope.$state);
             
             /*
             console.log("fromState:");
@@ -533,14 +210,15 @@ angular.module('felt', [
 // MAIN CONTROLLER
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller('MainCtrl', ['$scope', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', //'shippingCtrl',
+.controller('MainCtrl', ['$scope', '$state', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', 'ShippingFactory',
                          'Account', 'AUTH_EVENTS', 'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
                          '$animate', '$timeout', '$interval',
-                    function($scope, $rootScope, USER_ROLES, AuthService, AccountService, //shippingCtrl,
+                    function($scope, $state, $rootScope, USER_ROLES, AuthService, AccountService, ShippingFactory,
                          Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval) {
+  $scope.states = $state.get();
   
   console.log("[217 app.controller] MainCtrl");
   $scope.currentUser = 'guest';
@@ -622,20 +300,21 @@ angular.module('felt', [
               //login
               //transfer the cart from guest to logged
               
-              manageAccount($scope.cart, Account);
+              //manageAccount($scope.cart, Account);
 
               CartPersistenceService.transferCart(oldUsername, newUsername);
-
-
-            } else {
-              //logout
-
-              CartService.resetCart();
-              //FIXME shippingCtrl.reset();
-
             } 
           }
         }
+
+        if (oldUsername != "guest" && newUsername == "guest") {
+          //logout
+
+          CartService.resetCart();//TODO might be obsolete
+          ShippingFactory.resetAll();
+        }
+
+        manageAccount($scope.cart, Account);
 
         $rootScope.$broadcast("cart-loaded", oldCart, $scope.cart);
         
@@ -688,9 +367,9 @@ angular.module('felt', [
     } else {
       //IT IS GUEST
       Account.reset();
-      if ($rootScope.$state.current.name === 'account.edit') {
+      //if ($rootScope.$state.current.name === 'account.edit' || $rootScope.$state.current.name === 'shop.order.placed') {
         $rootScope.$state.go('home');
-      }
+      //}
     }
     
     if (accountPromise)
@@ -718,6 +397,27 @@ angular.module('felt', [
     console.log("login failed caught");
     $scope.setCurrentUser(null);
   });
+
+  $scope.$on("account-changed", function(event, notused, account) {
+    console.log("shop.cart.edit account-changed...");
+    
+    angular.copy(account.contactData, cart.contactData);
+    account.shippingData.copyTo(cart.shippingData);
+    
+  });
+
+  $scope.$on("address-changed", function(event, cart) {
+    console.log("shop.cart.checkout address-changed...");
+    
+    if (!Account.contactData.firstName) {
+      angular.copy(cart.contactData, Account.contactData);
+    }
+    if (!Account.shippingData.canShippingBeCalculated()) {
+      cart.shippingData.copyTo(Account.shippingData);
+    }
+    
+  });
+
   
   var subTotalPromise = null;
   var addToCartPromise = null;
@@ -829,10 +529,11 @@ function manageAccount(cart, account) {
   if (hasContactData(account.contactData)) {
     //we have contactData //copy it to cart
     angular.copy(account.contactData, cart.contactData);
-    //TODO account.shippingData.copyTo(cart.shippingData);
+    account.shippingData.copyTo(cart.shippingData);
   } else {
     if (hasContactData(cart.contactData)) {
       angular.copy(cart.contactData, account.contactData);
+      cart.shippingData.copyTo(account.shippingData);
     }
   }
 }

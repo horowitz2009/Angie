@@ -1,6 +1,5 @@
 angular.module('felt.shop', [
   'ui.router',
-  /*'common.utils.service',*/
   'angularUtils.directives.uiBreadcrumbs'
 ])
 
@@ -14,15 +13,6 @@ angular.module('felt.shop', [
 
       // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
       $urlRouterProvider
-          /*.when('/shop/order/display/:id', ['$state', '$stateParams', function ($state, $stateParams) {
-            $state.go('shop.order.display', {"id" : $stateParams['id']});
-          }])*/
-          
-          .when('/shop/order/display/:id', ['$match', '$state', 
-                                            function ($match, $state) {
-              $state.go('shop.order.display', $match);
-            }])
-          
           
           .when('/shop/cart', ['$state', function ($state) {
             $state.go('shop.cart.edit');
@@ -284,7 +274,4 @@ angular.module('felt.shop', [
   ]
 )
 
-.run(function () { console.log("[277 shop.run]"); })
-
-
-;
+;//end

@@ -18,7 +18,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['data'])) {
   
   $username = $_POST['username'];
   $data = $_POST['data'];
-  $newPassword = (isset($_POST['oldPassword']) || isset($_POST['newAccount'])) && isset($_POST['newPassword']) ? passwordHash::hash($_POST['newPassword']) : null;
+  $newPassword = isset($_POST['oldPassword']) && isset($_POST['newPassword']) ? passwordHash::hash($_POST['newPassword']) : null;
   
   $success = true;
   
@@ -37,11 +37,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['data'])) {
   }
   
   if ($success) {
-    if (isset($_POST['newAccount'])) {
-      $accountService->saveNewAccount($username, $newPassword, 'shopper', $data);
-    } else {
-      $accountService->saveAccount($username, $data, $newPassword);
-    } 
+    $accountService->saveAccount($username, $data, $newPassword);  
     set_result('200', 'OK');
   } else {
     set_result('401', 'Incorrect password');

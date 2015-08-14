@@ -44,6 +44,14 @@ class AccountService {
       $query->execute(array($data, $username));
   }
 
+  public function saveNewAccount($username, $password, $roles, $data) {
+    //INSERT INTO `users`(`email`, `password`, `roles`, `data`, `created`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])
+    $sql = "INSERT INTO users(`email`, `password`, `roles`, `data`) VALUES (?, ?, ?, ?)";
+
+    $query = $this->connection->prepare($sql);
+    $query->execute(array($username, $password, $roles, $data));
+  }
+
   public function loadAccount($username) {
     $sql = "SELECT data FROM users WHERE email = ?";
     $query = $this->connection->prepare($sql);
