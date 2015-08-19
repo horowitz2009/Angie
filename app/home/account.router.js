@@ -102,6 +102,7 @@ angular.module('home.account')
 
                   $scope.account = Account;
                   $scope.contactData = Account.contactData;
+                  $scope.oldUsername = $scope.account.contactData.email;
 
                   // only those functions that mess with external
                   // services need to be wrapped
@@ -115,6 +116,7 @@ angular.module('home.account')
                       var input = $('#city2'); // TODO perhaps class
                                                 // is better than id
                       input.val($scope.shippingData.getCityPretty());
+                      input.change();
                     }
                   }
 
@@ -145,8 +147,10 @@ angular.module('home.account')
                       $scope.shippingData.clearAddress();
                       var input = $('#city2');
                       input.val($scope.shippingData.getCityPretty());
+                      input.change();
                       input = $('#zipCode2');
                       input.val($scope.shippingData.zipCode);
+                      input.change();
                       $scope.shippingCtrl.recalcOptions(null, $scope.shippingData);
                     }
                   });
@@ -155,6 +159,7 @@ angular.module('home.account')
                     if (newUsername === 'guest') {
                       $scope.shippingCtrl.reset();
                     }
+                    $scope.oldUsername = newUsername;
                   });
 
                   $scope.account.contactData.email = Session.userId;
@@ -180,6 +185,10 @@ angular.module('home.account')
                         $('#changePassButton').show();
                       }
 
+                      if ($scope.account.getEmail() !== Session.userId) {
+                        Session.userId = $scope.account.getEmail(); 
+                        $scope.setCurrentUser($scope.account.contactData);
+                      }
                       $rootScope.$broadcast("account-changed", null, $scope.account);
 
                       $scope.message = 'Акаунтът е записан успешно!';
@@ -190,16 +199,20 @@ angular.module('home.account')
                       // TODO timeout 30sec and remove the message
                       $timeout(function() {
                         $scope.message = '';
+                        $state.go('account.summary');
                         $scope.$apply();
-                      }, 10000);
+                      }, 2000);
                     },
 
                     function(resp) {
                       if (resp.status === 401) {
-                        console.log("UH OH");
+                        console.log("UH OH 401");
                         $scope.message = 'Невярна парола! Моля въведете коректно старата си парола!';
+                      } else if (resp.status === 409) {
+                          console.log("UH OH 409");
+                          $scope.message = 'Проблем! Открихме профил с имейл ' + $scope.account.getEmail() + '. Въведете друг имейл!';
                       } else {
-                        console.log("UH OH");
+                        console.log("UH OH " + resp.status);
                         $scope.message = 'Грешка! Връзката със сървъра бе загубена! Опитайте отново!';
                       }
                       $scope.$apply();
@@ -412,6 +425,10 @@ angular.module('home.account')
                 });
               });
               
+              $scope.formatAddress = function(shippingData) {
+                return shippingData.settlement.country;
+              }
+              
             } ]
         }//content3
 
@@ -436,7 +453,7 @@ angular.module('home.account')
           templateUrl : 'app/home/partials/account.orders.html',
           controller : [ '$scope', '$state', 'OrderService', function($scope, $state, OrderService) {
             
-            $scope.orders = [];
+            $scope.orders = null;
             OrderService.getAllOrders().then(function(newOrders){
               $scope.$apply(function(){
                 $scope.orders = newOrders;
@@ -491,9 +508,18 @@ angular.module('home.account')
       views : {
         'content3@account' : {
           templateUrl : 'app/home/partials/account.order.html',
-          controller : [ '$scope', 'order', '$state', function($scope, order, $state) {
-            $scope.id = order.id;
-            $scope.order = order;
+          controller : [ '$scope', '$stateParams', 'OrderService', '$state', function($scope, $stateParams, OrderService, $state) {
+            
+            
+            $scope.id = $stateParams['id'];
+            $scope.order = null;
+            OrderService.getOrder($stateParams['id']).then(function(newOrder){
+              $scope.$apply(function(){
+                $scope.order = newOrder;
+                $scope.id = newOrder.id;
+              });
+            });
+            
             
           } ]
         }
@@ -502,6 +528,57 @@ angular.module('home.account')
 
 
 
-} ]);
+} ])
 
-// end
+
+.directive('formatAddress', ['$sce', function($sce) {
+
+  function getCityPretty(s) {
+    var res='';
+    if (s.type) 
+      res += s.type + ' ';
+    if (s.city)  
+      res += s.city;
+    return res;
+  }
+
+  function getAddress(o) {
+    var res = '';
+    if (o.option.type === 'office') {
+      res = 'До офис: ' + o.shippingData.office[o.option.courier];
+    } else if (o.option.type === 'address') {
+      res = o.shippingData.office['address'];
+    }
+    return res;
+  }
+
+  return {
+    template: //'{{order.shippingData.settlement.country}}, {{city}}<br>' +
+              '<span ng-bind-html="address"></span>',
+
+      link : function(scope, elem, attrs) {
+        if (scope.order.option.type == 'atelier') {
+          //if (scope.order.status == 'pending')
+            scope.address = 'Вземане от ателието';
+          //else  
+          //  scope.address = 'взето от ателието';
+        } else {
+          scope.address = scope.order.shippingData.settlement.country + ', ' +
+            getCityPretty(scope.order.shippingData.settlement) + '<br>' + 
+            getAddress(scope.order);
+          
+        }
+
+        scope.address = $sce.trustAsHtml(scope.address);
+        //scope.city = getCityPretty(scope.order.shippingData.settlement);
+        //scope.address = getAddress(scope.order);
+      }
+      
+  };
+}])
+
+;// end
+
+
+
+

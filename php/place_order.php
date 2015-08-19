@@ -20,7 +20,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['data'])) {
   $status = isset($_POST['status']) ? $_POST['status'] : 'pending';
   $data =  $_POST['data'];
 
-  $id = $orderService->saveOrder($username, $status, $data);
+  $id = $orderService->insertOrder($username, $status, $data);
     
   set_result('200', 'OK', '{"id":"'.$id.'"}');
 } else {

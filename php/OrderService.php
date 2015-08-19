@@ -31,16 +31,24 @@ class OrderService {
    * @param string $status          
    * @param string $data          
    */
-  public function saveOrder($username, $status, $data) {
-    $sql = "INSERT INTO orders(user, status, data) VALUES(?, ?, ?)";
+  public function insertOrder($username, $status, $data) {
+    $sql = "INSERT INTO orders(user, status, data, date_placed, date_changed) VALUES(?, ?, ?, now(), now())";
     
     $query = $this->connection->prepare($sql);
     $query->execute(array($username, $status, $data));
     return $this->connection->lastInsertId();
   }
+  
+  public function changeOrderStatus($id, $status) {
+    //UPDATE `orders` SET `id`=[value-1],`user`=[value-2],`status`=[value-3],`date_placed`=[value-4],`date_changed`=[value-5],`data`=[value-6] WHERE 1
+    $sql = "UPDATE orders SET status = ?, date_changed = now() WHERE id = ?";
+    
+    $query = $this->connection->prepare($sql);
+    $query->execute(array($status, $id));
+  }
 
   public function loadOrder($username, $id) {
-    $sql = "SELECT data, status FROM orders WHERE user = ? AND id = ?  LIMIT 1";
+    $sql = "SELECT data, status, date_placed, date_changed FROM orders WHERE user = ? AND id = ?  LIMIT 1";
   
     $query = $this->connection->prepare($sql);
     $query->execute(array($username, $id));
@@ -49,6 +57,8 @@ class OrderService {
       $obj = json_decode($row[0]);
       $obj->id = $id;
       $obj->status = $row[1];
+      $obj->datePlaced = $row[2];
+      $obj->dateChanged = $row[3];
       $res = json_encode($obj);
       return $res;
     }
@@ -57,7 +67,7 @@ class OrderService {
   }
   
   public function getAllOrders($username) {
-    $sql = "SELECT id, data, status FROM orders WHERE user = ?";
+    $sql = "SELECT id, data, status, date_placed, date_changed FROM orders WHERE user = ?";
   
     $query = $this->connection->prepare($sql);
     $query->execute(array($username));
@@ -69,6 +79,9 @@ class OrderService {
       $obj = json_decode($row[1]);
       $obj->id = $row[0];
       $obj->status = $row[2];
+      //$d = DateTime::createFromFormat('Y-m-d G:i:s', $row[3]);
+      $obj->datePlaced = $row[3];
+      $obj->dateChanged = $row[4];
       $res[] = $obj;
     }
     

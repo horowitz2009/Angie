@@ -40,6 +40,7 @@
 
 <!-- Custom styles for this template -->
 <link href="css/style.css" rel="stylesheet">
+<link href="css/mystyle.css" rel="stylesheet">
 
 <!-- css3 animation effect for this template -->
 <link href="css/animate.css" rel="stylesheet">
@@ -165,35 +166,34 @@
               </div>
             </div>
 
-            <div class="form-group reg-email">
+            <div class="form-group reg-email" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
               <div>
                 <input name="email" class="form-control input" size="20" ng-model="newUser.email"
-                  placeholder="Имейл  адрес" type="text">
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0} }"
+                  placeholder="Имейл  адрес" type="email" required>
+                  <div role="alert" class="help-block" style="color: #a94442;"
+                       ng-show="loginForm.email.$error.email && !loginForm.email.$pristine">
+                    Въведете валиден имейл</div>  
+                  </div>
+            </div>
+            <div class="form-group reg-password">
+              <div>
+                <input name="password" class="form-control input" size="20" ng-model="newUser.password" pw-check="newUser.password2"
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+                  placeholder="Парола" type="password" required>
               </div>
             </div>
             <div class="form-group reg-password">
               <div>
-                <input name="password" class="form-control input" size="20" ng-model="newUser.password"
-                  placeholder="Парола" type="password">
+                <input name="password2" class="form-control input" size="20" ng-model="newUser.password2"
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+                  placeholder="Парола отново" type="password" required>
+                <p class="help-block" style="color: #a94442;"
+                    ng-show="loginForm.password.$error.pwmatch && !loginForm.password2.$pristine && !loginForm.password.$pristine">
+                    Паролите не съвпадат!</p>  
+                  
               </div>
             </div>
-            <div class="form-group reg-password">
-              <div>
-                <input name="password" class="form-control input" size="20" ng-model="newUser.password2"
-                  placeholder="Парола отново" type="password">
-              </div>
-            </div>
-            <!--            <div class="form-group">
-                    <div>
-                        <div class="checkbox login-rememberme">
-                            <label style=" margin-left: 4px;">
-                              <input name="rememberme" type="checkbox" id="rememberme_checkbox2"
-                                     ng-model="newUser.rememberme"> Запомни ме 
-                            </label>
-                        </div>
-                    </div>
-                </div>
--->
             <div>
               <div>
                 <input name="submit" class="btn  btn-block btn-lg btn-primary" value="Регистрирай" type="submit">

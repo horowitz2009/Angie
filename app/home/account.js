@@ -36,7 +36,7 @@ angular.module('home.account', [
   
 })
 
-.factory('AccountService', ["$http", "Account", function ($http, Account) {
+.factory('AccountService', ["$http", "Account", 'Session', function ($http, Account, Session) {
   console.log("[ 20 home.factory AccountService]");
   var accountService = {};
   
@@ -83,6 +83,7 @@ angular.module('home.account', [
       data : {
         'data': jsonStr, 
         'username': account.contactData.email,
+        'oldUsername': Session.userId,
         'oldPassword': account.contactData.oldPassword,
         'newPassword': account.contactData.newPassword1
         },

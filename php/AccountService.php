@@ -31,17 +31,27 @@ class AccountService {
    * @param string $status          
    * @param string $data          
    */
-  public function saveAccount($username, $data, $newPassword = null) {
-    $sql = "UPDATE users SET data = ?";
+  public function saveAccount($username, $oldUsername, $data, $newPassword = null) {
+    if ($username != $oldUsername) {
+      $sql = "SELECT email FROM users WHERE email = ? LIMIT 1";
+      $query = $this->connection->prepare($sql);
+      $query->execute(array($username));
+      if ($query->fetchColumn()) {
+        return false; //new username is already in use
+      }
+    }
+    
+    $sql = "UPDATE users SET email = ?, data = ?";
     if ($newPassword != null)
       $sql = $sql.", password = ?";
       
     $sql = $sql." where email = ?";
     $query = $this->connection->prepare($sql);
     if ($newPassword != null)
-      $query->execute(array($data, $newPassword, $username));
+      $query->execute(array($username, $data, $newPassword, $oldUsername));
     else
-      $query->execute(array($data, $username));
+      $query->execute(array($username, $data, $oldUsername));
+    return true;
   }
 
   public function saveNewAccount($username, $password, $roles, $data) {

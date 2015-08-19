@@ -13,7 +13,7 @@ angular.module('felt.shop.orders', [
 
           var factory = {};
           
-          factory.order = {};
+          factory.order = {};//TODO is this used?
           
           
           
@@ -21,7 +21,7 @@ angular.module('felt.shop.orders', [
             return OrderPersistenceService.loadOrder(AuthService.getUsername(), id);
           }
           
-          factory.getAllOrders = function(id) {
+          factory.getAllOrders = function() {
             return OrderPersistenceService.getAllOrders(AuthService.getUsername());
           }
           
@@ -38,10 +38,10 @@ angular.module('felt.shop.orders', [
             angular.copy(cart.contactData, order.contactData);
             angular.copy(cart.shippingData, order.shippingData);
             angular.copy(cart.items, order.items);
-            order.subTotal = cart.subTotal;
             order.status = 'pending';
-            
+            order.subTotal = cart.subTotal;
             order.option = cart.shippingData.getOption();
+            order.total = cart.subTotal + order.option.amount;
             
             factory.order = order;
             
@@ -128,8 +128,11 @@ angular.module('felt.shop.orders', [
       data : {
         'username' : username
       },
-      success : function(order) {
-        return order;
+      success : function(orders) {
+        for(var i = 0; i < orders.length; i++) {
+          orders[i].datePlaced = new Date(orders[i].datePlaced);
+        }
+        return orders;
       }
     });
     

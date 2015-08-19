@@ -1,11 +1,58 @@
-<div class="col-lg-12 col-md-12 col-sm-12 view-slide-in" autoscroll="false">
-  
-<div ng-repeat="order in orders">
-  <a ui-sref="account.summary.order.display({id:order.id})">{{order.id}}</a>
-  <div>{{order.status}}</div>
-  <div>{{order.shippingData}}</div>
-  <p>&nbsp;</p>
+<!-- account.orders.html -->
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders == null">
+  <h2 class="text-center"><img src="images/loading.gif"></h2>
 </div>
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders && orders.length == 0">
+  <h2 class="text-center">Вие нямате все още направени поръчки!</h2>
+</div>
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders && orders.length > 0">
+  
+    <table>
+    <thead>
+      <tr class="cartItem">
+        <th style="width:  7%" > #            </th>
+        <th style="width: 20%" > Статус       </th>
+        <th style="width: 20%" > Дата         </th>
+        <th style="width: 33%" > Адрес        </th>
+        <th style="width: 20%" > Сума         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders" class="cartItem repeat-animation hide-fade" > <!-- cart-repeat-directive -->
+        
+        <!-- ID -->
+        <td style="width: 7%">
+          <a ui-sref="account.summary.order.display({id:order.id})">{{order.id}}</a>
+        </td>
+
+        <!-- STATUS -->
+        <td style="width: 20%">
+          <a ui-sref="account.summary.order.display({id:order.id})">{{order.status}}</a>
+          <small>[{{order.dateChanged}}]</small>
+        </td>
+
+        <!-- DATE -->
+        <td style="width: 20%;">
+          {{order.datePlaced | date:'mediumDate'}} {{order.datePlaced | date:'shortTime'}}
+        </td>
+
+        <!-- ADDRESS -->
+        <td style="width: 33%;">
+          <span format-address style="font-size: 75%"></span>
+        </td>
+
+        <!-- TOTAL -->
+        <td style="width: 20%;"><span> {{order.total | number:2}} лв</span></td>
+
+      </tr>
+    </tbody>
+  </table>
       
 </div>
 
