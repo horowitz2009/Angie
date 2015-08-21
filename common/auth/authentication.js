@@ -5,6 +5,8 @@ angular.module('common.authentication', [
 .constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',
   loginFailed: 'auth-login-failed',
+  resetPasswordSuccess: 'reset-password-success',
+  resetPasswordFailed: 'reset-password-failed',
   loginFromRememberMeFailed: 'auth-login-from-rememberme-failed',
   registrationSuccess: 'auth-register-success',
   registrationFailed: 'auth-register-failed',
@@ -61,6 +63,26 @@ angular.module('common.authentication', [
       }
     });
 
+  }
+  
+  //RESET PASSWORD
+  authService.resetPassword = function(credentials) {
+    return $.ajax({
+      type : "POST",
+      url : 'php/login.php',
+      data : {
+        'resetPassword' : true,
+        'email' : credentials.email
+        },
+      success : function(res) {
+        $rootScope.$broadcast(AUTH_EVENTS.resetPasswordSuccess, null);
+        return res;
+      },
+      error : function(res) {
+        $rootScope.$broadcast(AUTH_EVENTS.resetPasswordFailed, null);
+      }
+    });
+    
   }
   
   //REGISTER
@@ -188,6 +210,9 @@ angular.module('common.authentication', [
   
   console.log("[189 auth.controller LoginController]");
   $scope.result = ' ';
+  $scope.initial = true;
+  $scope.success = false;
+  $scope.send = "Изпрати";
   
   $scope.credentials = {
     email: '',
@@ -197,6 +222,14 @@ angular.module('common.authentication', [
   
   $scope.login = function (credentials) {
     AuthService.login(credentials);
+  };
+  
+  $scope.resetPassword = function (credentials) {
+    //$scope.$apply(function(){
+      $scope.success = false;
+      $scope.result = ' ';
+      AuthService.resetPassword(credentials);
+    //});
   };
 
   $scope.setResult = function(msg) {
@@ -211,6 +244,9 @@ angular.module('common.authentication', [
 	  $scope.credentials.email = '';
 	  $scope.credentials.password = '';
 	  $scope.setResult(" ");
+	  $scope.send = "Изпрати";
+	  $scope.success = false;
+	  
   }
   
   $scope.$on(AUTH_EVENTS.loginFailed, function(event, args) {
@@ -228,6 +264,29 @@ angular.module('common.authentication', [
 	  $scope.credentials.password='';
 	  $("#ModalLogin").modal('show');
   });
+  
+  $scope.$on(AUTH_EVENTS.resetPasswordSuccess, function(event, args) {
+  	$scope.$apply(function() {
+      $scope.success = true;
+      $scope.result = 'Новата Ви парола е пратена на указания имейл. ';
+      /////След като влезете в профила си, ще можете да я смените с предпочетена от Вас парола.
+      
+      //$scope.footerSuccess = 'Не сте получили имейл?';
+      $scope.send = "Изпрати пак";
+  	});
+  });
+  
+  $scope.$on(AUTH_EVENTS.resetPasswordFailed, function(event, args) {
+  	$scope.$apply(function() {
+  	  $scope.success = false;
+      $scope.result = 'Акаунт с този имейл не бе намерен!';
+      $scope.send = "Изпрати";
+  	});
+    
+  });
+  
+  
+  
   
   $("#ModalLogin").on('show.bs.modal', function(){
 	  $scope.reset();

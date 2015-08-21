@@ -26,6 +26,17 @@ class passwordHash {
         $new_hash = crypt($password, $full_salt);
         return ($hash == $new_hash);
     }
+    
+    public static function generate_password($length = 8) {
+      $alphabet = "abcdefghijklmnopqrstuwxyz0123456789";
+      $pass = array();
+      $alphaLength = strlen($alphabet) - 1; 
+      for ($i = 0; $i < $length; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+      }
+      return implode($pass); 
+    }
 
 }
 

@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/DBService.php';
 require_once __DIR__.'/passwordHash.php';
+require_once __DIR__.'/MailService.php';
 require_once __DIR__.'/init_auth.php';
 
 function loginWithRememberMe() {
@@ -67,10 +68,30 @@ function loginWithRememberMe() {
   }
 }
 
+function resetPassword() {
+  global $authenticator, $conn;
+  $email = $_POST ["email"];
+  $sql = "SELECT email FROM users WHERE email='$email'";
+  $result = $conn->query($sql);
+  $success = false;
+  if ($result->rowCount() > 0) {
+    $newPassword = passwordHash::generate_password(6);
+    $sql = "UPDATE users SET password = ? where email = ?";
+    $query = $conn->prepare($sql);
+    $query->execute(array(passwordHash::hash($newPassword), $email));
+    
+    MailService::sendPasswordMail($email, $newPassword);
+    
+    set_result('200', 'OK');
+  } else {
+    set_result('401', 'no user with such email');
+  }
+}
+
 function loginWithCredentials() {
   global $authenticator, $conn;
   
-  $email = isset ( $_POST ['email'] ) ? $_POST ["email"] : null;
+  $email = $_POST ["email"];
   $password = isset ( $_POST ['password'] ) ? $_POST ["password"] : null;
   $rememberMe = isset ( $_POST ['rememberme'] ) ? $_POST ["rememberme"] == "true" : false;
   
@@ -115,7 +136,11 @@ session_start();
 
 if(!empty($_POST)) {
   if (isset ( $_POST ['email'] )) {
-    loginWithCredentials();
+    if (isset ( $_POST ['resetPassword'] )) {
+      resetPassword();
+    } else {
+      loginWithCredentials();
+    }
   } else {
     loginWithRememberMe();
   }

@@ -76,6 +76,63 @@
 </head>
 
 <body ng-controller="MainCtrl">
+  <!-- Modal Reset Password -->
+  <div class="modal signUpContent fade" id="ModalResetPassword" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+
+        <iframe src="sink.html" name="sink" style="display: none"></iframe>
+
+        <form name="loginForm" action="sink.html" target="sink" method="post" ng-controller="LoginController"
+          ng-submit="resetPassword(credentials)" novalidate form-autofill-fix>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title-site text-center">Забравена парола</h3>
+          </div>
+          <div class="modal-body">
+            <div class="control-group">
+              <div style="min-height: 25px; padding-bottom: 0px;">
+                <span ng-cloak>{{result}}</span>
+                <!-- <a ng-if="success" data-toggle="modal" data-target="#ModalLogin"> <span
+                    class="">Вход</span> 
+                </a>-->
+              </div>
+              <div ng-show="success" style="padding-top: 15px; padding-bottom: 15px;">
+                <small>Затворете този прозорец и опитайте пак с 'ВХОД' като въведете новата си парола. След като влезете, ще можете да смените паролата с такава по ваш избор.</small><br>
+                <small>Не сте получили писмо? Проверете дали правилно сте написали имейла и натиснете 'Изпрати пак'.</small>
+              </div>
+            </div>
+            <div class="form-group login-username">
+              <div>
+                <input name="email" id="email" ng-model="credentials.email" class="form-control input" size="20"
+                  placeholder="Имейл  адрес" type="text" 
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }" required>
+              </div>
+            </div>
+            <div>
+              <div>
+                <input class="btn btn-block btn-lg btn-primary"  type="submit" ng-value="send"
+                       ng-disabled="loginForm.$invalid"><!-- value="Изпрати" -->
+                       
+              </div>
+            </div>
+            <!--userForm-->
+
+          </div>
+          <div class="modal-footer">
+            <p class="text-center">
+            </p>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+  </div>
+  <!-- /.Modal Login -->
+
   <!-- Modal Login start -->
   <div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
     <div class="modal-dialog ">
@@ -98,17 +155,13 @@
             <div class="form-group login-username">
               <div>
                 <input name="email" id="email" ng-model="credentials.email" class="form-control input" size="20"
-                  placeholder="Имейл  адрес" type="text">
-                <!-- autocomplete="off"
-                               style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;" -->
+                  placeholder="Имейл  адрес" type="text" required>
               </div>
             </div>
             <div class="form-group login-password">
               <div>
                 <input name="password" id="password" ng-model="credentials.password" class="form-control input"
-                  size="20" placeholder="Парола" type="password">
-                <!-- autocomplete="off"
-                               style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;" -->
+                  size="20" placeholder="Парола" type="password" required>
               </div>
             </div>
             <div class="form-group">
@@ -122,7 +175,8 @@
             </div>
             <div>
               <div>
-                <input name="submit" class="btn  btn-block btn-lg btn-primary" value="Вход" type="submit">
+                <input name="submit" class="btn btn-block btn-lg btn-primary" value="Вход" type="submit"
+                       ng-disabled="loginForm.$invalid">
 
               </div>
             </div>
@@ -132,7 +186,7 @@
           <div class="modal-footer">
             <p class="text-center">
               Нямате акаунт? <a data-toggle="modal" data-dismiss="modal" href="#ModalSignup"> Създайте акаунт. </a> <br>
-              <a href="forgot-password.html"> Забравена парола? </a>
+              <a data-toggle="modal" data-dismiss="modal" href="#ModalResetPassword"> Забравена парола? </a>
             </p>
           </div>
         </form>
@@ -186,7 +240,7 @@
             <div class="form-group reg-password">
               <div>
                 <input name="password2" class="form-control input" size="20" ng-model="newUser.password2"
-                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 500, 'blur': 0} }"
+                  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }"
                   placeholder="Парола отново" type="password" required>
                 <p class="help-block" style="color: #a94442;"
                     ng-show="loginForm.password.$error.pwmatch && !loginForm.password2.$pristine && !loginForm.password.$pristine">
@@ -196,7 +250,8 @@
             </div>
             <div>
               <div>
-                <input name="submit" class="btn  btn-block btn-lg btn-primary" value="Регистрирай" type="submit">
+                <input name="submit" class="btn  btn-block btn-lg btn-primary" value="Регистрирай" type="submit"
+                       ng-disabled="loginForm.$invalid">
               </div>
             </div>
             <!--userForm-->
