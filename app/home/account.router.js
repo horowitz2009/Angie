@@ -433,6 +433,16 @@ angular.module('home.account')
         }//content3
 
       }//view
+      ,
+      onEnter: function() {
+        console.log("Entered state account.summary")
+      }
+      
+      ,      resolve : {
+        orders : function(OrderService) {
+          return OrderService.getAllOrders();
+        }
+      },
       
     })//state
     
@@ -446,6 +456,11 @@ angular.module('home.account')
       
       data : {
         displayName : 'Поръчки'
+      },
+      resolve : {
+        orders : function(OrderService) {
+          return OrderService.getAllOrders();
+        }
       },
       
       views : {
@@ -466,6 +481,10 @@ angular.module('home.account')
         }//content3
       
       }//view
+      ,
+      onEnter: function() {
+        console.log("Entered state account.summary.orders")
+      }
       
       
     })//state
@@ -487,12 +506,12 @@ angular.module('home.account')
         breadcrumbProxy : 'account.summary.orders'
       },
 
-      resolve : {
-        order : [ '$stateParams', 'utils', 'OrderService', function($stateParams, utils, OrderService) {
-          // return utils.findById(categories, $stateParams.categoryId);
-          return OrderService.getOrder($stateParams['id']);
-        } ]
-      }
+//       resolve : {
+//         order : [ '$stateParams', 'utils', 'OrderService', function($stateParams, utils, OrderService) {
+//           // return utils.findById(categories, $stateParams.categoryId);
+//           return OrderService.getOrder($stateParams['id']);
+//         } ]
+//       }
 
 
     })
@@ -502,24 +521,62 @@ angular.module('home.account')
       url : '/{id}',
 
       data : {
-        displayName : 'Поръчка #{{order.id}}'
+        displayName : "Поръчка #{{$stateParams['id']}}"
       },
 
       views : {
-        'content3@account' : {
+        
+        'content3@account' : {  
+          template: ''
+        },
+
+        'content4@account' : {
           templateUrl : 'app/home/partials/account.order.html',
-          controller : [ '$scope', '$stateParams', 'OrderService', '$state', function($scope, $stateParams, OrderService, $state) {
+          controller : [ '$scope', '$rootScope', '$stateParams', 'OrderService', '$state', 
+                         function($scope, $rootScope, $stateParams, OrderService, $state) {
             
             
             $scope.id = $stateParams['id'];
             $scope.order = null;
             OrderService.getOrder($stateParams['id']).then(function(newOrder){
-              $scope.$apply(function(){
-                $scope.order = newOrder;
-                $scope.id = newOrder.id;
+              
+              OrderService.getAllOrderIds().then(function (orderIds) {
+                $scope.nextId = -1;  
+                $scope.prevId = -1;
+                
+                console.log(orderIds);
+                for(var i = 0; i < orderIds.length; i++) {
+                  if (orderIds[i] == $scope.id) {
+                    if ( i > 0)
+                      $scope.prevId = orderIds[i - 1];
+                    if (i < orderIds.length - 1)
+                      $scope.nextId = orderIds[i + 1];
+                    
+                    $scope.index = i + 1;
+                    $scope.length = orderIds.length;
+                    break;
+                  }
+                }
+
+                //here I'm done
+                $scope.$apply(function(){
+                  if (newOrder && !angular.equals(newOrder, {})) 
+                    $scope.order = new Order(newOrder);
+                  else {
+                    $scope.order = null;
+                    $state.go('account.summary');
+                  }
+                  $scope.id = newOrder.id;
+                });
+
+                //
               });
+              
             });
             
+            $scope.orderAgain = function(order) {
+              $rootScope.$broadcast('order-again', order);
+            }
             
           } ]
         }

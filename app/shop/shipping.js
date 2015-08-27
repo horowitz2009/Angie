@@ -26,11 +26,15 @@ ShippingOption.prototype.getNameAndService = function() {
   return s;
 };
   
-function ShippingData() {
-  this.settlement = { "country": "България" };
-  this.options = [];
-  this.selectedOption = null;
-  this.office = {};
+function ShippingData(data) {
+  if (data) {
+    angular.copy(data, this);
+  } else {
+    this.settlement = { "country": "България" };
+    this.options = [];
+    this.selectedOption = null;
+    this.office = {};
+  }
 }
 
 ShippingData.prototype.canShippingBeCalculated = function() {
@@ -141,4 +145,10 @@ ShippingData.prototype.reset = function () {
   this.selectedOption = null;
   this.selectedOptionObj = null;
   this.options = [];  
+}
+
+function Order(data) {
+  angular.copy(data, this);
+  this.option = new ShippingOption(data.option);
+  this.shippingData = new ShippingData(data.shippingData);
 }

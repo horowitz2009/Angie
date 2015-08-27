@@ -15,6 +15,7 @@ angular.module('felt', [
     'ui.bootstrap',
     'ui.router',
     'angucomplete-alt',
+    'pascalprecht.translate',
     
     'ngAnimate'
 ])
@@ -206,6 +207,41 @@ angular.module('felt', [
 ])
 
 
+.config(['$translateProvider', function($translateProvider) {
+  $translateProvider.translations('en', {
+    HEADLINE: 'Hello there, This is my awesome app!',
+    INTRO_TEXT: 'And it has i18n support!',
+    BUTTON_EN: 'English',
+    BUTTON_BG: 'Bulgarian',
+    awaiting_payment: 'Awaiting payment',
+    pending: 'Pending',
+    preparing_in_progress: 'Preparing in progress',
+    shipped: 'Shipped',
+    awaiting_pick_up: 'Awaiting pick up',
+    delivered: 'Delivered',
+    canceled: 'Canceled',
+    refunded: 'Refunded'
+  })
+  .translations('bg', {
+    HEADLINE: 'Здрасти',
+    INTRO_TEXT: 'Ихаа. има много езициии!',
+    BUTTON_EN: 'Английски',
+    BUTTON_BG: 'Български',
+    ONLY_IN_BG: 'Само на български',
+    awaiting_payment: 'Очаква плащане',
+    pending: 'Обработва се',
+    preparing_in_progress: 'Обработва се',
+    shipped: 'Изпратена',
+    awaiting_pick_up: 'Очаква вземане от ателието',
+    delivered: 'Доставена',
+    canceled: 'Отказана',
+    refunded: 'Плащането върнато'
+    
+  });
+  $translateProvider.preferredLanguage('bg');
+}])
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN CONTROLLER
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,11 +249,11 @@ angular.module('felt', [
 .controller('MainCtrl', ['$scope', '$state', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', 'ShippingFactory',
                          'Account', 'AUTH_EVENTS', 'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
-                         '$animate', '$timeout', '$interval',
+                         '$animate', '$timeout', '$interval', '$translate',
                     function($scope, $state, $rootScope, USER_ROLES, AuthService, AccountService, ShippingFactory,
                          Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
-            		         $animate, $timeout, $interval) {
+            		         $animate, $timeout, $interval, $translate) {
   $scope.states = $state.get();
   
   console.log("[217 app.controller] MainCtrl");
@@ -356,6 +392,10 @@ angular.module('felt', [
     
   }
   
+  $scope.setLanguage = function(langKey) {
+    $translate.use(langKey);
+  }
+  
   
   $scope.$on("user-changed", function(event, oldUsername, newUsername) {
     console.log("user changed:");
@@ -415,6 +455,20 @@ angular.module('felt', [
     if (!Account.shippingData.canShippingBeCalculated()) {
       cart.shippingData.copyTo(Account.shippingData);
     }
+    
+  });
+  
+  $scope.$on("order-again", function(event, order) {
+    console.log("ORDER AGAIN " + order);
+    //TODO check before dump the current cart
+    
+    //for now we just empty teh cart and fill it with order stuff
+    CartService.emptyCart();
+    angular.copy(order.items, cart.items);
+    CartService.recalcTotals()
+    //$rootScope.$broadcast("cart-loaded", null, cart);
+    $rootScope.$broadcast("cart-changed", cart);
+    $state.go("shop.cart.edit");
     
   });
 

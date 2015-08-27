@@ -1,6 +1,6 @@
 .editCart {
-  float: left;
-  width: 100%;
+  /* float: left; */
+  /* width: 100%; */
 }
 
 .editCart .cartItem {
@@ -86,7 +86,7 @@
 }
 
 .editCart table {
-  width: 100%;
+  /* width: 100%; */
   height: auto;
 }
 

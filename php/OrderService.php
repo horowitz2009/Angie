@@ -67,7 +67,7 @@ class OrderService {
   }
   
   public function getAllOrders($username) {
-    $sql = "SELECT id, data, status, date_placed, date_changed FROM orders WHERE user = ?";
+    $sql = "SELECT id, data, status, date_placed, date_changed FROM orders WHERE user = ? order by date_placed desc";
   
     $query = $this->connection->prepare($sql);
     $query->execute(array($username));
@@ -83,6 +83,22 @@ class OrderService {
       $obj->datePlaced = $row[3];
       $obj->dateChanged = $row[4];
       $res[] = $obj;
+    }
+    
+    return json_encode($res);
+  }
+  
+  public function getAllOrderIds($username) {
+    $sql = "SELECT id FROM orders WHERE user = ? order by date_placed desc";
+  
+    $query = $this->connection->prepare($sql);
+    $query->execute(array($username));
+    
+    $query->setFetchMode(PDO::FETCH_NUM);
+    
+    $res = array();
+    while ($row = $query->fetch()) {
+      $res[] = $row[0];
     }
     
     return json_encode($res);

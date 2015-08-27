@@ -282,9 +282,12 @@
           <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
             <div class="pull-left ">
               <ul class="userMenu ">
-                <li><a href="#"> <span class="hidden-xs">Помощ</span> <i
-                    class="glyphicon glyphicon-info-sign hide visible-xs "></i>
-                </a></li>
+                <li><a href="#" ng-click="setLanguage('bg')"><span>BG</span></a></li>
+                <li><a href="#" ng-click="setLanguage('en')"><span>EN</span></a></li>
+                <li><a href="#" ng-click="setLanguage('ro')"><span>RO</span></a></li>
+                <li><a href="#" ng-click="setLanguage('gr')"><span>GR</span></a></li>
+                <li><a href="#" ng-click="setLanguage('mk')"><span>MK</span></a></li>
+                <li><span>{{'ONLY_IN_BG'|translate}}</span></li>
                 <li class="phone-number"><a href="callto:+359887352619"> <span> <i
                       class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs"
                     style="margin-left: 5px"> 088 735 26 19 </span>
@@ -1088,6 +1091,7 @@
   <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js"></script>
   <script type="text/javascript" src="app/bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+  <script type="text/javascript" src="app/bower_components/angular-translate/angular-translate.js"></script>
 
   <!-- LOKI -->
   <script type="text/javascript" src="js/lokijs.js"></script>

@@ -21,7 +21,8 @@
     "angular-utils-ui-breadcrumbs": "~0.2.1",
     "lokijs": "~1.2.4",
     "autofill-event": "~1.0.0",
-    "angucomplete-alt": "https://github.com/horowitz2009/angucomplete-alt.git#custom"
+    "angucomplete-alt": "https://github.com/horowitz2009/angucomplete-alt.git#custom",
+    "angular-translate": "~2.7.2"
   },
   "resolutions": {
     "jquery": ">= 1.9.0",

@@ -2,6 +2,15 @@ angular.module('felt.shop.orders', [
 
 ])
 
+.filter('orderStatus', function() {
+  return function(input) {
+    input = input || '';
+    var out = "";
+    
+    return out;
+  };
+})
+
 // ////////////////////////////////////////////////////////////////////////
 // ORDER SERVICE
 // ////////////////////////////////////////////////////////////////////////
@@ -23,6 +32,10 @@ angular.module('felt.shop.orders', [
           
           factory.getAllOrders = function() {
             return OrderPersistenceService.getAllOrders(AuthService.getUsername());
+          }
+
+          factory.getAllOrderIds = function() {
+            return OrderPersistenceService.getAllOrderIds(AuthService.getUsername());
           }
           
           factory.submitOrder = function() {
@@ -114,6 +127,12 @@ angular.module('felt.shop.orders', [
         'id' : orderId
       },
       success : function(order) {
+        if (order && !angular.equals(order, {})) {
+          order.datePlaced = new Date(order.datePlaced);
+          order.dateChanged = new Date(order.dateChanged);
+        } else
+          return null;
+          
         return order;
       }
     });
@@ -131,8 +150,24 @@ angular.module('felt.shop.orders', [
       success : function(orders) {
         for(var i = 0; i < orders.length; i++) {
           orders[i].datePlaced = new Date(orders[i].datePlaced);
+          orders[i].dateChanged = new Date(orders[i].dateChanged);
         }
         return orders;
+      }
+    });
+    
+  }
+  
+  service.getAllOrderIds = function(username) {
+    return $.ajax({
+      type : "POST",
+      encoding : "UTF-8",
+      url : 'php/get_order_ids.php',
+      data : {
+        'username' : username
+      },
+      success : function(orderIds) {
+        return orderIds;
       }
     });
     

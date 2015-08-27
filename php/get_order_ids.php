@@ -18,7 +18,7 @@ if (! empty($_POST) && isset($_POST['username'])) {
   
   $username = $_POST['username'];
   
-  $orderIds = $orderService->getAllOrders($username);
+  $orderIds = $orderService->getAllOrderIds($username);
   
   if ($orderIds != null) {
     set_result('200', 'OK', $orderIds);
