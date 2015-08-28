@@ -1,165 +1,303 @@
 {
   "colorGroups": [
-    {
-      "id": "grаy",
-      "name": "Gray",
-      "code": "gray",
-      "colors":[
-        {
-          "name": "White",
-          "code" : "#FFFFFF",
-          "index": 0
-        },
-        {
-          "name": "White smoke",
-          "code" : "#F5F5F5",
-          "index": 1
-        },
-        {
-          "name": "Seashell",
-          "code" : "#FFF5EE",
-          "index": 2
-        },
-        {
-          "name": "Beige",
-          "code" : "#F5F5DC",
-          "index": 3
-        },
-        {
-          "name": "Ivory",
-          "code" : "#FFFFF0",
-          "index": 4
-        },
-        {
-          "name": "Gainsboro",
-          "code" : "#DCDCDC",
-          "index": 5
-        },
-        {
-          "name": "Light gray",
-          "code" : "#D3D3D3",
-          "index": 6
-        },
-        {
-          "name": "Silver",
-          "code" : "#C0C0C0",
-          "index": 7
-        },
-        {
-          "name": "Dark gray",
-          "code" : "#A9A9A9",
-          "index": 8
-        },
-        {
-          "name": "Gray",
-          "code" : "#808080",
-          "index": 9
-        },
-        {
-          "name": "Dim gray",
-          "code" : "#696969",
-          "index": 10
-        },
-        {
-          "name": "Black",
-          "code" : "#000000",
-          "index": 11
-        }
-      ]
-    },
-    {
-      "id": "pink",
-      "name": "Pink",
-      "code": "pink",
-      "colors":[
-        {
-          "name": "Pink",
-          "code" : "#FFC0CB",
-          "index": 0
-        },
-        {
-          "name": "Light pink",
-          "code" : "#FFB6C1",
-          "index": 1
-        },
-        {
-          "name": "Hot pink",
-          "code" : "FF69B4",
-          "index": 2
-        },
-        {
-          "name": "Deep pink",
-          "code" : "FF1493",
-          "index": 3
-        },
-        {
-          "name": "Medium violet red",
-          "code" : "C71585",
-          "index": 4
-        },
-        {
-          "name": "Pale violet red",
-          "code" : "DB7093",
-          "index": 5
-        }
-      ]
-    },
-    {
-      "id": "red",
-      "name": "Red",
-      "code": "red",
-      "colors":[
-        {
-          "name": "Indian red",
-          "code" : "#CD5C5C",
-          "index": 0
-        },
-        {
-          "name": "Light coral",
-          "code" : "#F08080",
-          "index": 1
-        },
-        {
-          "name": "Salmon",
-          "code" : "#FA8072",
-          "index": 2
-        },
-        {
-          "name": "Dark salmon",
-          "code" : "#E9967A",
-          "index": 3
-        },
-        {
-          "name": "Light salmon",
-          "code" : "#FFA07A",
-          "index": 4
-        },
-        {
-          "name": "Crimson",
-          "code" : "#DC143C",
-          "index": 5
-        },
-        {
-          "name": "Red",
-          "code" : "#FF0000",
-          "index": 6
-        },
-        {
-          "name": "Firebrick",
-          "code" : "#B22222",
-          "index": 7
-        },
-        {
-          "name": "Dark red",
-          "code" : "#8B0000",
-          "index": 8
-        }
-      ]
+                  {
+                    "id": "pink",
+                    "name": "Pink",
+                    "name_bg": "Розово",
+                    "code": "pink",
+                    "colors":[
+                      {
+                        "name": "Pink",
+                        "code" : "#FFC0CB",
+                        "index": 0
+                      },
+                      {
+                        "name": "Light pink",
+                        "code" : "#FFB6C1",
+                        "index": 1
+                      },
+                      {
+                        "name": "Hot pink",
+                        "code" : "FF69B4",
+                        "index": 2
+                      },
+                      {
+                        "name": "Deep pink",
+                        "code" : "FF1493",
+                        "index": 3
+                      },
+                      {
+                        "name": "Medium violet red",
+                        "code" : "C71585",
+                        "index": 4
+                      },
+                      {
+                        "name": "Pale violet red",
+                        "code" : "DB7093",
+                        "index": 5
+                      }
+                    ]
+                  },
+                  {
+                    "id": "purple",
+                    "name": "Purple",
+                    "name_bg": "Лилаво",
+                    "code": "violet",
+                    "colors":[
+                      {
+                        "name": "Lavender",
+                        "code" : "#E6E6FA",
+                        "index": 0
+                      },
+                      {
+                        "name": "Thistle",
+                        "code" : "#D8BFD8",
+                        "index": 1
+                      },
+                      {
+                        "name": "Plum",
+                        "code" : "#DDA0DD",
+                        "index": 2
+                      },
+                      {
+                        "name": "Violet",
+                        "code" : "#EE82EE",
+                        "index": 3
+                      },
+                      {
+                        "name": "Orchid",
+                        "code" : "#DA70D6",
+                        "index": 4
+                      },
+                      {
+                        "name": "Fuchsia",
+                        "code" : "#FF00FF",
+                        "index": 5
+                      },
+                      {
+                        "name": "Magenta",
+                        "code" : "#FF00FF",
+                        "index": 6
+                      },
+                      {
+                        "name": "Medium orchid",
+                        "code" : "#BA55D3",
+                        "index": 7
+                      },
+                      {
+                        "name": "Medium purple",
+                        "code" : "#9370DB",
+                        "index": 8
+                      },
+                      {
+                        "name": "Amethyst",
+                        "code" : "#9966CC",
+                        "index": 9
+                      },
+                      {
+                        "name": "Blue violet",
+                        "code" : "#8A2BE2",
+                        "index": 10
+                      },
+                      {
+                        "name": "Dark violet",
+                        "code" : "#9400D3",
+                        "index": 11
+                      },
+                      {
+                        "name": "Dark orchid",
+                        "code" : "#9932CC",
+                        "index": 12
+                      },
+                      {
+                        "name": "Dark magenta",
+                        "code" : "#8B008B",
+                        "index": 13
+                      },
+                      {
+                        "name": "Purple",
+                        "code" : "#800080",
+                        "index": 14
+                      },
+                      {
+                        "name": "Indigo",
+                        "code" : "#4B0082",
+                        "index": 15
+                      },
+                      {
+                        "name": "Slate blue",
+                        "code" : "#6A5ACD",
+                        "index": 16
+                      },
+                      {
+                        "name": "Dark slate blue",
+                        "code" : "#483D8B",
+                        "index": 17
+                      },
+                      {
+                        "name": "Medium slate blue",
+                        "code" : "#7B68EE",
+                        "index": 18
+                      }
+                    ]
+                  },
+                  {
+                    "id": "red",
+                    "name": "Red",
+                    "name_bg": "Червено",
+                    "code": "red",
+                    "colors":[
+                      {
+                        "name": "Indian red",
+                        "code" : "#CD5C5C",
+                        "index": 0
+                      },
+                      {
+                        "name": "Light coral",
+                        "code" : "#F08080",
+                        "index": 1
+                      },
+                      {
+                        "name": "Salmon",
+                        "code" : "#FA8072",
+                        "index": 2
+                      },
+                      {
+                        "name": "Dark salmon",
+                        "code" : "#E9967A",
+                        "index": 3
+                      },
+                      {
+                        "name": "Light salmon",
+                        "code" : "#FFA07A",
+                        "index": 4
+                      },
+                      {
+                        "name": "Crimson",
+                        "code" : "#DC143C",
+                        "index": 5
+                      },
+                      {
+                        "name": "Red",
+                        "code" : "#FF0000",
+                        "index": 6
+                      },
+                      {
+                        "name": "Firebrick",
+                        "code" : "#B22222",
+                        "index": 7
+                      },
+                      {
+                        "name": "Dark red",
+                        "code" : "#8B0000",
+                        "index": 8
+                      }
+                    ]
 
-    },
+                  },
+                  {
+                    "id": "orange",
+                    "name": "Orange",
+                    "name_bg": "Оранжево",
+                    "code": "orange",
+                    "colors":[
+                      {
+                        "name": "Light salmon",
+                        "code" : "#FFA07A",
+                        "index": 0
+                      },
+                      {
+                        "name": "Coral",
+                        "code" : "#FF7F50",
+                        "index": 1
+                      },
+                      {
+                        "name": "Tomato",
+                        "code" : "#FF6347",
+                        "index": 2
+                      },
+                      {
+                        "name": "Orange red",
+                        "code" : "#FF4500",
+                        "index": 3
+                      },
+                      {
+                        "name": "Dark orange",
+                        "code" : "#FF8C00",
+                        "index": 4
+                      },
+                      {
+                        "name": "Orange",
+                        "code" : "#FFA500",
+                        "index": 5
+                      }
+                    ]
+                  },
+                  {
+                    "id": "yellow",
+                    "name": "Yellow",
+                    "name_bg": "Жълто",
+                    "code": "yellow",
+                    "colors":[
+                      {
+                        "name": "Gold",
+                        "code" : "#FFD700",
+                        "index": 0
+                      },
+                      {
+                        "name": "Yellow",
+                        "code" : "#FFFF00",
+                        "index": 1
+                      },
+                      {
+                        "name": "Light yellow",
+                        "code" : "#FFFFE0",
+                        "index": 2
+                      },
+                      {
+                        "name": "Lemon chiffon",
+                        "code" : "#FFFACD",
+                        "index": 3
+                      },
+                      {
+                        "name": "Light goldenrod yellow",
+                        "code" : "#FAFAD2",
+                        "index": 4
+                      },
+                      {
+                        "name": "Papaya whip",
+                        "code" : "#FFEFD5",
+                        "index": 5
+                      },
+                      {
+                        "name": "Moccasin",
+                        "code" : "#FFE4B5",
+                        "index": 6
+                      },
+                      {
+                        "name": "Pale goldenrod",
+                        "code" : "#EEE8AA",
+                        "index": 7
+                      },
+                      {
+                        "name": "Khaki",
+                        "code" : "#F0E68C",
+                        "index": 8
+                      },
+                      {
+                        "name": "Dark khaki",
+                        "code" : "#BDB76B",
+                        "index": 9
+                      }
+                    ]
+                  },
+
+                  
+                  
     {
       "id": "brown",
       "name": "Brown",
+      "name_bg": "Кафяво",
       "code": "brown",
       "colors":[
         {
@@ -225,102 +363,9 @@
       ]
     },
     {
-      "id": "orange",
-      "name": "Orange",
-      "code": "orange",
-      "colors":[
-        {
-          "name": "Light salmon",
-          "code" : "#FFA07A",
-          "index": 0
-        },
-        {
-          "name": "Coral",
-          "code" : "#FF7F50",
-          "index": 1
-        },
-        {
-          "name": "Tomato",
-          "code" : "#FF6347",
-          "index": 2
-        },
-        {
-          "name": "Orange red",
-          "code" : "#FF4500",
-          "index": 3
-        },
-        {
-          "name": "Dark orange",
-          "code" : "#FF8C00",
-          "index": 4
-        },
-        {
-          "name": "Orange",
-          "code" : "#FFA500",
-          "index": 5
-        }
-      ]
-    },
-    {
-      "id": "yellow",
-      "name": "Yellow",
-      "code": "yellow",
-      "colors":[
-        {
-          "name": "Gold",
-          "code" : "#FFD700",
-          "index": 0
-        },
-        {
-          "name": "Yellow",
-          "code" : "#FFFF00",
-          "index": 1
-        },
-        {
-          "name": "Light yellow",
-          "code" : "#FFFFE0",
-          "index": 2
-        },
-        {
-          "name": "Lemon chiffon",
-          "code" : "#FFFACD",
-          "index": 3
-        },
-        {
-          "name": "Light goldenrod yellow",
-          "code" : "#FAFAD2",
-          "index": 4
-        },
-        {
-          "name": "Papaya whip",
-          "code" : "#FFEFD5",
-          "index": 5
-        },
-        {
-          "name": "Moccasin",
-          "code" : "#FFE4B5",
-          "index": 6
-        },
-        {
-          "name": "Pale goldenrod",
-          "code" : "#EEE8AA",
-          "index": 7
-        },
-        {
-          "name": "Khaki",
-          "code" : "#F0E68C",
-          "index": 8
-        },
-        {
-          "name": "Dark khaki",
-          "code" : "#BDB76B",
-          "index": 9
-        }
-      ]
-    },
-    {
       "id": "green",
       "name": "Green",
+      "name_bg": "Зелено",
       "code": "green",
       "colors":[
         {
@@ -443,6 +488,7 @@
     {
       "id": "blue",
       "name": "Blue",
+      "name_bg": "Синьо",
       "code": "blue",
       "colors":[
         {
@@ -573,104 +619,70 @@
       ]
     },
     {
-      "id": "violet",
-      "name": "Лилави",
-      "code": "violet",
+      "id": "gray",
+      "name": "Gray",
+      "name_bg": "Сиво",
+      "code": "gray",
       "colors":[
         {
-          "name": "Lavender",
-          "code" : "#E6E6FA",
+          "name": "White",
+          "code" : "#FFFFFF",
           "index": 0
         },
         {
-          "name": "Thistle",
-          "code" : "#D8BFD8",
+          "name": "White smoke",
+          "code" : "#F5F5F5",
           "index": 1
         },
         {
-          "name": "Plum",
-          "code" : "#DDA0DD",
+          "name": "Seashell",
+          "code" : "#FFF5EE",
           "index": 2
         },
         {
-          "name": "Violet",
-          "code" : "#EE82EE",
+          "name": "Beige",
+          "code" : "#F5F5DC",
           "index": 3
         },
         {
-          "name": "Orchid",
-          "code" : "#DA70D6",
+          "name": "Ivory",
+          "code" : "#FFFFF0",
           "index": 4
         },
         {
-          "name": "Fuchsia",
-          "code" : "#FF00FF",
+          "name": "Gainsboro",
+          "code" : "#DCDCDC",
           "index": 5
         },
         {
-          "name": "Magenta",
-          "code" : "#FF00FF",
+          "name": "Light gray",
+          "code" : "#D3D3D3",
           "index": 6
         },
         {
-          "name": "Medium orchid",
-          "code" : "#BA55D3",
+          "name": "Silver",
+          "code" : "#C0C0C0",
           "index": 7
         },
         {
-          "name": "Medium purple",
-          "code" : "#9370DB",
+          "name": "Dark gray",
+          "code" : "#A9A9A9",
           "index": 8
         },
         {
-          "name": "Amethyst",
-          "code" : "#9966CC",
+          "name": "Gray",
+          "code" : "#808080",
           "index": 9
         },
         {
-          "name": "Blue violet",
-          "code" : "#8A2BE2",
+          "name": "Dim gray",
+          "code" : "#696969",
           "index": 10
         },
         {
-          "name": "Dark violet",
-          "code" : "#9400D3",
+          "name": "Black",
+          "code" : "#000000",
           "index": 11
-        },
-        {
-          "name": "Dark orchid",
-          "code" : "#9932CC",
-          "index": 12
-        },
-        {
-          "name": "Dark magenta",
-          "code" : "#8B008B",
-          "index": 13
-        },
-        {
-          "name": "Purple",
-          "code" : "#800080",
-          "index": 14
-        },
-        {
-          "name": "Indigo",
-          "code" : "#4B0082",
-          "index": 15
-        },
-        {
-          "name": "Slate blue",
-          "code" : "#6A5ACD",
-          "index": 16
-        },
-        {
-          "name": "Dark slate blue",
-          "code" : "#483D8B",
-          "index": 17
-        },
-        {
-          "name": "Medium slate blue",
-          "code" : "#7B68EE",
-          "index": 18
         }
       ]
     }

@@ -21,7 +21,7 @@
             
             <!-- ORIGIN -->
 			      <div ng-if="filter.origins.length>0" style="display:none">{{filter.origins}}</div>
-            <div class="panel panel-default" ng-if="filter.origins.length > 0">
+            <div class="categoryFilter panel panel-default" ng-if="filter.origins.length > 0">
                 <div class="panel-heading">
                     <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Произход <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a> </h4>
                 </div>
@@ -38,17 +38,17 @@
 			
             <!-- COLOR -->
 			      <div ng-if="filter.colors.length > 0" ng-show="isDebug">{{filter.colors}}</div>
-            <div  ng-if="filter.colors.length > 0" class="panel panel-default">
+            <div  ng-if="filter.colors.length > 0" class="categoryFilter panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseColors" class="collapseWill"> Цвят <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a> </h4>
+                    <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseColors" class="collapseWill"> Цветова група <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a> </h4>
                 </div>
                 <div id="collapseColors" class="panel-collapse collapse in">
                     <div class="panel-body maxheight300 color-filter mCustomScrollbar">
                         <div ng-repeat="color in filter.colors">
                             <label>
                                 <input type="checkbox" name="selectedColors[]" ng-model="color.value">
-								<small style="background-color: {{color.code}}"></small>
-                                {{color.name}} <span>({{color.cnt}})</span>
+								<span class="color-square" style="background-color: {{color.code}}"></span>
+                                {{color.name_bg}} <span style="padding-left: 3px"> ({{color.cnt}})</span>
 							</label>
                         </div>
 <!--						

@@ -119,7 +119,7 @@ angular.module('felt.shop.service', [
             }
           }
           
-          if (!found) 
+          if (!found && p.origin) 
             origins.push({ "name": p.origin, 'value': false, 'cnt': 1 });
           
         });
@@ -127,23 +127,26 @@ angular.module('felt.shop.service', [
       return origins;
     }
     
-    factory.extractColors = function(category) {
-      var colors = [];
-      
+    factory.extractColors = function(category, colorGroups) {
+      var colors = angular.copy(colorGroups);
+      for (var i = 0; i < colors.length; i++) {
+        colors[i].cnt = 0;
+        delete colors[i].colors;
+        colors[i].value = false;
+      }
+      var globalCnt = 0;
       if(category !== null)
         category.products.forEach(function(p){
-          var found = false;
           for (var i = 0; i < colors.length; i++) {
-            if (colors[i].name === p.color) {
-              found = true;
-              colors[i].cnt = colors[i].cnt + 1;
-              break;
+            if (p.colorGroups && p.colorGroups.indexOf(''+colors[i].id) >= 0) {
+              colors[i].cnt++;
+              globalCnt++;
             }
           }
-          
-          if (!found) 
-            colors.push({ "name": p.color, 'value': false, 'cnt': 1 });
         });
+      
+      if (globalCnt == 0)
+        return [];
       
       return colors;
     }

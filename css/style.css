@@ -704,7 +704,7 @@ p.required, .required sup {
     margin-left: 0;
 }
 
-input[type=checkbox]
+input[type=checkbox].rememberme
 {
   /* Double-sized Checkboxes */
   -ms-transform: scale(1.5); /* IE */
@@ -3776,33 +3776,35 @@ h5.parallaxSubtitle {
 /* PRODUCT DETAILS PAGE
 /* =============================================================== */
 
+.catFilter {
+	font-weight: normal;
+  cursor: pointer;
+}
+
+
 .categoryFilter {
-    padding-bottom: 20px;
-    border-bottom: solid 1px #ddd;
-    margin-bottom: 20px;
-    display: block;
-    width: 100%;
-    height: 50px;
+  display: block;
 }
 
-.categoryFilter .minict_wrapper {
-    max-width: 180px;
-    max-height: 28px;
-    height: 28px !important;
+.categoryFilter label {
+  font-weight: normal;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.categoryFilter .minict_wrapper input {
-    height: 28px !important;
-    font-size: 12px !important;
+.categoryFilter label > span.color-square {
+	background: grey;
+  width: 13px;
+  height: 13px;
+  padding: 3px 3px;
+  margin: 0px 4px;
 }
 
-.minict_wrapper input {
-    border: 0 !important;
+.categoryFilter input[type=checkbox] {
+	margin: 0px 2px
 }
 
-.categoryFilter .minict_wrapper ul li {
-    font-size: 12px !important;
-}
 
 .nav-tabs > li.active, .nav-tabs > li {
     background: none;

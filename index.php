@@ -167,7 +167,7 @@
             <div class="form-group">
               <div>
                 <div class="checkbox login-rememberme">
-                  <label style="margin-left: 4px;"> <input name="rememberme" type="checkbox" id="rememberme_checkbox"
+                  <label style="margin-left: 4px;"> <input name="rememberme" type="checkbox" id="rememberme_checkbox" class="rememberme"
                     ng-model="credentials.rememberme"> Запомни ме
                   </label>
                 </div>

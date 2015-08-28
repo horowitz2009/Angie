@@ -81,7 +81,7 @@ angular.module('felt.shop', [
               $scope.categories.forEach(function(category) {
                 $scope.filters[category.id] = {};
                 $scope.filters[category.id].origins = ShopService.extractOrigins(category);
-                $scope.filters[category.id].colors = ShopService.extractColors(category);
+                $scope.filters[category.id].colors = ShopService.extractColors(category, allColors.colorGroups);
               });
 
               
@@ -183,7 +183,7 @@ angular.module('felt.shop', [
                   if (filterObj.colors)
                   for (var i = 0; i < filterObj.colors.length; i++) {
                     if (filterObj.colors[i].value) {
-                      colorFilter.push(filterObj.colors[i].name);
+                      colorFilter.push(filterObj.colors[i].id);
                     }
                   }
 
@@ -213,7 +213,7 @@ angular.module('felt.shop', [
                       matchColor = true;
                     } else {
                       for (var i = 0; !matchColor && i < colorFilter.length; i++) {
-                        if (colorFilter[i] === product.color) {
+                        if (product.colorGroups && product.colorGroups.indexOf(colorFilter[i])>=0) {
                           matchColor = true;
                           break;
                         }
