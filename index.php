@@ -332,7 +332,7 @@
           <span class="icon-bar"> </span>
         </button>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart">
-          <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> КОЛИЧКА (57.00лв) </span>
+          <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Количка ({{cart.subTotal | number:2}} лв) </span>
         </button>
 
         <!-- BRAND -->
@@ -356,155 +356,34 @@
           <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark" style="overflow: visible;">
             <table>
               <tbody>
-                <tr class="miniCartProduct">
+                <tr class="miniCartProduct" ng-repeat="item in cart.items">
                   <td width="20%" class="miniCartProductThumb">
                     <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/3.jpg" alt="img">
+                      <a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
+                        <img ng-src="{{item.product.image}}" alt="{{item.product.name}}">
                       </a>
                     </div>
                   </td>
                   <td width="40%">
                     <div class="miniCartDescription">
                       <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black22 </a>
+                        <a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
+                          {{item.product.name}} 
+                        </a>
                       </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
                       <div class="price">
-                        <span> $8.80 </span>
+                        <span> {{item.product.price | number:2}} </span><span>лв</span>
                       </div>
                     </div>
                   </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
-                </tr>
-                <tr class="miniCartProduct">
-                  <td width="20%" class="miniCartProductThumb">
-                    <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/2.jpg" alt="img">
-                      </a>
-                    </div>
+                  <td width="10%" class="miniCartQuantity"><a> X {{item.quantity}} </a></td>
+                  <td width="15%" class="miniCartSubtotal"><span> {{item.sum | number:2}} </span><span>лв</span></td>
+                  <td width="5%" class="delete">
+                    <!-- glyphicon glyphicon-remove-sign  aria-hidden="true" --> <!--<button class="btn btn-link btn-sm" type="button" style="color: red" ng-click="removeFromCart(item.product)">-->
+                    <a ng-click="removeFromCart(item.id)"> <span class="glyphicon glyphicon-remove-circle"
+                       style="color: red"></span>
+                    </a> <!--</button>-->
                   </td>
-                  <td width="40%">
-                    <div class="miniCartDescription">
-                      <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black33 </a>
-                      </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
-                      <div class="price">
-                        <span> $8.80 </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
-                </tr>
-                <tr class="miniCartProduct">
-                  <td width="20%" class="miniCartProductThumb">
-                    <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/5.jpg" alt="img">
-                      </a>
-                    </div>
-                  </td>
-                  <td width="40%">
-                    <div class="miniCartDescription">
-                      <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black44 </a>
-                      </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
-                      <div class="price">
-                        <span> $8.80 </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
-                </tr>
-                <tr class="miniCartProduct">
-                  <td width="20%" class="miniCartProductThumb">
-                    <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/3.jpg" alt="img">
-                      </a>
-                    </div>
-                  </td>
-                  <td width="40%">
-                    <div class="miniCartDescription">
-                      <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black55 </a>
-                      </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
-                      <div class="price">
-                        <span> $8.80 </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
-                </tr>
-                <tr class="miniCartProduct">
-                  <td width="20%" class="miniCartProductThumb">
-                    <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/3.jpg" alt="img">
-                      </a>
-                    </div>
-                  </td>
-                  <td width="40%">
-                    <div class="miniCartDescription">
-                      <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black66 </a>
-                      </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
-                      <div class="price">
-                        <span> $8.80 </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
-                </tr>
-                <tr class="miniCartProduct">
-                  <td width="20%" class="miniCartProductThumb">
-                    <div>
-                      <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                        src="images/4.jpg" alt="img">
-                      </a>
-                    </div>
-                  </td>
-                  <td width="40%">
-                    <div class="miniCartDescription">
-                      <h4>
-                        <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> TSHOP T
-                          shirt Black77 </a>
-                      </h4>
-                      <span class="size"> 12 x 1.5 L </span>
-
-                      <div class="price">
-                        <span> $8.80 </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td width="10%" class="miniCartQuantity"><a> X 1 </a></td>
-                  <td width="15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-                  <td width="5%" class="delete"><a> x </a></td>
                 </tr>
               </tbody>
             </table>
@@ -514,10 +393,10 @@
           <!--/.miniCartTable-->
 
           <div class="miniCartFooter  miniCartFooterInMobile text-right">
-            <h3 class="text-right subtotal">Subtotal: $199</h3>
-            <a class="btn btn-sm btn-danger"> <i class="fa fa-shopping-cart"> </i> VIEW CART
-            </a> <a class="btn btn-sm btn-primary"> CHECKOUT </a>
-          </div>
+            <h3 class="text-right subtotal">{{cart.subTotal | number:2}} лв</h3>
+            <a class="btn btn-sm btn-info" ui-sref="shop.cart.edit"><i class="fa fa-shopping-cart"></i> Подробно </a>
+            <a class="btn btn-sm btn-inverse" ui-sref="shop.cart.checkout"> Поръчай </a>
+                      </div>
           <!--/.miniCartFooter-->
 
         </div>
@@ -770,7 +649,8 @@
         <div class="nav navbar-nav navbar-right hidden-xs">
           <div class="dropdown  cartMenu cartMenu1 " ng-cloak>
             <a ui-sref="shop.cart.edit" class="dropdown-toggle cart111" data-toggle="dropdown" data-hover="dropdown"> <i
-              class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Количка ({{cart.subTotal | number:2}}) </span>
+              class="fa fa-shopping-cart"> </i> <span class="cartRespons" 
+              style="font-size: 16px; font-weight: normal; text-transform: none;"> Количка ({{cart.subTotal | number:2}} <small>лв</small>) </span>
               <b class="caret"> </b>
             </a>
 
@@ -790,9 +670,9 @@
                       <td style="width: 40%">
                         <div class="miniCartDescription">
                           <h4>
-                            <a
-                              ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
-                              {{item.product.name}} </a>
+                            <a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
+                              {{item.product.name}} 
+                            </a>
                           </h4>
                           <!--<span class="size"> 12 x 1.5 L </span>-->
                           <div class="price">
@@ -818,9 +698,8 @@
 
               <div class="miniCartFooter text-right">
                 <h3 class="text-right subtotal">{{cart.subTotal | number:2}} лв</h3>
-                <a class="btn btn-sm btn-primary" ui-sref="shop.cart.edit"><i class="fa fa-shopping-cart"></i> 
-                Подробно
-                </a> <a class="btn btn-sm btn-danger" ui-sref="shop.cart.checkout"> Поръчай </a>
+                <a class="btn btn-sm btn-info" ui-sref="shop.cart.edit"><i class="fa fa-shopping-cart"></i> Подробно </a>
+                <a class="btn btn-sm btn-inverse" ui-sref="shop.cart.checkout"> Поръчай </a>
               </div>
               <!--/.miniCartFooter-->
 

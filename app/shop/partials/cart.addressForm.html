@@ -98,7 +98,7 @@
         </h5>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-        <input name="button" class="btn btn-default btn-sm" style="float: right" value="Промени" type="button"
+        <input name="button" class="btn btn-info btn-sm" style="float: right" value="Промени" type="button"
           ng-click="setEditContactData(true)">
       </div>
 
@@ -386,7 +386,7 @@
 
       </div>
       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-        <input name="button" class="btn btn-default btn-sm" style="float: right" value="Промени" type="button"
+        <input name="button" class="btn btn-info btn-sm" style="float: right" value="Промени" type="button"
           ng-click="setEditAddressData(true)">
 
       </div>
@@ -428,7 +428,7 @@
       <!-- 
       <div
         style="margin-left: -15px; margin-right: -15px; margin-bottom: 0px">
-        <input name="button" class="btn btn-default btn-sm"
+        <input name="button" class="btn btn-info btn-sm"
           value="Промени" type="button"
           ng-click="setEditPaymentData(true)">
       </div>
@@ -449,7 +449,7 @@
 
 <a ui-sref="shop.cart.edit" class="btn btn-primary">Обратно към количката</a>
 
-<input type="button" class="btn btn-danger" value="Поръчай" ng-click="submitOrder()"
+<input type="button" class="btn btn-inverse" value="Поръчай" ng-click="submitOrder()"
   style="float: right; padding-left: 36px; padding-right: 36px;"
   ng-disabled="!isContactDataOK() || !isAddressDataOK() || !isPaymentDataOK()">
 
