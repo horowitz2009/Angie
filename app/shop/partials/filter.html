@@ -1,7 +1,7 @@
         <div class="panel-group" id="accordionNo">
 
             <!-- CATEGORY -->
-            <div class="panel panel-default">
+            <div class="panel panel-default hidden-xs">
                 <div class="panel-heading">
                     <h4 class="panel-title"> <a data-toggle="collapse" data-target="#collapseCategory" class="collapseWill"> <span class="pull-left"> <i class="fa fa-caret-right"></i></span> Категории </a> </h4>
                 </div>
@@ -10,7 +10,7 @@
 
                         <ul class="nav nav-pills nav-stacked tree">
                             <li ng-repeat="menuitem in catMenuItems" ui-sref-active="active">
-                              <a ui-sref="shop.one({categoryId:menuitem.id})">
+                              <a ui-sref="shop.one({categoryId:menuitem.id})" style="padding: 3px 0px">
                                 <span class="badge pull-right">{{menuitem.cnt}}</span>{{menuitem.name}}</a>
                             </li>
                         </ul>

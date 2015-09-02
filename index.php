@@ -282,12 +282,13 @@
           <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
             <div class="pull-left ">
               <ul class="userMenu ">
-                <li><a href="#" ng-click="setLanguage('bg')"><span>BG</span></a></li>
-                <li><a href="#" ng-click="setLanguage('en')"><span>EN</span></a></li>
-                <li><a href="#" ng-click="setLanguage('ro')"><span>RO</span></a></li>
-                <li><a href="#" ng-click="setLanguage('gr')"><span>GR</span></a></li>
-                <li><a href="#" ng-click="setLanguage('mk')"><span>MK</span></a></li>
-                <li><span>{{'ONLY_IN_BG'|translate}}</span></li>
+                <li><a ng-click="setLanguage('bg')"><span>BG</span></a></li>
+                <li><a ng-click="setLanguage('en')"><span>EN</span></a></li>
+                <li><a ng-click="setLanguage('ro')"><span>RO</span></a></li>
+                <li><a ng-click="setLanguage('gr')"><span>GR</span></a></li>
+                <li><a ng-click="setLanguage('mk')"><span>MK</span></a></li>
+                
+                <!-- <li><span>{{'ONLY_IN_BG'|translate}}</span></li>-->
                 <li class="phone-number"><a href="callto:+359887352619"> <span> <i
                       class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs"
                     style="margin-left: 5px"> 088 735 26 19 </span>
@@ -340,17 +341,18 @@
         </a>
 
         <!-- this part for mobile -->
+        <!-- 
         <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
           <div class="input-group">
             <button class="btn btn-nobg getFullSearch" type="button">
               <i class="fa fa-search"> </i>
             </button>
           </div>
-          <!-- /input-group -->
         </div>
+        -->
       </div>
 
-      <!-- this part is duplicate from cartMenu  keep it for mobile -->
+      <!-- CART MOBILE: this part is duplicate from cartMenu. Keep it for mobile -->
       <div class="navbar-cart  collapse">
         <div class="cartMenu col-lg-5 col-md-6 col-sm-6 col-xs-12">
           <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark" style="overflow: visible;">
@@ -407,46 +409,48 @@
       <!-- NAV elements -->
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-
+          <!-- НАЧАЛО --> 
           <li ui-sref-active="active"><a ui-sref="home"> Начало </a></li>
 
+          <!-- ПРОДУКТИ -->
           <li id="myDropdown" class="dropdown megamenu-fullwidth">
             <!-- <li ng-class="{active: $state.includes('shop')}"><a ui-sref="shop.categories.all">Продукти</a></li> -->
             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ui-sref="shop.all"> Продукти <b
               class="caret"> </b>
-          </a>
+            </a>
             <ul class="dropdown-menu">
               <li class="megamenu-content ">
-                <ul class="col-lg-3  col-sm-3 col-md-3 unstyled noMarginLeft newCollectionUl">
+                <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-12 unstyled noMarginLeft newCollectionUl">
                   <li class="no-border">
                     <p class="promo-1">
                       <strong> КАТЕГОРИИ </strong>
                     </p>
                   </li>
-                  <li ng-repeat="menuitem in catMenuItems"><a tabindex="-1"
-                    ui-sref="shop.one({ categoryId: menuitem.id })" style="text-transform: uppercase"> {{menuitem.name}}
-                  </a></li>
+                  <li ng-repeat="menuitem in catMenuItems">
+                    <a tabindex="-1" ui-sref="shop.one({ categoryId: menuitem.id })" style="text-transform: uppercase"> {{menuitem.name}}
+                    </a>
+                  </li>
                 </ul>
-                <ul class="col-lg-3  col-sm-3 col-md-3  col-xs-4">
+                <ul class="col-lg-3  col-sm-3 col-md-3 hidden-xs">
                   <li><a class="newProductMenuBlock"
-                    ui-sref="shop.categories.one.product({categoryId:'wool',productId:'english-wool-red'})"> <img
-                      class="img-responsive" src="images/e_red.jpg" alt="product"> <span class="ProductMenuCaption"> <i
-                        class="fa fa-caret-right"> </i> ЧЕРВЕНА ВЪЛНА
+                    ui-sref="shop.one.product({categoryId:'wool',productId:'english-wool-red'})">
+                    <img class="img-responsive" src="images/e_red.jpg" alt="product"> <span class="ProductMenuCaption"> <i
+                        class="fa fa-caret-right"> </i> Червена вълна
                     </span>
                   </a></li>
                 </ul>
-                <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-4">
+                <ul class="col-lg-3  col-sm-3 col-md-3 hidden-xs">
                   <li><a class="newProductMenuBlock"
-                    ui-sref="shop.categories.one.product({categoryId:'silk',productId:'white'})"> <img
-                      class="img-responsive" src="images/wool_rozova.jpg" alt="product"> <span
-                      class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> БЯЛА КОПРИНА
+                    ui-sref="shop.one.product({categoryId:'silk',productId:'white'})"> <img
+                      class="img-responsive" src="images/swhite.jpg" alt="product"> <span
+                      class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> Бяла коприна
                     </span>
                   </a></li>
                 </ul>
-                <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-4">
+                <ul class="col-lg-3  col-sm-3 col-md-3 hidden-xs">
                   <li><a class="newProductMenuBlock"
-                    ui-sref="shop.categories.one.product({categoryId:'needles',productId:'n36'})"> <img
-                      class="img-responsive" src="images/promo3.jpg" alt="product"> <span class="ProductMenuCaption"> <i
+                    ui-sref="shop.one.product({categoryId:'needles',productId:'e36'})"> <img
+                      class="img-responsive" src="images/needle32.jpg" alt="product"> <span class="ProductMenuCaption"> <i
                         class="fa fa-caret-right"> </i> Игла #36
                     </span>
                   </a></li>
@@ -456,7 +460,7 @@
           </li>
 
           <!-- change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width -->
-          <li class="dropdown megamenu-80width "><a data-toggle="dropdown" class="dropdown-toggle" data-hover="dropdown"
+          <li class="dropdown megamenu-80width hidden"><a data-toggle="dropdown" class="dropdown-toggle" data-hover="dropdown"
             href="#"> SHOP <b class="caret"> </b>
           </a>
             <ul class="dropdown-menu">
@@ -525,7 +529,7 @@
                 </ul>
               </li>
             </ul></li>
-          <li class="dropdown megamenu-fullwidth"><a data-toggle="dropdown" class="dropdown-toggle"
+          <li class="dropdown megamenu-fullwidth hidden"><a data-toggle="dropdown" class="dropdown-toggle"
             data-hover="dropdown" href="#"> PAGES <b class="caret"> </b>
           </a>
             <ul class="dropdown-menu">
@@ -751,7 +755,7 @@
 
   <!-- FOOTER -->
   <hr>
-  <pre>
+  <pre ng-show="isDebug">
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
       $state = {{$state.current.name}}
       $stateParams = {{$stateParams}}
@@ -767,45 +771,50 @@
       logged user = {{currentUser.email}}
       
       has focus = {{hasFocus}}
-    </pre>
-<div ng-repeat = "st in states">
-  state: {{st.name}}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{st.url}}
-</div>
+  </pre>
+  
+  <div ng-show="isDebug" ng-repeat = "st in states">
+    state: {{st.name}}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{st.url}}
+  </div>
 
   <footer>
     <div class="footer" id="footer">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3  col-md-3 col-sm-4 col-xs-6">
-            <h3>Support</h3>
+          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+            <h3>Свържете се нас</h3>
             <ul>
               <li class="supportLi">
-                <p>Lorem ipsum dolor sit amet, consectetur</p>
+                <p>В работни дни от 10:00 до 19:00</p>
                 <h4>
-                  <a class="inline" href="callto:+8801680531352"> <strong> <i class="fa fa-phone"> </i> 88 01680 531352
+                  <a class="inline" href="callto:+359899198669"> <strong> <i class="fa fa-phone"> </i> 089 919 86 69
                   </strong>
                   </a>
                 </h4>
                 <h4>
-                  <a class="inline" href="mailto:help@tshopweb.com"> <i class="fa fa-envelope-o"> </i> help@tshopweb.com
+                  <a class="inline" href="mailto:contact@felt-bg.com"> <i class="fa fa-envelope-o"> </i> contact@felt-bg.com
                   </a>
                 </h4>
               </li>
             </ul>
           </div>
           <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-            <h3>Shop</h3>
+            <h3>Продукти</h3>
             <ul>
-              <li><a href="index.html"> Home </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html"> Category </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/sub-category.html"> Sub Category </a></li>
+              <li><a ui-sref="home"> Начало </a></li>
+              <li><a ui-sref="shop.all"> Категории </a></li>
+              <li ng-repeat="menuitem in catMenuItems">
+                <a ui-sref="shop.one({ categoryId: menuitem.id })"> {{menuitem.name}} </a>
+              </li>
             </ul>
           </div>
-          <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-            <h3>Information</h3>
+          
+          <div class="clearfix visible-xs-block"></div>
+          
+          <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 hidden">
+            <h3>Информация</h3>
             <ul>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Product
-                  Details </a></li>
+              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Условия на доставка</a></li>
               <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details-style2.html"> Product
                   Details Version 2 </a></li>
               <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/cart.html"> Cart </a></li>
@@ -817,17 +826,25 @@
                   Conditions </a></li>
             </ul>
           </div>
+          
           <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-            <h3>My Account</h3>
+            <h3>Моят акаунт</h3>
             <ul>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/account-1.html"> Account Login </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/account.html"> My Account </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/my-address.html"> My Address </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/wishlist.html"> Wisth list </a></li>
-              <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/order-list.html"> Order list </a></li>
+            
+              <li ng-if="getUsername() == 'guest'" ng-cloak><a data-toggle="modal" data-target="#ModalLogin">Вход</a></li>
+              
+              <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.summary">Моят акаунт</a></li>
+              <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.man.edit">Редактирай акаунт</a></li>
+              <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.summary.orders">Моите поръчки</a></li>
+              
+              <li ng-if="getUsername() == 'guest'" ng-cloak><a href="#" data-toggle="modal"
+                  data-target="#ModalSignup"> Регистрирайте акаунт </a></li>
+              
+              <li ng-if="getUsername() !== 'guest'" ng-cloak><a ng-click="logout(false)"> Изход </a></li>
+              
             </ul>
           </div>
-          <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+          <div class="col-lg-3  col-md-3 col-sm-8 col-xs-12 ">
             <h3>Stay in touch</h3>
             <ul>
               <li>
@@ -861,7 +878,7 @@
 
     <div class="footer-bottom">
       <div class="container">
-        <p class="pull-left">© TSHOP 2014. All right reserved.</p>
+        <p class="pull-left">© ФЕЛТ 2015. Всички права запазени.</p>
 
         <div class="pull-right paymentMethodImg">
           <img height="30" class="pull-right" src="images/master_card.png" alt="img"> <img height="30"

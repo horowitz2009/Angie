@@ -254,6 +254,9 @@ angular.module('felt', [
                          Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate) {
+  
+  $scope.isDebug = false;
+  
   $scope.states = $state.get();
   
   console.log("[217 app.controller] MainCtrl");
