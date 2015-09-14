@@ -249,11 +249,11 @@ angular.module('felt', [
 .controller('MainCtrl', ['$scope', '$state', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', 'ShippingFactory',
                          'Account', 'AUTH_EVENTS', 'ShopService', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
-                         '$animate', '$timeout', '$interval', '$translate',
+                         '$animate', '$timeout', '$interval', '$translate', '$window',
                     function($scope, $state, $rootScope, USER_ROLES, AuthService, AccountService, ShippingFactory,
                          Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
-            		         $animate, $timeout, $interval, $translate) {
+            		         $animate, $timeout, $interval, $translate, $window) {
   
   $scope.isDebug = false;
   
@@ -474,8 +474,9 @@ angular.module('felt', [
     $state.go("shop.cart.edit");
     
   });
-
   
+  
+
   var subTotalPromise = null;
   var addToCartPromise = null;
   var saveCartPromise = null;
@@ -564,6 +565,15 @@ angular.module('felt', [
   //   }, 333);
 
   ////////////////////////////////////////  
+  
+  $scope.showSlider = false;
+  
+  $scope.toggleSlider = function() {
+    
+    $scope.showSlider= !$scope.showSlider;
+  }
+  
+
 
 }])
     
@@ -598,3 +608,13 @@ function manageAccount(cart, account) {
 function hasContactData(a) {
   return a && a.firstName && a.lastName && a.phone;
 }
+
+
+$(window).resize(function() {
+  // This will execute whenever the window is resized
+  //$(window).height(); // New height
+  //$(window).width(); // New width
+  console.log("HMM width : " + $(window).innerWidth());
+  console.log("HMM height: " + $(window).innerHeight());
+  
+});
