@@ -28,22 +28,24 @@
     <div class="col-lg-6 col-md-6 col-sm-6">
         <!-- product Image and Zoom -->
         <div class="main-image sp-wrap col-lg-12 no-padding" style="display: inline-block;">
-            <div class="sp-large" style="overflow: hidden; height: auto; left: 0px; top: 0px;">
-                <a href="../images/zoom1hi.jpg" class="">
+            <div ng-if="!product.images" class="sp-large" style="overflow: hidden; height: auto; left: 0px; top: 0px;">
+                <a href="{{product.image}}" class="">
                     <img ng-src="{{product.image}}" class="img-responsive" alt="{{product.name}}">
                 </a>
             </div>
+            <div ng-if="product.images" class="sp-large" style="overflow: hidden; height: auto; left: 0px; top: 0px;">
+                <a class="" ng-click="openLightboxModal(imageIndex)">
+                    <img ng-src="{{product.images[imageIndex].thumbUrl}}" class="img-responsive" alt="{{product.name}}">
+                </a>
+            </div>
 			
-            <div class="sp-thumbs sp-tb-active" style="display:none">
-                <a href="../images/zoom1hi.jpg" class="sp-current">
-                    <img src="../images/zoom1.jpg" class="img-responsive" alt="img">
+            <div class="sp-thumbs sp-tb-active" ng-if="product.images">
+              <div ng-repeat="image in product.images">
+                <a ng-click="openLightboxModal($index)" ng-mouseenter="changeImageIndex($index)" 
+                   ng-class="{'sp-current': imageIndex == $index}">
+                  <img ng-src="{{image.thumbUrl}}" class="img-responsive" alt="{{image.caption}}">
                 </a>
-                <a href="../images/zoom2hi.jpg" class="">
-                    <img src="../images/zoom2.jpg" class="img-responsive" alt="img">
-                </a>
-                <a href="../images/zoom3hi.jpg" class="">
-                    <img src="../images/zoom3.jpg" class="img-responsive" alt="img">
-                </a>
+              </div>
             </div>
         </div>
     </div><!--/ left column end -->

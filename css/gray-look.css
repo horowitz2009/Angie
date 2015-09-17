@@ -46,10 +46,23 @@ hr {
 }
 
 .main-image.sp-wrap {
-    background:#fff!important;
+    /* background:#fff!important; */
 }
 .main-image.sp-wrap  .sp-thumbs {
-    right: 10px !important;
+    /* right: 10px !important; */
+    padding: 10px 5px;
+    /* line-height: 100px; */
+    /* display: flex; */<
+    div 
+    
+    style="display: flex;align-items:center;">    <
+    
+    div></
+    
+    div>  </
+    
+    div>;
+    /* position: relative; */
 }
 .style2.style2look2 .sp-thumbs {
     top: 0 !important;

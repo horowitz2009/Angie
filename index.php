@@ -43,6 +43,11 @@
 <link href="css/mystyle.css" rel="stylesheet">
 <link href="css/mbExtruder.css" rel="stylesheet">
 
+<!-- LIGHTBOX -->
+<!-- <link href="app/bower_components/lightbox2/dist/css/lightbox.css" rel="stylesheet">-->
+<link rel="stylesheet" href="app/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
+<link rel="stylesheet" href="app/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+
 <!-- css3 animation effect for this template -->
 <link href="css/animate.css" rel="stylesheet">
 
@@ -989,6 +994,11 @@
   <script type="text/javascript" src="app/bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js"></script>
   <script type="text/javascript" src="app/bower_components/angucomplete-alt/angucomplete-alt.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-translate/angular-translate.js"></script>
+  
+  <!-- <script type="text/javascript" src="app/bower_components/lightbox2/dist/js/lightbox.js"></script>-->
+  <script type="text/javascript" src="app/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
+  <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
   <!-- LOKI -->
   <script type="text/javascript" src="js/lokijs.js"></script>

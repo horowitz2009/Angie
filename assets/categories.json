@@ -1,4 +1,4 @@
-﻿﻿﻿﻿{
+﻿﻿﻿﻿﻿{
   "categories":[
     {
       "id": "wool",
@@ -11,6 +11,9 @@
 		      "color": "жълт",
 		      "colorGroups": "yellow",
           "image": "images/wool_jylta.jpg",
+          "images": [{"thumbUrl": "images/wool_jylta.jpg", "url": "images/wool_jylta.jpg", "caption": "гранка 10грама"},
+                     {"thumbUrl": "images/zoom3.jpg", "url": "images/zoom3.jpg", "caption": "в опаковка"}
+                     ],
           "name": "Жълта вълна",
 		      "origin": "България",
           "description": "Прана, дарачена, багрена и пак дарачена. Изключително подходяща за основа поради бързото и лесно степване.",

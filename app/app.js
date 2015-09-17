@@ -17,14 +17,18 @@ angular.module('felt', [
     'angucomplete-alt',
     'pascalprecht.translate',
     
+    'bootstrapLightbox',
+    
     'ngAnimate'
 ])
 
 
 
-.config(['$stateProvider', '$urlRouterProvider',
-  function ($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', 'LightboxProvider',
+  function ($stateProvider, $urlRouterProvider, LightboxProvider) {
     console.log("[ 59 app.config]");
+    
+            LightboxProvider.fullScreenMode = true;
 
             /////////////////////////////
             // Redirects and Otherwise //

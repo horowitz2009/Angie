@@ -262,9 +262,18 @@ angular.module('felt.shop', [
             
             'content2@shop': {
               templateUrl: 'app/shop/partials/product.html',
-              controller: ['$scope', 'product',
-                function ($scope, product) {
+              controller: ['$scope', 'product', 'Lightbox',
+                function ($scope, product, Lightbox) {
                   $scope.product = product;
+                  $scope.imageIndex = 0;
+                  
+                  $scope.changeImageIndex = function (index) {
+                    $scope.imageIndex = index;
+                  }
+                  
+                  $scope.openLightboxModal = function (index) {
+                    Lightbox.openModal($scope.product.images, index);
+                  };
                 }]
             }
           }

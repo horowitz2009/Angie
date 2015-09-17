@@ -390,7 +390,7 @@ ul.list-border li:hover {
 }
 
 .modal-dialog {
-    max-width: 460px;
+    /* max-width: 460px; */
 }
 
 .modal-header {
@@ -3836,7 +3836,7 @@ h5.parallaxSubtitle {
 }
 
 .sp-thumbs {
-    text-align: center !important;
+    /* text-align: center !important; */
 }
 
 .sp-large a img {
@@ -3850,28 +3850,33 @@ h5.parallaxSubtitle {
 }
 
 .sp-large {
-    /*max-width: 90%;*/
+    /* max-width: 90%; */
 }
 
 .sp-thumbs {
-    position: absolute;
-    right: 0 !important;
     text-align: left;
-    bottom: 140px !important;
-    width: 100px !important;
     z-index: 70;
+    height: 100px;
+    float: left;
+    display: flex;
+    align-items: center;
 }
 
 .sp-thumbs a:link, .sp-thumbs a:visited {
     border: 2px solid #EEEEEE;
     display: inline-block;
     margin-bottom: 10px;
-    float: right;
     transition: margin 0.2s ease 0s;
 }
 
 .main-image .sp-thumbs a:link, .sp-thumbs a:visited {
-    margin-right: 0 !important;
+    margin-right: 2px !important;
+    margin-left: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    min-width: 45px;
 }
 
 .sp-thumbs a:hover {
@@ -3880,7 +3885,8 @@ h5.parallaxSubtitle {
 
 .sp-thumbs img {
     height: auto !important;
-    width: 60px !important;
+    /* width: 60px !important; */
+    padding: 3px 3px;
 }
 
 /***  -------  Product details style 2   ------- ***/
