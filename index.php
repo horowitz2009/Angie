@@ -44,9 +44,11 @@
 <link href="css/mbExtruder.css" rel="stylesheet">
 
 <!-- LIGHTBOX -->
-<!-- <link href="app/bower_components/lightbox2/dist/css/lightbox.css" rel="stylesheet">-->
+<link href="app/bower_components/lightbox2/dist/css/lightbox.css" rel="stylesheet">
+<!-- 
 <link rel="stylesheet" href="app/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css">
 <link rel="stylesheet" href="app/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+-->
 
 <!-- css3 animation effect for this template -->
 <link href="css/animate.css" rel="stylesheet">
@@ -288,12 +290,13 @@
           <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
             <div class="pull-left ">
               <ul class="userMenu ">
+                <!-- 
                 <li><a ng-click="setLanguage('bg')"><span>BG</span></a></li>
                 <li><a ng-click="setLanguage('en')"><span>EN</span></a></li>
                 <li><a ng-click="setLanguage('ro')"><span>RO</span></a></li>
                 <li><a ng-click="setLanguage('gr')"><span>GR</span></a></li>
                 <li><a ng-click="setLanguage('mk')"><span>MK</span></a></li>
-                
+                -->
                 <!-- <li><span>{{'ONLY_IN_BG'|translate}}</span></li>-->
                 <li class="phone-number"><a href="callto:+359887352619"> <span> <i
                       class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs"
@@ -995,7 +998,9 @@
   <script type="text/javascript" src="app/bower_components/angucomplete-alt/angucomplete-alt.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-translate/angular-translate.js"></script>
   
-  <!-- <script type="text/javascript" src="app/bower_components/lightbox2/dist/js/lightbox.js"></script>-->
+  <!-- LIGHTBOX -->
+  <script type="text/javascript" src="app/bower_components/lightbox2/dist/js/lightbox.js"></script>
+  
   <script type="text/javascript" src="app/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
