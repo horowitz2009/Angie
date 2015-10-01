@@ -309,7 +309,7 @@
 	.left-slider.hide {
 		left: -295px;
 	}
-	.panel-default {
+	.extruder .panel-default {
 		background-color: #1e1e1e;
 		box-shadow: none;
 	}
