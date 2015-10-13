@@ -748,7 +748,7 @@ legend {
 }
 
 .navbar-brand {
-    padding: 10px;
+    padding: 4px 11px 5px 10px;
     color: #FFFFFF;
     font-size: 28px;
     font-weight: bold;
@@ -783,6 +783,9 @@ legend {
 /***  ------- Mega Menu Start ------- ***/
 .megamenu .nav, .megamenu .dropup, .megamenu .dropdown, .megamenu .collapse {
     position: static;
+    /* background-color: blue; */
+    /* height: 100%; */
+    margin-bottom: -1px;
 }
 
 .megamenu .navbar-inner, .megamenu .container {
@@ -5119,7 +5122,7 @@ div.quickview {
     }
 
     .navbar-brand {
-        padding: 15px;
+        padding: 9px 15px 15px 12px;
     }
 
     .miniCartFooter {
@@ -5521,7 +5524,7 @@ div.quickview {
     }
 
     .navbar-brand {
-        padding: 17px 0 0 10px;
+        padding: 13px 0 0 12px;
     }
 
     .navbar-brand img {

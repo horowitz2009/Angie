@@ -20,9 +20,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Fav and touch icons -->
-<link rel="apple-touch-icon" href="images/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon" href="images/favicon72.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/favicon72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="images/favicon144.png">
 
 <link rel="shortcut icon" href="images/favicon.png">
 
@@ -298,10 +298,13 @@
                 <li><a ng-click="setLanguage('mk')"><span>MK</span></a></li>
                 -->
                 <!-- <li><span>{{'ONLY_IN_BG'|translate}}</span></li>-->
-                <li class="phone-number"><a href="callto:+359887352619"> <span> <i
+                <li class="phone-number">
+                  <a href="callto:+359899198669"> <span> <i
                       class="glyphicon glyphicon-phone-alt "></i></span> <span class="hidden-xs"
-                    style="margin-left: 5px"> 088 735 26 19 </span>
-                </a> <span ui-view="hint" class="navbar-text navbar-right"></span></li>
+                    style="margin-left: 5px"> 089 919 86 69 </span>
+                  </a>
+                   
+                <span ui-view="hint" class="navbar-text navbar-right"></span></li>
               </ul>
             </div>
           </div>
@@ -346,7 +349,7 @@
         </button>
 
         <!-- BRAND -->
-        <a class="navbar-brand " ui-sref="home"> <img src="images/logo(1).png" alt="ФЕЛТ">
+        <a class="navbar-brand " ui-sref="home"> <img src="images/logo45.png" alt="ФЕЛТ">
         </a>
 
         <!-- this part for mobile -->
@@ -764,7 +767,7 @@
 
   <!-- FOOTER -->
   <hr>
-  <pre ng-show="isDebug">
+  <pre ng-show="isDebug" ng-cloak>
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
       $state = {{$state.current.name}}
       $stateParams = {{$stateParams}}
@@ -782,15 +785,15 @@
       has focus = {{hasFocus}}
   </pre>
   
-  <div ng-show="isDebug" ng-repeat = "st in states">
+  <div ng-show="isDebug" ng-repeat = "st in states" ng-cloak>
     state: {{st.name}}&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;{{st.url}}
   </div>
 
-  <footer>
+  <footer class="hidden-print" ng-cloak>
     <div class="footer" id="footer">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <h3>Свържете се нас</h3>
             <ul>
               <li class="supportLi">
@@ -807,7 +810,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <h3>Продукти</h3>
             <ul>
               <li><a ui-sref="home"> Начало </a></li>
@@ -820,7 +823,7 @@
           
           <div class="clearfix visible-xs-block"></div>
           
-          <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6 hidden">
+          <div class="col-sm-4 col-xs-6 hidden">
             <h3>Информация</h3>
             <ul>
               <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Условия на доставка</a></li>
@@ -836,7 +839,7 @@
             </ul>
           </div>
           
-          <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <h3>Моят акаунт</h3>
             <ul>
             
@@ -853,7 +856,10 @@
               
             </ul>
           </div>
-          <div class="col-lg-3  col-md-3 col-sm-8 col-xs-12 ">
+          
+          <!--  UNUSED SECTION -->
+          <!-- 
+          <div class="col-lg-3  col-md-3 col-sm-8 col-xs-12 hidden">
             <h3>Stay in touch</h3>
             <ul>
               <li>
@@ -877,7 +883,8 @@
               <li><a href="http://youtube.com/"> <i class="fa fa-youtube"> &nbsp; </i>
               </a></li>
             </ul>
-          </div>
+          </div>-->
+          <!-- end of UNUSED SECTION -->
         </div>
         <!--/.row-->
       </div>
@@ -889,7 +896,7 @@
       <div class="container">
         <p class="pull-left">© ФЕЛТ 2015. Всички права запазени.</p>
 
-        <div class="pull-right paymentMethodImg">
+        <div class="pull-right paymentMethodImg hidden">
           <img height="30" class="pull-right" src="images/master_card.png" alt="img"> <img height="30"
             class="pull-right" src="images/paypal.png" alt="img"> <img height="30" class="pull-right"
             src="images/american_express_card.png" alt="img"> <img height="30" class="pull-right"
