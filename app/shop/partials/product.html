@@ -55,7 +55,7 @@
     <div class="col-lg-6 col-md-6 col-sm-5" style="padding-left: 30px">
 
         <h1 class="product-title"> {{product.name}} </h1>
-        <h3 class="product-code">Product Code : DEN1098</h3>
+        <h3 class="product-code hidden">Product Code : DEN1098</h3>
         <div class="product-price">
             <span class="price-sales">{{product.price | number:2}} <span style="font-size: 80%">лв</span></span>
             <!--<span class="price-standard"></span>-->
@@ -194,6 +194,8 @@
                 </div>
 
                 <div class="tab-pane" id="shipping">
+                  Ползваме куриерските услуги на Спиди и Еконт. Цена на доставка може да бъде изчислена, като изберете <a ui-sref="shop.cart.edit">Количка</a> и въведете населеното място или пощенски код.
+                    <!-- 
                     <table>
                         <colgroup>
                             <col style="width:33%">
@@ -217,7 +219,9 @@
                             <td colspan="3">* Безплатна доставка при поръчка над 40лв</td>
                         </tr>
                         </tfoot>
+                        
                     </table>
+                    -->
                 </div>
 
             </div> <!-- /.tab content -->
@@ -226,10 +230,18 @@
 
         <div style="clear:both"></div>
 
-        <div class="product-share clearfix">
+        <div class="product-share clearfix hidden">
             <p> SHARE </p>
-            <div class="socialIcon">
-                <a href="#"> <i class="fa fa-facebook"></i></a>
+                <!-- THE LINK DOES NOT WORK YET!!! -->
+                <a href="#" onclick="window.open('http://facebook.com/sharer.php?u=http://felt-bg.com/#/shop/wool/english-wool-white','mywindow','width=500,height=400,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,copyhistory=no,resizable=yes'); return false;" 
+                  data-ga-event="Shop" data-ga-action="Facebook share">
+                  
+                   <i class="fa fa-facebook"></i>
+                </a>
+                
+                
+                
+                
                 <a href="#"> <i class="fa fa-twitter"></i></a>
                 <a href="#"> <i class="fa fa-google-plus"></i></a>
                 <a href="#"> <i class="fa fa-pinterest"></i></a> </div>
