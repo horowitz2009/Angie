@@ -1811,7 +1811,7 @@ h1.bolder-style.dark, h1.bolder-style.dark a {
 .banner, .slider-content, .slider, .slider-v2 {
     width: 100%;
     display: block;
-    max-height: 540px;
+    /* max-height: 540px; */
     height: auto;
     overflow: hidden;
     position: relative;
