@@ -348,17 +348,14 @@
       </div>
     </div>
     <!--/.navbar-top-->
-    
-    <!-- NAVBAR -->
-    <div class="container" id="accordionNav" >
+
+    <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNav">
-          <span class="sr-only"> Toggle navigation </span> 
-          <span class="icon-bar"> </span> 
-          <span class="icon-bar"> </span>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span>
           <span class="icon-bar"> </span>
         </button>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileCart">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart">
           <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite ng-cloak"> Количка ({{cart.subTotal | number:2}} лв) </span>
         </button>
 
@@ -379,9 +376,9 @@
       </div>
 
       <!-- CART MOBILE: this part is duplicate from cartMenu. Keep it for mobile -->
-      <div class="navbar-cart collapse visible-xs" id="mobileCart">
+      <div class="navbar-cart collapse" id="mobileCart">
         <div class="cartMenu col-lg-5 col-md-6 col-sm-6 col-xs-12">
-          <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark">
+          <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark" style="overflow: visible;">
             <table>
               <tbody>
                 <tr class="miniCartProduct" ng-repeat="item in cart.items">
@@ -415,6 +412,8 @@
                 </tr>
               </tbody>
             </table>
+
+
           </div>
           <!--/.miniCartTable-->
 
@@ -779,7 +778,7 @@
 
   <!-- FOOTER -->
   <hr>
-  <pre ng-show="isDebug" class="hidden">
+  <pre ng-show="isDebug" class="ng-cloak">
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
       $state = {{$state.current.name}}
       $stateParams = {{$stateParams}}
