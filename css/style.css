@@ -50,6 +50,10 @@
 /* FOUNDATION
 /* =============================================================== */
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 a {
     color: #34495E;
     text-decoration: none;
@@ -748,7 +752,7 @@ legend {
 }
 
 .navbar-brand {
-    padding: 4px 11px 5px 10px;
+    padding: 4px 11px 4px 10px;
     color: #FFFFFF;
     font-size: 28px;
     font-weight: bold;
@@ -785,7 +789,7 @@ legend {
     position: static;
     /* background-color: blue; */
     /* height: 100%; */
-    margin-bottom: -1px;
+    /* margin-bottom: -1px; */
 }
 
 .megamenu .navbar-inner, .megamenu .container {
@@ -1224,7 +1228,7 @@ legend {
 }
 
 .cartMenu a.dropdown-toggle {
-    padding-bottom: 15px;
+    padding-bottom: 14px;
     padding-top: 15px;
     padding-left: 20px;
     padding-right: 20px;

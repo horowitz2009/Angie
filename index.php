@@ -348,15 +348,18 @@
       </div>
     </div>
     <!--/.navbar-top-->
-
-    <div class="container">
+    
+    <!-- NAVBAR -->
+    <div class="container" id="accordionNav" >
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNav">
+          <span class="sr-only"> Toggle navigation </span> 
+          <span class="icon-bar"> </span> 
+          <span class="icon-bar"> </span>
           <span class="icon-bar"> </span>
         </button>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart">
-          <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Количка ({{cart.subTotal | number:2}} лв) </span>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileCart">
+          <i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite ng-cloak"> Количка ({{cart.subTotal | number:2}} лв) </span>
         </button>
 
         <!-- BRAND -->
@@ -376,9 +379,9 @@
       </div>
 
       <!-- CART MOBILE: this part is duplicate from cartMenu. Keep it for mobile -->
-      <div class="navbar-cart  collapse">
+      <div class="navbar-cart collapse visible-xs" id="mobileCart">
         <div class="cartMenu col-lg-5 col-md-6 col-sm-6 col-xs-12">
-          <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark" style="overflow: visible;">
+          <div id="cart1" class="miniCartTable mCustomScrollbar" data-mcs-theme="dark">
             <table>
               <tbody>
                 <tr class="miniCartProduct" ng-repeat="item in cart.items">
@@ -405,15 +408,13 @@
                   <td width="15%" class="miniCartSubtotal"><span> {{item.sum | number:2}} </span><span>лв</span></td>
                   <td width="5%" class="delete">
                     <!-- glyphicon glyphicon-remove-sign  aria-hidden="true" --> <!--<button class="btn btn-link btn-sm" type="button" style="color: red" ng-click="removeFromCart(item.product)">-->
-                    <a ng-click="removeFromCart(item.id)"> <span class="glyphicon glyphicon-remove-circle"
+                    <a ng-click="removeFromCart(item.id)"> <span class="glyphicon glyphicon-remove-circle do-not-close"
                        style="color: red"></span>
                     </a> <!--</button>-->
                   </td>
                 </tr>
               </tbody>
             </table>
-
-
           </div>
           <!--/.miniCartTable-->
 
@@ -430,7 +431,7 @@
       <!--/.navbar-cart-->
 
       <!-- NAV elements -->
-      <div class="navbar-collapse collapse">
+      <div class="navbar-collapse collapse" id="mobileNav">
         <ul class="nav navbar-nav">
           <!-- НАЧАЛО --> 
           <li ui-sref-active="active"><a ui-sref="home"> Начало </a></li>
@@ -735,7 +736,7 @@
           </div>
           <!--/.cartMenu-->
 
-          <div class="search-box">
+          <div class="search-box hidden">
             <div class="input-group">
               <button class="btn btn-nobg getFullSearch" type="button">
                 <i class="fa fa-search"> </i>
@@ -778,7 +779,7 @@
 
   <!-- FOOTER -->
   <hr>
-  <pre ng-show="isDebug" ng-cloak>
+  <pre ng-show="isDebug" class="hidden">
       <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
       $state = {{$state.current.name}}
       $stateParams = {{$stateParams}}
@@ -962,8 +963,9 @@
 
   <!-- Placed at the end of the document so the pages load faster -->
   <script type="text/javascript" src="app/bower_components/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="app/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
   <script type="text/javascript" src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="app/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  
 
   <script type="text/javascript">
     // this script required for subscribe modal
@@ -1011,6 +1013,7 @@
   <script type="text/javascript" src="app/bower_components/angular/angular.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-animate/angular-animate.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  
   <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js"></script>
   <script type="text/javascript" src="app/bower_components/angucomplete-alt/angucomplete-alt.js"></script>
@@ -1020,7 +1023,6 @@
   <script type="text/javascript" src="app/bower_components/lightbox2/dist/js/lightbox.js"></script>
   
   <script type="text/javascript" src="app/bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
-  <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script type="text/javascript" src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
   <!-- LOKI -->

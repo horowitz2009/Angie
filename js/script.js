@@ -444,4 +444,58 @@ $(document).ready(function() {
 
     //$('.js-activated').dropdownHover().dropdown();
     
+    
+    
+//    $('#mobileNav').on('hidden.bs.collapse', function () {
+//      // do something…
+//      console.log("mobileNav is hidden");
+//    });  
+//    $('#mobileNav').on('shown.bs.collapse', function () {
+//      // do something…
+//      console.log("mobileNav is shown");
+//    }); 
+    $('#mobileNav').on('show.bs.collapse', function () {
+      // do something…
+      console.log("mobileNav starts to show");
+      //$('#mobileCart').collapse('hide');
+    }); 
+    
+//    $('#mobileCart').on('hidden.bs.collapse', function () {
+//      // do something…
+//      console.log("mobileCart is hidden");
+//    });  
+    $('#mobileCart').on('show.bs.collapse', function () {
+      // do something…
+      console.log("mobileCart starts to show");
+      //$('#mobileNav').collapse('hide');
+    })  
+//    $('#mobileCart').on('shown.bs.collapse', function () {
+//      // do something…
+//      console.log("mobileNav is shown");
+//    }); 
+    
+    
+    
+//    $(document).click(function (event) {
+//      console.log("click ... ");
+//      console.log(event);
+//      var clickover = $(event.target);
+//      var _opened = $(".navbar-collapse").hasClass("navbar-collapse in");
+//      console.log("opened:" + _opened);
+//      //if (_opened === true && !clickover.hasClass("navbar-toggle")) {
+//          //$("button.navbar-toggle").click();
+//        console.log("close them");
+//        
+//        var hmm = clickover.hasClass("do-not-close");
+//        console.log("do not close?");
+//        console.log(hmm);
+//        console.log("END");
+//        if (!hmm) {
+//          $('#mobileNav').collapse('hide');
+//          $('#mobileCart').collapse('hide');
+//        }
+//      //}
+//    });
+    
+    
 }); // end Ready
