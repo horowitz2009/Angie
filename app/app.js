@@ -11,6 +11,7 @@ angular.module('felt', [
     'common.utils.service',
     'common.authentication',
     'home.account',
+    'backend',
 	  
     'ui.bootstrap',
     'ui.router',
@@ -219,7 +220,7 @@ angular.module('felt', [
     BUTTON_BG: 'Bulgarian',
     awaiting_payment: 'Awaiting payment',
     pending: 'Pending',
-    preparing_in_progress: 'Preparing in progress',
+    preparing: 'Preparing in progress',
     shipped: 'Shipped',
     awaiting_pick_up: 'Awaiting pick up',
     delivered: 'Delivered',
@@ -234,9 +235,10 @@ angular.module('felt', [
     ONLY_IN_BG: 'Само на български',
     awaiting_payment: 'Очаква плащане',
     pending: 'Обработва се',
-    preparing_in_progress: 'Обработва се',
+    preparing: 'Приготвя се',
     shipped: 'Изпратена',
     awaiting_pick_up: 'Очаква вземане от ателието',
+    picked_up: 'Взета от ателието',
     delivered: 'Доставена',
     canceled: 'Отказана',
     refunded: 'Плащането върнато'
@@ -259,7 +261,7 @@ angular.module('felt', [
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate, $window) {
   
-  $scope.isDebug = false;
+  $scope.isDebug = true;
   
   $scope.states = $state.get();
   
@@ -409,8 +411,17 @@ angular.module('felt', [
     console.log("old username: " + oldUsername);
     console.log("new username: " + newUsername);
     var accountPromise = null;
+
+    $scope.isAdmin = false;
+    
     if (!AuthService.isGuest()) {
       accountPromise = AccountService.loadAccount(newUsername);
+      
+      if (AuthService.isAuthorized('admin')) {
+        console.log("ADMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+        $scope.isAdmin = true;
+      }
+
     } else {
       //IT IS GUEST
       Account.reset();

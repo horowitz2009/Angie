@@ -419,7 +419,7 @@ angular.module('home.account')
               $scope.contactData = Account.contactData;
 
               $scope.orders = [];
-              OrderService.getAllOrders().then(function(newOrders){
+              OrderService.getAllUserOrders().then(function(newOrders){
                 $scope.$apply(function(){
                   $scope.orders = newOrders;
                 });
@@ -440,7 +440,7 @@ angular.module('home.account')
       
       ,      resolve : {
         orders : function(OrderService) {
-          return OrderService.getAllOrders();
+          return OrderService.getAllUserOrders();
         }
       },
       
@@ -459,7 +459,7 @@ angular.module('home.account')
       },
       resolve : {
         orders : function(OrderService) {
-          return OrderService.getAllOrders();
+          return OrderService.getAllUserOrders();
         }
       },
       
@@ -469,7 +469,7 @@ angular.module('home.account')
           controller : [ '$scope', '$state', 'OrderService', function($scope, $state, OrderService) {
             
             $scope.orders = null;
-            OrderService.getAllOrders().then(function(newOrders){
+            OrderService.getAllUserOrders().then(function(newOrders){
               $scope.$apply(function(){
                 $scope.orders = newOrders;
               });
@@ -540,7 +540,7 @@ angular.module('home.account')
             $scope.order = null;
             OrderService.getOrder($stateParams['id']).then(function(newOrder){
               
-              OrderService.getAllOrderIds().then(function (orderIds) {
+              OrderService.getAllUserOrderIds().then(function (orderIds) {
                 $scope.nextId = -1;  
                 $scope.prevId = -1;
                 

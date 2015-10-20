@@ -1,0 +1,101 @@
+<!-- account.orders.html -->
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders == null">
+  <h2 class="text-center"><img src="images/loading.gif"></h2>
+</div>
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders && orders.length == 0">
+  <h2 class="text-center">Вие нямате все още направени поръчки!</h2>
+</div>
+
+
+  <!--  links -->
+  <div class="hidden-print" style="padding-bottom:15px">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 15px;padding-top: 15px">
+      <a class="after15" href="javascript:window.print()" style="display: inline-block;"><i class="glyphicon glyphicon-print"></i> Принтирай </a>
+      <!-- TODO -->
+      <!-- 
+      <a class="after15" href="#" style="display: inline-block;"><i class="glyphicon glyphicon-file"></i> Генерирай PDF </a>
+      -->
+      
+      
+      <a class="after15" ng-click="changeOrderStatus('preparing')" style="display: inline-block;">
+        <i class="fa fa-archive"></i>
+        Приготвя се 
+      </a>
+
+      <a class="after15" ng-click="changeOrderStatus('shipped')" style="display: inline-block;">
+        <i class="fa fa-truck"></i>
+        Изпратена 
+      </a>
+      
+    </div>
+  </div>
+  <div class="clearfix visible-xs-block"></div>
+
+
+
+
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="orders && orders.length > 0">
+  
+    <table>
+    <thead>
+      <tr class="cartItem">
+        <th style="width:  2%" >              </th>
+        <th style="width:  2%" > #            </th>
+        <th style="width: 17%" > Статус       </th>
+        <th style="width: 17%" > Дата         </th>
+        <th style="width: 17%" > Потребител   </th>
+        <th style="width: 28%" > Адрес        </th>
+        <th style="width: 17%" > Сума         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders" class="cartItem repeat-animation hide-fade" > <!-- cart-repeat-directive -->
+        
+        <!-- SELECTION -->
+        <td>
+          <input type="checkbox" ng-model="selection.ids[order.id]" name="group" id="{{order.id}}" />
+        </td>
+
+        <!-- ID -->
+        <td>
+          <a ui-sref="backend.summary.order.display({id:order.id})">{{order.id}}</a>
+        </td>
+
+        <!-- STATUS -->
+        <td>
+          <a ui-sref="backend.summary.order.display({id:order.id})">{{order.status | translate}}</a>
+        </td>
+
+        <!-- DATE -->
+        <td>
+          {{order.datePlaced | date:'dd/MM/yyyy'}} {{order.datePlaced | date:'shortTime'}}
+        </td>
+
+        <!-- CUSTOMER -->
+        <td>
+          {{order.contactData.firstName}} {{order.contactData.lastName}} ({{order.contactData.email}})
+        </td>
+
+        <!-- ADDRESS -->
+        <td>
+          <span format-address style="font-size: 75%"></span>
+        </td>
+
+        <!-- TOTAL -->
+        <td><span> {{order.total | number:2}} лв</span></td>
+
+      </tr>
+    </tbody>
+  </table>
+      
+</div>
+<div>
+<pre ng-bind="selection.ids | json"></pre> </div>
+
+
+<!--/ order.all.html -->

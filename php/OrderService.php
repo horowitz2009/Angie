@@ -48,10 +48,22 @@ class OrderService {
   }
 
   public function loadOrder($username, $id) {
-    $sql = "SELECT data, status, date_placed, date_changed FROM orders WHERE user = ? AND id = ?  LIMIT 1";
+    $sql = "SELECT data, status, date_placed, date_changed FROM orders WHERE ";
+    if (!empty($username)) {
+      $sql = $sql."user = ? AND ";
+    }
+    $sql = $sql."id = ? LIMIT 1";
+    
   
     $query = $this->connection->prepare($sql);
-    $query->execute(array($username, $id));
+    
+    $params = array();
+    if (!empty($username))
+      $params[] = $username;
+    $params[] = $id;
+    
+    
+    $query->execute($params);
     $query->setFetchMode(PDO::FETCH_NUM);
     if ($row = $query->fetch()) {
       $obj = json_decode($row[0]);
@@ -67,10 +79,17 @@ class OrderService {
   }
   
   public function getAllOrders($username) {
-    $sql = "SELECT id, data, status, date_placed, date_changed FROM orders WHERE user = ? order by date_placed desc";
-  
+    $sql = "SELECT id, data, status, date_placed, date_changed FROM orders ";
+    if (!empty($username)) {
+      $sql = $sql."WHERE user = ?";
+    }
+    $sql = $sql." order by date_placed desc";
     $query = $this->connection->prepare($sql);
-    $query->execute(array($username));
+    $params = null;
+    if (!empty($username))
+      $params = array($username);
+    
+    $query->execute($params);
     
     $query->setFetchMode(PDO::FETCH_NUM);
     
@@ -89,11 +108,19 @@ class OrderService {
   }
   
   public function getAllOrderIds($username) {
-    $sql = "SELECT id FROM orders WHERE user = ? order by date_placed desc";
-  
-    $query = $this->connection->prepare($sql);
-    $query->execute(array($username));
+    $sql = "SELECT id FROM orders ";
+    if (!empty($username)) {
+      $sql = $sql."WHERE user = ?";
+    }
+    $sql = $sql." order by date_placed desc";
     
+    $query = $this->connection->prepare($sql);
+    $params = null;
+    if (!empty($username))
+      $params = array($username);
+    
+    $query->execute($params);
+        
     $query->setFetchMode(PDO::FETCH_NUM);
     
     $res = array();

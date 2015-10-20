@@ -29,13 +29,29 @@ angular.module('felt.shop.orders', [
           factory.getOrder = function(id) {
             return OrderPersistenceService.loadOrder(AuthService.getUsername(), id);
           }
+
+          factory.getOrderAdmin = function(id) {
+            return OrderPersistenceService.loadOrder('', id);
+          }
           
-          factory.getAllOrders = function() {
+          factory.getAllUserOrders = function() {
             return OrderPersistenceService.getAllOrders(AuthService.getUsername());
           }
 
-          factory.getAllOrderIds = function() {
+          factory.getAllUserOrderIds = function() {
             return OrderPersistenceService.getAllOrderIds(AuthService.getUsername());
+          }
+          
+          factory.getAllOrders = function() {
+            return OrderPersistenceService.getAllOrders('');
+          }
+          
+          factory.getAllOrderIds = function() {
+            return OrderPersistenceService.getAllOrderIds('');
+          }
+          
+          factory.changeOrderStatus = function(id, newStatus) {
+            return OrderPersistenceService.changeOrderStatus(id, newStatus);
           }
           
           factory.submitOrder = function() {
@@ -178,10 +194,10 @@ angular.module('felt.shop.orders', [
     return $.ajax({
       type : "POST",
       encoding : "UTF-8",
-      url : 'php/update_order_status.php',
+      url : 'php/change_order_status.php',
       data : {
         'id' : orderId,
-        'newstatus' : newStatus
+        'status' : newStatus
       }
     });
 

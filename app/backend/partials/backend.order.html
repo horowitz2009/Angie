@@ -1,0 +1,232 @@
+<!-- ============ backend.order.html ============== -->
+
+<style>
+</style>
+<!-- ==================================================================== -->
+<style>
+</style>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
+  ng-if="order == null">
+  <h2 class="text-center"><img src="images/loading.gif"></h2>
+</div>
+
+<div ng-if="order">
+
+  <!--  Title -->
+  <div class="row-lg-flex-baseline row-md-flex-baseline row-sm-flex-baseline">
+    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+      <h2> Поръчка #{{id}} <small>({{order.datePlaced | date:'dd/MM/yyyy'}} {{order.datePlaced | date:'shortTime'}})</small></h2>
+    </div>  
+    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">  
+      <h4 class="text-right-lg text-right-md text-right-sm" >Статус: {{order.status | translate}}</h4>
+    </div>
+  </div>
+  
+  <div class="clearfix visible-xs-block"></div>
+  
+  <!--  links -->
+  <div class="hidden-print" style="padding-bottom:15px">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 15px;padding-top: 15px">
+      <a class="after15" href="javascript:window.print()" style="display: inline-block;"><i class="glyphicon glyphicon-print"></i> Принтирай </a>
+      <!-- TODO -->
+      <!-- 
+      <a class="after15" href="#" style="display: inline-block;"><i class="glyphicon glyphicon-file"></i> Генерирай PDF </a>
+      -->
+      
+      <a class="after15 hidden" ng-click="orderAgain(order)" style="display: inline-block;"><i class="glyphicon glyphicon-repeat"></i> Поръчай отново </a>
+      <div class="pull-right order-nav">
+        <div class="order-pages">{{index}} от {{length}}</div>
+        <div>
+        <ul>
+          <li>
+            <a ng-disabled="prevId < 0" class="btn btn-lg" 
+                 ui-sref="backend.summary.order.display({id: prevId})">
+                <i class="glyphicon glyphicon-triangle-top"></i></a>
+          </li>
+          <li style="line-height: 0;">
+            <a ng-disabled="nextId < 0" class="btn btn-lg"
+                 ui-sref="backend.summary.order.display({id: nextId})">
+                <i class="glyphicon glyphicon-triangle-bottom"></i></a>
+          </li>
+        </ul>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="clearfix visible-xs-block"></div>
+  
+  
+  <div class="col-md-4 col-xs-12 col-md-push-8">
+    <div class="sidebox panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Данни за доставка</h4>
+      </div>
+  
+      <div class="panel-body sidebox-body">
+        <table>
+          <tbody>
+            <tr>
+              <td class="summary-item" colspan="2">
+                <div>
+                  <span ng-if="order.option.type!=='atelier'">
+                    <span style="font-weight: bold">Адрес:</span><br>
+                    {{order.contactData.firstName}} {{order.contactData.lastName}}<br>
+                    {{order.shippingData.settlement.country}}, {{order.shippingData.getCityAndZipPretty()}}<br>
+                    
+                    <span ng-if="order.option.type==='office'">
+                      До офис: {{order.shippingData.office[order.option.courier]}}
+                    </span>
+                    <span ng-if="order.option.type==='address'">
+                      {{order.shippingData.office['address']}}
+                    </span>
+                    <br>
+                    <span style="font-weight: bold">Куриер:</span> {{order.option.courier | courier }}<br>
+                    <span style="font-weight: bold">Услуга:</span> "{{order.option.service}}"<br>
+  
+                    <span style="font-weight: bold">Начин на плащане:</span> Наложен платеж<br>
+                  </span>
+                  <span ng-if="order.option.type==='atelier'" style="font-weight: normal">
+                    {{order.option.name}}
+                    <br>
+                  </span>  
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  
+  <div class="col-md-8 col-xs-12 col-md-pull-4 view-slide-in">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Съдържание</h4>
+      </div>
+      <div class="panel-body orderTable">
+        <table>
+          <thead>
+            <tr class="cartItem">
+              <th style="width: 47%" style="font-size: 11px">Наименование
+              </th>
+              <th style="width: 17%" style="font-size: 11px">Ед. цена
+              </th>
+              <th style="width: 22%" style="font-size: 11px">Количество
+              </th>
+              <th style="width: 17%" style="font-size: 11px">Общо
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in order.items" class="cartItem repeat-animation hide-fade">
+              <!-- NAME -->
+              <td style="width: 47%">
+                <h4>
+                  <a ui-sref="shop.one.product({categoryId: item.product.categoryId, productId:item.product.id})">
+                    {{item.product.name}} </a>
+                </h4>
+                <h3 class="product-code">{{item.product.categoryId | shortCategory }}-{{item.product.origin | shortOrigin
+                  }}-{{item.product.color}}</h3>
+              </td>
+      
+              <!-- PRICE -->
+              <td style="width: 17%;"><span> {{item.product.price | number:2}} лв</span></td>
+      
+              <!-- QUANTITY -->
+              <td style="width: 22%;">
+                {{item.quantity}}
+              </td>
+      
+              <!-- SUM -->
+              <td style="width: 17%;"><span> {{item.sum | number:2}} лв</span></td>
+      
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="cart-totals">
+              <td colspan="5">
+                <table>
+                  <colgroup>
+                    <col>
+                    <col width="1">
+                  </colgroup>
+      
+                  <tbody>
+                    <tr>
+                      <td style="" class="text-right">Междинна сума:</td>
+                      <td style="" class="text-right"><span class="text-nowrap bigPrice"> {{ order.subTotal |
+                          number:2 }} лв</span></td>
+                    </tr>
+                    <tr>
+                      <td style="" class="text-right">Доставка:<br>
+                      <small ng-show="order.option">{{order.option.getNameAndService()}}</small></td>
+                      <td style="" class="text-right">
+                        <span ng-show="order.option" class="text-nowrap bigPrice">
+                            {{order.option.amount | number:2}} лв</span>
+                      </td>
+                    </tr>
+                  </tbody>
+      
+                  <tfoot>
+                    <tr>
+                      <td style="" class="text-right">Всичко:</td>
+                      <td style="" class="text-right"><strong><span class="text-nowrap bigPrice">{{
+                            order.subTotal + order.option.amount | number:2 }} лв</span></strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="clearfix visible-xs-block"></div>
+  
+
+  
+  <div class="">
+    <!--  buttons -->
+    <div  class="hidden-print col-lg-12 col-md-12 col-sm-12 col-xs-12"><!-- style="width: 100%; padding-top: 15px;" -->
+    
+      <a class="btn btn-primary" ui-sref="backend.summary.orders" ng-if="getUsername() !== 'guest'"> Към поръчките </a>
+      
+      <div class="pull-right order-nav">
+        <div class="order-pages">{{index}} от {{length}}</div>
+        <div>
+        <ul>
+          <li>
+            <a ng-disabled="prevId < 0" class="btn btn-lg" 
+                 ui-sref="backend.summary.order.display({id: prevId})">
+                <i class="glyphicon glyphicon-triangle-top"></i></a>
+          </li>
+          <li style="line-height: 0;">
+            <a ng-disabled="nextId < 0" class="btn btn-lg"
+                 ui-sref="backend.summary.order.display({id: nextId})">
+                <i class="glyphicon glyphicon-triangle-bottom"></i></a>
+          </li>
+        </ul>
+        </div>
+        <!-- 
+        <a ng-disabled="prevId < 0" class="" ui-sref="backend.summary.order.display({id: prevId})">
+        <i class="glyphicon glyphicon-triangle-top"></i>Предишна</a> 
+        <a ng-disabled="nextId < 0" class="" ui-sref="backend.summary.order.display({id: nextId})">
+        <i class="glyphicon glyphicon-triangle-bottom"></i>Следваща</a>
+        -->
+      </div> 
+        
+    </div>
+  </div>
+
+</div> <!-- if -->
+<!--/ cart.details.html -->

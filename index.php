@@ -327,6 +327,9 @@
                     style="text-transform: none; font-size: 14px; line-height: 28px;" ng-bind="getUsername()"> ... </span></a>
                 </li>
 
+                <li ng-if="isAdmin" ng-cloak><a ui-sref="backend.summary"><span class="hidden-xs"> Админ Панел</span> <i
+                    class="glyphicon glyphicon-briefcase hide visible-xs "></i> </a></li>
+
                 <li ng-if="getUsername() !== 'guest'" ng-cloak><a ui-sref="account.summary"><span class="hidden-xs"> Моят акаунт</span> <i
                     class="glyphicon glyphicon-user hide visible-xs "></i> </a></li>
 
@@ -1033,6 +1036,7 @@
   <script type="text/javascript" src="app/app.js"></script>
   <script type="text/javascript" src="app/home/account.js"></script>
   <script type="text/javascript" src="app/home/account.router.js"></script>
+  <script type="text/javascript" src="app/backend/backend.router.js"></script>
   <script type="text/javascript" src="common/auth/authentication.js"></script>
   <script type="text/javascript" src="app/shop/shop.js"></script>
   <script type="text/javascript" src="app/shop/shipping.js"></script>
