@@ -477,19 +477,19 @@ $(document).ready(function() {
     
     
     $(document).click(function (event) {
-      console.log("click ... ");
+      //////console.log("click ... ");
       console.log(event);
       var clickover = $(event.target);
       var _opened = $(".navbar-collapse").hasClass("navbar-collapse in");
       console.log("opened:" + _opened);
       //if (_opened === true && !clickover.hasClass("navbar-toggle")) {
           //$("button.navbar-toggle").click();
-        console.log("close them");
+        //////console.log("close them");
         
         var hmm = clickover.hasClass("do-not-close");
-        console.log("do not close?");
-        console.log(hmm);
-        console.log("END");
+        //////console.log("do not close?");
+        //////console.log(hmm);
+        //////console.log("END");
         if (!hmm) {
           $('#mobileNav').collapse('hide');
           $('#mobileCart').collapse('hide');

@@ -218,6 +218,10 @@ angular.module('felt', [
     INTRO_TEXT: 'And it has i18n support!',
     BUTTON_EN: 'English',
     BUTTON_BG: 'Bulgarian',
+    
+    Speedy: 'Speedy',
+    Ekont: 'Ekont',
+    
     awaiting_payment: 'Awaiting payment',
     pending: 'Pending',
     preparing: 'Preparing in progress',
@@ -233,6 +237,10 @@ angular.module('felt', [
     BUTTON_EN: 'Английски',
     BUTTON_BG: 'Български',
     ONLY_IN_BG: 'Само на български',
+    
+    Speedy: 'Спиди',
+    Ekont: 'Еконт',
+
     awaiting_payment: 'Очаква плащане',
     pending: 'Обработва се',
     preparing: 'Приготвя се',
@@ -261,7 +269,7 @@ angular.module('felt', [
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate, $window) {
   
-  $scope.isDebug = true;
+  $scope.isDebug = false;
   
   $scope.states = $state.get();
   

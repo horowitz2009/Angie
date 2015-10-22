@@ -774,7 +774,7 @@
   <div class="view-slide-in" ui-view="banner" autoscroll="false"></div>
 
   <!-- Main component START -->
-  <div ui-view class="view-slide-in container main-container headerOffset" autoscroll="false"></div>
+  <div id="mainContainer" ui-view class="view-slide-in container main-container headerOffset" autoscroll="false"></div>
   <!-- Main component END -->
 
 

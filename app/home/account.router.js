@@ -588,47 +588,16 @@ angular.module('home.account')
 } ])
 
 
-.directive('formatAddress', ['$sce', function($sce) {
-
-  function getCityPretty(s) {
-    var res='';
-    if (s.type) 
-      res += s.type + ' ';
-    if (s.city)  
-      res += s.city;
-    return res;
-  }
-
-  function getAddress(o) {
-    var res = '';
-    if (o.option.type === 'office') {
-      res = 'До офис: ' + o.shippingData.office[o.option.courier];
-    } else if (o.option.type === 'address') {
-      res = o.shippingData.office['address'];
-    }
-    return res;
-  }
+.directive('formatAddress', ['$sce', 'Address', function($sce, Address) {
 
   return {
     template: //'{{order.shippingData.settlement.country}}, {{city}}<br>' +
               '<span ng-bind-html="address"></span>',
 
       link : function(scope, elem, attrs) {
-        if (scope.order.option.type == 'atelier') {
-          //if (scope.order.status == 'pending')
-            scope.address = 'Вземане от ателието';
-          //else  
-          //  scope.address = 'взето от ателието';
-        } else {
-          scope.address = scope.order.shippingData.settlement.country + ', ' +
-            getCityPretty(scope.order.shippingData.settlement) + '<br>' + 
-            getAddress(scope.order);
-          
-        }
+        scope.address = Address.getAddressAsHTML(scope.order);
 
         scope.address = $sce.trustAsHtml(scope.address);
-        //scope.city = getCityPretty(scope.order.shippingData.settlement);
-        //scope.address = getAddress(scope.order);
       }
       
   };
@@ -636,6 +605,32 @@ angular.module('home.account')
 
 ;// end
 
+//core functions for address
+function getCityPrettyDEP(s) {
+  var res='';
+  if (s.type) 
+    res += s.type + ' ';
+  if (s.city)  
+    res += s.city;
+  return res;
+}
 
+function getAddressDEP(o) {
+  var res = '';
+  if (o.option.type === 'office') {
+    res = 'До офис: ' + o.shippingData.office[o.option.courier];
+  } else if (o.option.type === 'address') {
+    res = o.shippingData.office['address'];
+  } else if(o.option.type === 'atelier') {
+    res = o.option.name;
+  }
+  return res;
+}
+
+function getAddressAsStringDEP(o) {
+  return o.shippingData.settlement.country + ' ' +
+  getCityPretty(o.shippingData.settlement) + ' ' + 
+  getAddress(o);
+}
 
 

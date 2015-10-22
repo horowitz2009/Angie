@@ -1,4 +1,4 @@
-<!-- account.orders.html -->
+<!-- backend.orders.html -->
 
 <div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
   ng-if="orders == null">
@@ -14,7 +14,7 @@
   <!--  links -->
   <div class="hidden-print" style="padding-bottom:15px">
     <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 15px;padding-top: 15px">
-      <a class="after15" href="javascript:window.print()" style="display: inline-block;"><i class="glyphicon glyphicon-print"></i> Принтирай </a>
+      <!-- <a class="after15" href="javascript:window.print()" style="display: inline-block;"><i class="glyphicon glyphicon-print"></i> Принтирай </a>-->
       <!-- TODO -->
       <!-- 
       <a class="after15" href="#" style="display: inline-block;"><i class="glyphicon glyphicon-file"></i> Генерирай PDF </a>
@@ -31,6 +31,34 @@
         Изпратена 
       </a>
       
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Статус <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-repeat="status in statuses">
+            <a ng-click="changeOrderStatus(status.name)"><i class="fa" ng-class="status.icon"></i> {{status.name|translate}}</a>
+          </li>
+        </ul>
+      </div>
+      
+       <p class="pull-right"><ng-pluralize count="filtered.length"
+                            when="{'0': 'Няма намерени поръчки.',
+                                 'one': 'Намерена ',
+                               'other': 'Намерени '}"></ng-pluralize>
+                 
+                 <strong><ng-pluralize count="filtered.length"
+                            when="{'0': '',
+                                 'one': '1',
+                               'other': '{}'}"></ng-pluralize></strong>
+                 
+                 <ng-pluralize count="filtered.length"
+                            when="{'0': '',
+                                 'one': ' поръчка.',
+                               'other': ' поръчки.'}"></ng-pluralize>
+                 
+                 </p>
+      
     </div>
   </div>
   <div class="clearfix visible-xs-block"></div>
@@ -38,8 +66,7 @@
 
 
 
-<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false"
-  ng-if="orders && orders.length > 0">
+<div class="editCart col-lg-12 col-md-12 col-sm-12 view-slide-in" style="width: 100%" autoscroll="false">
   
     <table>
     <thead>
@@ -54,7 +81,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="order in orders" class="cartItem repeat-animation hide-fade" > <!-- cart-repeat-directive -->
+      <tr ng-repeat="order in limited = (filtered = (orders | filter:filterOrders) | limitTo:20)" class="cartItem repeat-animation hide-fade" > <!-- cart-repeat-directive -->
         
         <!-- SELECTION -->
         <td>
@@ -78,7 +105,7 @@
 
         <!-- CUSTOMER -->
         <td>
-          {{order.contactData.firstName}} {{order.contactData.lastName}} ({{order.contactData.email}})
+          {{order.contactData.firstName}} {{order.contactData.lastName}} ({{order.contactData.email}}) {{order.contactData.phone}}
         </td>
 
         <!-- ADDRESS -->
@@ -94,8 +121,4 @@
   </table>
       
 </div>
-<div>
-<pre ng-bind="selection.ids | json"></pre> </div>
-
-
 <!--/ order.all.html -->

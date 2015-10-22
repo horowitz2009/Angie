@@ -1,0 +1,41 @@
+<!-- shop.html -->
+
+<!-- Breadcrumb -->
+<div class="row">
+  <div class="breadcrumbDiv col-lg-12 hidden-print">
+    <ui-breadcrumbs displayname-property="data.displayName" abstract-proxy-property="data.breadcrumbProxy"></ui-breadcrumbs>
+  </div>
+</div>
+<!-- /.row  -->
+
+<!-- FILTER : CONTENT -->
+<div class="row">
+  <!--left column-->
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 extruder left" ui-view="filter">
+  </div>
+  
+  <!--right column-->
+  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 view-slide-in" ui-view="content"  autoscroll="false">
+  </div>
+  <!--/right column end-->
+</div>  
+<!-- /.row  -->
+
+<!-- CONTENT2 -->
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 view-slide-in" ui-view="content2"  autoscroll="false">
+  </div>
+</div>  
+<!-- /.row  -->
+
+<!-- CONTENT3 -->
+<div class="row" ui-view="content3">
+</div>  
+<!-- /.row  -->
+
+<!-- CONTENT4 -->
+<div class="row" ui-view="content4">
+</div>  
+<!-- /.row  -->
+
+<!--/ shop.html -->

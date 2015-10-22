@@ -1,0 +1,62 @@
+<div class="categoryFilter panel panel-default" ng-if="filter">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Статус <span
+        class="pull-left"> <i class="fa fa-caret-right"></i></span>
+      </a>
+    </h4>
+  </div>
+  <div id="collapseBrand" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <div ng-repeat="status in filter.statuses" class="checkbox-group">
+        <label> <input type="checkbox" ng-model="status.value" name="selectedStatuses[]">
+          {{status.name | translate}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="categoryFilter panel panel-default" ng-if="filter">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Потребител <span
+        class="pull-left"> <i class="fa fa-caret-right"></i></span>
+      </a>
+    </h4>
+  </div>
+  <div id="collapseBrand" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <input type="text" class="form-control" ng-model="filter.user" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
+    </div>
+  </div>
+</div>
+
+<div class="categoryFilter panel panel-default" ng-if="filter">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Адрес <span
+        class="pull-left"> <i class="fa fa-caret-right"></i></span>
+      </a>
+    </h4>
+  </div>
+  <div id="collapseBrand" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <input type="text" class="form-control" ng-model="filter.address" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
+    </div>
+  </div>
+</div>
+
+<div class="categoryFilter panel panel-default" ng-if="filter">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Съдържание <span
+        class="pull-left"> <i class="fa fa-caret-right"></i></span>
+      </a>
+    </h4>
+  </div>
+  <div id="collapseBrand" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <input type="text" class="form-control" ng-model="filter.content" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
+    </div>
+  </div>
+</div>
