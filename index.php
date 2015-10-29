@@ -33,7 +33,7 @@
 
 
 <!-- Bootstrap core CSS -->
-<link href="app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="app/bower_components/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- add theme styles for this template -->
 <link id="pagestyle" href="css/skin-2.css" rel="stylesheet">
@@ -424,7 +424,7 @@
             <h3 class="text-right subtotal">{{cart.subTotal | number:2}} лв</h3>
             <a class="btn btn-sm btn-info" ui-sref="shop.cart.edit"><i class="fa fa-shopping-cart"></i> Подробно </a>
             <a class="btn btn-sm btn-inverse" ui-sref="shop.cart.checkout"> Поръчай </a>
-                      </div>
+          </div>
           <!--/.miniCartFooter-->
 
         </div>
@@ -475,7 +475,7 @@
                 </ul>
                 <ul class="col-lg-3  col-sm-3 col-md-3 hidden-xs">
                   <li><a class="newProductMenuBlock"
-                    ui-sref="shop.one.product({categoryId:'needles',productId:'e36'})"> <img
+                    ui-sref="shop.one.product({categoryId:'needles',productId:'en36'})"> <img
                       class="img-responsive" src="images/needle32.jpg" alt="product"> <span class="ProductMenuCaption"> <i
                         class="fa fa-caret-right"> </i> Игла #36
                     </span>
@@ -485,199 +485,11 @@
             </ul>
           </li>
 
-          <!-- change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width -->
-          <li class="dropdown megamenu-80width hidden"><a data-toggle="dropdown" class="dropdown-toggle" data-hover="dropdown"
-            href="#"> SHOP <b class="caret"> </b>
-          </a>
-            <ul class="dropdown-menu">
-              <li class="megamenu-content">
-                <!-- megamenu-content -->
-
-                <ul class="col-lg-2  col-sm-2 col-md-2  unstyled noMarginLeft">
-                  <li>
-                    <p>
-                      <strong> Women Collection </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Kameez </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Tops </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Shoes </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> T shirt </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> TSHOP </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Party Dress </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Women Fragrances </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2  unstyled">
-                  <li>
-                    <p>
-                      <strong> Men Collection </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Panjabi </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Male Fragrances </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Scarf </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Sandal </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Underwear </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Winter Collection </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Men Accessories </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2  unstyled">
-                  <li>
-                    <p>
-                      <strong> Top Brands </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Diesel </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Farah </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> G-Star RAW </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Lyle &amp; Scott </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> Pretty Green </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> TSHOP </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index.html#"> TANJIM </a></li>
-                </ul>
-                <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-6">
-                  <li class="no-margin productPopItem "><a
-                    href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                      class="img-responsive" src="images/g4.jpg" alt="img">
-                  </a> <a class="text-center productInfo alpha90"
-                    href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Eodem modo typi
-                      <br> <span> $60 </span>
-                  </a></li>
-                </ul>
-                <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-6">
-                  <li class="no-margin productPopItem relative"><a
-                    href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> <img
-                      class="img-responsive" src="images/g5.jpg" alt="img">
-                  </a> <a class="text-center productInfo alpha90"
-                    href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Eodem modo typi
-                      <br> <span> $60 </span>
-                  </a></li>
-                </ul>
-              </li>
-            </ul></li>
-          <li class="dropdown megamenu-fullwidth hidden"><a data-toggle="dropdown" class="dropdown-toggle"
-            data-hover="dropdown" href="#"> PAGES <b class="caret"> </b>
-          </a>
-            <ul class="dropdown-menu">
-              <li class="megamenu-content">
-                <!-- megamenu-content -->
-
-                <h3 class="promo-1 no-margin hidden-xs">28+ HTML PAGES ONLY $12 || AVAILABLE ONLY AT WRAP BOOTSTRAP</h3>
-
-                <h3 class="promo-1sub hidden-xs">Complete Parallax E-Commerce Boostrap Template, Responsive on any
-                  Device, 10+ color Theme + Parallax Effect</h3>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> Home Pages </strong>
-                    </p>
-                  </li>
-                  <li><a href="index.html"> Home Version 1 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index2.html"> Home Version 2 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index3.html"> Home Version 3
-                      (BOXES) </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index4.html"> Home Version 4
-                      (LOOK 2)</a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index5.html"> Home Version 5
-                      (LOOK 3)</a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index-header2.html"> Header
-                      Version 2 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index-header3.html"> Header
-                      Version 3 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/index-static-search.html">Header
-                      Version 4<br> ( Static Search Form)
-                  </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> Featured Pages </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html"> Category </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/sub-category.html"> Sub Category
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category-list.html"> Category
-                      List View </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details.html"> Product
-                      Details Version 1 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details-style2.html">
-                      Product Details Version 2 </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/product-details-style3.html">
-                      Product Details Version 3 (Custom Thumbnail Position)</a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/single-product-modal.html">
-                      Single Product Details Modal</a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/single-subscribe-modal.html">
-                      Single Subscribe Modal</a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> &nbsp; </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/cart.html"> Cart </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/about-us.html"> About us </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/about-us-2.html"> About us 2 (no
-                      parallax) </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/contact-us.html"> Contact us </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/contact-us-2.html"> Contact us 2
-                      (No Fixed Map) </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/terms-conditions.html"> Terms
-                      &amp; Conditions </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> Checkout </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-0.html"> Checkout Before
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-1.html"> checkout step 1
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-2.html"> checkout step 2
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-3.html"> checkout step 3
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-4.html"> checkout step 4
-                  </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/checkout-5.html"> checkout step 5
-                  </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> User Account </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/account-1.html"> Account Login </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/account.html"> My Account </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/my-address.html"> My Address </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/user-information.html"> User
-                      information </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/wishlist.html"> Wisth list </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/order-list.html"> Order list </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/forgot-password.html"> Forgot
-                      Password </a></li>
-                </ul>
-                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                  <li class="no-border">
-                    <p>
-                      <strong> &nbsp; </strong>
-                    </p>
-                  </li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/error-page.html"> Error Page </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/blank-page.html"> Blank Page </a></li>
-                  <li><a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/form.html"> Basic Form Element </a></li>
-                </ul>
-              </li>
-            </ul></li>
         </ul>
 
         <!--- this part will be hidden for mobile version -->
         <div class="nav navbar-nav navbar-right hidden-xs">
-          <div class="dropdown  cartMenu cartMenu1 " ng-cloak>
+          <div id="desktopCart" class="dropdown  cartMenu cartMenu1 " ng-cloak>
             <a ui-sref="shop.cart.edit" class="dropdown-toggle cart111" data-toggle="dropdown" data-hover="dropdown"> <i
               class="fa fa-shopping-cart"> </i> <span class="cartRespons" 
               style="font-size: 16px; font-weight: normal; text-transform: none;"> Количка ({{cart.subTotal | number:2}} <small>лв</small>) </span>
@@ -714,7 +526,7 @@
                       <td style="width: 15%" class="miniCartSubtotal"><span> {{item.sum | number:2}} </span><span>лв</span></td>
                       <td style="width: 5%" class="delete">
                         <!-- glyphicon glyphicon-remove-sign  aria-hidden="true" --> <!--<button class="btn btn-link btn-sm" type="button" style="color: red" ng-click="removeFromCart(item.product)">-->
-                        <a ng-click="removeFromCart(item.id)"> <span class="glyphicon glyphicon-remove-circle"
+                        <a ng-click="removeFromCart(item.id)"> <span class="glyphicon glyphicon-remove-circle do-not-close"
                           style="color: red"></span>
                       </a> <!--</button>-->
                       </td>
@@ -922,67 +734,13 @@
     <!--/.footer-bottom-->
   </footer>
 
-
-  <div class="modal fade" id="modalAds" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog  modal-bg-1">
-      <div class="modal-body-content">
-        <a class="close" data-dismiss="modal">×</a>
-
-        <div class="modal-body">
-          <div class="col-lg-6 col-sm-8 col-xs-8">
-            <h3>
-              enter your <br>email to receive
-            </h3>
-
-            <p class="discountLg">10% OFF</p>
-
-            <p>We invite you to subscribe to our newsletter and receive 10% discount.</p>
-
-            <div class="clearfx">
-              <form id="newsletter" class="newsletter">
-                <input type="text" id="subscribe" name="s" placeholder="Enter email" autocomplete="off"
-                  style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDhss3LcOZQAAAU5JREFUOMvdkzFLA0EQhd/bO7iIYmklaCUopLAQA6KNaawt9BeIgnUwLHPJRchfEBR7CyGWgiDY2SlIQBT/gDaCoGDudiy8SLwkBiwz1c7y+GZ25i0wnFEqlSZFZKGdi8iiiOR7aU32QkR2c7ncPcljAARAkgckb8IwrGf1fg/oJ8lRAHkR2VDVmOQ8AKjqY1bMHgCGYXhFchnAg6omJGcBXEZRtNoXYK2dMsaMt1qtD9/3p40x5yS9tHICYF1Vn0mOxXH8Uq/Xb389wff9PQDbQRB0t/QNOiPZ1h4B2MoO0fxnYz8dOOcOVbWhqq8kJzzPa3RAXZIkawCenHMjJN/+GiIqlcoFgKKq3pEMAMwAuCa5VK1W3SAfbAIopum+cy5KzwXn3M5AI6XVYlVt1mq1U8/zTlS1CeC9j2+6o1wuz1lrVzpWXLDWTg3pz/0CQnd2Jos49xUAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat;">
-                <button class="subscribe-btn">Subscribe</button>
-              </form>
-            </div>
-
-            <p>
-              <a href="http://codepeoples.com/tanimdesign.net/thsop-v-1.3/gray/category.html" class="link shoplink">
-                SHOP NOW <i class="fa fa-caret-right"> </i>
-              </a>
-            </p>
-
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
   <!-- Le javascript ================================================== -->
 
   <!-- Placed at the end of the document so the pages load faster -->
-  <script type="text/javascript" src="app/bower_components/jquery/dist/jquery.js"></script>
-  <script type="text/javascript" src="app/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-  <script type="text/javascript" src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script type="text/javascript" src="app/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="app/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+  <script type="text/javascript" src="app/bower_components/bootstrap/js/bootstrap.js"></script>
   
-
-  <script type="text/javascript">
-    // this script required for subscribe modal
-    $(window).load(function () {
-        console.log("993 START " + "<?php echo $useremail; ?>");
-        
-        
-        // full load
-        //$('#modalAds').modal('show');
-        //$('#modalAds').removeClass('hide');
-
-        //$("#cart1").mCustomScrollbar();
-    });
-</script>
-
   <!-- include jqueryCycle plugin -->
   <script type="text/javascript" src="app/bower_components/jquery-cycle2/build/jquery.cycle2.min.js"></script>
 
@@ -1000,7 +758,7 @@
     src="app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 
   <!-- include checkRadio plugin //Custom check & Radio  -->
-  <script type="text/javascript" src="js/ion.checkRadio-1.1.0/js/ion.checkRadio.js"></script>
+  <script type="text/javascript" src="js/ion.checkRadio-1.1.0/js/ion.checkRadio.min.js"></script>
 
   <!-- include grid.js // for equal Div height  -->
   <script type="text/javascript" src="js/grids.js"></script>

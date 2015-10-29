@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.3.4",
+    "bootstrap": "https://github.com/horowitz2009/bootstrap.git#custom",
     "angular": "1.4.x",
     "angular-animate": "1.4.x",
     "angular-ui-router": "~0.2.13",
@@ -29,8 +29,8 @@
   "resolutions": {
     "jquery": ">= 2.1.0",
     "jquery.scrollTo": ">=2.1.0",
-    
     "angular-bootstrap": "^0.13.4",
-    "angular": "1.4.x"
+    "angular": "1.4.x",
+    "bootstrap": "custom"
   }
 }
