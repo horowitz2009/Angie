@@ -74,9 +74,9 @@
             <div class="price"> <span>{{product.price | number:2}}</span><span class="currency">лв</span> </div>
                 <span class="size" style="font-size: 0.75em"> {{product.quantity}} {{product.unit}} </span> </div>
             <div class="action-control">
-              <!--<button id="btn-{{product.fullId}}" class="btn btn-7 btn-7a icon-cart" ng-click="addToCart(product, 1)">Добави</button>-->
+              <!--<button id="btn-{{product.categoryId + '-' + product.id}}" class="btn btn-7 btn-7a icon-cart" ng-click="addToCart(product, 1)">Добави</button>-->
 
-              <button id="btn-{{product.fullId}}" class="btn2 btn2-7a glyphicon-shopping-cart" ng-click="addToCart(product, 1)"> 
+              <button id="btn-{{product.categoryId + '-' + product.id}}" class="btn2 btn2-7a glyphicon-shopping-cart" ng-click="addToCart(product, 1)"> 
                 Добави
               </button>
               <!--

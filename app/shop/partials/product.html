@@ -88,7 +88,7 @@
 			  <input id="mine1" class="form-control" type="text" ng-model="quantity" ng-init="quantity = 1;" data-bts-min="1" data-bts-max="100" style="text-align: center;">
 			  <span id="myUp" class="input-group-btn"></span>
 			  <span class="input-group-btn">
-				<button id="btn-{{product.fullId}}" class="btn btn-primary btn2 btn2-7a glyphicon-shopping-cart" 
+				<button id="btn-{{product.categoryId + '-' + product.id}}" class="btn btn-primary btn2 btn2-7a glyphicon-shopping-cart" 
           style="padding-left: 55px; padding-right: 18px; outline: 0px none;" 
           type="button" ng-click="addToCart(product, quantity)">
         ДОБАВИ</button>

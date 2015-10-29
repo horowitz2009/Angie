@@ -19,7 +19,7 @@
     "pace": "~1.0.2",
     "angular-bootstrap": "~0.12.1",
     "angular-utils-ui-breadcrumbs": "~0.2.1",
-    "lokijs": "~1.2.4",
+    "lokijs": "~1.3.x",
     "autofill-event": "~1.0.0",
     "angucomplete-alt": "https://github.com/horowitz2009/angucomplete-alt.git#custom",
     "angular-translate": "~2.7.2",
@@ -27,10 +27,10 @@
     "angular-bootstrap-lightbox": "~0.9.0"
   },
   "resolutions": {
-    "jquery": ">= 1.9.0",
-    
+    "jquery": ">= 2.1.0",
     "jquery.scrollTo": ">=2.1.0",
-    "angucomplete-alt": "custom",
-    "angular-bootstrap": "^0.13.4"
+    
+    "angular-bootstrap": "^0.13.4",
+    "angular": "1.4.x"
   }
 }

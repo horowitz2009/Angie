@@ -142,7 +142,7 @@ angular
           // addItem
           service.addItem = function(product, qty) {
             var quantity = parseInt(qty);
-            var item = service.findItem(product.fullId);
+            var item = service.findItem(product.categoryId + '-' + product.id);
             if (item) {
               // console.log("already exists");
               item.quantity = parseInt(item.quantity) + parseInt(quantity);
@@ -378,7 +378,7 @@ angular
 function buildItem(product, qty) {
   var quantity = parseInt(qty);
   var item = {};
-  item.id = product.fullId;
+  item.id = product.categoryId + '-' + product.id;
   item.product = product;
   item.quantity = quantity;
   item.sum = product.price * quantity;

@@ -537,9 +537,9 @@ angular.module('felt', [
 
       $timeout(function() {
         $scope.cartPromise = $animate.addClass($('#btn-'
-            + product.fullId), "btn2-activated");
+            + product.categoryId + '-' + product.id), "btn2-activated");
         $scope.cartPromise.then(function() {
-            $('#btn-' + product.fullId).removeClass("btn2-activated");
+            $('#btn-' + product.categoryId + '-' + product.id).removeClass("btn2-activated");
         });
       }, 1);
 
