@@ -739,7 +739,7 @@
   <!-- Placed at the end of the document so the pages load faster -->
   <script type="text/javascript" src="app/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="app/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
-  <script type="text/javascript" src="app/bower_components/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="app/bower_components/bootstrap/js/bootstrap.min.js"></script>
   
   <!-- include jqueryCycle plugin -->
   <script type="text/javascript" src="app/bower_components/jquery-cycle2/build/jquery.cycle2.min.js"></script>
@@ -801,6 +801,7 @@
   <script type="text/javascript" src="app/shop/cart.js"></script>
   <script type="text/javascript" src="app/shop/cart.router.js"></script>
   <script type="text/javascript" src="app/shop/shop-service.js"></script>
+  <script type="text/javascript" src="app/shop/inventory.js"></script>
   <script type="text/javascript" src="app/shop/orders.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-factory.js"></script>

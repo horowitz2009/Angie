@@ -5,6 +5,7 @@ angular.module('felt', [
     'felt.shop.cart',
     'felt.shop.orders',
     'felt.shop.service',
+    'felt.shop.inventory',
     'felt.color.service',
     'felt.shipping.service',
     
@@ -261,11 +262,11 @@ angular.module('felt', [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .controller('MainCtrl', ['$scope', '$state', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', 'ShippingFactory',
-                         'Account', 'AUTH_EVENTS', 'ShopService', 'maxVisibleElements',
+                         'Account', 'AUTH_EVENTS', 'ShopService', 'Inventory', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
                          '$animate', '$timeout', '$interval', '$translate', '$window',
                     function($scope, $state, $rootScope, USER_ROLES, AuthService, AccountService, ShippingFactory,
-                         Account, AUTH_EVENTS, ShopService, maxVisibleElements, 
+                         Account, AUTH_EVENTS, ShopService, Inventory, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate, $window) {
   
@@ -505,6 +506,8 @@ angular.module('felt', [
   var saveCartPromise = null;
 
   $scope.cart = cart;
+  
+  Inventory.getInventory();
 
   ShopService.getCategories().then(function(data) {
     console.log("[207 app.MainCtrl] getCategories");

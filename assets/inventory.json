@@ -1,0 +1,43 @@
+﻿﻿﻿﻿﻿﻿﻿﻿﻿{
+  "globals":{
+    "min":0,
+    "opt":100
+  },
+  
+  "entries":[
+    {
+      "categoryId": "wool",
+      "id": "yellow",
+      "unit": "грама",
+      "quantity": 120,
+      "min": 30,
+      "opt": 100
+    },
+    {
+      "categoryId": "wool",
+      "id": "grapefruit",
+      "unit": "грама",
+      "quantity": 220,
+      "min": 30,
+      "opt": 100
+    },
+    {
+      "categoryId": "wool",
+      "id": "darkgrapefruit",
+      "unit": "грама",
+      "quantity": 80,
+      "min": 30,
+      "opt": 100
+    },
+    {
+      "categoryId": "wool",
+      "id": "bluegreenlight",
+      "unit": "грама",
+      "quantity": 180,
+      "min": 10,
+      "opt": 150
+    }
+
+  ]
+  
+}
