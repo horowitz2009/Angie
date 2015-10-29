@@ -7,7 +7,7 @@ class MailService {
     $txt = "Здравейте, \n".
            "Новата Ви парола е: ".$newPassword."\n";
     $headers = "From: no-reply@felt-bg.com" . "\r\n";
-    //mail($email, $subject, $txt, $headers);
+    mail($email, $subject, $txt, $headers);
   }
 
 }

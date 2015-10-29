@@ -15,16 +15,16 @@ angular.module('felt.shop.service', [
    */
 
   var factory = {};
-  
-  //I think this is never used
+
+  // I think this is never used
   function initializeDB(db) {
     if (db != null && typeof (db) === "object") {
       var promise = $http.get("assets/categories.json").then(function(resp) {
         var res = resp.data.categories;
 
+        enrich(res);
         saveToLoki(res);
 
-        enrich(res);
         return res;
       });
 
@@ -32,6 +32,7 @@ angular.module('felt.shop.service', [
   }
 
   factory.getCategories = function() {
+    //TODO make this to expire in a moment and take fresh data from server
     if (categoriesPromise == null) {
 
       // DB WAY HERE
@@ -45,35 +46,26 @@ angular.module('felt.shop.service', [
       categoriesPromise = $q(function(resolve, reject) {
         db.loadDatabase({}, function(db) {
           if (db != null && typeof (db) === "object") {
-            var categories = null;
-            if (db.listCollections().length < 2) {
-              var promise = $http.get("assets/categories.json").then(function(resp) {
-                var res = resp.data.categories;
-                enrich(res);
-                saveToLoki(res);
-                resolve(res);
-                //return res;
+            var catCollection = db.getCollection('categories');
+
+            if (catCollection == null) {
+              $http.get("assets/categories.json").then(function(resp) {
+                var cats = resp.data.categories;
+                enrich(cats);
+                saveToLoki(cats);
+                resolve(cats);
+              },
+
+              function(resp) {
+                reject(resp);
               });
-
             } else {
-              var catCollection = db.getCollection('categories');
-              catCollection.setChangesApi(true);
+              // TODO check this later
+              // catCollection.setChangesApi(true);
 
-              var productsCollection = db.getCollection('products');
-              productsCollection.setChangesApi(true);
-
-              var categories = catCollection.chain().data();
-              for (var i = 0; i < categories.length; i++) {
-                var cat = categories[i];
-                var products = productsCollection.find({
-                  "categoryId" : cat.id
-                });
-                cat.products = products;
-              }
-
-              resolve(categories);
+              resolve(catCollection.chain().data());
             }
-            //hmm
+            // hmm
           } else {
             reject(db);
           }
@@ -179,10 +171,6 @@ angular.module('felt.shop.service', [
     new loki('catalog', {
       autoload : true,
       autoloadCallback : function(db) {
-
-        console.log('collections: ');
-        console.log(db.listCollections());
-
         var catCollection = db.getCollection('categories');
         if (!catCollection) {
           console.log("categories collection not found. Adding...")
@@ -190,34 +178,14 @@ angular.module('felt.shop.service', [
         }
         catCollection.setChangesApi(false);
 
-        var productsCollection = db.getCollection('products');
-        if (!productsCollection) {
-          console.log("products collection not found. Adding...")
-          productsCollection = db.addCollection('products');
-        }
-        productsCollection.setChangesApi(false);
+        // removes all categories if any
+        catCollection.chain().remove();
 
-        for (var i = 0; i < categories.length; i++) {
-          var cat = categories[i];
+        // adds the categories
+        categories.forEach(function(cat) {
+          catCollection.insert(cat);
+        });
 
-          var newCat = JSON.parse(JSON.stringify(cat, function(key, value) {
-            if (key == "products")
-              return undefined;
-            return value;
-          }));
-          console.log(newCat)
-          catCollection.insert(newCat);
-
-          // now the products
-          for (var j = 0; j < cat.products.length; j++) {
-            var product = cat.products[j];
-            //product.categoryId = cat.id;
-            productsCollection.insert(product);
-          }
-
-        }
-
-        db.clearChanges();
         db.save();
         console.log("DONE.");
       },

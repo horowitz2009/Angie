@@ -54,21 +54,21 @@ CREATE TABLE IF NOT EXISTS `lokidbs` (
 $conn->exec($sql);
 echo "<p>Table `lokidbs` created.</p>";
 
-$sql = "SELECT name FROM `lokidbs` WHERE name = 'catalog'";
+// $sql = "SELECT name FROM `lokidbs` WHERE name = 'catalog'";
 
-$st = $conn->query($sql);
-if ($st && $st->rowCount() == 0) {
+// $st = $conn->query($sql);
+// if ($st && $st->rowCount() == 0) {
   
-  $myfile = fopen("../assets/catalog.txt", "r") or die("Unable to open file!");
-  $dataString = fread($myfile, filesize("../assets/catalog.txt"));
-  fclose($myfile);
+//   $myfile = fopen("../assets/catalog.txt", "r") or die("Unable to open file!");
+//   $dataString = fread($myfile, filesize("../assets/catalog.txt"));
+//   fclose($myfile);
   
-  $sql = "
- INSERT INTO `lokidbs` (`name`, `data`) VALUES('catalog', ?)";
-  $st = $conn->prepare($sql);
-  $st->execute(array($dataString));
-  echo "<p> Inserted " . $st->rowCount() . " rows in lokidbs</p>";
-}
+//   $sql = "
+//  INSERT INTO `lokidbs` (`name`, `data`) VALUES('catalog', ?)";
+//   $st = $conn->prepare($sql);
+//   $st->execute(array($dataString));
+//   echo "<p> Inserted " . $st->rowCount() . " rows in lokidbs</p>";
+// }
 
 $sql = "
 CREATE TABLE IF NOT EXISTS `tokens` (
