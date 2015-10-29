@@ -1,21 +1,50 @@
-<div class="categoryFilter panel panel-default" ng-if="filter">
+<div class="panel panel-default" ng-if="filter">
   <div class="panel-heading">
     <h4 class="panel-title">
-      <a data-toggle="collapse" data-target="#collapseBrand" class="collapseWill"> Статус <span
+      <a data-toggle="collapse" data-target="#collapseFilter" class="collapseWill"> Филтър <span
         class="pull-left"> <i class="fa fa-caret-right"></i></span>
       </a>
     </h4>
   </div>
-  <div id="collapseBrand" class="panel-collapse collapse in">
+  <div id="collapseFilter" class="panel-collapse collapse in">
     <div class="panel-body">
-      <div ng-repeat="status in filter.statuses" class="checkbox-group">
-        <label> <input type="checkbox" ng-model="status.value" name="selectedStatuses[]">
-          {{status.name | translate}}</label>
+      <!-- 1 -->
+      <div class="form-group">
+        <label class="control-label ">Статус</label>
+        <div ng-repeat="status in filter.statuses" class="checkbox-group">
+          <label style="font-weight: normal;"> <input type="checkbox" ng-model="status.value" name="selectedStatuses[]">
+            {{status.name | translate}}</label>
+        </div>
+      </div>
+      <hr>
+      
+      <!-- 2 -->
+      <div class="form-group">
+        <label class="control-label " for="filterUser">Потребител</label> 
+        <input type="text" class="form-control" id="filterUser"
+              name="user" ng-model="filter.user"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
+      </div>
+      
+      <!-- 3 -->
+      <div class="form-group">
+        <label class="control-label " for="filterAddress">Адрес</label> 
+        <input type="text" class="form-control" id="filterAddress"
+              name="user" ng-model="filter.address"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
+      </div>
+
+      <!-- 4 -->
+      <div class="form-group">
+        <label class="control-label " for="filterContent">Съдържание</label> 
+        <input type="text" class="form-control" id="filterContent"
+              name="user" ng-model="filter.content"
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 200, 'blur': 100} }">
       </div>
     </div>
   </div>
 </div>
-
+<!-- 
 <div class="categoryFilter panel panel-default" ng-if="filter">
   <div class="panel-heading">
     <h4 class="panel-title">
@@ -60,3 +89,5 @@
     </div>
   </div>
 </div>
+
+-->
