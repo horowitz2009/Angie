@@ -83,18 +83,6 @@ angular.module('felt.shop', [
                 $scope.filters[category.id].origins = ShopService.extractOrigins(category);
                 $scope.filters[category.id].colors = ShopService.extractColors(category, allColors.colorGroups);
               });
-
-              
-                //$scope.colors = [];
-                var colors = [
-                  {"name": "бял", "code": "white", "value": false},
-                  {"name": "червен", "code": "red", "value": false},
-                  {"name": "розов", "code": "pink", "value": false},
-                  {"name": "зелен", "code": "green", "value": false},
-                  {"name": "син", "code": "blue", "value": false},
-                  {"name": "светло син", "code": "lightblue", "value": false}
-                ];
-                
               
             }]
         })

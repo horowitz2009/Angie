@@ -802,6 +802,7 @@
   <script type="text/javascript" src="app/shop/cart.router.js"></script>
   <script type="text/javascript" src="app/shop/shop-service.js"></script>
   <script type="text/javascript" src="app/shop/inventory.js"></script>
+  <script type="text/javascript" src="app/shop/stockentries.js"></script>
   <script type="text/javascript" src="app/shop/orders.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-service.js"></script>
   <script type="text/javascript" src="app/shipping/shipping-factory.js"></script>

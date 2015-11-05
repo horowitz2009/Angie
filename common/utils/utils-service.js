@@ -45,4 +45,66 @@ angular.module('common.utils.service', [
       return randKey;
     }
   };
-});
+})
+
+
+// ////////////////////////////////////////////////////////////////////////
+// LokiService
+// ////////////////////////////////////////////////////////////////////////
+.factory('LokiService', [ '$log', '$http', '$q', function($log, $http, $q) {
+  var factory = {};
+
+  factory.createDB = function(dbName, collectionName, jsonFilename, propageteCallback) {
+    var promise = $q(function(resolve, reject) {
+
+      var db = new loki(dbName, {
+        autosave : false,
+        persistenceMethod : 'adapter',
+        adapter : new jquerySyncAdapter({
+          ajaxLib : $
+        })
+      });
+
+      db.loadDatabase({}, function() {
+        var data = null;
+        var collection = db.getCollection(collectionName);
+        if (!collection) {
+          collection = db.addCollection(collectionName);
+        }
+
+        if (collection.data.length == 0) {
+          // no collection found. Try to load the data from json file
+          $http.get(jsonFilename).then(function(resp) {
+            data = resp.data[collectionName];
+            if (propageteCallback)
+              data = propageteCallback(data, db);
+
+            for (var i = 0; i < data.length; i++) {
+              collection.insert(data[i]);
+            }
+            data = collection.chain().data();
+
+            db.saveDatabase();
+            resolve(data);
+
+          },
+
+          function(resp) {
+            reject(resp);
+          });
+
+        } else {
+          data = collection.chain().data();
+          resolve(data);
+        }
+      });
+
+    });
+
+    return promise;
+  }
+
+  return factory;
+} ])
+
+;

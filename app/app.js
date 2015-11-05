@@ -6,6 +6,7 @@ angular.module('felt', [
     'felt.shop.orders',
     'felt.shop.service',
     'felt.shop.inventory',
+    'felt.shop.stockentries',
     'felt.color.service',
     'felt.shipping.service',
     
@@ -262,15 +263,15 @@ angular.module('felt', [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 .controller('MainCtrl', ['$scope', '$state', '$rootScope', 'USER_ROLES', 'AuthService', 'AccountService', 'ShippingFactory',
-                         'Account', 'AUTH_EVENTS', 'ShopService', 'Inventory', 'maxVisibleElements',
+                         'Account', 'AUTH_EVENTS', 'ShopService', 'InventoryService', 'StockEntries', 'maxVisibleElements',
                          'cart', 'CartService', 'CartPersistenceService', 'CART_EVENTS',
                          '$animate', '$timeout', '$interval', '$translate', '$window',
                     function($scope, $state, $rootScope, USER_ROLES, AuthService, AccountService, ShippingFactory,
-                         Account, AUTH_EVENTS, ShopService, Inventory, maxVisibleElements, 
+                         Account, AUTH_EVENTS, ShopService, InventoryService, StockEntries, maxVisibleElements, 
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate, $window) {
   
-  $scope.isDebug = false;
+  $scope.isDebug = true;
   
   $scope.states = $state.get();
   
@@ -507,8 +508,13 @@ angular.module('felt', [
 
   $scope.cart = cart;
   
-  Inventory.getInventory();
-
+  
+  ShopService.loadCatalog().then(function(){
+    console.log("//////////////////////////////");
+    console.log("// CATALOG LOADED           //");
+    console.log("//////////////////////////////");
+  });
+  
   ShopService.getCategories().then(function(data) {
     console.log("[207 app.MainCtrl] getCategories");
     var categories = data;
@@ -518,6 +524,38 @@ angular.module('felt', [
     console.log("[212 app.MainCtrl] extractCatMenuItems");
 
   });
+  
+  InventoryService.getPackagings().then(function(hmm) {
+    console.log("HMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+    console.log(hmm);
+    InventoryService.getInventory();
+    StockEntries.get({ categoryId:"wool", productId: "yellow", packagingId: "p10"}).then(function(res) {
+      console.log("found it?" + res);
+      res.quantity = parseInt(res.quantity) + 100;
+      res.onHold = parseInt(res.onHold) + 1;
+      if (res.quantity > 300) {
+        //StockEntries.del(res);
+      } else {
+        StockEntries.change(res);
+        
+      } 
+
+      StockEntries.getSome({ categoryId:"wool"}).then(function(res){
+          console.log(res);
+        }, function(res){
+          console.log(res);
+        }); 
+    }, function(res) {
+      console.log("not found! inserting one...");
+      StockEntries.insert({ categoryId:"wool", productId: "yellow", packagingId: "p10", quantity: 10, onHold: 0}).then(function(){
+        StockEntries.getSome({ categoryId:"wool"}).then(function(res){
+          console.log(res);
+        });
+      });
+    });
+    
+  });
+  
 
   $scope.gridview = function() {
     $scope.productView = '';

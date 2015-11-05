@@ -112,6 +112,20 @@ if ($st && $st->rowCount() == 0) {
   echo "<p> Inserted " . $cnt . " row(s) in users</p>";
 }
 
+
+$sql = "
+CREATE TABLE IF NOT EXISTS `stockentries` (
+  `category_id` varchar(50) COLLATE utf8_bin NOT NULL,
+  `product_id` varchar(50) COLLATE utf8_bin NOT NULL,
+  `packaging_id` varchar(50) COLLATE utf8_bin NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `onhold` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+  ";
+
+$conn->exec($sql);
+echo "<p>Table `stockentries` created.</p>";
+
 ?>
 
 

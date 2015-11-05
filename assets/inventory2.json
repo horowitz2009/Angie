@@ -1,0 +1,103 @@
+﻿{
+  "globals": {
+    "min": 0,
+    "opt": 100
+  },
+  "packagings": [
+    {
+      "id": "p10",
+      "name": "гранка 10г",
+      "weight": "10",
+      "dimensions": {
+        "w": 10,
+        "h": 10,
+        "d": 3
+      }
+    },
+    {
+      "id": "p20",
+      "name": "гранка 20г",
+      "weight": "20",
+      "dimensions": {
+        "w": 10,
+        "h": 10,
+        "d": 6
+      }
+    },
+    {
+      "id": "p50",
+      "name": "гранка 50г",
+      "weight": "50",
+      "dimensions": {
+        "w": 25,
+        "h": 20,
+        "d": 3
+      }
+    }
+  ],
+  "entries": [
+    {
+      "categoryId": "wool",
+      "id": "yellow",
+      "packagings": [
+        {
+          "id": "ws",
+          "quantity": 2000,
+          "onHold": 0
+        },
+        {
+          "id": "p10",
+          "quantity": 12,
+          "onHold": 3
+        },
+        {
+          "id": "p20",
+          "quantity": 7,
+          "onHold": 0
+        }
+      ]
+    },
+    {
+      "categoryId": "wool",
+      "id": "grapefruit",
+      "packagings": [
+        {
+          "id": "ws",
+          "quantity": 1200,
+          "onHold": 0
+        },
+        {
+          "id": "p10",
+          "quantity": 6,
+          "onHold": 1
+        },
+        {
+          "id": "p20",
+          "quantity": 5,
+          "onHold": 0
+        }
+      ]
+    },
+    {
+      "categoryId": "wool",
+      "id": "darkgrapefruit",
+      "packagings": [
+        {
+          "id": "ws",
+          "quantity": 500,
+          "onHold": 0
+        },
+        {
+          "id": "p10",
+          "quantity": 5,
+          "onHold": 0
+        },
+        {
+          "id": "p20",
+          "quantity": 0,
+          "onHold": 0
+        }
+      ]
+    }
+  ]
+}

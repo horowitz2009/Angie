@@ -1,94 +1,69 @@
 angular.module('felt.shop.inventory', [
 
+'felt.shop.service',
+'common.utils.service'
+
 ])
 
 // ////////////////////////////////////////////////////////////////////////
 // INVENTORY
 // ////////////////////////////////////////////////////////////////////////
-.factory('Inventory', [ '$log', '$http', '$q', function($log, $http, $q) {
+.factory('InventoryService',
+    [ '$log', '$http', '$q', 'ShopService', 'LokiService', function($log, $http, $q, ShopService, LokiService) {
 
-  $log.debug("[felt.shop.inventory Inventory]");
-  var inventoryPromise = null;
+      $log.debug("[felt.shop.inventory Inventory]");
+      var packagingsPromise = null;
+      var inventoryPromise = null;
 
-  var factory = {};
+      var factory = {};
 
-  factory.getInventory = function() {
-    // TODO make this to expire in a moment and take fresh data from
-    // server
-    if (inventoryPromise == null) {
-
-      // DB WAY HERE
-      var db = new loki('inventory', {
-        persistenceMethod : 'adapter',
-        adapter : new jquerySyncAdapter({
-          ajaxLib : $
-        })
-      });
-
-      inventoryPromise = $q(function(resolve, reject) {
-        db.loadDatabase({}, function(db) {
-          if (db != null && typeof (db) === "object") {
-            var collection = db.getCollection('entries');
-
-            if (collection == null) {
-              $http.get("assets/inventory.json").then(function(resp) {
-                var entries = resp.data.entries;
-                resolve(entries);
-                saveToLoki(entries);
-              },
-
-              function(resp) {
-                reject(resp);
-              });
-            } else {
-              // TODO check this later
-              // catCollection.setChangesApi(true);
-
-              resolve(collection.chain().data());
-            }
-            // hmm
-          } else {
-            reject(db);
-          }
-        });
-      });
-
-    }
-    return inventoryPromise;
-  }
-
-  function saveToLoki(entries) {
-    new loki('inventory', {
-      autoload : true,
-      autoloadCallback : function(db) {
-        var collection = db.getCollection('entries');
-        if (!collection) {
-          $log.warn("inventory entries collection not found. Adding...")
-          collection = db.addCollection('entries');
+      factory.getPackagings = function() {
+        if (packagingsPromise == null) {
+          packagingsPromise = LokiService.createDB("inventory", "packagings", "assets/inventory2.json", null);
         }
-        collection.setChangesApi(false);
+        return packagingsPromise;
+      }
 
-        // removes all entries if any
-        collection.chain().remove();
+      factory.getInventory = function() {
+        if (inventoryPromise == null) {
+          inventoryPromise = LokiService.createDB("inventory", "entries", "assets/inventory2.json", function(entries) {
+            // ////////////////////
+            var result = [];
+            var categories = ShopService.getCategoriesCached();
 
-        // adds the entries
-        entries.forEach(function(entry) {
-          collection.insert(entry);
-        });
+            categories.forEach(function(cat) {
+              cat.products.forEach(function(product) {
 
-        db.save();
-        $log.debug("DONE.");
-      },
-      autosave : false,
-      autosaveInterval : 10000,
-      persistenceMethod : 'adapter',
-      adapter : new jquerySyncAdapter({
-        ajaxLib : $
-      })
-    });
+                // is there and entry for this product?
+                var entry = null;
+                for (var i = 0; i < entries.length; i++) {
+                  if (entries[i].categoryId === product.categoryId && entries[i].id === product.id) {
+                    entry = entries[i];
+                    break;
+                  }
+                }
 
-  }
+                if (!entry) {
+                  entry = {
+                    "categoryId" : product.categoryId,
+                    "id" : product.id,
+                    "packagings": [{ "id": "p10", "quantity": product.quantity * 100, "onHold":0 }]
+                  };
+                }
+                result.push(entry);
 
-  return factory;
+              });
+            });
+            return result;
+          });
 
-} ]);
+          // ////////////////////
+
+        }
+        return inventoryPromise;
+
+      }
+
+      return factory;
+
+    } ]);

@@ -1,0 +1,58 @@
+{
+  "colorGroups": [
+    {
+      "id": "pink",
+      "name": "Pink",
+      "name_bg": "Розово",
+      "code": "pink"
+    },
+    {
+      "id": "purple",
+      "name": "Purple",
+      "name_bg": "Лилаво",
+      "code": "violet"
+    },
+    {
+      "id": "red",
+      "name": "Red",
+      "name_bg": "Червено",
+      "code": "red"
+    },
+    {
+      "id": "orange",
+      "name": "Orange",
+      "name_bg": "Оранжево",
+      "code": "orange"
+    },
+    {
+      "id": "yellow",
+      "name": "Yellow",
+      "name_bg": "Жълто",
+      "code": "yellow"
+    },
+    {
+      "id": "brown",
+      "name": "Brown",
+      "name_bg": "Кафяво",
+      "code": "brown"
+    },
+    {
+      "id": "green",
+      "name": "Green",
+      "name_bg": "Зелено",
+      "code": "green"
+    },
+    {
+      "id": "blue",
+      "name": "Blue",
+      "name_bg": "Синьо",
+      "code": "blue"
+    },
+    {
+      "id": "gray",
+      "name": "Gray",
+      "name_bg": "Сиво",
+      "code": "gray"
+    }
+  ]
+}

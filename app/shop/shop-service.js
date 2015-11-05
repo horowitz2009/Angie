@@ -1,12 +1,13 @@
 angular.module('felt.shop.service', [
-
+    'common.utils.service'
 ])
 
-.factory('ShopService', [ '$http', 'utils', '$q', function($http, utils, $q) {
+.factory('ShopService', [ '$http', 'utils', '$q', 'LokiService', function($http, utils, $q, LokiService) {
   console.log("[  6 shop-service.factory ShopService]");
   var pathCategories = 'assets/categories.json';
-  var pathAllColors = 'assets/allColors.json';
+  var pathAllColors = 'assets/colorGroups.json';
   var categoriesPromise = null;
+  var categoriesPromise2 = null;
   var categories = null;
   var allColorsPromise = null;
 
@@ -14,7 +15,7 @@ angular.module('felt.shop.service', [
    * var jqAdapter = new jquerySyncAdapter({ ajaxLib : $ });
    */
 
-  var factory = {};
+  var factory = { categories: [] };
 
   // I think this is never used
   function initializeDB(db) {
@@ -30,7 +31,47 @@ angular.module('felt.shop.service', [
 
     }
   }
+  
+  factory.getCategoriesCached = function() {
+    return factory.categories;
+  }
 
+  factory.loadCatalog = function() {
+    if (categoriesPromise2 == null) {
+      categoriesPromise2 = LokiService.createDB("catalog2", "categories", "assets/categories.json", function(cats, db) {
+        var products = [];
+        if (cats) {
+          cats.forEach(function(cat) {
+            var productsCol = db.getCollection("products");
+            if (!productsCol) {
+              productsCol = db.addCollection("products");
+            }
+            var pos = cat.position * 1000;
+            cat.products.forEach(function(p) {
+              if (!p.categoryId)
+                p.categoryId = cat.id;
+
+              if (!p.weight)
+                p.weight = p.quantity;
+              
+              p.position = ++pos;
+              productsCol.insert(p);
+              
+            });
+            cat.products = undefined;
+          });
+        }
+        return cats;
+      });
+      categoriesPromise2.then(function(categories) {
+        console.log("CATEGORIES......................................................");
+        console.log(categories);
+      });
+    }
+    return categoriesPromise2;
+
+  }
+  
   factory.getCategories = function() {
     //TODO make this to expire in a moment and take fresh data from server
     if (categoriesPromise == null) {
@@ -53,7 +94,11 @@ angular.module('felt.shop.service', [
                 var cats = resp.data.categories;
                 enrich(cats);
                 saveToLoki(cats);
-                resolve(cats);
+                factory.categories = cats;
+                
+                catCollection = db.getCollection('categories');
+                var hmm = catCollection.chain().find( { "published" : true }).simplesort("position").data();
+                resolve(hmm);
               },
 
               function(resp) {
@@ -62,8 +107,9 @@ angular.module('felt.shop.service', [
             } else {
               // TODO check this later
               // catCollection.setChangesApi(true);
-
-              resolve(catCollection.chain().data());
+              factory.categories = catCollection.chain().data();
+              var hmm = catCollection.chain().find( { "published" : true }).simplesort("position").data();
+              resolve(hmm);
             }
             // hmm
           } else {
