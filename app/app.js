@@ -271,7 +271,7 @@ angular.module('felt', [
             		         cart, CartService, CartPersistenceService, CART_EVENTS, 
             		         $animate, $timeout, $interval, $translate, $window) {
   
-  $scope.isDebug = true;
+  $scope.isDebug = false;
   
   $scope.states = $state.get();
   
@@ -513,6 +513,8 @@ angular.module('felt', [
     console.log("//////////////////////////////");
     console.log("// CATALOG LOADED           //");
     console.log("//////////////////////////////");
+    
+    $scope.catMenuItems = ShopService.extractCatMenuItems();
   });
   
   ShopService.getCategories().then(function(data) {
@@ -520,8 +522,8 @@ angular.module('felt', [
     var categories = data;
     //console.log("Categories:");
     //console.log(categories);
-    $scope.catMenuItems = ShopService.extractCatMenuItems(categories);
-    console.log("[212 app.MainCtrl] extractCatMenuItems");
+    //$scope.catMenuItems = ShopService.extractCatMenuItems(categories);
+    //console.log("[212 app.MainCtrl] extractCatMenuItems");
 
   });
   

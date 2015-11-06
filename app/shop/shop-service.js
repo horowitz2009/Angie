@@ -17,28 +17,24 @@ angular.module('felt.shop.service', [
 
   var factory = { categories: [] };
 
-  // I think this is never used
-  function initializeDB(db) {
-    if (db != null && typeof (db) === "object") {
-      var promise = $http.get("assets/categories.json").then(function(resp) {
-        var res = resp.data.categories;
-
-        enrich(res);
-        saveToLoki(res);
-
-        return res;
-      });
-
-    }
-  }
-  
   factory.getCategoriesCached = function() {
     return factory.categories;
   }
+  
+  factory.catalog = LokiService.db;
 
   factory.loadCatalog = function() {
     if (categoriesPromise2 == null) {
-      categoriesPromise2 = LokiService.createDB("catalog2", "categories", "assets/categories.json", function(cats, db) {
+      categoriesPromise2 = LokiService.loadDB(LokiService.db, "categories", "assets/categories.json", function(cats, db) {
+        
+        var coll = db.getCollection("categories");
+        var pcdv = coll.getDynamicView("publishedCategories");
+        if (!pcdv) {
+          pcdv = coll.addDynamicView("publishedCategories", true);
+        }
+        pcdv.applyFind({"published": true});
+        pcdv.applySimpleSort("position");
+        
         var products = [];
         if (cats) {
           cats.forEach(function(cat) {
@@ -46,6 +42,13 @@ angular.module('felt.shop.service', [
             if (!productsCol) {
               productsCol = db.addCollection("products");
             }
+            var ppdv = productsCol.getDynamicView("publishedProducts");
+            if (!ppdv) {
+              ppdv = productsCol.addDynamicView("publishedProducts", true);
+            }
+            ppdv.applyFind({"published": true});
+            ppdv.applySimpleSort("position");
+
             var pos = cat.position * 1000;
             cat.products.forEach(function(p) {
               if (!p.categoryId)
@@ -63,15 +66,26 @@ angular.module('felt.shop.service', [
         }
         return cats;
       });
-      categoriesPromise2.then(function(categories) {
-        console.log("CATEGORIES......................................................");
-        console.log(categories);
-      });
     }
     return categoriesPromise2;
 
   }
   
+  factory.getPublishedCategories = function() {
+    return factory.catalog.getCollection("categories").getDynamicView("publishedCategories").data();
+  }
+  
+  factory.getPublishedProducts = function(categoryId) {
+    return factory.getPublishedProductsRS(categoryId).data();
+  }
+  
+  factory.getPublishedProductsRS = function(categoryId) {
+    return factory.catalog.getCollection("products").getDynamicView("publishedProducts").branchResultset().find({"categoryId":categoryId});
+  }
+  /**
+   * @deprecated
+   * 
+   */
   factory.getCategories = function() {
     //TODO make this to expire in a moment and take fresh data from server
     if (categoriesPromise == null) {
@@ -136,44 +150,50 @@ angular.module('felt.shop.service', [
     dataPromise = null;
   }
 
-  factory.extractCatMenuItems = function(categories) {
+  factory.extractCatMenuItems = function() {
+    var categories = factory.getPublishedCategories();
     var items = [];
     for (var i = 0; i < categories.length; i++) {
       items.push({
         "name" : categories[i].name,
         "id" : categories[i].id,
-        "cnt" : categories[i].products.length
+        "cnt" : factory.getPublishedProducts(categories[i].id).length
       });
     }
     return items;
   }
 
-  factory.extractOrigins = function(category) {
+  factory.extractOrigins = function(categoryId, products) {
     var origins = [];
-    if (category !== null) {
-      category.products.forEach(function(p) {
-        var found = false;
-        for (var i = 0; i < origins.length; i++) {
-          if (origins[i].name === p.origin) {
-            found = true;
-            origins[i].cnt = origins[i].cnt + 1;
-            break;
-          }
-        }
-
-        if (!found && p.origin)
-          origins.push({
-            "name" : p.origin,
-            'value' : false,
-            'cnt' : 1
-          });
-
-      });
+    if (!products) {
+      products = factory.getPublishedProducts(categoryId);
     }
+    products.forEach(function(p) {
+      var found = false;
+      for (var i = 0; i < origins.length; i++) {
+        if (origins[i].id === p.origin) {
+          found = true;
+          origins[i].cnt = origins[i].cnt + 1;
+          break;
+        }
+      }
+
+      if (!found && p.origin)
+        origins.push({
+          "id" : p.origin,
+          'value' : false,
+          'cnt' : 1
+        });
+
+    });
     return origins;
   }
-
-  factory.extractColors = function(category, colorGroups) {
+  
+  //TODO refactor this: colorGroups: fix it outside once!
+  factory.extractColors = function(categoryId, colorGroups, products) {
+    if (!products) {
+      products = factory.getPublishedProducts(categoryId);
+    }
     var colors = angular.copy(colorGroups);
     for (var i = 0; i < colors.length; i++) {
       colors[i].cnt = 0;
@@ -181,16 +201,15 @@ angular.module('felt.shop.service', [
       colors[i].value = false;
     }
     var globalCnt = 0;
-    if (category !== null)
-      category.products.forEach(function(p) {
-        for (var i = 0; i < colors.length; i++) {
-          if (p.colorGroups && p.colorGroups.indexOf('' + colors[i].id) >= 0) {
-            colors[i].cnt++;
-            globalCnt++;
-          }
+    products.forEach(function(p) {
+      for (var i = 0; i < colors.length; i++) {
+        if (p.colorGroups && p.colorGroups.indexOf('' + colors[i].id) >= 0) {
+          colors[i].cnt++;
+          globalCnt++;
         }
-      });
-
+      }
+    });
+    
     if (globalCnt == 0)
       return [];
 

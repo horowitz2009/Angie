@@ -351,7 +351,7 @@
           "origin": "Англия",
           "color": "тюркоазен",
           "colorGroups": "blue",
-          "published": true,
+          "published": false,
           "description": "Внос от Англия. Фина висококачествена коприна.",
           
           "image": "images/sturquoise.jpg",
@@ -968,7 +968,7 @@
       "name": "Материали за кукли",
       "thumbnail" : "images/cat_dollstuff.jpg",
       "cover": "images/cover_dollstuff.png",
-      "published": false,
+      "published": true,
       "position": 6,
       "products": [
         {

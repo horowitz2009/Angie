@@ -67,7 +67,8 @@ angular.module('felt.shop', [
           controller: ['$scope', '$state', 'categories', 'utils', 'allColors', 'ShopService',
             function ($scope, $state, categories, utils, allColors, ShopService) {
 
-              $scope.categories = categories;
+              //TODO apply 'loading and then' approach
+              $scope.categories = ShopService.getPublishedCategories();
 
               $scope.goToRandom = function () {
                 var randId = utils.newRandomKey($scope.categories, "id", $state.params.categoryId);
@@ -79,9 +80,10 @@ angular.module('felt.shop', [
               $scope.filters = [];
               
               $scope.categories.forEach(function(category) {
-                $scope.filters[category.id] = {};
-                $scope.filters[category.id].origins = ShopService.extractOrigins(category);
-                $scope.filters[category.id].colors = ShopService.extractColors(category, allColors.colorGroups);
+                
+                $scope.filters[category.id] = new CategoryFilter(ShopService.extractOrigins(category.id),
+                    ShopService.extractColors(category.id, allColors.colorGroups));
+                
               });
               
             }]
@@ -153,31 +155,58 @@ angular.module('felt.shop', [
 
             'content': {
               templateUrl: 'app/shop/partials/categories.one.html',
-              controller: ['$scope', 'category',
-                function ($scope, category) {
+              controller: ['$scope', 'category', 'allColors', 'ShopService',
+                function ($scope, category, allColors, ShopService) {
                   $scope.category = category;
+                  $scope.products = ShopService.getPublishedProducts(category.id);
                   
+                  //UPDATE filter numbers
+                  $scope.$watch('results', function(newValue, oldValue) {
+                    
+                    //recalcNumbers
+                    var filterObj = $scope.filters[$scope.category.id];
+                    var originFilter = filterObj.getSelectedOrigins();
+                    var colorFilter = filterObj.getSelectedColors();
+                    
+                    var prc = ShopService.getPublishedProductsRS(category.id);
+                    if (colorFilter.length > 0 && colorFilter.length < filterObj.colors.length) {
+                      prc.where(function(product){
+                        for (var i = 0; i < colorFilter.length; i++) {
+                          if (product.colorGroups && product.colorGroups.indexOf(colorFilter[i]) >= 0) {
+                            return true;
+                          }
+                        }
+                        return false;
+                      });
+                    }                    
+                    var newOrigins = ShopService.extractOrigins(category.id, prc.data());
+                    
+                    var pro = ShopService.getPublishedProductsRS(category.id);
+                    if (originFilter.length > 0 && originFilter.length < filterObj.origins.length)
+                      pro.where(function(product){
+                        for (var i = 0; i < originFilter.length; i++) {
+                          if (originFilter[i] === product.origin) {
+                            return true;
+                          }
+                        }
+                        return false;
+                      });
+                    var newColors = ShopService.extractColors(category.id, allColors.colorGroups, pro.data());
+                      
+                    filterObj.setOriginCounts(newOrigins);
+                    filterObj.setColorCounts(newColors);
+                    
+                  });
                   
                 //SEARCH FUNCTION USED TO FILTER DATA IN NG-REPEAT
                 $scope.search = function (product) {
-                  var originFilter = [];
-                  var colorFilter = [];
                   var filterObj = $scope.filters[$scope.category.id];
-                  for (var i = 0; i < filterObj.origins.length; i++) {
-                    if (filterObj.origins[i].value) {
-                      originFilter.push(filterObj.origins[i].name);
-                    }
-                  }
-                  if (filterObj.colors)
-                  for (var i = 0; i < filterObj.colors.length; i++) {
-                    if (filterObj.colors[i].value) {
-                      colorFilter.push(filterObj.colors[i].id);
-                    }
-                  }
-
+                  var originFilter = filterObj.getSelectedOrigins();
+                  var colorFilter = filterObj.getSelectedColors();
+                  
                   //check origin
                   var matchOrigin = false;
-                  if (originFilter.length == 0) {
+                  if (originFilter.length == 0 || originFilter.length == filterObj.origins.length) {
                     matchOrigin = true;
                   } else {
                     for (var i = 0; i < originFilter.length; i++) {
@@ -187,17 +216,11 @@ angular.module('felt.shop', [
                       }
                     }
                   }
-                  /*
-                   if (filter.indexOf(product.origin)) {
-                   console.log(product.origin + ' in ' + filter);
-                   return true;
-                   }*/
-                  //console.log(product);
 
                   //check color
                   var matchColor = false;
                   if (matchOrigin) {
-                    if (colorFilter.length == 0) {
+                    if (colorFilter.length == 0 || colorFilter.length == filterObj.colors.length) {
                       matchColor = true;
                     } else {
                       for (var i = 0; !matchColor && i < colorFilter.length; i++) {
@@ -208,7 +231,7 @@ angular.module('felt.shop', [
                       }
                     }
                   }
-
+                  
                   return matchColor;
 
                 };
@@ -272,3 +295,57 @@ angular.module('felt.shop', [
 )
 
 ;//end
+
+function CategoryFilter(origins, colors) {
+  this.origins = origins  
+  this.colors = colors;
+  return this;
+}
+
+
+
+CategoryFilter.prototype.getSelectedOrigins = function () {
+  return this.getSelected(this.origins);
+}
+
+CategoryFilter.prototype.getSelectedColors = function () {
+  return this.getSelected(this.colors);
+}
+
+CategoryFilter.prototype.setOriginCounts = function(newOrigins) {
+  this.setCounts(this.origins, newOrigins);
+}
+
+CategoryFilter.prototype.setColorCounts = function(newColors) {
+  this.setCounts(this.colors, newColors);
+}
+
+CategoryFilter.prototype.getSelected = function (arr) {
+  var res = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].value) {
+      res.push(arr[i].id ? arr[i].id : arr[i].name);
+    }
+  }
+  return res;
+}
+
+CategoryFilter.prototype.setCounts = function(oldArr, newArr) {
+  
+  oldArr.forEach(function(obj) {
+    var found = false;
+    for (var i = 0; i < newArr.length; i++) {
+      if (obj.id == newArr[i].id) {
+        obj.cnt = newArr[i].cnt;
+        found = true;
+        break;
+      }
+    }
+    if (!found)
+      obj.cnt = 0;
+  });
+  
+}
+
+
+

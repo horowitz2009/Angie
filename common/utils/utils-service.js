@@ -53,20 +53,32 @@ angular.module('common.utils.service', [
 // ////////////////////////////////////////////////////////////////////////
 .factory('LokiService', [ '$log', '$http', '$q', function($log, $http, $q) {
   var factory = {};
+  
+  factory.db = new loki("catalog2", {
+    autosave : false,
+    persistenceMethod : 'adapter',
+    adapter : new jquerySyncAdapter({
+      ajaxLib : $
+    })
+  }); 
 
   factory.createDB = function(dbName, collectionName, jsonFilename, propageteCallback) {
+    var db = new loki(dbName, {
+      autosave : false,
+      persistenceMethod : 'adapter',
+      adapter : new jquerySyncAdapter({
+        ajaxLib : $
+      })
+    });
+    
+    return factory.loadDB(db, collectionName, jsonFilename, propageteCallback);
+  }
+  
+  factory.loadDB = function(db, collectionName, jsonFilename, propageteCallback) {
     var promise = $q(function(resolve, reject) {
 
-      var db = new loki(dbName, {
-        autosave : false,
-        persistenceMethod : 'adapter',
-        adapter : new jquerySyncAdapter({
-          ajaxLib : $
-        })
-      });
-
       db.loadDatabase({}, function() {
-        var data = null;
+        //var data = null;
         var collection = db.getCollection(collectionName);
         if (!collection) {
           collection = db.addCollection(collectionName);
@@ -82,10 +94,11 @@ angular.module('common.utils.service', [
             for (var i = 0; i < data.length; i++) {
               collection.insert(data[i]);
             }
-            data = collection.chain().data();
+            //data = collection.chain().data();
 
-            db.saveDatabase();
-            resolve(data);
+            db.saveDatabase(function(){
+              resolve(collection.data);
+            });
 
           },
 
@@ -94,8 +107,8 @@ angular.module('common.utils.service', [
           });
 
         } else {
-          data = collection.chain().data();
-          resolve(data);
+          //data = collection.chain().data();
+          resolve(collection.data);
         }
       });
 
