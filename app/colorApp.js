@@ -96,7 +96,8 @@ angular.module('colorApp', [
                             templateUrl: 'app/common/left.html',
                             controller: ['$scope', 
                               function($scope) {
-                                var path = "images/wow/";
+                                //var path = "images/wow/";
+                                var path = "images/wool2016/";
                                 $scope.paths = [];
                                 var names = [
                                   'amber',
@@ -105,8 +106,11 @@ angular.module('colorApp', [
                                   'antique',
                                   'aqua'
                                 ];
-                                for(var i = 0; i < names.length; i++) {
-                                  $scope.paths.push({ 'id': names[i], 'imagePath': path + names[i] + '.jpg', 'hex': 'wait' });
+//                                for(var i = 0; i < names.length; i++) {
+//                                  $scope.paths.push({ 'id': names[i], 'imagePath': path + names[i] + '.jpg', 'hex': 'wait' });
+//                                }
+                                for(var i = 1; i <= 29; i++) {
+                                  $scope.paths.push({ 'id': i+"a", 'imagePath': path + i + 'a.jpg', 'hex': 'wait' });
                                 }
                                 
                                 console.log("left controller executed");
