@@ -21,6 +21,8 @@ angular.module('felt.shop.stockentries', [
         'productId' : params.productId,
         'packagingId' : params.packagingId,
         'quantity' : params.quantity,
+        'min' : params.min,
+        'opt' : params.opt,
         'onHold' : params.onHold
       }
     });
@@ -37,6 +39,8 @@ angular.module('felt.shop.stockentries', [
         'productId' : params.productId,
         'packagingId' : params.packagingId,
         'quantity' : params.quantity,
+        'min' : params.min,
+        'opt' : params.opt,
         'onHold' : params.onHold
       }
     });
