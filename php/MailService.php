@@ -10,6 +10,11 @@ class MailService {
     mail($email, $subject, $txt, $headers);
   }
 
+  public static function sendMail($email, $subject, $txt) {
+    $headers = "From: no-reply@felt-bg.com" . "\r\n";
+    mail($email, $subject, $txt, $headers);
+  }
+
 }
 
 ?>
