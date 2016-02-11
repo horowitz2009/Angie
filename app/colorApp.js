@@ -112,6 +112,9 @@ angular.module('colorApp', [
                                 for(var i = 1; i <= 29; i++) {
                                   $scope.paths.push({ 'id': i+"a", 'imagePath': path + i + 'a.jpg', 'hex': 'wait' });
                                 }
+                                for(var i = 101; i <= 127; i++) {
+                                  $scope.paths.push({ 'id': i+"", 'imagePath': path + i + '.jpg', 'hex': 'wait' });
+                                }
                                 
                                 console.log("left controller executed");
                                 
