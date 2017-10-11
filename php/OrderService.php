@@ -79,6 +79,11 @@ class OrderService {
   }
   
   public function getAllOrders($username) {
+    $res = array();	  
+    if (!empty($username) AND $username == 'guest') {
+      return json_encode($res);
+    }
+	    
     $sql = "SELECT id, data, status, date_placed, date_changed FROM orders ";
     if (!empty($username)) {
       $sql = $sql."WHERE user = ?";
@@ -93,7 +98,7 @@ class OrderService {
     
     $query->setFetchMode(PDO::FETCH_NUM);
     
-    $res = array();
+    
     while ($row = $query->fetch()) {
       $obj = json_decode($row[1]);
       $obj->id = $row[0];

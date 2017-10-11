@@ -119,8 +119,6 @@ CREATE TABLE IF NOT EXISTS `stockentries` (
   `product_id` varchar(50) COLLATE utf8_bin NOT NULL,
   `packaging_id` varchar(50) COLLATE utf8_bin NOT NULL,
   `quantity` int(11) NOT NULL,
-  `min` int(11) NOT NULL,
-  `opt` int(11) NOT NULL,
   `onhold` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
   ";

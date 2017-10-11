@@ -72,8 +72,7 @@ angular.module('felt.shop.service', [
   }
   
   factory.getPublishedCategories = function() {
-    var data = factory.catalog.getCollection("categories").getDynamicView("publishedCategories").data();
-    return data;
+    return factory.catalog.getCollection("categories").getDynamicView("publishedCategories").data();
   }
   
   factory.getPublishedProducts = function(categoryId) {
@@ -82,14 +81,6 @@ angular.module('felt.shop.service', [
   
   factory.getPublishedProductsRS = function(categoryId) {
     return factory.catalog.getCollection("products").getDynamicView("publishedProducts").branchResultset().find({"categoryId":categoryId});
-  }
-  
-  factory.getCategory = function(categoryId) {
-    return factory.catalog.getCollection("categories").findOne({"id": categoryId});
-  }
-  
-  factory.getProduct = function(categoryId, productId) {
-    return factory.catalog.getCollection("products").findOne({"categoryId": categoryId, "id": productId});
   }
   /**
    * @deprecated

@@ -105,17 +105,7 @@ angular.module('felt', [
 
 .run(['$rootScope', '$state', '$stateParams', 'AuthService',
   function ($rootScope, $state, $stateParams, AuthService) {
-// .run(['$rootScope', '$state', '$stateParams', 'AuthService', 'ShopService',
-//   function ($rootScope, $state, $stateParams, AuthService, ShopService) {
     console.log("[333 21 app.run]");
-    
-    
-//     ShopService.loadCatalog().then(function(){
-//       console.log("//////////////////////////////");
-//       console.log("// CATALOG LOADED 0         //");
-//       console.log("//////////////////////////////");
-//     });
-
 
     // It's very handy to add references to $state and $stateParams to the $rootScope
     // so that you can access them from any scope within your applications.For example,
@@ -521,7 +511,7 @@ angular.module('felt', [
   
   ShopService.loadCatalog().then(function(){
     console.log("//////////////////////////////");
-    console.log("// CATALOG LOADED 1         //");
+    console.log("// CATALOG LOADED           //");
     console.log("//////////////////////////////");
     
     $scope.catMenuItems = ShopService.extractCatMenuItems();
@@ -537,10 +527,35 @@ angular.module('felt', [
 
   });
   
-  InventoryService.getPackagings().then(function(ps) {
-    console.log("Packagings loaded");
-    console.log(ps);
+  InventoryService.getPackagings().then(function(hmm) {
+    console.log("HMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+    console.log(hmm);
     InventoryService.getInventory();
+    StockEntries.get({ categoryId:"wool", productId: "yellow", packagingId: "p10"}).then(function(res) {
+      console.log("found it?" + res);
+      res.quantity = parseInt(res.quantity) + 100;
+      res.onHold = parseInt(res.onHold) + 1;
+      if (res.quantity > 300) {
+        //StockEntries.del(res);
+      } else {
+        StockEntries.change(res);
+        
+      } 
+
+      StockEntries.getSome({ categoryId:"wool"}).then(function(res){
+          console.log(res);
+        }, function(res){
+          console.log(res);
+        }); 
+    }, function(res) {
+      console.log("not found! inserting one...");
+      StockEntries.insert({ categoryId:"wool", productId: "yellow", packagingId: "p10", quantity: 10, onHold: 0}).then(function(){
+        StockEntries.getSome({ categoryId:"wool"}).then(function(res){
+          console.log(res);
+        });
+      });
+    });
+    
   });
   
 

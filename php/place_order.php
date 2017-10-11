@@ -23,7 +23,7 @@ if (! empty($_POST) && isset($_POST['username']) && isset($_POST['data'])) {
 
   $id = $orderService->insertOrder($username, $status, $data);
   
-  MailService::sendMail("zhristov@gmail.com,yovka.hristova@gmail.com", "Order " + $id, "Поръчка на потрбител: " + $username);
+  MailService::sendMail("zhristov@gmail.com,yovka.hristova@gmail.com", "Order " . $id, "Поръчка на потрбител: " . $username);
   
   set_result('200', 'OK', '{"id":"'.$id.'"}');
 } else {

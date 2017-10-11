@@ -35,6 +35,8 @@ angular.module('felt.shop.orders', [
           }
           
           factory.getAllUserOrders = function() {
+            if (AuthService.getUsername() == 'guest')
+	      return [];
             return OrderPersistenceService.getAllOrders(AuthService.getUsername());
           }
 

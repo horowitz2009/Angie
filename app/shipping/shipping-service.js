@@ -161,6 +161,7 @@ angular.module('felt.shipping.service', [
         rate2 = applyReductionsAndTaxes(rate, true, true);
         options.toOffice.amount = rate2;
         options.toOffice.service = "Градски куриер";
+		/*
         if (weight - 8.0 <= 0.0000001) {
           // try 358
           rate = findTariff(weight, table358);
@@ -168,7 +169,7 @@ angular.module('felt.shipping.service', [
             options.toOffice.amount = rate;
             options.toOffice.service = "3-5-8";
           }
-        }
+        }*/
         
       } else {
         //NOT SOFIA
@@ -184,14 +185,14 @@ angular.module('felt.shipping.service', [
           rate2 = applyReductionsAndTaxes(rate, true, true);
           options.toOffice.amount = rate2;
           options.toOffice.service = "Икономична";
-          if (weight - 8.0 <= 0.0000001) {
+          /*if (weight - 8.0 <= 0.0000001) {
             // try 358
             rate = findTariff(weight, table358);
             if (rate - rate2 <= 0.0000001) {
               options.toOffice.amount = rate;
               options.toOffice.service = "3-5-8";
             }
-          }
+          }*/
         }
       }
     } else if (country === 'Македония') {

@@ -1,0 +1,8 @@
+
+
+# AddHandler application/x-httpd-php54  .php54 .php
+
+
+
+
+AddHandler application/x-httpd-php53  .php53 .php

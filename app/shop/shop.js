@@ -52,17 +52,10 @@ angular.module('felt.shop', [
           },
 
           resolve: {
-            categories: ['ShopService', function (ShopService) {
-              
-              ShopService.loadCatalog().then(function() {
-                console.log("//////////////////////////////");
-                console.log("// CATALOG LOADED 101       //");
-                console.log("//////////////////////////////");
-                
-                return ShopService.getPublishedCategories();
-              });
-              
-            }],
+            categories: ['ShopService',
+              function (ShopService) {
+                return ShopService.getCategories();
+              }],
               
             allColors:  ['ShopService',
               function (ShopService) {
@@ -71,13 +64,11 @@ angular.module('felt.shop', [
           },
 
           templateUrl: 'app/shop/partials/shop.html',
-          controller: ['$scope', '$state', 'utils', 'allColors', 'ShopService', 'categories', 
-            function ($scope, $state, utils, allColors, ShopService, categories) {
-//            controller: ['$scope', '$state', 'utils', 'allColors', 'ShopService', 
-//                         function ($scope, $state, utils, allColors, ShopService) {
+          controller: ['$scope', '$state', 'categories', 'utils', 'allColors', 'ShopService',
+            function ($scope, $state, categories, utils, allColors, ShopService) {
 
-              $scope.categories = categories;
-              //$scope.categories = ShopService.getPublishedCategories();
+              //TODO apply 'loading and then' approach
+              $scope.categories = ShopService.getPublishedCategories();
 
               $scope.goToRandom = function () {
                 var randId = utils.newRandomKey($scope.categories, "id", $state.params.categoryId);
@@ -136,92 +127,80 @@ angular.module('felt.shop', [
 
 
           resolve: {
-            category: ['$stateParams', 
-              function ($stateParams) {
-              
-                ShopService.loadCatalog().then(function() {
-                  console.log("//////////////////////////////");
-                  console.log("// CATALOG LOADED 102       //");
-                  console.log("//////////////////////////////");
-                  
-                  return ShopService.getCategory($stateParams.categoryId);
-                });
-  
-                
-                
-                
-              }],
-            mumbojumbo: function() { 
-              return { "value": "Hello there" };
-            }
+            category: ['categories', '$stateParams', 'utils',
+              function (categories, $stateParams, utils) {
+                return utils.findById(categories, $stateParams.categoryId);
+              }]
           },
 
           views: {
             'filter': {
               templateUrl: 'app/shop/partials/filter.html',
-              controller: ['$scope', '$stateParams', function($scope, $stateParams) {
-                
-                var catFilter = $scope.filters[$stateParams.categoryId];
-                $scope.filter = catFilter;
-                
-              }]
+              controller: ['$scope', 'ShopService', 'category',
+                  function($scope, ShopService, category) {
+                    if (category) {
+                      var catFilter = $scope.filters[category.id];
+                      /*if (!catFilter) {
+                        var newFilter = {};
+                        newFilter.origins = ShopService.extractOrigins(category);
+                        $scope.filters[category.id] = newFilter;
+                        catFilter = newFilter;
+                      }*/
+                  
+                      $scope.filter = catFilter;
+                    }
+                  }
+              ]
             },
 
             'content': {
               templateUrl: 'app/shop/partials/categories.one.html',
-              controller: ['$scope', '$stateParams', 'allColors', 'ShopService', 'category', 
-                           function ($scope, $stateParams, allColors, ShopService, category) {
-//              controller: ['$scope', '$stateParams', 'allColors', 'ShopService',  
-//                           function ($scope, $stateParams, allColors, ShopService) {
-                
-                $scope.category = category;
-                //$scope.category = ShopService.getCategory($stateParams.categoryId);
-                
-                //$state.current.data.displayName = $scope.category.name;
-                
-                $scope.products = ShopService.getPublishedProducts($stateParams.categoryId);
+              controller: ['$scope', 'category', 'allColors', 'ShopService',
+                function ($scope, category, allColors, ShopService) {
+                  $scope.category = category;
+                  $scope.products = ShopService.getPublishedProducts(category.id);
                   
                   //UPDATE filter numbers
-                $scope.$watch('results', function(newValue, oldValue) {
+                  $scope.$watch('results', function(newValue, oldValue) {
                     
-                  //recalcNumbers
-                  var filterObj = $scope.filters[$stateParams.categoryId];
-                  var originFilter = filterObj.getSelectedOrigins();
-                  var colorFilter = filterObj.getSelectedColors();
-                  
-                  var prc = ShopService.getPublishedProductsRS($stateParams.categoryId);
-                  if (colorFilter.length > 0 && colorFilter.length < filterObj.colors.length) {
-                    prc.where(function(product){
-                      for (var i = 0; i < colorFilter.length; i++) {
-                        if (product.colorGroups && product.colorGroups.indexOf(colorFilter[i]) >= 0) {
-                          return true;
+                    //recalcNumbers
+                    var filterObj = $scope.filters[$scope.category.id];
+                    var originFilter = filterObj.getSelectedOrigins();
+                    var colorFilter = filterObj.getSelectedColors();
+                    
+                    var prc = ShopService.getPublishedProductsRS(category.id);
+                    if (colorFilter.length > 0 && colorFilter.length < filterObj.colors.length) {
+                      prc.where(function(product){
+                        for (var i = 0; i < colorFilter.length; i++) {
+                          if (product.colorGroups && product.colorGroups.indexOf(colorFilter[i]) >= 0) {
+                            return true;
+                          }
                         }
-                      }
-                      return false;
-                    });
-                  }                    
-                  var newOrigins = ShopService.extractOrigins($stateParams.categoryId, prc.data());
-                  
-                  var pro = ShopService.getPublishedProductsRS($stateParams.categoryId);
-                  if (originFilter.length > 0 && originFilter.length < filterObj.origins.length)
-                    pro.where(function(product){
-                      for (var i = 0; i < originFilter.length; i++) {
-                        if (originFilter[i] === product.origin) {
-                          return true;
+                        return false;
+                      });
+                    }                    
+                    var newOrigins = ShopService.extractOrigins(category.id, prc.data());
+                    
+                    var pro = ShopService.getPublishedProductsRS(category.id);
+                    if (originFilter.length > 0 && originFilter.length < filterObj.origins.length)
+                      pro.where(function(product){
+                        for (var i = 0; i < originFilter.length; i++) {
+                          if (originFilter[i] === product.origin) {
+                            return true;
+                          }
                         }
-                      }
-                      return false;
-                    });
-                  var newColors = ShopService.extractColors($stateParams.categoryId, allColors.colorGroups, pro.data());
+                        return false;
+                      });
+                    var newColors = ShopService.extractColors(category.id, allColors.colorGroups, pro.data());
                       
-                  filterObj.setOriginCounts(newOrigins);
-                  filterObj.setColorCounts(newColors);
+                    filterObj.setOriginCounts(newOrigins);
+                    filterObj.setColorCounts(newColors);
                     
-                });
+                  });
                   
                 //SEARCH FUNCTION USED TO FILTER DATA IN NG-REPEAT
                 $scope.search = function (product) {
-                  var filterObj = $scope.filters[$stateParams.categoryId];
+                  var filterObj = $scope.filters[$scope.category.id];
                   var originFilter = filterObj.getSelectedOrigins();
                   var colorFilter = filterObj.getSelectedColors();
                   
@@ -263,7 +242,7 @@ angular.module('felt.shop', [
                   
                   
                   
-              }]
+                }]
 
             }
           }
@@ -282,17 +261,9 @@ angular.module('felt.shop', [
           },
 
           resolve: {
-            product: ['$stateParams',
-              function ($stateParams) {
-              
-                ShopService.loadCatalog().then(function(){
-                  console.log("//////////////////////////////");
-                  console.log("// CATALOG LOADED 103       //");
-                  console.log("//////////////////////////////");
-                  
-                  return ShopService.getProduct($stateParams.categoryId, $stateParams.productId);
-                });
-
+            product: ['category', '$stateParams', 'utils',
+              function (category, $stateParams, utils) {
+                return utils.findById(category.products, $stateParams.productId);
               }]
           },
 
@@ -302,18 +273,9 @@ angular.module('felt.shop', [
             
             'content2@shop': {
               templateUrl: 'app/shop/partials/product.html',
-              controller: ['$scope', '$stateParams', 'ShopService', 'Lightbox', 'product',
-                function ($scope, $stateParams, ShopService, Lightbox, product) {
-//                controller: ['$state', '$scope', '$stateParams', 'ShopService', 'Lightbox',
-//                             function ($state, $scope, $stateParams, ShopService, Lightbox) {
+              controller: ['$scope', 'product', 'Lightbox',
+                function ($scope, product, Lightbox) {
                   $scope.product = product;
-                  //$scope.product = ShopService.getProduct($stateParams.categoryId, $stateParams.productId);
-                  
-                  //console.log($state.current.data.customData1) // outputs 5;
-                  //$state.current.data.displayName = $scope.product.name; 
-                  //$state.$current.parent.data.displayName = "blah blah blah";//$scope.category.name; 
-                  
-                  // LightBox stuff
                   $scope.imageIndex = 0;
                   
                   $scope.changeImageIndex = function (index) {
@@ -323,8 +285,6 @@ angular.module('felt.shop', [
                   $scope.openLightboxModal = function (index) {
                     Lightbox.openModal($scope.product.images, index);
                   };
-                  // //
-                  
                 }]
             }
           }

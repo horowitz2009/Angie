@@ -1,0 +1,149 @@
+[06-Oct-2015 19:00:40 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'feltbgco_felt.lokidbs' doesn't exist' in /home/feltbgco/public_html/php/LokiService.php:69
+Stack trace:
+#0 /home/feltbgco/public_html/php/LokiService.php(69): PDOStatement->execute(Array)
+#1 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/LokiService.php on line 69
+[06-Oct-2015 19:00:54 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'feltbgco_felt.lokidbs' doesn't exist' in /home/feltbgco/public_html/php/LokiService.php:69
+Stack trace:
+#0 /home/feltbgco/public_html/php/LokiService.php(69): PDOStatement->execute(Array)
+#1 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/LokiService.php on line 69
+[06-Oct-2015 19:01:01 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'feltbgco_felt.lokidbs' doesn't exist' in /home/feltbgco/public_html/php/LokiService.php:69
+Stack trace:
+#0 /home/feltbgco/public_html/php/LokiService.php(69): PDOStatement->execute(Array)
+#1 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/LokiService.php on line 69
+[23-Oct-2015 00:37:17 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:12 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:31 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:41:45 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:33 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:36 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:46 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:45:49 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:46:54 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:46:59 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/LokiService.php(65): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/assets/load_loki.php(8): LokiService->loadLoki()
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28

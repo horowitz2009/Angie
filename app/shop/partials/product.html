@@ -172,7 +172,7 @@
 
             <ul class="nav nav-tabs">
                 <li class="active"><a data-target="#details" data-toggle="tab">Допълнителна информация</a></li>
-                <li> <a data-target="#size" data-toggle="tab">Размери</a></li>
+                <!--<li> <a data-target="#size" data-toggle="tab">Размери</a></li>-->
                 <li> <a data-target="#shipping" data-toggle="tab">Доставка</a></li>
             </ul>
 
@@ -181,6 +181,7 @@
                 <div class="tab-pane active" id="details">
 				{{product.longdesc}}
 				</div>
+				<!--
                 <div class="tab-pane" id="size"> 
 				    Тегло: {{product.quantity}} {{product.unit}}<br>
                     Ширина: 10-15см<br>
@@ -192,7 +193,7 @@
                     <br>
                     Размери на опаковката: 20 x 30см<br>
                 </div>
-
+				-->
                 <div class="tab-pane" id="shipping">
                   Ползваме куриерските услуги на Спиди и Еконт. Цена на доставка може да бъде изчислена, като изберете <a ui-sref="shop.cart.edit">Количка</a> и въведете населеното място или пощенски код.
                     <!-- 

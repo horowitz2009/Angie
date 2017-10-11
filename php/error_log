@@ -1,0 +1,331 @@
+[23-Oct-2015 00:37:17 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:12 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:40:31 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:41:45 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:33 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:36 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:42:46 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:45:49 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:46:54 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[23-Oct-2015 00:46:59 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'zhristov'@'localhost' (using password: YES)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=loca...', 'zhristov', 'totaasha', Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 18:58:13 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 18:58:13 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 18:58:15 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 18:58:15 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 18:58:17 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 18:58:17 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 18:58:20 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 18:58:20 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 19:41:50 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 19:41:50 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 19:41:51 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 19:41:51 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 19:41:51 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 19:41:51 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 19:41:52 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 19:41:52 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/stockentries.php(15): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:27 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:31 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:31 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:36 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:36 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:53 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:53 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:56 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:56 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:57 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:57 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:59 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:59 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:02:59 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:02:59 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:08 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:12 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:12 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:43 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:43 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:45 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:45 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:48 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:48 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:48 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:48 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:03:49 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:03:49 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/init_auth.php(39): DBService->createPDOConnection()
+#2 /home/feltbgco/public_html/php/login.php(6): require_once('/home/feltbgco/...')
+#3 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28
+[11-Feb-2016 20:08:58 Europe/Sofia] PHP Warning:  syntax error, unexpected END_OF_LINE in db.ini on line 7
+ in /home/feltbgco/public_html/php/DBService.php on line 14
+[11-Feb-2016 20:08:58 Europe/Sofia] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)' in /home/feltbgco/public_html/php/DBService.php:28
+Stack trace:
+#0 /home/feltbgco/public_html/php/DBService.php(28): PDO->__construct('mysql:host=;dbn...', NULL, NULL, Array)
+#1 /home/feltbgco/public_html/php/install.php(14): DBService->createPDOConnection()
+#2 {main}
+  thrown in /home/feltbgco/public_html/php/DBService.php on line 28

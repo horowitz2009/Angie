@@ -1,0 +1,4 @@
+
+
+
+AddHandler application/x-httpd-php53  .php53 .php

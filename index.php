@@ -459,9 +459,9 @@
                 </ul>
                 <ul class="col-lg-3  col-sm-3 col-md-3 hidden-xs">
                   <li><a class="newProductMenuBlock"
-                    ui-sref="shop.one.product({categoryId:'wool',productId:'english-wool-red'})">
-                    <img class="img-responsive" src="images/e_red.jpg" alt="product"> <span class="ProductMenuCaption"> <i
-                        class="fa fa-caret-right"> </i> Червена вълна
+                    ui-sref="shop.one.product({categoryId:'wool',productId:'english-pack-red'})">
+                    <img class="img-responsive" src="images/en-pack-red3.jpg" alt="product"> <span class="ProductMenuCaption"> <i
+                        class="fa fa-caret-right"> </i> Комплект Червена вълна
                     </span>
                   </a></li>
                 </ul>
