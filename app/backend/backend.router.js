@@ -31,7 +31,7 @@ angular.module('backend', [
 
   $stateProvider
 
-    // ///////////
+    // //////////
     // account  //
     // ///////////
     .state("backend", {
